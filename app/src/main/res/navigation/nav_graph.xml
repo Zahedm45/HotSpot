@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/logInOrCreateProfile">
+
+    <fragment
+        android:id="@+id/logInOrCreateProfile"
+        android:name="com.example.hotspot.LogInOrCreateProfile"
+        android:label="fragment_log_in_or_create_profile"
+        tools:layout="@layout/fragment_log_in_or_create_profile" >
+        <action
+            android:id="@+id/action_logInOrCreateProfile_to_logIn"
+            app:destination="@id/logIn" />
+        <action
+            android:id="@+id/action_logInOrCreateProfile_to_createProfile"
+            app:destination="@id/createProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/afterCheckIn"
+        android:name="com.example.hotspot.AfterCheckIn"
+        android:label="fragment_after_check_in"
+        tools:layout="@layout/fragment_after_check_in" >
+        <action
+            android:id="@+id/action_afterCheckIn_to_othersProfile"
+            app:destination="@id/othersProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/beforeCheckIn"
+        android:name="com.example.hotspot.BeforeCheckIn"
+        android:label="fragment_before_check_in"
+        tools:layout="@layout/fragment_before_check_in" >
+        <action
+            android:id="@+id/action_beforeCheckIn_to_afterCheckIn"
+            app:destination="@id/afterCheckIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/chat"
+        android:name="com.example.hotspot.Chat"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/createProfile"
+        android:name="com.example.hotspot.CreateProfile"
+        android:label="fragment_create_profile"
+        tools:layout="@layout/fragment_create_profile" >
+        <action
+            android:id="@+id/action_createProfile_to_homeMap2"
+            app:destination="@id/homeMap2" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfile"
+        android:name="com.example.hotspot.EditProfile"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/favorites"
+        android:name="com.example.hotspot.Favorites"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favorites_to_beforeCheckIn"
+            app:destination="@id/beforeCheckIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/listeView"
+        android:name="com.example.hotspot.ListeView"
+        android:label="fragment_liste_view"
+        tools:layout="@layout/fragment_liste_view" >
+        <action
+            android:id="@+id/action_listeView_to_homeMap2"
+            app:destination="@id/homeMap2" />
+        <action
+            android:id="@+id/action_listeView_to_beforeCheckIn"
+            app:destination="@id/beforeCheckIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/logIn"
+        android:name="com.example.hotspot.LogIn"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logIn_to_homeMap2"
+            app:destination="@id/homeMap2" />
+    </fragment>
+    <fragment
+        android:id="@+id/messageOverview"
+        android:name="com.example.hotspot.MessageOverview"
+        android:label="fragment_message_overview"
+        tools:layout="@layout/fragment_message_overview" >
+        <action
+            android:id="@+id/action_messageOverview_to_chat"
+            app:destination="@id/chat" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalProfile"
+        android:name="com.example.hotspot.PersonalProfile"
+        android:label="fragment_personal_profile"
+        tools:layout="@layout/fragment_personal_profile" >
+        <action
+            android:id="@+id/action_personalProfile_to_editProfile"
+            app:destination="@id/editProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/othersProfile"
+        android:name="com.example.hotspot.OthersProfile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_othersProfile_to_chat"
+            app:destination="@id/chat" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeMap2"
+        android:name="com.example.hotspot.HomeMap"
+        android:label="fragment_home_map"
+        tools:layout="@layout/fragment_home_map" >
+        <action
+            android:id="@+id/action_homeMap2_self"
+            app:destination="@id/homeMap2" />
+        <action
+            android:id="@+id/action_homeMap2_to_listeView"
+            app:destination="@id/listeView" />
+    </fragment>
+</navigation>
