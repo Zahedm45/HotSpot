@@ -8,8 +8,9 @@
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2359375" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/map_nav_bottom.xml" value="0.2359375" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/message.xml" value="0.2359375" />
-        <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_main.xml" value="0.1640625" />
+        <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_after_check_in.xml" value="0.1" />
+        <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_favorites.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_home_map.xml" value="0.1640625" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_log_in.xml" value="0.1640625" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_log_in_or_create_profile.xml" value="0.1" />
