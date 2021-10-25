@@ -26,7 +26,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.228125" />
         <entry key="app/src/main/res/drawable/map_nav_bottom.xml" value="0.67" />
         <entry key="app/src/main/res/drawable/message.xml" value="0.11145833333333334" />
-        <entry key="app/src/main/res/drawable/person.xml" value="0.11145833333333334" />
+        <entry key="app/src/main/res/drawable/person.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_after_check_in.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_before_check_in.xml" value="0.33" />

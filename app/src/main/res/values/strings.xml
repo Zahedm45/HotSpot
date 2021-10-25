@@ -9,4 +9,8 @@
     <string name="messages">Messages</string>
     <string name="map">Map</string>
     <string name="log_in">Log in</string>
+    <string name="tjekket_ind">Tjekket ind</string>
+    <string name="indtjekninger">Indtjekninger</string>
+
+
 </resources>
