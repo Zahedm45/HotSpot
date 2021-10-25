@@ -23,13 +23,13 @@ class LogInOrCreateProfile : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.button_text).setOnClickListener(this)
+        view.findViewById<Button>(R.id.log_in).setOnClickListener(this)
         view.findViewById<Button>(R.id.create_profile).setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
         when(p0!!.id){
-            R.id.button_text -> navController.navigate(R.id.action_logInOrCreateProfile_to_logIn)
+            R.id.log_in -> navController.navigate(R.id.action_logInOrCreateProfile_to_logIn)
             R.id.create_profile -> navController.navigate(R.id.action_logInOrCreateProfile_to_createProfile)
         }
     }

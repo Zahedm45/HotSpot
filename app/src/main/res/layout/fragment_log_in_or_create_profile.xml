@@ -10,10 +10,10 @@
     >
 
     <Button
-        android:id="@+id/button_text"
+        android:id="@+id/log_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_text"
+        android:text="@string/log_in"
         />
 
     <Button
