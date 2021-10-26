@@ -3,6 +3,7 @@ package com.example.hotspot
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Window
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -19,5 +20,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 /*        binding = ActivityMainBinding.inflate(LayoutInflater)
         setContentView(binding.root)*/
+
+
+
+
+        val afterCheckIn = AfterCheckIn()
+        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, afterCheckIn).commit()
+        supportActionBar?.hide()
+
+
     }
 }

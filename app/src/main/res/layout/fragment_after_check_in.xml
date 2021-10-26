@@ -3,13 +3,16 @@
 
 
 
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AfterCheckIn">
+    tools:context=".AfterCheckIn"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+    
+
 
     <!-- TODO: Update blank fragment layout -->
 <!--    <TextView-->
@@ -19,9 +22,12 @@
 
 
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
 
         <androidx.appcompat.widget.Toolbar
@@ -45,7 +51,7 @@
             android:textSize="26dp"
             android:textStyle="bold" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/humbergerMenu"
             android:layout_width="48dp"
             android:layout_height="34dp"
@@ -54,15 +60,15 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="19dp"
             android:layout_marginBottom="686dp"
-            android:src="@drawable/humberger_menu" />
+            android:src="@drawable/humberger_menu2" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/partyImage"
             android:layout_width="wrap_content"
             android:layout_height="250dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="426dp"
-            android:src="@drawable/img" />
+            android:src="@drawable/dancing_pic" />
 
         <Button
             android:id="@+id/button5"
@@ -87,7 +93,8 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="356dp"
             android:layout_marginBottom="380dp"
-            android:src="@drawable/img_1" />
+            android:src="@drawable/persons2" />
+
 
         <TextView
             android:id="@+id/textView6"
@@ -95,24 +102,61 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="258dp"
-            android:layout_marginBottom="391dp"
+            android:layout_marginEnd="254dp"
+            android:layout_marginBottom="386dp"
             android:text="@string/indtjekninger" />
 
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="1dp"
-            android:background="#F9F6F5"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_navigation" />
+            android:layout_marginEnd="209dp"
+            android:layout_marginBottom="289dp"
+            android:lineSpacingExtra="5dp"
+            android:padding="10dp"
+            android:text="@string/address"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+
+
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="62dp"
+            android:layout_marginBottom="338dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="62dp"
+            android:layout_marginBottom="312dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/bottomNavigationView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="72dp"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginBottom="1dp"-->
+<!--            android:background="#F9F6F5"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:menu="@menu/bottom_navigation" />-->
+
 
     </RelativeLayout>
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

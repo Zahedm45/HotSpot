@@ -9,8 +9,15 @@
     <string name="messages">Messages</string>
     <string name="map">Map</string>
     <string name="log_in">Log in</string>
+
+
     <string name="tjekket_ind">Tjekket ind</string>
-    <string name="indtjekninger">Indtjekninger</string>
+    <string name="indtjekninger">7 Indtjekninger</string>
+    <string name="address"> 50m  - København H Lorem \nLorem ipsun \nbeskrivelse</string>
+    <string name="description">beskrivelse</string>
+
+
+
 
 
 </resources>
