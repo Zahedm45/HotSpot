@@ -10,6 +10,7 @@
     <string name="map">Map</string>
     <string name="log_in">Log in</string>
     <string name="opret_profil">opret profil</string>
+    <string name="edit_profil">opret profil</string>
     <string name="username">username</string>
     <string name="e_mail">email</string>
     <string name="password">password</string>
@@ -17,4 +18,5 @@
     <string name="log_in2">Log In</string>
     <string name="glemt_log_in">Glemt log in</string>
     <string name="password2">Password</string>
+    <string name="bio_text">Bio tekst</string>
 </resources>
