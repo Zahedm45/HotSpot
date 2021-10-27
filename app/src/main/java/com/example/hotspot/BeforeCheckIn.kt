@@ -5,26 +5,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.hotspot.databinding.ActivityMainBinding
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
+import com.example.hotspot.databinding.BeforeCheckInBinding
+
 
 class BeforeCheckIn : Fragment() {
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_before_check_in, container, false)
+        val view = inflater.inflate(R.layout.before_check_in, container, false)
+
+        view.findViewById<Button>(R.id.checkInButton).setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.afterCheckIn)
+            print("helelodoofiofj")
+        }
+
+        return view
+
 
     }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        navController = Navigation.findNavController(view)
-//        view.findViewById<Button>(R.id.log_in).setOnClickListener(this)
-//
-//    }
+
+
+
+
+
 
 
 

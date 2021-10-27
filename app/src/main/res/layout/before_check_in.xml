@@ -13,27 +13,26 @@
         android:layout_height="46dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
         android:src="@mipmap/humberger_menu_bar_foreground"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-
     <ImageButton
         android:id="@+id/partyImage"
-        android:layout_width="wrap_content"
-        android:layout_height="250dp"
+        android:layout_width="417dp"
+        android:layout_height="251dp"
         android:layout_alignParentBottom="true"
         android:src="@drawable/dancing_pic_with_shadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/humbergerMenu"
-        app:layout_constraintVertical_bias="0.032"
+        app:layout_constraintVertical_bias="0.028"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
@@ -80,7 +79,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/checkInButton"
             style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
             android:layout_width="141dp"
             android:layout_height="68dp"
