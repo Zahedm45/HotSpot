@@ -19,4 +19,13 @@ class BeforeCheckIn : Fragment() {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+        view.findViewById<Button>(R.id.log_in).setOnClickListener(this)
+
+    }
+
+
+
 }
