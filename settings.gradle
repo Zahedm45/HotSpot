@@ -4,6 +4,10 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
+        maven {
+            url  'http://dl.bintray.com/gigamole/maven/'
+            allowInsecureProtocol(true)
+        }
     }
 }
 rootProject.name = "HotSpot"
