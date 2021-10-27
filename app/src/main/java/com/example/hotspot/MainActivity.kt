@@ -24,8 +24,15 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val afterCheckIn = AfterCheckIn()
-        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, afterCheckIn).commit()
+//        val afterCheckIn = AfterCheckIn()
+//        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, afterCheckIn).commit()
+//        supportActionBar?.hide()
+
+
+
+
+        val beforeCheckIn = BeforeCheckIn()
+        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, beforeCheckIn).commit()
         supportActionBar?.hide()
 
 

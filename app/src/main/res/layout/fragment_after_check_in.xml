@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/humbergerMenu"
-        android:text="Kassen"
+        android:text="@string/locationName"
         android:textColor="@color/black"
         android:textSize="26dp"
         android:textStyle="bold"
@@ -59,8 +59,6 @@
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.727"
-
-
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton

@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.hotspot.databinding.ActivityMainBinding
 
 class BeforeCheckIn : Fragment() {
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -14,5 +16,7 @@ class BeforeCheckIn : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_before_check_in, container, false)
+
     }
+
 }
