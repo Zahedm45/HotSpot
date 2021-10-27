@@ -9,16 +9,59 @@
     <!-- TODO: Update blank fragment layout -->
 
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="200dp"
+        app:cardCornerRadius="2dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_profile" />
+    </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Beskeder"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="24" />
+        android:textColor="#59000000"
+        android:textSize="24dp" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="137dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginRight="100dp"
+        android:src="@drawable/ic_menu_icon" />
+
+
+    <com.gigamole.navigationtabstrip.NavigationTabStrip
+
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:nts_color="#000"
+        app:nts_size="15sp"
+        app:nts_weight="3dp"
+        app:nts_factor="2.5"
+        app:nts_titles="@array/titles"
+        app:nts_type="line"
+        app:nts_gravity="top"
+        app:nts_typeface="fonts/typeface.otf"
+        app:nts_corners_radius="1.5dp"
+        app:nts_animation_duration="300"
+        app:nts_active_color="#BF673AB7"
+        app:nts_inactive_color="#c4c4c4">
+
+    </com.gigamole.navigationtabstrip.NavigationTabStrip>
 </FrameLayout>
