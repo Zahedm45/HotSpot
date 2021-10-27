@@ -1,14 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateProfile">
+    tools:context=".CreateProfile"
+    android:padding="20dp"
+    android:background="@drawable/shutterstock"
+    android:orientation="vertical"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:background="@color/white_80tinted">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opret_profil"
+                    android:textColor="@color/orange"
+                    android:textSize="30dp">
+                </TextView>
+
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="username"
+                    android:background="@drawable/edittext_background1"
+                    android:ems="10"
+                    android:hint="@string/username"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
+                    android:layout_marginTop="20dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle_for_profile_picture"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:autofillHints="emailAddress"
+                android:background="@drawable/edittext_background1"
+                android:ems="10"
+                android:hint="@string/e_mail"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp" />
+
+            <EditText
+                android:id="@+id/CreateTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:autofillHints="password"
+                android:background="@drawable/edittext_background1"
+                android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:paddingEnd="10dp"
+                tools:ignore="RtlSymmetry" />
+
+            <EditText
+                android:id="@+id/RepeatTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:autofillHints="password"
+                android:background="@drawable/edittext_background1"
+                android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
+                android:ems="10"
+                android:hint="@string/repeat_password"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:paddingEnd="10dp"
+                tools:ignore="RtlSymmetry" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_profile"
+                android:layout_marginTop="70dp"
+                android:backgroundTint="@color/orange"
+                android:width="200dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
