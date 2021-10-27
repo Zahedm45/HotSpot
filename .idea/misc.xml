@@ -33,7 +33,7 @@
         <entry key="app/src/main/res/layout/activity_scrolling.xml" value="0.353125" />
         <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.353125" />
         <entry key="app/src/main/res/layout/fragment_after_check_in.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_before_check_in.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_before_check_in.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/fragment_home_map.xml" value="0.21197916666666666" />
