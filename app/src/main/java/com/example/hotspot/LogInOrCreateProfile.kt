@@ -29,7 +29,7 @@ class LogInOrCreateProfile : Fragment(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when(p0!!.id){
-            R.id.log_in -> navController.navigate(R.id.action_logInOrCreateProfile_to_logIn)
+            R.id.log_in -> navController.navigate(R.id.action)
             R.id.create_profile -> navController.navigate(R.id.action_logInOrCreateProfile_to_createProfile)
         }
     }

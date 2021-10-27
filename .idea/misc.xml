@@ -27,12 +27,13 @@
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/menu_icon.xml" value="0.1" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/message.xml" value="0.2703125" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/person.xml" value="0.21666666666666667" />
-        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_main.xml" value="0.24603174603174602" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_after_check_in.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_before_check_in.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_chat.xml" value="0.8" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_chat.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_create_profile.xml" value="0.264" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_log_in.xml" value="0.2346014492753623" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_log_in_or_create_profile.xml" value="0.190625" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navigation.xml" value="0.25416666666666665" />
       </map>
     </option>

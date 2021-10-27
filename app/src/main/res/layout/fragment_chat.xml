@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/chat_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -25,7 +25,7 @@
         android:layout_height="80dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="150dp"
-        app:cardCornerRadius="2dp">
+        app:cardCornerRadius="50dp">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -72,15 +72,22 @@
         app:nts_corners_radius="1.5dp"
         app:nts_animation_duration="300"
         app:nts_active_color="#BF673AB7"
-        app:nts_inactive_color="#c4c4c4">
-
-    </com.gigamole.navigationtabstrip.NavigationTabStrip>
+        app:nts_inactive_color="#c4c4c4" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="200dp"
-        android:text="TextView" />
+        android:layout_marginTop="195dp"
+        android:text="Hey, hvordan går det?" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="195dp"
+        android:text="27/09" />
+
 </FrameLayout>
