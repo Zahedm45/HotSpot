@@ -11,7 +11,7 @@
         android:label="fragment_log_in_or_create_profile"
         tools:layout="@layout/fragment_log_in_or_create_profile" >
         <action
-            android:id="@+id/action_homeToMessageOverview"
+            android:id="@+id/action_logInOrCreateProfile_to_logIn"
             app:destination="@id/logIn" />
         <action
             android:id="@+id/action_logInOrCreateProfile_to_createProfile"
