@@ -89,7 +89,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:backgroundTint="@color/gold"
-            android:text="@string/tjekket_ind"
+            android:text="@string/checkIn"
             android:textColor="@android:color/white"
             android:textSize="13dp"
             app:cornerRadius="28dp"
