@@ -77,8 +77,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_menu_icon" />
 
-
-<!--   <com.gigamole.navigationtabstrip.NavigationTabStrip
+    <com.gigamole.navigationtabstrip.NavigationTabStrip
 
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -94,7 +93,7 @@
         app:nts_titles="@array/titles"
         app:nts_type="line"
         app:nts_typeface="fonts/typeface.otf"
-        app:nts_weight="5dp" />-->
+        app:nts_weight="5dp" />
 
 
 
