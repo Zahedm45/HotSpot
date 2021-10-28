@@ -19,4 +19,7 @@
     <string name="glemt_log_in">Glemt log in</string>
     <string name="password2">Password</string>
     <string name="bio_text">Bio tekst</string>
+    <string name="kvinde">Kvinde</string>
+    <string name="mand">Mand</string>
+    <string name="opret_profil2">Opret Profil</string>
 </resources>
