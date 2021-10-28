@@ -84,7 +84,9 @@
         android:layout_height="38dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="@color/gold"
+
+        android:backgroundTint="@color/light_gold"
+
         android:text="@string/tjekket_ind"
         android:textColor="@android:color/white"
         android:textSize="13dp"
@@ -95,7 +97,11 @@
         app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/partyImage"
         app:layout_constraintVertical_bias="0.029"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck"
+        android:clickable="false"
+
+
+        />
 
     <ImageView
         android:id="@+id/imageView6"
