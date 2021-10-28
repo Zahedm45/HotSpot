@@ -30,9 +30,12 @@
         android:id="@+id/beforeCheckIn"
         android:name="com.example.hotspot.BeforeCheckIn"
         android:label="fragment_before_check_in"
-        tools:layout="@layout/fragment_before_check_in" >
+        tools:layout="@layout/before_check_in" >
         <action
             android:id="@+id/action_beforeCheckIn_to_afterCheckIn"
+            app:destination="@id/afterCheckIn" />
+        <action
+            android:id="@+id/checkInButton2"
             app:destination="@id/afterCheckIn" />
     </fragment>
     <fragment

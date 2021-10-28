@@ -20,4 +20,22 @@
     <string name="kvinde">Kvinde</string>
     <string name="mand">Mand</string>
     <string name="opret_profil2">Opret Profil</string>
+    <string name="personal_name">Navn</string>
+    <string name="edit_profile">Rediger profil</string>
+    <string name="personal_age">Alder</string>
+    <string name="personal_description">Beskrivelse</string>
+    <string name="send_message">Send besked</string>
+
+    <string name="checkIn">Tjek ind</string>
+    <string name="checkedIn">Tjekket ind</string>
+    <string name="amntOfPeople">7 Indtjekninger</string>
+    <string name="address"> 50m  - København H Lorem \nLorem ipsun \nbeskrivelse</string>
+    <string name="description">beskrivelse</string>
+    <string name="locationName">Kassen</string>
+
+
+
+
+
+
 </resources>
