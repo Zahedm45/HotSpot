@@ -3,6 +3,7 @@ package com.example.hotspot
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import com.example.hotspot.databinding.ActivityMainBinding
 
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val messageOverview = MessageOverview()
     private val favorite = Favorites()
     private val logIn = LogIn()
+    private val profile = PersonalProfile()
 
 
     @SuppressLint("ResourceType")
@@ -41,9 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         botmNavView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
+                R.id.fragment_favorites -> replaceFragment(favorite)
+                R.id.fragment_Profile -> replaceFragment(beforeCheckIn)
                 R.id.fragment_message -> replaceFragment(messageOverview)
-                R.id.fragment_favorites -> replaceFragment(beforeCheckIn)
-                R.id.fragment_Profile -> replaceFragment(logIn)
+
 
 
             }
