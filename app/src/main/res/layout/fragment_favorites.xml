@@ -105,7 +105,8 @@
                                 android:id="@+id/imageView2"
                                 android:layout_width="72dp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/Heart_for_favorites" />
+                                android:src="@drawable/Heart_for_favorites"
+                                tools:srcCompat="@drawable/heart_for_favorites" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -163,7 +164,8 @@
                                 android:id="@+id/imageView2"
                                 android:layout_width="72dp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/Heart_for_favorites" />
+                                android:src="@drawable/Heart_for_favorites"
+                                tools:srcCompat="@drawable/heart_for_favorites" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -221,7 +223,8 @@
                                 android:id="@+id/imageView2"
                                 android:layout_width="72dp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/Heart_for_favorites" />
+                                android:src="@drawable/Heart_for_favorites"
+                                tools:srcCompat="@drawable/heart_for_favorites" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -279,7 +282,8 @@
                                 android:id="@+id/imageView2"
                                 android:layout_width="72dp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/Heart_for_favorites" />
+                                android:src="@drawable/Heart_for_favorites"
+                                tools:srcCompat="@drawable/heart_for_favorites" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -337,7 +341,8 @@
                                 android:id="@+id/imageView2"
                                 android:layout_width="72dp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/Heart_for_favorites" />
+                                android:src="@drawable/Heart_for_favorites"
+                                tools:srcCompat="@drawable/heart_for_favorites" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -395,7 +400,8 @@
                                 android:id="@+id/imageView2"
                                 android:layout_width="72dp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/Heart_for_favorites" />
+                                android:src="@drawable/Heart_for_favorites"
+                                tools:srcCompat="@drawable/heart_for_favorites" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -453,7 +459,8 @@
                                 android:id="@+id/imageView2"
                                 android:layout_width="72dp"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/Heart_for_favorites" />
+                                android:src="@drawable/Heart_for_favorites"
+                                tools:srcCompat="@drawable/heart_for_favorites" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -506,7 +513,8 @@
                             android:id="@+id/imageView2"
                             android:layout_width="72dp"
                             android:layout_height="match_parent"
-                            android:src="@drawable/Heart_for_favorites" />
+                            android:src="@drawable/Heart_for_favorites"
+                            tools:srcCompat="@drawable/heart_for_favorites" />
                     </LinearLayout>
 
                 </LinearLayout>
