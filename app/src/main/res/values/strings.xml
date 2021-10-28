@@ -10,7 +10,7 @@
     <string name="map">Map</string>
     <string name="log_in">Log in</string>
     <string name="opret_profil">opret profil</string>
-    <string name="edit_profil">opret profil</string>
+    <string name="edit_profil">ændre profil</string>
     <string name="username">username</string>
     <string name="e_mail">email</string>
     <string name="password">password</string>
@@ -22,4 +22,7 @@
     <string name="kvinde">Kvinde</string>
     <string name="mand">Mand</string>
     <string name="opret_profil2">Opret Profil</string>
+    <string name="place_name">Sted Navn</string>
+    <string name="Place_location">Lokation/By</string>
+    <string name="Place_Disctance">Afstand</string>
 </resources>
