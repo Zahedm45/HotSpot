@@ -21,11 +21,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+
     private val beforeCheckIn = BeforeCheckIn()
     private val messageOverview = MessageOverview()
     private val favorite = Favorites()
     private val logIn = LogIn()
     private val profile = PersonalProfile()
+    private val afterCheckIn = AfterCheckIn()
 
 
     @SuppressLint("ResourceType")
@@ -43,15 +45,17 @@ class MainActivity : AppCompatActivity() {
 
         botmNavView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
+                R.id.fragment_home -> replaceFragment(afterCheckIn)
                 R.id.fragment_favorites -> replaceFragment(favorite)
                 R.id.fragment_Profile -> replaceFragment(beforeCheckIn)
-                R.id.fragment_message -> replaceFragment(messageOverview)
+                R.id.fragment_message -> replaceFragment(favorite)
 
 
 
             }
             true
         }
+        replaceFragment(beforeCheckIn)
 
 
     }
