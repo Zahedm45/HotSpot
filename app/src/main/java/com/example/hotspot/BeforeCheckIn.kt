@@ -27,14 +27,6 @@ class BeforeCheckIn : Fragment() {
 
         return view
 
-
     }
-
-
-
-
-
-
-
 
 }
