@@ -73,5 +73,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.193" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="174dp"
+        android:layout_height="156dp"
+        android:src="@mipmap/ic_profile"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.765" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
