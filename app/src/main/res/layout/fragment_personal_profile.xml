@@ -73,5 +73,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.123" />
 
+    <ImageView
+        android:id="@+id/personal_picture"
+        android:layout_width="175dp"
+        android:layout_height="156dp"
+        android:src="@drawable/round_profile_pic"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.775" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
