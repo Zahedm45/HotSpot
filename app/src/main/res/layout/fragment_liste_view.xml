@@ -46,10 +46,20 @@
                             android:textSize="30dp"
                             tools:text="HotSpots"></TextView>
 
-                        <SearchView
+                        <EditText
+                            android:id="@+id/editTextTextPersonName10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:text="Søg..."
+                            android:textSize="24sp"
+                            android:textStyle="italic" />
+
+                        <!--<SearchView
                             android:id="@+id/searchList"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent" />-->
 
                     </LinearLayout>
 
@@ -75,7 +85,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName3"
+                                    android:id="@+id/editTextTextPersonName4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -92,7 +102,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine"
+                                    android:id="@+id/editTextTextMultiLine1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -103,7 +113,7 @@
                                     android:text="Afstand" />
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine2"
+                                    android:id="@+id/editTextTextMultiLine3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -128,7 +138,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName3"
+                                    android:id="@+id/editTextTextPersonName5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -145,7 +155,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine"
+                                    android:id="@+id/editTextTextMultiLine4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -156,7 +166,7 @@
                                     android:text="Afstand" />
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine2"
+                                    android:id="@+id/editTextTextMultiLine5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -181,7 +191,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName3"
+                                    android:id="@+id/editTextTextPersonName6"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -198,7 +208,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine"
+                                    android:id="@+id/editTextTextMultiLine6"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -209,7 +219,7 @@
                                     android:text="Afstand" />
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine2"
+                                    android:id="@+id/editTextTextMultiLine7"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -234,7 +244,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName3"
+                                    android:id="@+id/editTextTextPersonName7"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -251,7 +261,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine"
+                                    android:id="@+id/editTextTextMultiLine8"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -262,7 +272,7 @@
                                     android:text="Afstand" />
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine2"
+                                    android:id="@+id/editTextTextMultiLine9"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -287,7 +297,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName3"
+                                    android:id="@+id/editTextTextPersonName9"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -304,7 +314,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine"
+                                    android:id="@+id/editTextTextMultiLine10"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -315,7 +325,7 @@
                                     android:text="Afstand" />
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine2"
+                                    android:id="@+id/editTextTextMultiLine11"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -340,7 +350,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName3"
+                                    android:id="@+id/editTextTextPersonName11"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -357,7 +367,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine"
+                                    android:id="@+id/editTextTextMultiLine12"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -368,7 +378,7 @@
                                     android:text="Afstand" />
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine2"
+                                    android:id="@+id/editTextTextMultiLine13"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -393,7 +403,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName3"
+                                    android:id="@+id/editTextTextPersonName14"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -410,7 +420,7 @@
                                 android:orientation="horizontal">
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine"
+                                    android:id="@+id/editTextTextMultiLine14"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -421,7 +431,7 @@
                                     android:text="Afstand" />
 
                                 <EditText
-                                    android:id="@+id/editTextTextMultiLine2"
+                                    android:id="@+id/editTextTextMultiLine15"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
