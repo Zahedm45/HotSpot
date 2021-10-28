@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/drawable/person.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_scrolling.xml" value="0.353125" />
+        <entry key="app/src/main/res/layout/before_check_in.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.353125" />
         <entry key="app/src/main/res/layout/fragment_after_check_in.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_before_check_in.xml" value="0.25" />

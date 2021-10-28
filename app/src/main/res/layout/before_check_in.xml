@@ -40,7 +40,7 @@
         android:layout_width="105dp"
         android:layout_height="33dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_toStartOf="@+id/humbergerMenu"
         android:text="@string/locationName"
         android:textColor="@color/black"
@@ -74,7 +74,7 @@
 
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.014"
+            app:layout_constraintHorizontal_bias="0.07"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

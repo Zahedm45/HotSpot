@@ -21,10 +21,8 @@ class BeforeCheckIn : Fragment() {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.before_check_in, container, false)
-
         view.findViewById<Button>(R.id.checkInButton).setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.afterCheckIn)
-            print("helelodoofiofj")
         }
 
         return view
