@@ -10,6 +10,7 @@
     <string name="map">Map</string>
     <string name="log_in">Log in</string>
     <string name="opret_profil">opret profil</string>
+    <string name="edit_profil">ændre profil</string>
     <string name="username">username</string>
     <string name="e_mail">email</string>
     <string name="password">password</string>
@@ -17,7 +18,29 @@
     <string name="log_in2">Log In</string>
     <string name="glemt_log_in">Glemt log in</string>
     <string name="password2">Password</string>
+    <string name="bio_text">Bio tekst</string>
     <string name="kvinde">Kvinde</string>
     <string name="mand">Mand</string>
     <string name="opret_profil2">Opret Profil</string>
+    <string name="place_name">Sted Navn</string>
+    <string name="Place_location">Lokation/By</string>
+    <string name="Place_Disctance">Afstand</string>
+    <string name="personal_name">Navn</string>
+    <string name="edit_profile">Rediger profil</string>
+    <string name="personal_age">Alder</string>
+    <string name="personal_description">Beskrivelse</string>
+    <string name="send_message">Send besked</string>
+
+    <string name="checkIn">Tjek ind</string>
+    <string name="checkedIn">Tjekket ind</string>
+    <string name="amntOfPeople">7 Indtjekninger</string>
+    <string name="address"> 50m  - København H Lorem \nLorem ipsun \nbeskrivelse</string>
+    <string name="description">beskrivelse</string>
+    <string name="locationName">Kassen</string>
+
+
+
+
+
+
 </resources>

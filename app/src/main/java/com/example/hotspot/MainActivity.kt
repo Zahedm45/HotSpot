@@ -2,13 +2,14 @@ package com.example.hotspot
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.hotspot.databinding.ActivityMainBinding
+
 import android.view.LayoutInflater
+import android.view.Window
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
-import com.example.hotspot.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -21,9 +22,10 @@ class MainActivity : AppCompatActivity() {
 /*        binding = ActivityMainBinding.inflate(LayoutInflater)
         setContentView(binding.root)*/
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        val navController = findNavController(R.id.nav_host_fragment)
+        // temporary coding, just to show the scenarios of before and after check in
+//        val beforeCheckIn = BeforeCheckIn()
+//        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, beforeCheckIn).commit()
+//        supportActionBar?.hide()
 
-        bottomNavigationView.setupWithNavController(navController)
     }
 }

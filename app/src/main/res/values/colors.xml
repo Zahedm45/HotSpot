@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white_80tinted">#CDFFFFFF</color>
     <color name="orange">#FFB255</color>
+    <color name="gold">#C6FFA200</color>
+    <color name="light_gold">#EAC690</color>
+
+
     <color name="yellow">#2B2B2B</color>
 </resources>
