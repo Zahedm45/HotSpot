@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 
-class LogInOrCreateProfile : Fragment(), View.OnClickListener {
+class  LogInOrCreateProfile : Fragment(), View.OnClickListener {
 
     lateinit var navController: NavController
 
