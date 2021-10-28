@@ -24,12 +24,12 @@ class PersonalProfile : Fragment(),View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.edit_profile).setOnClickListener(this)
+        view.findViewById<Button>(R.id.send_message).setOnClickListener(this)
 
     }
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.edit_profile -> navController.navigate(R.id.action_personalProfile_to_editProfile)
+            R.id.send_message -> navController.navigate(R.id.action_personalProfile_to_editProfile)
         }
     }
 }
