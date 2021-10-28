@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="titles">
+        chat_titles
+        <item> Nye </item>
+        <item> tidligere </item>
+    </string-array>
+
+</resources>
