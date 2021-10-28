@@ -50,4 +50,6 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation 'com.github.devlight.navigationtabstrip:navigationtabstrip:+'
 
+    implementation 'com.google.android.material:material:1.0.0'
+
 }

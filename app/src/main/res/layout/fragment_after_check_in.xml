@@ -1,14 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AfterCheckIn">
+    android:layout_width="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        tools:context=".AfterCheckIn">
 
-</FrameLayout>
+
+        <!-- TODO: Update blank fragment layout -->
+        <!--    <TextView-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent"-->
+        <!--        android:text="@string/hello_blank_fragment" />-->
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#9EFFFFFF"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/eventLocationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/humbergerMenu"
+            android:text="@string/locationName"
+            android:textColor="@color/black"
+            android:textSize="26dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toStartOf="@+id/humbergerMenu"
+            app:layout_constraintHorizontal_bias="0.156"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+
+        <ImageButton
+            android:id="@+id/humbergerMenu"
+            android:layout_width="55dp"
+            android:layout_height="46dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/white"
+            android:src="@mipmap/humberger_menu_bar_foreground"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.76"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <ImageButton
+            android:id="@+id/partyImage"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/dancing_pic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.032"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+
+        <Button
+            android:id="@+id/button5"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="156dp"
+            android:layout_height="38dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+
+            android:backgroundTint="@color/light_gold"
+
+            android:text="@string/checkedIn"
+            android:textColor="@android:color/white"
+            android:textSize="13dp"
+            app:cornerRadius="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.82"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/partyImage"
+            app:layout_constraintVertical_bias="0.029"
+            tools:ignore="TouchTargetSizeCheck"
+            android:clickable="false"
+
+
+            />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="41dp"
+            android:layout_height="37dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/persons2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/partyImage" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/amntOfPeople"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintTop_toBottomOf="@+id/partyImage"
+            android:textSize="15dp"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="20dp"
+            android:lineSpacingExtra="5dp"
+            android:padding="10dp"
+            android:text="@string/address"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.078"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.738"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/button5"
+            tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.738"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/switch1"
+            tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="29dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="28dp"
+            android:src="@drawable/img"
+            app:layout_constraintEnd_toStartOf="@+id/switch1"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/button5" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="29dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/img_1"
+            app:layout_constraintEnd_toStartOf="@+id/switch2"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
+
+
