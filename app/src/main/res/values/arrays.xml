@@ -3,7 +3,7 @@
     <string-array name="titles">
         chat_titles
         <item> Nye </item>
-        <item> Åbnede </item>
+        <item> tidligere </item>
     </string-array>
 
 </resources>

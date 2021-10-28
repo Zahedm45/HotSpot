@@ -4,33 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Chat">
+    tools:context=".MessageOverview">
 
     <!-- TODO: Update blank fragment layout -->
 
 
-    <TextView
-        android:id="@+id/chat_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="160dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="Clara Henriksen"
-        android:textColor="#000000"
-        android:textSize="18dp" />
-
     <androidx.cardview.widget.CardView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:id="@+id/chatOnClick"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="150dp"
         app:cardCornerRadius="50dp">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/messageContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="30dp"
+            android:text="Ikke så meget, dig?" />
+
+        <TextView
+            android:id="@+id/message_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="290dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="0dp"
+            android:text="27/09" />
+
+        <TextView
+            android:id="@+id/chat_name"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Clara"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
             android:src="@mipmap/ic_profile" />
     </androidx.cardview.widget.CardView>
 
@@ -48,46 +67,34 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="137dp"
+        android:layout_width="50dp"
         android:layout_height="57dp"
+        android:layout_marginLeft="300dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="280dp"
-        android:layout_marginRight="100dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_menu_icon" />
 
 
     <com.gigamole.navigationtabstrip.NavigationTabStrip
 
-        android:layout_marginTop="70dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:nts_color="#000"
-        app:nts_size="15sp"
-        app:nts_weight="3dp"
+        android:layout_marginTop="70dp"
+        app:nts_active_color="#673AB7"
+        app:nts_animation_duration="300"
+        app:nts_color="#D9673AB7"
+        app:nts_corners_radius="50dp"
         app:nts_factor="2.5"
+        app:nts_gravity="top"
+        app:nts_inactive_color="#c4c4c4"
+        app:nts_size="15sp"
         app:nts_titles="@array/titles"
         app:nts_type="line"
-        app:nts_gravity="top"
         app:nts_typeface="fonts/typeface.otf"
-        app:nts_corners_radius="1.5dp"
-        app:nts_animation_duration="300"
-        app:nts_active_color="#BF673AB7"
-        app:nts_inactive_color="#c4c4c4" />
+        app:nts_weight="5dp" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="195dp"
-        android:text="Hey, hvordan går det?" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="350dp"
-        android:layout_marginTop="195dp"
-        android:text="27/09" />
 
 </FrameLayout>
