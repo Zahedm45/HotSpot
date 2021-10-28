@@ -27,12 +27,16 @@
         <entry key="app/src/main/res/drawable/home.xml" value="0.2640625" />
         <entry key="app/src/main/res/drawable/map_nav_bottom.xml" value="0.2640625" />
         <entry key="app/src/main/res/drawable/message.xml" value="0.2640625" />
+        <entry key="app/src/main/res/drawable/person.xml" value="0.20572916666666666" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/layout/fragment_create_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/fragment_log_in_or_create_profile.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_message_overview.xml" value="0.21927083333333333" />
         <entry key="app/src/main/res/layout/fragment_personal_profile.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.33" />
       </map>
     </option>
