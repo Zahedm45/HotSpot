@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)*/
 
         // temporary coding, just to show the scenarios of before and after check in
-        val beforeCheckIn = BeforeCheckIn()
-        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, beforeCheckIn).commit()
-        supportActionBar?.hide()
+//        val beforeCheckIn = BeforeCheckIn()
+//        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, beforeCheckIn).commit()
+//        supportActionBar?.hide()
 
     }
 }
