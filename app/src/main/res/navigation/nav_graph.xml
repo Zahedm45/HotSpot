@@ -46,9 +46,10 @@
         android:name="com.example.hotspot.CreateProfile"
         android:label="fragment_create_profile"
         tools:layout="@layout/fragment_create_profile" >
+
         <action
-            android:id="@+id/action_createProfile_to_homeMap2"
-            app:destination="@id/homeMap2" />
+            android:id="@+id/action_createProfile_to_homeMapeCop"
+            app:destination="@id/homeMapeCop" />
     </fragment>
     <fragment
         android:id="@+id/editProfile"
@@ -70,9 +71,6 @@
         android:label="fragment_liste_view"
         tools:layout="@layout/fragment_liste_view" >
         <action
-            android:id="@+id/action_listeView_to_homeMap2"
-            app:destination="@id/homeMap2" />
-        <action
             android:id="@+id/action_listeView_to_beforeCheckIn"
             app:destination="@id/beforeCheckIn" />
     </fragment>
@@ -82,8 +80,8 @@
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
-            android:id="@+id/action_logIn_to_homeMap2"
-            app:destination="@id/homeMap2" />
+            android:id="@+id/action_logIn_to_homeMapeCop"
+            app:destination="@id/homeMapeCop" />
     </fragment>
     <fragment
         android:id="@+id/messageOverview"
@@ -113,15 +111,8 @@
             app:destination="@id/chat" />
     </fragment>
     <fragment
-        android:id="@+id/homeMap2"
+        android:id="@+id/homeMapeCop"
         android:name="com.example.hotspot.HomeMap"
         android:label="fragment_home_map"
-        tools:layout="@layout/fragment_home_map" >
-        <action
-            android:id="@+id/action_homeMap2_self"
-            app:destination="@id/homeMap2" />
-        <action
-            android:id="@+id/action_homeMap2_to_listeView"
-            app:destination="@id/listeView" />
-    </fragment>
+        tools:layout="@layout/fragment_home_map" />
 </navigation>

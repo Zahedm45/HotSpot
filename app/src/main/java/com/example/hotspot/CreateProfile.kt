@@ -29,7 +29,7 @@ class CreateProfile : Fragment(),View.OnClickListener {
     }
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.createprofile_btn -> navController.navigate(R.id.action_createProfile_to_homeMap2)
+            R.id.createprofile_btn -> navController.navigate(R.id.homeMapeCop)
         }
     }
 }
