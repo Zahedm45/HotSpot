@@ -18,11 +18,11 @@
     <!--            app:layout_constraintStart_toStartOf="parent"-->
     <!--            app:menu="@menu/bottom_navigation" />-->
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <ImageButton
+        android:id="@+id/mapImage"
         android:layout_width="413dp"
         android:layout_height="581dp"
-        android:src="@drawable/kbh_map_2"
+        android:src="@drawable/kbh_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
