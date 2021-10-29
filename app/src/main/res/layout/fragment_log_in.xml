@@ -20,9 +20,10 @@
         android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/edittext_background1"
         android:ems="10"
+        android:fontFamily="sans-serif"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
         android:minHeight="48dp" />
@@ -35,6 +36,7 @@
         android:background="@drawable/edittext_background1"
         android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
         android:ems="10"
+        android:fontFamily="sans-serif"
         android:hint="@string/password2"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -44,18 +46,18 @@
         android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/log_in2"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/orange"
         android:ems="7"
-        />
+        android:text="@string/log_in2" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/glemt_log_in"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_light"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"/>
+        android:text="@string/glemt_log_in"
+        android:textColor="@color/white" />
 
 </LinearLayout>

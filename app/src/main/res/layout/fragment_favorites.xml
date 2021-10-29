@@ -15,11 +15,11 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="370dp"
+            android:layout_width="330dp"
             android:layout_height="match_parent"
             android:background="@color/white_80tinted"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="0dp">
 
             <LinearLayout
                 android:layout_width="330dp"
@@ -36,6 +36,7 @@
                     <TextView
                         android:layout_width="330dp"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
                         android:text="@string/favourites"
                         android:textColor="@color/orange"
                         android:textSize="30dp"
@@ -70,6 +71,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:hint="@string/place_name"
                                 android:inputType="textPersonName"
                                 android:text="Navn" />
@@ -87,6 +89,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_Disctance"
                                 android:inputType="textMultiLine"
@@ -98,6 +101,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_location"
                                 android:inputType="textMultiLine"
@@ -129,6 +133,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:hint="@string/place_name"
                                 android:inputType="textPersonName"
                                 android:text="Navn" />
@@ -146,6 +151,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_Disctance"
                                 android:inputType="textMultiLine"
@@ -157,6 +163,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_location"
                                 android:inputType="textMultiLine"
@@ -188,6 +195,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:hint="@string/place_name"
                                 android:inputType="textPersonName"
                                 android:text="Navn" />
@@ -205,6 +213,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_Disctance"
                                 android:inputType="textMultiLine"
@@ -216,6 +225,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_location"
                                 android:inputType="textMultiLine"
@@ -247,6 +257,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:hint="@string/place_name"
                                 android:inputType="textPersonName"
                                 android:text="Navn" />
@@ -264,6 +275,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_Disctance"
                                 android:inputType="textMultiLine"
@@ -275,6 +287,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_location"
                                 android:inputType="textMultiLine"
@@ -306,6 +319,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:hint="@string/place_name"
                                 android:inputType="textPersonName"
                                 android:text="Navn" />
@@ -323,6 +337,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_Disctance"
                                 android:inputType="textMultiLine"
@@ -334,6 +349,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_location"
                                 android:inputType="textMultiLine"
@@ -365,6 +381,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:hint="@string/place_name"
                                 android:inputType="textPersonName"
                                 android:text="Navn" />
@@ -382,6 +399,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_Disctance"
                                 android:inputType="textMultiLine"
@@ -393,6 +411,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_location"
                                 android:inputType="textMultiLine"
@@ -424,6 +443,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:hint="@string/place_name"
                                 android:inputType="textPersonName"
                                 android:text="Navn" />
@@ -441,6 +461,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_Disctance"
                                 android:inputType="textMultiLine"
@@ -452,6 +473,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ems="10"
+                                android:fontFamily="@font/poppins_light"
                                 android:gravity="start|top"
                                 android:hint="@string/Place_location"
                                 android:inputType="textMultiLine"

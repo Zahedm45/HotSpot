@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 /*        binding = ActivityMainBinding.inflate(LayoutInflater)
         setContentView(binding.root)*/
 
-       // btmNavigation = findViewById(R.id.bottomNavigationView)
+        //btmNavigation = findViewById(R.id.bottomNavigationView)
 
         val btn = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navCont = findNavController(R.id.nav_host_fragment)
