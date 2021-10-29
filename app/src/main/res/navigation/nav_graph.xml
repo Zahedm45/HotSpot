@@ -114,5 +114,9 @@
         android:id="@+id/homeMapeCop"
         android:name="com.example.hotspot.HomeMap"
         android:label="fragment_home_map"
-        tools:layout="@layout/fragment_home_map" />
+        tools:layout="@layout/fragment_home_map" >
+        <action
+            android:id="@+id/action_homeMapeCop_to_beforeCheckIn"
+            app:destination="@id/beforeCheckIn" />
+    </fragment>
 </navigation>
