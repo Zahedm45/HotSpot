@@ -15,6 +15,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -34,41 +35,50 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 /*        binding = ActivityMainBinding.inflate(LayoutInflater)
         setContentView(binding.root)*/
 
-        //btmNavigation = findViewById(R.id.bottomNavigationView)
+       // btmNavigation = findViewById(R.id.bottomNavigationView)
 
+        val btn = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val navCont = findNavController(R.id.nav_host_fragment)
+        btn.setupWithNavController(navCont)
 
-        var botmNavView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-
-
-        botmNavView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.fragment_home -> replaceFragment(afterCheckIn)
-                R.id.fragment_favorites -> replaceFragment(favorite)
-                R.id.fragment_Profile -> replaceFragment(beforeCheckIn)
-                R.id.fragment_message -> replaceFragment(favorite)
-
-
-
-            }
-            true
-        }
-        replaceFragment(beforeCheckIn)
-
+//        var botmNavView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+//        botmNavView.setOnNavigationItemSelectedListener {
+//            when (it.itemId) {
+//
+//                R.id.fragment_message -> replaceFragment(beforeCheckIn)
+//
+//                R.id.fragment_Profile -> replaceFragment(profile)
+//                R.id.fragment_favorites -> replaceFragment(favorite)
+//                R.id.fragment_home -> replaceFragment(logIn)
+//            }
+//            true
+//        }
+//
+//
+//
+//    }
+//
+//
+//    private fun replaceFragment(fragment: Fragment) {
+//
+//        if (fragment != null) {
+//            supportFragmentManager.beginTransaction().apply {
+//                replace(R.id.nav_host_fragment, fragment)
+//                commit()
+//            }
+//
+//        }
 
     }
 
 
-    private fun replaceFragment(fragment: Fragment) {
 
-        if (fragment != null) {
 
-            supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit()
 
-        }
-    }
 
 }
 

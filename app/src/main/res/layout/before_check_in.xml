@@ -91,7 +91,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/checkInButton"
+                android:id="@+id/checkInButton1"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
                 android:layout_width="141dp"
                 android:layout_height="68dp"

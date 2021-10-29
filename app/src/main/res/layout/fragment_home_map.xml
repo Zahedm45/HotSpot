@@ -16,36 +16,30 @@
             android:name="com.example.hotspot.HomeMap"
             android:layout_width="0dp"
             android:layout_height="655dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-            app:layout_constraintEnd_toEndOf="@+id/bottomNavigationView"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
+        <!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/bottomNavigationView"-->
+<!--            android:layout_width="409dp"-->
+<!--            android:layout_height="73dp"-->
+<!--            android:background="#F9F6F5"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:menu="@menu/bottom_navigation" />-->
+
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="413dp"
             android:layout_height="581dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginEnd="15dp"
             android:src="@drawable/kbh_map_2"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-            app:layout_constraintEnd_toEndOf="@+id/mapView"
-            app:layout_constraintHorizontal_bias="0.686"
-            app:layout_constraintStart_toStartOf="@+id/mapView"
-            app:layout_constraintTop_toBottomOf="@id/TempSøg"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="409dp"
-            android:layout_height="73dp"
-            android:background="#F9F6F5"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_navigation" />
+            app:layout_constraintTop_toBottomOf="@+id/TempSøg" />
 
         <EditText
             android:id="@+id/TempSøg"
@@ -57,12 +51,10 @@
             android:text="Søg..."
             android:textSize="24sp"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/mapView"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/mapView" />
 
         <!--<SearchView
             android:id="@+id/searchMap"
