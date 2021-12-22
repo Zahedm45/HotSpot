@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".CreateProfile">
+    tools:context=".view.CreateProfile">
     tools:context=".Favorites"
     android:id="@+id/fragment_favorites">
     <LinearLayout
