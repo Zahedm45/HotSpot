@@ -23,7 +23,7 @@
         tools:autoText="true" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/personName_textView"
         android:layout_width="96dp"
         android:layout_height="38dp"
         android:layout_marginTop="276dp"
@@ -43,7 +43,7 @@
         app:layout_constraintVertical_bias="0.214" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_light"
@@ -56,10 +56,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/personName_textView"
         app:layout_constraintVertical_bias="0.05" />
 
     <TextView
+        android:id="@+id/personal_comment"
         android:layout_width="279dp"
         android:layout_height="49dp"
         android:fontFamily="@font/poppins_light"
@@ -70,7 +71,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_edit_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/tv_age"
         app:layout_constraintVertical_bias="0.123" />
 
     <ImageView
@@ -78,7 +79,7 @@
         android:layout_width="175dp"
         android:layout_height="156dp"
         android:src="@drawable/round_profile_pic"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/personName_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

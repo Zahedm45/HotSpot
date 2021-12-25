@@ -57,7 +57,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/edit_profile_new_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -71,7 +71,7 @@
                 android:text="Nyt brugernavn" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/edit_profile_new_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -85,7 +85,7 @@
                 android:text="Ny email" />
 
             <EditText
-                android:id="@+id/editBioText"
+                android:id="@+id/edit_profile_BioText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -99,7 +99,7 @@
                 android:text="Statusbesked" />
 
             <EditText
-                android:id="@+id/CreateTextPassword"
+                android:id="@+id/edit_profile_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -131,7 +131,7 @@
                 tools:ignore="RtlSymmetry" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/edit_profile_saveChange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
