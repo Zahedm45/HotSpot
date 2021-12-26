@@ -3,6 +3,7 @@ package com.example.hotspot.view
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.hotspot.databinding.ActivityMainBinding
 
 import androidx.navigation.findNavController
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         val navCont = findNavController(R.id.nav_host_fragment)
         btn.setupWithNavController(navCont)
 
+
+
+
+
 //        var botmNavView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 //        botmNavView.setOnNavigationItemSelectedListener {
 //            when (it.itemId) {
@@ -66,6 +71,8 @@ class MainActivity : AppCompatActivity() {
 //        }
 
     }
+
+
 
 
 

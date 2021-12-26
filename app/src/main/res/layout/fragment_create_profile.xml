@@ -39,7 +39,7 @@
                         android:textSize="30sp" />
 
                     <EditText
-                        android:id="@+id/edit_profile_new_username"
+                        android:id="@+id/create_profile_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -64,7 +64,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName"
+                    android:id="@+id/create_profile_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -76,7 +76,7 @@
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/CreateTextPassword"
+                    android:id="@+id/create_profile_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -90,7 +90,7 @@
                     tools:ignore="RtlSymmetry" />
 
                 <EditText
-                    android:id="@+id/RepeatTextPassword"
+                    android:id="@+id/create_profile_repeat_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -105,7 +105,7 @@
                     tools:ignore="RtlSymmetry" />
 
                 <EditText
-                    android:id="@+id/emailinput"
+                    android:id="@+id/create_profile_emailinput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"

@@ -33,12 +33,21 @@
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_personal_profile.xml" value="0.1640625" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navi.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navigation.xml" value="0.21979166666666666" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.22760416666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/before_check_in.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.2796875" />
+        <entry key="app/src/main/res/layout/fragment_create_profile.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_personal_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.37604166666666666" />
       </map>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout-w1240dp/activity_login.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout-w936dp/activity_login.xml" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

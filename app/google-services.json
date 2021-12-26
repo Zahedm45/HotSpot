@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "119711614320",
+    "project_id": "hotspot-onmyown",
+    "storage_bucket": "hotspot-onmyown.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119711614320:android:c09827cd9687874e20bbb5",
+        "android_client_info": {
+          "package_name": "com.example.hotspot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119711614320-l3bqj4rm0u08md49s7l1tmv247uel9pd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV8uwHojKs4W-jTXNBHwLUCAecLNgL3us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119711614320-l3bqj4rm0u08md49s7l1tmv247uel9pd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

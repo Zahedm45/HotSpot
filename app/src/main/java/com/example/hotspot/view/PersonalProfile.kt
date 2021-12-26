@@ -44,6 +44,7 @@ class PersonalProfile : Fragment(),View.OnClickListener {
         when (p0!!.id) {
             R.id.btn_edit_profile -> navController.navigate(R.id.action_personalProfile_to_editProfile)
 
+
 //            R.id.btn_edit_profile -> userModel.getUpdate()
 
 
