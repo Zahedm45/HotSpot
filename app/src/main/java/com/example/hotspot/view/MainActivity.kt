@@ -1,42 +1,69 @@
 package com.example.hotspot.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.hotspot.databinding.ActivityMainBinding
 
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.hotspot.R
+import com.example.hotspot.databinding.ActivityLoginBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityLoginBinding
 
 
-    private val beforeCheckIn = BeforeCheckIn()
-    private val messageOverview = MessageOverview()
-    private val favorite = Favorites()
-    private val logIn = LogIn()
-    private val profile = PersonalProfile()
-    private val afterCheckIn = AfterCheckIn()
+
 
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+       // setContentView(R.layout.activity_login)
 
-/*        binding = ActivityMainBinding.inflate(LayoutInflater)
-        setContentView(binding.root)*/
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        //btmNavigation = findViewById(R.id.bottomNavigationView)
 
-        val btn = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        val navCont = findNavController(R.id.nav_host_fragment)
-        btn.setupWithNavController(navCont)
+        binding.createProfile.setOnClickListener {
+            val intent = Intent(this, CreateProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.activityLoginBtn.setOnClickListener {
+            val intent = Intent(this, AfterLoginActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+//    private val beforeCheckIn = BeforeCheckIn()
+//    private val messageOverview = MessageOverview()
+//    private val favorite = Favorites()
+//    private val logIn = LogIn()
+//    private val profile = PersonalProfile()
+//    private val afterCheckIn = AfterCheckIn()
+
+
+
+
+//btmNavigation = findViewById(R.id.bottomNavigationView)
+
+
 
 
 
@@ -69,18 +96,3 @@ class MainActivity : AppCompatActivity() {
 //            }
 //
 //        }
-
-    }
-
-
-
-
-
-
-
-
-}
-
-
-
-

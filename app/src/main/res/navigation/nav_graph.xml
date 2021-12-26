@@ -3,20 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logInOrCreateProfile">
+    app:startDestination="@id/afterLogin_map">
 
-    <fragment
-        android:id="@+id/logInOrCreateProfile"
-        android:name="com.example.hotspot.view.LogInOrCreateProfile"
-        android:label="fragment_log_in_or_create_profile"
-        tools:layout="@layout/fragment_log_in_or_create_profile" >
-        <action
-            android:id="@+id/action_logInOrCreateProfile_to_logIn"
-            app:destination="@id/logIn" />
-        <action
-            android:id="@+id/action_logInOrCreateProfile_to_createProfile"
-            app:destination="@id/createProfile" />
-    </fragment>
+
     <fragment
         android:id="@+id/afterCheckIn"
         android:name="com.example.hotspot.view.AfterCheckIn"
@@ -26,6 +15,8 @@
             android:id="@+id/action_afterCheckIn_to_othersProfile"
             app:destination="@id/othersProfile" />
     </fragment>
+
+
     <fragment
         android:id="@+id/beforeCheckIn"
         android:name="com.example.hotspot.view.BeforeCheckIn"
@@ -41,16 +32,7 @@
         android:name="com.example.hotspot.view.Chat"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
-    <fragment
-        android:id="@+id/createProfile"
-        android:name="com.example.hotspot.view.CreateProfile"
-        android:label="fragment_create_profile"
-        tools:layout="@layout/fragment_create_profile" >
 
-        <action
-            android:id="@+id/action_createProfile_to_homeMapeCop"
-            app:destination="@id/homeMapeCop" />
-    </fragment>
     <fragment
         android:id="@+id/editProfile"
         android:name="com.example.hotspot.view.EditProfile"
@@ -74,15 +56,7 @@
             android:id="@+id/action_listeView_to_beforeCheckIn"
             app:destination="@id/beforeCheckIn" />
     </fragment>
-    <fragment
-        android:id="@+id/logIn"
-        android:name="com.example.hotspot.view.LogIn"
-        android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" >
-        <action
-            android:id="@+id/action_logIn_to_homeMapeCop"
-            app:destination="@id/homeMapeCop" />
-    </fragment>
+
     <fragment
         android:id="@+id/messageOverview"
         android:name="com.example.hotspot.view.MessageOverview"
@@ -110,13 +84,12 @@
             android:id="@+id/action_othersProfile_to_chat"
             app:destination="@id/chat" />
     </fragment>
+
     <fragment
-        android:id="@+id/homeMapeCop"
+        android:id="@+id/afterLogin_map"
         android:name="com.example.hotspot.view.HomeMap"
         android:label="fragment_home_map"
         tools:layout="@layout/fragment_home_map" >
-        <action
-            android:id="@+id/action_homeMapeCop_to_beforeCheckIn"
-            app:destination="@id/beforeCheckIn" />
+
     </fragment>
 </navigation>
