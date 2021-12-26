@@ -6,16 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
-import com.example.hotspot.databinding.ActivityLoginBinding
+import com.example.hotspot.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class CreateProfileActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    val db = Firebase.firestore
+
 
     private lateinit var binding: ActivityCreateProfileBinding
 
@@ -29,10 +31,12 @@ class CreateProfileActivity : AppCompatActivity() {
 
 
         binding.createprofileBtn.setOnClickListener {
-            val emil = binding.createProfileEmailinput.text.toString()
-            val password = binding.createProfilePassword.text.toString()
+            val email = binding.activityCreateProfileEmailinput.text.toString()
+            val password = binding.activityCreateProfilePassword.text.toString()
 
-            createAccount(emil, password)
+            if (!email.isNullOrBlank() && !password.isNullOrEmpty()) {
+                createAccount(email, password)
+            }
 
         }
     }
@@ -48,12 +52,7 @@ class CreateProfileActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
-
-
+    lateinit var uid : String
 
 
     private fun createAccount(email: String, password: String) {
@@ -63,6 +62,10 @@ class CreateProfileActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
+
+                    if (user != null) {
+                        uid = user.uid
+                    }
                     updateUI(user)
 
                 } else {
@@ -78,10 +81,84 @@ class CreateProfileActivity : AppCompatActivity() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
+        addToFirebase(binding)
 
-        val intent = Intent(this, AfterLoginActivity::class.java)
-        startActivity(intent)
+
 
     }
+
+
+    fun addToFirebase(binding: ActivityCreateProfileBinding) {
+
+        val userName = binding.activityCreateProfileUsername.text.toString()
+        val name = binding.activityCreateProfileName.text.toString()
+        val password = binding.activityCreateProfilePassword.text.toString()
+        val repeatPassword = binding.activityCreateProfileRepeatPassword.text.toString()
+        val email = binding.activityCreateProfileEmailinput.text.toString()
+        val age = binding.activityCreateProfileAge.text.toString()
+        val bio = binding.activityCreateProfileBio.text.toString()
+        val women = binding.activityCreateProfileWomen.text.toString()
+        val men = binding.activityCreateProfileMen.text.toString()
+        var gender: String = "0"
+
+        if (!women.isNullOrBlank()) {
+            gender = women
+
+        } else if (!men.isNullOrBlank()) {
+            gender = men
+        }
+
+
+        val user = User(
+            name = name,
+            age = age.toInt(),
+            emailAddress = email,
+            userName = userName,
+            password = password,
+            bio = bio,
+            gender = gender
+
+        )
+
+
+
+        db.collection("users").document(uid).set(user)
+            .addOnSuccessListener {
+                val intent = Intent(this, AfterLoginActivity::class.java)
+                startActivity(intent)
+            }
+
+            .addOnFailureListener {e ->
+                Log.w(TAG, "Error adding document", e)
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//            .add(user)
+//            .addOnSuccessListener { documentReference ->
+//                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+//
+//                val intent = Intent(this, AfterLoginActivity::class.java)
+//                startActivity(intent)
+//
+//            }
+//            .addOnFailureListener { e ->
+//                Log.w(TAG, "Error adding document", e)
+//            }
+
+    }
+
 
 }

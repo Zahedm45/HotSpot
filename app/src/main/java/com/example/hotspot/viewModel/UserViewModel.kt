@@ -8,7 +8,7 @@ import com.example.hotspot.model.User
 
 class UserViewModel : ViewModel() {
 
-    private var user = User("First name", 24, "zahedm@gmail.com", "no userName", "noPass")
+    private var user = User("First name", 24, "zahedm@gmail.com", "no userName", "noPass",null,"3")
 
     private var mutableUser = MutableLiveData(user)
     fun getUserData(): LiveData<User> = mutableUser

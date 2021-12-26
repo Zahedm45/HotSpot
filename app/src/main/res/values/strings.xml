@@ -11,8 +11,13 @@
     <string name="log_in">Log in</string>
     <string name="opret_profil">opret profil</string>
     <string name="edit_profil">Rediger profil</string>
-    <string name="username">username</string>
-    <string name="e_mail">email</string>
+    <string name="username">Username</string>
+    <string name="e_mail">Email</string>
+    <string name="name">Navn</string>
+    <string name="age">Alder</string>
+    <string name="bio">Bio</string>
+
+
     <string name="password">kodeord</string>
     <string name="repeat_password">gentag kodeord</string>
     <string name="log_in2">Log In</string>

@@ -10,7 +10,7 @@
     android:background="@drawable/shutterstock">
 
     <ImageView
-        android:id="@+id/fragment_log_in_imageView"
+        android:id="@+id/activity_login_imageView"
         android:layout_width="330dp"
         android:layout_height="153dp"
         android:src="@drawable/hotspot_logo" />
@@ -42,7 +42,7 @@
         android:paddingEnd="10dp" />
 
     <Button
-        android:id="@+id/activity_login_btn"
+        android:id="@+id/activity_login_login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -60,7 +60,7 @@
         android:textColor="@color/white" />
 
     <Button
-        android:id="@+id/create_profile"
+        android:id="@+id/activity_login_create_profile_btn"
         android:layout_width="148dp"
         android:layout_height="41dp"
         android:layout_margin="30dp"

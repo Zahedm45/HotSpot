@@ -56,27 +56,27 @@ class PersonalProfile : Fragment(),View.OnClickListener {
 //        binding = FragmentPersonalProfileBinding.inflate(layout)
 //    }
 
-    override fun onResume() {
-        super.onResume()
-
-
-        userModel.getUserData().observe(this, {user ->
-           // view?.findViewById<TextView>(R.id.personName_textView)?.setText(user.name)
-            view?.findViewById<TextView>(R.id.tv_age)?.setText(user.age.toString())
-            binding.personNameTextView.text = "ddddd"
-
-
-            // binding.personNameTextView.text = "hellooo...."
-//            binding.personNameTextView.text = user.name
-//            binding.tvAge.setText(user.age)
-//            binding.personalComment.text = user.emailAddress
-
-
-
-
-        })
-
-    }
+//    override fun onResume() {
+//        super.onResume()
+//
+//
+//        userModel.getUserData().observe(this, {user ->
+//           // view?.findViewById<TextView>(R.id.personName_textView)?.setText(user.name)
+//            view?.findViewById<TextView>(R.id.tv_age)?.setText(user.age.toString())
+//            binding.personNameTextView.text = "ddddd"
+//
+//
+//            // binding.personNameTextView.text = "hellooo...."
+////            binding.personNameTextView.text = user.name
+////            binding.tvAge.setText(user.age)
+////            binding.personalComment.text = user.emailAddress
+//
+//
+//
+//
+//        })
+//
+//    }
 
 
     override fun onDestroy() {

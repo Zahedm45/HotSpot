@@ -1,39 +1,11 @@
-package com.example.hotspot.model
+package com.example.hotspot.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginViewModel : ViewModel() {
 
- //   private lateinit var auth: FirebaseAuth
 
-//
-//    fun createUser(
-//        binding: FragmentCreateProfileBinding,
-//        auth: FirebaseAuth,
-//        createProfileActivity: CreateProfileActivity
-//    ) {
-//
-//        val email = binding.createProfileEmailinput.text.toString()
-//        val password = binding.createProfilePassword.text.toString()
-//
-////        auth.createUserWithEmailAndPassword(email, password)
-////            .addOnCompleteListener(createProfile) { task ->
-////                if (task.isSuccessful) {
-////                    // Sign in success, update UI with the signed-in user's information
-////                    Log.d(TAG, "createUserWithEmail:success")
-////                    val user = auth.currentUser
-////                    updateUI(user)
-////                } else {
-////                    // If sign in fails, display a message to the user.
-////                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-////                    Toast.makeText(baseContext, "Authentication failed.",
-////                        Toast.LENGTH_SHORT).show()
-////                    updateUI(null)
-////                }
-////            }
-//
-//    }
 
 
 
