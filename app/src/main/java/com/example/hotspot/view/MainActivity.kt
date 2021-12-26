@@ -4,13 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
-import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLoginBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
