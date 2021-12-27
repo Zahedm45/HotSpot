@@ -103,8 +103,10 @@ class Repository {
 
                 DataHolder.fbUser = fbUser
                 Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
+                getUser()
                 val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
                 createProfileActivity.startActivity(intent)
+
 
             }
 
@@ -135,8 +137,9 @@ class Repository {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
                     Toast.makeText(baseContext, "sign in with email success.", Toast.LENGTH_SHORT).show()
-
+                    getUser()
                     updateUI(mainActivity)
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
@@ -152,12 +155,7 @@ class Repository {
 
         val intent = Intent(mainActivity, AfterLoginActivity::class.java)
         mainActivity.startActivity(intent)
-
-        getUser()
-
-
     }
-
 
 
     fun getUser() {

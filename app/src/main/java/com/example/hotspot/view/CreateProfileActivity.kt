@@ -34,6 +34,7 @@ class CreateProfileActivity : AppCompatActivity() {
         createProfileVM = CreateProfileViewModel(repository, this, binding)
 
         binding.createprofileBtn.setOnClickListener {
+            DataHolder.showProgress(this)
             createProfileVM.createNewProfile(auth)
 
         }
