@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/activity_login_imageView"
         android:layout_width="330dp"
-        android:layout_height="153dp"
+        android:layout_height="90dp"
         android:src="@drawable/hotspot_logo" />
 
     <EditText
@@ -41,6 +41,16 @@
         android:minHeight="48dp"
         android:paddingEnd="10dp" />
 
+
+    <CheckBox
+        android:id="@+id/activity_login_remember_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:text="@string/rememberMe" />
+
     <Button
         android:id="@+id/activity_login_login_btn"
         android:layout_width="wrap_content"
@@ -68,6 +78,8 @@
         android:ems="8"
         android:text="@string/create_profile"
         android:textSize="12dp" />
+
+
 
 
 </LinearLayout>
