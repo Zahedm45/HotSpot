@@ -5,9 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.content.ContextCompat
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
-import com.example.hotspot.viewModel.ViewModels
+import com.example.hotspot.viewModel.CreateProfileViewModel
+import com.example.hotspot.viewModel.DataHolder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -18,8 +18,8 @@ class CreateProfileActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     val db = Firebase.firestore
 
-    private val createProfileVM = ViewModels.createProfileViewModel
-
+    private val repository = DataHolder.repository
+    private val createProfileVM = CreateProfileViewModel(repository)
 
     private lateinit var binding: ActivityCreateProfileBinding
 

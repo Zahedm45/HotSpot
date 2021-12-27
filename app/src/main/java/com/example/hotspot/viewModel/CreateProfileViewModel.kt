@@ -18,25 +18,13 @@ class CreateProfileViewModel(private val repository: Repository) : ViewModel() {
         createProfileActivity: CreateProfileActivity,
         binding: ActivityCreateProfileBinding,
         auth: FirebaseAuth,
-        db: FirebaseFirestore
-    ){
+        db: FirebaseFirestore ) {
 
 
-        repository.createProfileInFirebase(createProfileActivity, binding, auth, db) { fbUser ->
-          add(fbUser)
-        }
+        repository.createProfileInFirebase(createProfileActivity, binding, auth, db)
 
 
     }
 
 
-    fun add(fbUser: FirebaseUser) : FirebaseUser{
-        return fbUser
-    }
-
-
-
-
-//    val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
-//    createProfileActivity.startActivity(intent)
 }

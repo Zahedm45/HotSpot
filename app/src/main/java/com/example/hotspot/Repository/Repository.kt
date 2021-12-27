@@ -8,6 +8,7 @@ import com.example.hotspot.databinding.ActivityCreateProfileBinding
 import com.example.hotspot.model.User
 import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.CreateProfileActivity
+import com.example.hotspot.viewModel.DataHolder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,17 +16,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 class Repository {
 
 
-
-
-
-
     fun createProfileInFirebase(
         createProfileActivity: CreateProfileActivity,
         binding: ActivityCreateProfileBinding,
         auth: FirebaseAuth,
-        db: FirebaseFirestore,
+        db: FirebaseFirestore
 
-        callback: (fbUser: FirebaseUser) -> FirebaseUser
     ) {
 
         val baseContext = createProfileActivity.baseContext
@@ -56,8 +52,7 @@ class Repository {
         binding: ActivityCreateProfileBinding,
         db: FirebaseFirestore,
         fbUser: FirebaseUser,
-        createProfileActivity: CreateProfileActivity,
-        callback: (fbUser: FirebaseUser) -> FirebaseUser
+        createProfileActivity: CreateProfileActivity
 
     ) {
 
@@ -94,14 +89,22 @@ class Repository {
         )
 
 
+        val baseContext = createProfileActivity.baseContext
 
         db.collection("users").document(uid).set(user)
             .addOnSuccessListener {
-                 callback(fbUser)
+
+                DataHolder.fbUser = fbUser
+                Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
+                val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
+                createProfileActivity.startActivity(intent)
             }
 
             .addOnFailureListener {e ->
                 Log.w(ContentValues.TAG, "Error adding document", e)
+                Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
+
+
             }
 
     }
