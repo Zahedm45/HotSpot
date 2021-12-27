@@ -1,6 +1,7 @@
 package com.example.hotspot.view
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.activityLoginLoginBtn.setOnClickListener {
+            DataHolder.showProgress(this)
             mainActivityMV.login(auth)
+
 
         }
 
