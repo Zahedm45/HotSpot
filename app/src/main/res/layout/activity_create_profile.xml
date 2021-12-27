@@ -24,8 +24,8 @@
             android:padding="20dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="329dp"
+                android:layout_height="123dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -35,8 +35,8 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="161dp"
+                        android:layout_height="36dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:text="@string/opret_profil2"
                         android:textColor="@color/orange"
@@ -45,7 +45,7 @@
                     <EditText
                         android:id="@+id/activity_create_profile_username"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="55dp"
                         android:layout_marginTop="20dp"
                         android:autofillHints="username"
                         android:background="@drawable/edittext_background1"
@@ -54,11 +54,18 @@
                         android:inputType="textEmailAddress" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <ImageButton
+                    android:id="@+id/activity_create_profile_image"
+                    android:layout_width="126dp"
+                    android:layout_height="95dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/person"
-                    android:backgroundTint="#A6000000" />
+
+                    >
+
+                </ImageButton>
+
 
             </LinearLayout>
 
@@ -180,6 +187,7 @@
                     android:width="200dp"
                     android:backgroundTint="@color/orange"
                     android:text="@string/opret_profil2" />
+
             </LinearLayout>
 
         </LinearLayout>
