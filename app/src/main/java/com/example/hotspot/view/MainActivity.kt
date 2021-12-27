@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.hotspot.databinding.ActivityLoginBinding
+import com.example.hotspot.viewModel.DataHolder
+import com.example.hotspot.viewModel.MainActivityVM
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -19,6 +21,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var mainActivityMV: MainActivityVM
+    private val repository = DataHolder.repository
 
 
 
@@ -34,19 +38,17 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        DataHolder
+
+        mainActivityMV = MainActivityVM(this, binding, repository)
+
         binding.activityLoginCreateProfileBtn.setOnClickListener {
             val intent = Intent(this, CreateProfileActivity::class.java)
             startActivity(intent)
         }
 
         binding.activityLoginLoginBtn.setOnClickListener {
-
-            val email = binding.activityLoginEmail.text?.toString()
-            val password = binding.activityLoginPassword.text?.toString()
-
-            if (!email.isNullOrBlank() && !password.isNullOrEmpty()) {
-                login(email, password)
-            }
+            mainActivityMV.login(auth)
 
         }
 
@@ -56,31 +58,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private fun login(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                   // updateUI(null)
-                }
-            }
 
-    }
-
-    fun updateUI(user: FirebaseUser?) {
-
-        val intent = Intent(this, AfterLoginActivity::class.java)
-        startActivity(intent)
-
-    }
 
 
 

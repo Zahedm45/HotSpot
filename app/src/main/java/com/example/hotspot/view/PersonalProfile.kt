@@ -6,18 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
-import com.example.hotspot.viewModel.UserViewModel
+import com.example.hotspot.viewModel.DataHolder
+import com.example.hotspot.viewModel.PersonalProfileViewModel
 
 class PersonalProfile : Fragment(),View.OnClickListener {
 
     lateinit var navController: NavController
-    private val userModel : UserViewModel by viewModels()
+    private val userModel : PersonalProfileViewModel by viewModels()
     private var _binding: FragmentPersonalProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -25,24 +25,35 @@ class PersonalProfile : Fragment(),View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
        // val view = inflater.inflate(R.layout.fragment_personal_profile, container, false)
         _binding = FragmentPersonalProfileBinding.inflate(inflater, container, false)
         val view = binding.root
+
+
+        val user = userModel.getUserData().value
+
+        if (user != null) {
+            binding.fragmentPersonalProfilePersonName.text = user.name
+            binding.fragmentPersonalProfileAge.text = user.age.toString()
+            binding.fragmentPersonalProfileBio.text = user.bio
+        }
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.btn_edit_profile).setOnClickListener(this)
+        view.findViewById<Button>(R.id.fragment_personal_profile_editProfile_btn).setOnClickListener(this)
+
+
      //   view.findViewById<TextView>(R.id.personName_textView).text =
     }
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.btn_edit_profile -> navController.navigate(R.id.action_personalProfile_to_editProfile)
+            R.id.fragment_personal_profile_editProfile_btn -> navController.navigate(R.id.action_personalProfile_to_editProfile)
 
 
 //            R.id.btn_edit_profile -> userModel.getUpdate()
@@ -55,7 +66,7 @@ class PersonalProfile : Fragment(),View.OnClickListener {
 //        super.onCreate(savedInstanceState)
 //        binding = FragmentPersonalProfileBinding.inflate(layout)
 //    }
-
+//
 //    override fun onResume() {
 //        super.onResume()
 //

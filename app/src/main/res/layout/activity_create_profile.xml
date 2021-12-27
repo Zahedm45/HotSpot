@@ -130,7 +130,7 @@
                     android:ems="10"
                     android:hint="@string/bio_text"
                     android:fontFamily="@font/poppins_light"
-                    android:inputType="date" />
+                    android:inputType="textCapWords" />
 
                 <EditText
                     android:id="@+id/activity_create_profile_age"
@@ -142,7 +142,7 @@
                     android:ems="10"
                     android:fontFamily="@font/poppins_light"
                     android:hint="@string/age"
-                    android:inputType="date" />
+                    android:inputType="numberSigned" />
 
                 <RadioGroup
                     android:layout_width="match_parent"

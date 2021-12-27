@@ -1,26 +1,31 @@
 package com.example.hotspot.Repository
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
+import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.model.User
 import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.CreateProfileActivity
+import com.example.hotspot.view.MainActivity
 import com.example.hotspot.viewModel.DataHolder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class Repository {
 
+    val db = Firebase.firestore
 
     fun createProfileInFirebase(
         createProfileActivity: CreateProfileActivity,
         binding: ActivityCreateProfileBinding,
         auth: FirebaseAuth,
-        db: FirebaseFirestore
 
     ) {
 
@@ -37,7 +42,8 @@ class Repository {
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
-                        addProfileToDb(binding, db, auth.currentUser!!, createProfileActivity)
+                        addProfileToDb(binding, auth.currentUser!!, createProfileActivity)
+
 
                     }  else {
                         Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
@@ -50,7 +56,6 @@ class Repository {
 
     fun addProfileToDb(
         binding: ActivityCreateProfileBinding,
-        db: FirebaseFirestore,
         fbUser: FirebaseUser,
         createProfileActivity: CreateProfileActivity
 
@@ -98,6 +103,7 @@ class Repository {
                 Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
                 val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
                 createProfileActivity.startActivity(intent)
+
             }
 
             .addOnFailureListener {e ->
@@ -108,6 +114,93 @@ class Repository {
             }
 
     }
+
+
+
+     fun login(mainActivity: MainActivity, binding: ActivityLoginBinding, auth: FirebaseAuth) {
+
+         val email = binding.activityLoginEmail.text.toString()
+         val password = binding.activityLoginPassword.text.toString()
+         val baseContext = mainActivity.baseContext
+
+
+
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(mainActivity) { task ->
+                if (task.isSuccessful) {
+
+                    DataHolder.fbUser = auth.currentUser
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(ContentValues.TAG, "signInWithEmail:success")
+                    Toast.makeText(baseContext, "sign in with email success.", Toast.LENGTH_SHORT).show()
+
+                    updateUI(mainActivity)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                    // updateUI(null)
+                }
+            }
+
+    }
+
+    private fun updateUI(mainActivity: MainActivity) {
+
+        val intent = Intent(mainActivity, AfterLoginActivity::class.java)
+        mainActivity.startActivity(intent)
+
+        getUser()
+
+
+    }
+
+
+
+    fun getUser() {
+
+        if (DataHolder.fbUser == null) {
+            return
+        }
+
+        val fbUser = DataHolder.fbUser!!.uid
+
+        val docRef = db.collection("users").document(fbUser)
+        docRef.get()
+            .addOnSuccessListener { document ->
+
+                if (document != null) {
+
+
+                    val name = document.get("name").toString()
+                    val userName = document.get("userName").toString()
+                    val age = document.get("age").toString().toInt()
+                    val email = document.get("emailAddress").toString()
+                    val password = document.get("password").toString()
+                    val bio = document.get("bio").toString()
+                    val gender = document.get("gender").toString()
+
+                    val user = User(name, age, email, userName, password, bio, gender)
+                    DataHolder.user = user
+
+
+
+
+
+
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+
+            }
+
+    }
+
 
 
 

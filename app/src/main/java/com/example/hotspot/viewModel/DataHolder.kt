@@ -1,7 +1,10 @@
 package com.example.hotspot.viewModel
 
+import android.annotation.SuppressLint
 import com.example.hotspot.Repository.Repository
+import com.example.hotspot.model.User
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class DataHolder {
@@ -11,7 +14,8 @@ class DataHolder {
 
     companion object {
         val repository = Repository()
-        lateinit var fbUser : FirebaseUser
+        var fbUser : FirebaseUser? = null
+         var user: User? = null
 
     }
 }

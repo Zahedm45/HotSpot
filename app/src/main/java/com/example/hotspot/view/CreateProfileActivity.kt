@@ -19,7 +19,7 @@ class CreateProfileActivity : AppCompatActivity() {
     val db = Firebase.firestore
 
     private val repository = DataHolder.repository
-    private val createProfileVM = CreateProfileViewModel(repository)
+    private lateinit var createProfileVM : CreateProfileViewModel
 
     private lateinit var binding: ActivityCreateProfileBinding
 
@@ -31,9 +31,10 @@ class CreateProfileActivity : AppCompatActivity() {
 //        setContentView(R.layout.activity_create_profile)
         auth = Firebase.auth
 
+        createProfileVM = CreateProfileViewModel(repository, this, binding)
 
         binding.createprofileBtn.setOnClickListener {
-            createProfileVM.createNewProfile(this,  binding, auth, db)
+            createProfileVM.createNewProfile(auth)
 
         }
     }
@@ -42,64 +43,11 @@ class CreateProfileActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-       //     reload();
-        }
+//        val currentUser = auth.currentUser
+//        if(currentUser != null){
+//       //     reload();
+//        }
     }
-
-
-    lateinit var uid : String
-
-
-
-
-
-
-
-
-//    private fun createAccount(email: String, password: String) {
-//        auth.createUserWithEmailAndPassword(email, password)
-//            .addOnCompleteListener(this) { task ->
-//                if (task.isSuccessful) {
-//                    // Sign in success, update UI with the signed-in user's information
-//                    Log.d(TAG, "createUserWithEmail:success")
-//                    val user = auth.currentUser
-//
-//                    if (user != null) {
-//                        uid = user.uid
-//                    }
-//                    updateUI(user)
-//
-//                } else {
-//                    // If sign in fails, display a message to the user.
-//                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-//                    Toast.makeText(baseContext, "Authentication failed.",
-//                        Toast.LENGTH_SHORT).show()
-//                  //  updateUI(null)
-//                }
-//            }
-//
-//
-//    }
-
-    private fun updateUI(user: FirebaseUser?) {
-
-        if (user != null) {
-
-            db.collection("users").document(uid).set(user)
-                .addOnSuccessListener {
-                    val intent = Intent(this, AfterLoginActivity::class.java)
-                    startActivity(intent)
-                }
-
-                .addOnFailureListener {e ->
-                    Log.w(ContentValues.TAG, "Error adding document", e)
-                }
-        }
-    }
-
-
 
 
 

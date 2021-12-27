@@ -10,21 +10,20 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
-class CreateProfileViewModel(private val repository: Repository) : ViewModel() {
+class CreateProfileViewModel(
+    private val repository: Repository,
+    val createProfileActivity: CreateProfileActivity,
+    val binding: ActivityCreateProfileBinding,
 
 
-
-    fun createNewProfile(
-        createProfileActivity: CreateProfileActivity,
-        binding: ActivityCreateProfileBinding,
-        auth: FirebaseAuth,
-        db: FirebaseFirestore ) {
+) : ViewModel() {
 
 
-        repository.createProfileInFirebase(createProfileActivity, binding, auth, db)
-
-
+    fun createNewProfile(auth: FirebaseAuth) {
+        repository.createProfileInFirebase(createProfileActivity, binding, auth)
     }
+
+
 
 
 }
