@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
-import com.example.hotspot.viewModel.DataHolder
+import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileViewModel
 
 class PersonalProfile : Fragment(),View.OnClickListener {
@@ -26,18 +26,12 @@ class PersonalProfile : Fragment(),View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
-       // val view = inflater.inflate(R.layout.fragment_personal_profile, container, false)
         _binding = FragmentPersonalProfileBinding.inflate(inflater, container, false)
         val view = binding.root
 
 
         val user = userModel.getUserData().value
-
-        if (user != null) {
-            binding.fragmentPersonalProfilePersonName.text = user.name
-            binding.fragmentPersonalProfileAge.text = user.age.toString()
-            binding.fragmentPersonalProfileBio.text = user.bio
-        }
+        updateProfileUI(user)
 
         return view
     }
@@ -47,8 +41,6 @@ class PersonalProfile : Fragment(),View.OnClickListener {
         navController = Navigation.findNavController(view)
         view.findViewById<Button>(R.id.fragment_personal_profile_editProfile_btn).setOnClickListener(this)
 
-
-     //   view.findViewById<TextView>(R.id.personName_textView).text =
     }
 
     override fun onClick(p0: View?) {
@@ -56,42 +48,34 @@ class PersonalProfile : Fragment(),View.OnClickListener {
             R.id.fragment_personal_profile_editProfile_btn -> navController.navigate(R.id.action_personalProfile_to_editProfile)
 
 
-//            R.id.btn_edit_profile -> userModel.getUpdate()
-
-
         }
     }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        binding = FragmentPersonalProfileBinding.inflate(layout)
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//
-//
-//        userModel.getUserData().observe(this, {user ->
-//           // view?.findViewById<TextView>(R.id.personName_textView)?.setText(user.name)
-//            view?.findViewById<TextView>(R.id.tv_age)?.setText(user.age.toString())
-//            binding.personNameTextView.text = "ddddd"
-//
-//
-//            // binding.personNameTextView.text = "hellooo...."
-////            binding.personNameTextView.text = user.name
-////            binding.tvAge.setText(user.age)
-////            binding.personalComment.text = user.emailAddress
-//
-//
-//
-//
-//        })
-//
-//    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        userModel.getUserData().observe(this, {user ->
+            updateProfileUI(user)
+        })
+
+    }
 
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+
+
+    fun updateProfileUI(user: User?) {
+
+        if (user != null) {
+            binding.fragmentPersonalProfilePersonName.text = user.name
+            binding.fragmentPersonalProfileAge.text = user.age.toString()
+            binding.fragmentPersonalProfileBio.text = user.bio
+        }
     }
 }

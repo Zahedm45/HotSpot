@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
 import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.model.User
@@ -12,6 +13,7 @@ import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.CreateProfileActivity
 import com.example.hotspot.view.MainActivity
 import com.example.hotspot.viewModel.DataHolder
+import com.example.hotspot.viewModel.PersonalProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -182,7 +184,9 @@ class Repository {
                     val gender = document.get("gender").toString()
 
                     val user = User(name, age, email, userName, password, bio, gender)
-                    DataHolder.user = user
+                  //  DataHolder.user = user
+
+                    PersonalProfileViewModel.mutableUser = MutableLiveData(user)
 
 
 

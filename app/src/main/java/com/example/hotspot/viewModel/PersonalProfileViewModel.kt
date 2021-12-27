@@ -15,38 +15,38 @@ class PersonalProfileViewModel(): ViewModel() {
 
 
 
-    private lateinit var user : User
 
-    private lateinit var mutableUser : MutableLiveData<User>
 
-    init {
-        if (DataHolder.user != null) {
-            user = DataHolder.user!!
-            mutableUser = MutableLiveData(user)
-        }
-    }
-
-    fun getUserData(): LiveData<User> {
-
-        return mutableUser
-
-    }
+//    init {
+//        if (DataHolder.user != null) {
+//            user = DataHolder.user!!
+//            mutableUser = MutableLiveData(user)
+//        }
+//    }
 
 
 
+    fun getUserData(): LiveData<User> = mutableUser
+
+    companion object {
+        lateinit var mutableUser : MutableLiveData<User>
 
 
 
-
-
-
-
-
-    fun getUpdate() {
-
+  //      fun addUser(): MutableLiveData<User> = mutableUser
 
 
     }
+
+
+
+
+
+
+
+
+
+
 
 
 
