@@ -20,11 +20,11 @@ class DataHolder {
         var user: User? = null
 
 
-        fun showProgress(context: Context) {
+        fun showProgress(context: Context): ProgressDialog {
             val pd = ProgressDialog(context)
             pd.setTitle("Please wait")
             pd.setMessage("Loading ...")
-            pd.show()
+            return pd
         }
 
     }

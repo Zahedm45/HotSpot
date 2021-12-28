@@ -19,17 +19,16 @@ class CreateProfileViewModel(
 
     fun createNewProfile(auth: FirebaseAuth, uri: Uri?) {
 
-        if (!verifyInput()) {
+        if (!verifyInput(uri)) {
             return
         }
 
-        DataHolder.showProgress(createProfileActivity)
         repository.createUserInFirebase(createProfileActivity, binding, auth, uri)
     }
 
 
 
-    fun verifyInput(): Boolean {
+    fun verifyInput(uri: Uri?): Boolean {
 
         val userName = binding.activityCreateProfileUsername.text.isNullOrBlank()
         val name = binding.activityCreateProfileName.text.isNullOrBlank()
@@ -45,8 +44,13 @@ class CreateProfileViewModel(
             return false
         }
 
+        if (uri == null) {
+            Toast.makeText(createProfileActivity.baseContext ,"Select image..! ", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
         if (name) {
-            Toast.makeText(createProfileActivity.baseContext ,"Navn er tom! ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(createProfileActivity.baseContext ,"Navn ", Toast.LENGTH_SHORT).show()
             return false
         }
 

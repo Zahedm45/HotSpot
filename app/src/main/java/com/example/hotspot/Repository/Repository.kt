@@ -1,5 +1,6 @@
 package com.example.hotspot.Repository
 
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -27,6 +28,7 @@ class Repository {
 
     val db = Firebase.firestore
     var uri: Uri? = null
+    var progressDialog: ProgressDialog? = null
 
     fun createUserInFirebase(
         createProfileActivity: CreateProfileActivity,
@@ -36,29 +38,41 @@ class Repository {
 
         ) {
 
+
+        progressDialog = ProgressDialog(createProfileActivity)
+        progressDialog!!.setTitle("Please wait")
+        progressDialog!!.setMessage("Loading ...")
+        progressDialog!!.show()
+
+
         val baseContext = createProfileActivity.baseContext
        // var userID: String? = null
 
         val email = binding.activityCreateProfileEmailinput.text.toString()
         val password = binding.activityCreateProfilePassword.text.toString()
 
-        if (!email.isNullOrBlank() && !password.isNullOrEmpty()) {
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-
-                    if (task.isSuccessful) {
-                        this.uri = uri
-                        addProfileToFirebas(binding, auth.currentUser!!, createProfileActivity)
-
-
-                    }  else {
-                        Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
-
-                    }
-                }
+        if(email.isBlank() || password.isBlank()) {
+            progressDialog!!.dismiss()
+            return
         }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+
+                if (task.isSuccessful) {
+                    this.uri = uri
+                    addProfileToFirebas(binding, auth.currentUser!!, createProfileActivity)
+
+
+                } else {
+                    progressDialog!!.dismiss()
+                    Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+
+
+                }
+            }
+
     }
 
     fun addProfileToFirebas(
@@ -89,7 +103,6 @@ class Repository {
             gender = men.text.toString()
         }
 
-
         val user = User(
             name = name,
             age = age.toInt(),
@@ -110,6 +123,7 @@ class Repository {
             }
 
             .addOnFailureListener {e ->
+                progressDialog?.dismiss()
                 Log.w(ContentValues.TAG, "Error adding document", e)
                 Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
 
@@ -137,7 +151,7 @@ class Repository {
                     createProfileActivity.startActivity(intent)
                 }
                 .addOnFailureListener { it ->
-
+                    progressDialog?.dismiss()
                     Log.w(ContentValues.TAG, "Error uploading image to database", it)
                     Toast.makeText(baseContext, "Error uploading image to database! ", Toast.LENGTH_SHORT).show()
 
