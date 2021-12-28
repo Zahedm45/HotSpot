@@ -124,10 +124,13 @@ class Repository {
             }
 
             .addOnFailureListener {e ->
+                if (fbUser != null) {
+                    DataHolder.fbUser = null
+                    fbUser.delete()
+                }
                 progressDialog?.dismiss()
                 Log.w(ContentValues.TAG, "Error adding document", e)
                 Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
-
 
             }
 
@@ -153,6 +156,10 @@ class Repository {
                     createProfileActivity.startActivity(intent)
                 }
                 .addOnFailureListener { it ->
+                    if (fbUser != null) {
+                        DataHolder.fbUser = null
+                        fbUser.delete()
+                    }
                     progressDialog?.dismiss()
                     Log.w(ContentValues.TAG, "Error uploading image to database", it)
                     Toast.makeText(baseContext, "Error uploading image to database! ", Toast.LENGTH_SHORT).show()
@@ -187,7 +194,7 @@ class Repository {
 
                     DataHolder.fbUser = auth.currentUser
 
-                    val msg = "Sign in with email: Success"
+                    val msg = "Login successfully."
                     getUser(loginActivity, null, msg)
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
 
