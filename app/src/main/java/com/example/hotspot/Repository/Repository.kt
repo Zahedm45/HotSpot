@@ -3,6 +3,7 @@ package com.example.hotspot.Repository
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
@@ -16,20 +17,23 @@ import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.PersonalProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 
 class Repository {
 
     val db = Firebase.firestore
+    var uri: Uri? = null
 
     fun createProfileInFirebase(
         createProfileActivity: CreateProfileActivity,
         binding: ActivityCreateProfileBinding,
         auth: FirebaseAuth,
+        uri: Uri?,
 
-    ) {
+        ) {
 
         val baseContext = createProfileActivity.baseContext
        // var userID: String? = null
@@ -44,6 +48,7 @@ class Repository {
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
+                        this.uri = uri
                         addProfileToDb(binding, auth.currentUser!!, createProfileActivity)
 
 
@@ -59,7 +64,7 @@ class Repository {
     fun addProfileToDb(
         binding: ActivityCreateProfileBinding,
         fbUser: FirebaseUser,
-        createProfileActivity: CreateProfileActivity
+        createProfileActivity: CreateProfileActivity,
 
     ) {
 
@@ -75,6 +80,7 @@ class Repository {
         val women = binding.activityCreateProfileWomen.text.toString()
         val men = binding.activityCreateProfileMen.text.toString()
         var gender: String = "Non"
+        val img = uri
 
         if (!women.isNullOrBlank()) {
             gender = women
@@ -100,7 +106,7 @@ class Repository {
 
         db.collection("users").document(uid).set(user)
             .addOnSuccessListener {
-
+                addImageToDB(fbUser)
                 DataHolder.fbUser = fbUser
                 Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
                 getUser()
@@ -116,6 +122,20 @@ class Repository {
 
 
             }
+
+    }
+
+
+
+    fun addImageToDB(fbUser: FirebaseUser) {
+
+       val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
+        if (uri != null) {
+            ref.putFile(uri!!)
+
+        }
+
+
 
     }
 
