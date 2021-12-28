@@ -2,12 +2,12 @@ package com.example.hotspot.viewModel
 
 import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.ActivityLoginBinding
-import com.example.hotspot.view.MainActivity
+import com.example.hotspot.view.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
-class MainActivityVM(private val activity: MainActivity,
-                     private val binding: ActivityLoginBinding,
-                     private val repository: Repository) {
+class LoginActivityVM(private val activity: LoginActivity,
+                      private val binding: ActivityLoginBinding,
+                      private val repository: Repository) {
 
 
 

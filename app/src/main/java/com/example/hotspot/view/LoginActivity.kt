@@ -1,28 +1,21 @@
 package com.example.hotspot.view
 
-import android.annotation.SuppressLint
-import android.app.ProgressDialog
-import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.viewModel.DataHolder
-import com.example.hotspot.viewModel.MainActivityVM
+import com.example.hotspot.viewModel.LoginActivityVM
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var mainActivityMV: MainActivityVM
+    private lateinit var loginActivityMV: LoginActivityVM
     private val repository = DataHolder.repository
 
 
@@ -42,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         DataHolder
 
-        mainActivityMV = MainActivityVM(this, binding, repository)
+        loginActivityMV = LoginActivityVM(this, binding, repository)
 
         binding.activityLoginCreateProfileBtn.setOnClickListener {
             val intent = Intent(this, CreateProfileActivity::class.java)
@@ -50,8 +43,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.activityLoginLoginBtn.setOnClickListener {
+
             DataHolder.showProgress(this)
-            mainActivityMV.login(auth)
+            loginActivityMV.login(auth)
 
 
         }

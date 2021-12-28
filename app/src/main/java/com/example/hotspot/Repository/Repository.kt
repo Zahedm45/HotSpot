@@ -13,7 +13,7 @@ import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.model.User
 import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.CreateProfileActivity
-import com.example.hotspot.view.MainActivity
+import com.example.hotspot.view.LoginActivity
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.PersonalProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -77,16 +77,16 @@ class Repository {
         val email = binding.activityCreateProfileEmailinput.text.toString()
         val age = binding.activityCreateProfileAge.text.toString()
         val bio = binding.activityCreateProfileBio.text.toString()
-        val women = binding.activityCreateProfileWomen.text.toString()
-        val men = binding.activityCreateProfileMen.text.toString()
+        val women = binding.activityCreateProfileWomen
+        val men = binding.activityCreateProfileMen
         var gender: String = "Non"
         val img = uri
 
-        if (!women.isNullOrBlank()) {
-            gender = women
+        if (women.isChecked) {
+            gender = women.text.toString()
 
-        } else if (!men.isNullOrBlank()) {
-            gender = men
+        } else if (men.isChecked) {
+            gender = men.text.toString()
         }
 
 
@@ -149,23 +149,23 @@ class Repository {
 
 
 
-     fun login(mainActivity: MainActivity, binding: ActivityLoginBinding, auth: FirebaseAuth) {
+     fun login(loginActivity: LoginActivity, binding: ActivityLoginBinding, auth: FirebaseAuth) {
 
          val email = binding.activityLoginEmail.text.toString()
          val password = binding.activityLoginPassword.text.toString()
-         val baseContext = mainActivity.baseContext
+         val baseContext = loginActivity.baseContext
 
 
 
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(mainActivity) { task ->
+            .addOnCompleteListener(loginActivity) { task ->
                 if (task.isSuccessful) {
 
                     DataHolder.fbUser = auth.currentUser
                     getUser()
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
                     Toast.makeText(baseContext, "sign in with email success.", Toast.LENGTH_SHORT).show()
-                    updateUI(mainActivity)
+                    updateUI(loginActivity)
 
                 } else {
                     // If sign in fails, display a message to the user.
@@ -178,10 +178,10 @@ class Repository {
 
     }
 
-    private fun updateUI(mainActivity: MainActivity) {
+    private fun updateUI(loginActivity: LoginActivity) {
 
-        val intent = Intent(mainActivity, AfterLoginActivity::class.java)
-        mainActivity.startActivity(intent)
+        val intent = Intent(loginActivity, AfterLoginActivity::class.java)
+        loginActivity.startActivity(intent)
     }
 
 

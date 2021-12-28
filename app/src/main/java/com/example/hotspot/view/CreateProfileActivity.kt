@@ -17,7 +17,9 @@ import com.google.firebase.ktx.Firebase
 
 class CreateProfileActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    val db = Firebase.firestore
+
+    var uri: Uri? = null
+    var bitMDrawable: BitmapDrawable? = null
 
     private val repository = DataHolder.repository
     private lateinit var createProfileVM : CreateProfileViewModel
@@ -46,14 +48,12 @@ class CreateProfileActivity : AppCompatActivity() {
 
 
         binding.createprofileBtn.setOnClickListener {
-            DataHolder.showProgress(this)
             createProfileVM.createNewProfile(auth, uri)
 
         }
     }
 
-    var uri: Uri? = null
-    var bitMDrawable: BitmapDrawable? = null
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

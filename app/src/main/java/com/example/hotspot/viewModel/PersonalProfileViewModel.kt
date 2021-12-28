@@ -12,29 +12,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 class PersonalProfileViewModel(): ViewModel() {
 
 
-
-
-
-
-
-//    init {
-//        if (DataHolder.user != null) {
-//            user = DataHolder.user!!
-//            mutableUser = MutableLiveData(user)
-//        }
-//    }
-
-
-
     fun getUserData(): LiveData<User> = mutableUser
 
     companion object {
         lateinit var mutableUser : MutableLiveData<User>
-
-
-
-  //      fun addUser(): MutableLiveData<User> = mutableUser
-
 
     }
 

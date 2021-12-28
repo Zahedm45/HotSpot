@@ -1,6 +1,7 @@
 package com.example.hotspot.viewModel
 
 import android.net.Uri
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
@@ -18,11 +19,77 @@ class CreateProfileViewModel(
 
     fun createNewProfile(auth: FirebaseAuth, uri: Uri?) {
 
+        if (!verifyInput()) {
+            return
+        }
 
+        DataHolder.showProgress(createProfileActivity)
         repository.createUserInFirebase(createProfileActivity, binding, auth, uri)
     }
 
 
+
+    fun verifyInput(): Boolean {
+
+        val userName = binding.activityCreateProfileUsername.text.isNullOrBlank()
+        val name = binding.activityCreateProfileName.text.isNullOrBlank()
+        val email = binding.activityCreateProfileEmailinput.text.isNullOrBlank()
+        val age = binding.activityCreateProfileAge.text.isNullOrBlank()
+        val women = binding.activityCreateProfileWomen
+        val men = binding.activityCreateProfileMen
+        val password = binding.activityCreateProfilePassword.text
+        val repeatPassword = binding.activityCreateProfileRepeatPassword.text
+
+        if (userName) {
+            Toast.makeText(createProfileActivity.baseContext ,"User name er tom! ", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (name) {
+            Toast.makeText(createProfileActivity.baseContext ,"Navn er tom! ", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (password.isNullOrBlank()) {
+            Toast.makeText(createProfileActivity.baseContext ,"Kodeord er tom! ", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+        if (password.toString() != repeatPassword.toString()) {
+            Toast.makeText(createProfileActivity.baseContext ,"Kodeord != GentageKodeord", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+        if (email) {
+            Toast.makeText(createProfileActivity.baseContext ,"Email er tom! ", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (age) {
+            Toast.makeText(createProfileActivity.baseContext ,"Alder er tom! ", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+
+
+        var gender: String? = null
+        if (women.isChecked) {
+            gender = women.text.toString()
+
+        } else if (men.isChecked) {
+            gender = men.text.toString()
+        }
+
+        if (gender == null) {
+            Toast.makeText(createProfileActivity.baseContext ,"Køn? ", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
+
+    }
 
 
 }
