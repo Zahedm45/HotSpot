@@ -1,5 +1,6 @@
 package com.example.hotspot.Repository
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.ContentValues.TAG
@@ -61,7 +62,7 @@ class Repository {
 
                 if (task.isSuccessful) {
                     this.uri = uri
-                    addProfileToFirebas(binding, auth.currentUser!!, createProfileActivity)
+                    addProfileToFirebase(binding, auth.currentUser!!, createProfileActivity)
 
 
                 } else {
@@ -75,7 +76,7 @@ class Repository {
 
     }
 
-    fun addProfileToFirebas(
+   private fun addProfileToFirebase(
         binding: ActivityCreateProfileBinding,
         fbUser: FirebaseUser,
         createProfileActivity: CreateProfileActivity,
@@ -144,8 +145,9 @@ class Repository {
                 .addOnSuccessListener {
 
                     DataHolder.fbUser = fbUser
-                    getUser(loginActivity)
-                    Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
+                    val msg = "Account is successfully created."
+                    getUser(null, createProfileActivity, msg)
+ //                   Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
                     createProfileActivity.startActivity(intent)
@@ -173,9 +175,6 @@ class Repository {
              progressDialog!!.show()
          }
 
-
-
-
          val email = binding.activityLoginEmail.text.toString()
          val password = binding.activityLoginPassword.text.toString()
          val baseContext = loginActivity.baseContext
@@ -187,7 +186,9 @@ class Repository {
                 if (task.isSuccessful) {
 
                     DataHolder.fbUser = auth.currentUser
-                    getUser(loginActivity)
+
+                    val msg = "Sign in with email: Success"
+                    getUser(loginActivity, null, msg)
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
 
 
@@ -204,7 +205,22 @@ class Repository {
 
 
 
-    private fun getUser(loginActivity: LoginActivity) {
+    private fun getUser(loginActivity: LoginActivity?, createProfileActivity: CreateProfileActivity?, msg: String) {
+        var activity: Activity? = null
+
+        if (loginActivity != null) {
+            activity = loginActivity
+
+        } else if (createProfileActivity != null) {
+            activity = createProfileActivity
+
+        } else {
+            Log.i(TAG, "getUser is being called without a parameter..")
+            return
+        }
+
+
+
 
         if (DataHolder.fbUser == null) {
             return
@@ -231,8 +247,8 @@ class Repository {
                     PersonalProfileViewModel.mutableUser = MutableLiveData(user)
 
                     progressDialog?.dismiss()
-                    Toast.makeText(loginActivity.baseContext, "sign in with email success.", Toast.LENGTH_SHORT).show()
-                    updateUI(loginActivity)
+                    updateUI(activity)
+                    Toast.makeText(activity.baseContext, msg, Toast.LENGTH_SHORT).show()
 
 
                 } else {
@@ -267,10 +283,10 @@ class Repository {
     }
 
 
-    private fun updateUI(loginActivity: LoginActivity) {
+    private fun updateUI(activity: Activity) {
 
-        val intent = Intent(loginActivity, AfterLoginActivity::class.java)
-        loginActivity.startActivity(intent)
+        val intent = Intent(activity, AfterLoginActivity::class.java)
+        activity.startActivity(intent)
     }
 
 
