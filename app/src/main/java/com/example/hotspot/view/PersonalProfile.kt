@@ -1,6 +1,14 @@
 package com.example.hotspot.view
 
+import android.content.ContentResolver
+import android.content.ContentValues
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +20,12 @@ import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import com.example.hotspot.model.User
+import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.PersonalProfileViewModel
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import java.io.File
 
 class PersonalProfile : Fragment(),View.OnClickListener {
 
@@ -70,12 +83,40 @@ class PersonalProfile : Fragment(),View.OnClickListener {
 
 
 
+
     fun updateProfileUI(user: User?) {
 
         if (user != null) {
             binding.fragmentPersonalProfilePersonName.text = user.name
             binding.fragmentPersonalProfileAge.text = user.age.toString()
             binding.fragmentPersonalProfileBio.text = user.bio
+
+
+
+            if (user.bitmapImg != null) {
+                Log.i(ContentValues.TAG, "Here is the from Personal profile ${user.bitmapImg}")
+                binding.fragmentPersonalProfilePicture.setImageBitmap(user.bitmapImg)
+            }
+
+
+
+       //     binding.fragmentPersonalProfilePicture.setImageURI(null)
+
+//            val storageRef = FirebaseStorage.getInstance().reference.child("images/${DataHolder.fbUser!!.uid}")
+//            val localFile = File.createTempFile("temImage", "jpeg")
+//
+//            storageRef.getFile(localFile).addOnSuccessListener {
+//
+//                val bit = BitmapFactory.decodeFile(localFile.absolutePath)
+//
+//                binding.fragmentPersonalProfilePicture.setImageBitmap(bit)
+//
+//            }
+
         }
     }
+
+
+
+
 }

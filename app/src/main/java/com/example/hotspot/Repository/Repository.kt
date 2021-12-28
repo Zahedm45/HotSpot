@@ -3,6 +3,7 @@ package com.example.hotspot.Repository
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
@@ -20,14 +21,14 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
+import java.io.File
 
 class Repository {
 
     val db = Firebase.firestore
     var uri: Uri? = null
 
-    fun createProfileInFirebase(
+    fun createUserInFirebase(
         createProfileActivity: CreateProfileActivity,
         binding: ActivityCreateProfileBinding,
         auth: FirebaseAuth,
@@ -44,12 +45,11 @@ class Repository {
         if (!email.isNullOrBlank() && !password.isNullOrEmpty()) {
 
             auth.createUserWithEmailAndPassword(email, password)
-
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
                         this.uri = uri
-                        addProfileToDb(binding, auth.currentUser!!, createProfileActivity)
+                        addProfileToFirebas(binding, auth.currentUser!!, createProfileActivity)
 
 
                     }  else {
@@ -61,7 +61,7 @@ class Repository {
         }
     }
 
-    fun addProfileToDb(
+    fun addProfileToFirebas(
         binding: ActivityCreateProfileBinding,
         fbUser: FirebaseUser,
         createProfileActivity: CreateProfileActivity,
@@ -106,14 +106,7 @@ class Repository {
 
         db.collection("users").document(uid).set(user)
             .addOnSuccessListener {
-                addImageToDB(fbUser)
-                DataHolder.fbUser = fbUser
-                Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
-                getUser()
-                val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
-                createProfileActivity.startActivity(intent)
-
-
+                addImageToFirebase(fbUser, createProfileActivity)
             }
 
             .addOnFailureListener {e ->
@@ -127,15 +120,30 @@ class Repository {
 
 
 
-    fun addImageToDB(fbUser: FirebaseUser) {
+    fun addImageToFirebase(fbUser: FirebaseUser, createProfileActivity: CreateProfileActivity) {
 
-       val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
+        val baseContext = createProfileActivity.baseContext
+
+        val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
         if (uri != null) {
             ref.putFile(uri!!)
+                .addOnSuccessListener {
+
+                    DataHolder.fbUser = fbUser
+                    getUser()
+                    Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
+                    createProfileActivity.startActivity(intent)
+                }
+                .addOnFailureListener { it ->
+
+                    Log.w(ContentValues.TAG, "Error uploading image to database", it)
+                    Toast.makeText(baseContext, "Error uploading image to database! ", Toast.LENGTH_SHORT).show()
+
+                }
 
         }
-
-
 
     }
 
@@ -154,10 +162,9 @@ class Repository {
                 if (task.isSuccessful) {
 
                     DataHolder.fbUser = auth.currentUser
-                    // Sign in success, update UI with the signed-in user's information
+                    getUser()
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
                     Toast.makeText(baseContext, "sign in with email success.", Toast.LENGTH_SHORT).show()
-                    getUser()
                     updateUI(mainActivity)
 
                 } else {
@@ -184,9 +191,9 @@ class Repository {
             return
         }
 
-        val fbUser = DataHolder.fbUser!!.uid
+        val fbUserId = DataHolder.fbUser!!.uid
 
-        val docRef = db.collection("users").document(fbUser)
+        val docRef = db.collection("users").document(fbUserId)
         docRef.get()
             .addOnSuccessListener { document ->
 
@@ -202,14 +209,8 @@ class Repository {
                     val gender = document.get("gender").toString()
 
                     val user = User(name, age, email, userName, password, bio, gender)
-                  //  DataHolder.user = user
-
+                    getUserPic(fbUserId, user)
                     PersonalProfileViewModel.mutableUser = MutableLiveData(user)
-
-
-
-
-
 
                 } else {
                     Log.d(TAG, "No such document")
@@ -220,6 +221,37 @@ class Repository {
                 Log.d(TAG, "get failed with ", exception)
 
             }
+
+    }
+
+    fun getUserPic(fbUserId: String, user: User) {
+        if(fbUserId == null) {
+            return
+        }
+
+        val ref = FirebaseStorage.getInstance().getReference("/images/${fbUserId}")
+        val localFile = File.createTempFile("localImage", "jpeg")
+
+        ref.getFile(localFile)
+            .addOnSuccessListener { img ->
+
+                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+                user.bitmapImg = bitmap
+                PersonalProfileViewModel.mutableUser = MutableLiveData(user)
+
+            }
+
+
+//        ref.downloadUrl
+//            .addOnSuccessListener { img ->
+//                if (img != null) {
+//
+//                    user.img = img
+//                    Log.i(TAG, "Here is the from Repository $img")
+//
+//                    PersonalProfileViewModel.mutableUser = MutableLiveData(user)
+//                }
+//            }
 
     }
 

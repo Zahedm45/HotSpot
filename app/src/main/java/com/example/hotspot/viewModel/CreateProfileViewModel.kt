@@ -19,7 +19,7 @@ class CreateProfileViewModel(
     fun createNewProfile(auth: FirebaseAuth, uri: Uri?) {
 
 
-        repository.createProfileInFirebase(createProfileActivity, binding, auth, uri)
+        repository.createUserInFirebase(createProfileActivity, binding, auth, uri)
     }
 
 
