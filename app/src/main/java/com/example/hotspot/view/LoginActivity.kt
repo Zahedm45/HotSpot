@@ -33,8 +33,6 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
-        DataHolder
-
         loginActivityMV = LoginActivityVM(this, binding, repository)
 
         binding.activityLoginCreateProfileBtn.setOnClickListener {
@@ -43,11 +41,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.activityLoginLoginBtn.setOnClickListener {
-
-            DataHolder.showProgress(this)
             loginActivityMV.login(auth)
-
-
         }
 
 

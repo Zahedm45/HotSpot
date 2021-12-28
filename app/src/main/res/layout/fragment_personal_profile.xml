@@ -24,8 +24,8 @@
 
     <TextView
         android:id="@+id/fragment_personal_profile_personName"
-        android:layout_width="96dp"
-        android:layout_height="38dp"
+        android:layout_width="291dp"
+        android:layout_height="41dp"
         android:layout_marginTop="276dp"
         android:fontFamily="@font/poppins_semibold"
         android:gravity="center"

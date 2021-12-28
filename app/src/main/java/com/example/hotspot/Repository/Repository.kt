@@ -144,7 +144,7 @@ class Repository {
                 .addOnSuccessListener {
 
                     DataHolder.fbUser = fbUser
-                    getUser()
+                    getUser(loginActivity)
                     Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
@@ -165,6 +165,17 @@ class Repository {
 
      fun login(loginActivity: LoginActivity, binding: ActivityLoginBinding, auth: FirebaseAuth) {
 
+
+         if( (progressDialog == null) || (progressDialog?.isShowing == false) ) {
+             progressDialog = ProgressDialog(loginActivity)
+             progressDialog!!.setTitle("Please wait")
+             progressDialog!!.setMessage("Loading ...")
+             progressDialog!!.show()
+         }
+
+
+
+
          val email = binding.activityLoginEmail.text.toString()
          val password = binding.activityLoginPassword.text.toString()
          val baseContext = loginActivity.baseContext
@@ -176,13 +187,12 @@ class Repository {
                 if (task.isSuccessful) {
 
                     DataHolder.fbUser = auth.currentUser
-                    getUser()
+                    getUser(loginActivity)
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
-                    Toast.makeText(baseContext, "sign in with email success.", Toast.LENGTH_SHORT).show()
-                    updateUI(loginActivity)
+
 
                 } else {
-                    // If sign in fails, display a message to the user.
+                    progressDialog?.dismiss()
                     Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
@@ -192,14 +202,9 @@ class Repository {
 
     }
 
-    private fun updateUI(loginActivity: LoginActivity) {
-
-        val intent = Intent(loginActivity, AfterLoginActivity::class.java)
-        loginActivity.startActivity(intent)
-    }
 
 
-    fun getUser() {
+    private fun getUser(loginActivity: LoginActivity) {
 
         if (DataHolder.fbUser == null) {
             return
@@ -213,7 +218,6 @@ class Repository {
 
                 if (document != null) {
 
-
                     val name = document.get("name").toString()
                     val userName = document.get("userName").toString()
                     val age = document.get("age").toString().toInt()
@@ -225,6 +229,11 @@ class Repository {
                     val user = User(name, age, email, userName, password, bio, gender)
                     getUserPic(fbUserId, user)
                     PersonalProfileViewModel.mutableUser = MutableLiveData(user)
+
+                    progressDialog?.dismiss()
+                    Toast.makeText(loginActivity.baseContext, "sign in with email success.", Toast.LENGTH_SHORT).show()
+                    updateUI(loginActivity)
+
 
                 } else {
                     Log.d(TAG, "No such document")
@@ -238,7 +247,7 @@ class Repository {
 
     }
 
-    fun getUserPic(fbUserId: String, user: User) {
+    private fun getUserPic(fbUserId: String, user: User) {
         if(fbUserId == null) {
             return
         }
@@ -255,19 +264,15 @@ class Repository {
 
             }
 
-
-//        ref.downloadUrl
-//            .addOnSuccessListener { img ->
-//                if (img != null) {
-//
-//                    user.img = img
-//                    Log.i(TAG, "Here is the from Repository $img")
-//
-//                    PersonalProfileViewModel.mutableUser = MutableLiveData(user)
-//                }
-//            }
-
     }
+
+
+    private fun updateUI(loginActivity: LoginActivity) {
+
+        val intent = Intent(loginActivity, AfterLoginActivity::class.java)
+        loginActivity.startActivity(intent)
+    }
+
 
 
 
