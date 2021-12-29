@@ -2,6 +2,7 @@ package com.example.hotspot.view
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -38,7 +39,7 @@ class CreateProfileActivity : AppCompatActivity() {
 
 
 
-        binding.activityCreateProfileImage.setOnClickListener {
+        binding.activityCreateProfileSelectImgTv.setOnClickListener {
 
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
