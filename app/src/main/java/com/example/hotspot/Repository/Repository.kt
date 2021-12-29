@@ -109,7 +109,6 @@ class Repository {
             age = age.toInt(),
             emailAddress = email,
             userName = userName,
-            password = password,
             bio = bio,
             gender = gender
 
@@ -245,12 +244,12 @@ class Repository {
                     val userName = document.get("userName").toString()
                     val age = document.get("age").toString().toInt()
                     val email = document.get("emailAddress").toString()
-                    val password = document.get("password").toString()
+                //    val password = document.get("password").toString()
                     val bio = document.get("bio").toString()
                     val gender = document.get("gender").toString()
 
                     val userProfile = UserProfile(name = name, age =  age, emailAddress = email,
-                        userName =  userName, password =  password, bio = bio, gender = gender)
+                        userName =  userName,  bio = bio, gender = gender)
 
                     getUserPic(fbUserId, userProfile)
                     PersonalProfileViewModel.mutableUserProfile = MutableLiveData(userProfile)
