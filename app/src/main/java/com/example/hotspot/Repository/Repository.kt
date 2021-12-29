@@ -152,7 +152,13 @@ class Repository {
  //                   Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     createProfileActivity.startActivity(intent)
+                    createProfileActivity.finish()
+
+
+
+
                 }
                 .addOnFailureListener { it ->
                     if (fbUser != null) {
@@ -294,6 +300,11 @@ class Repository {
     private fun updateUI(activity: Activity) {
 
         val intent = Intent(activity, AfterLoginActivity::class.java)
+
+
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        activity.startActivity(intent)
+        activity.finish()
         activity.startActivity(intent)
     }
 
