@@ -32,6 +32,8 @@ class CreateProfileActivity : AppCompatActivity() {
 
         binding = ActivityCreateProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
+
         auth = Firebase.auth
         createProfileVM = CreateProfileViewModel(repository, this, binding)
 

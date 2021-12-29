@@ -15,6 +15,10 @@ import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import com.example.hotspot.model.UserProfile
 import com.example.hotspot.viewModel.PersonalProfileViewModel
+import androidx.appcompat.app.AppCompatActivity
+
+
+
 
 class PersonalProfile : Fragment(),View.OnClickListener {
 
@@ -30,6 +34,8 @@ class PersonalProfile : Fragment(),View.OnClickListener {
 
         _binding = FragmentPersonalProfileBinding.inflate(inflater, container, false)
         val view = binding.root
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My Profile"
+
 
 
         val user = userModel.getUserData().value
@@ -105,8 +111,6 @@ class PersonalProfile : Fragment(),View.OnClickListener {
 
         }
     }
-
-
 
 
 }
