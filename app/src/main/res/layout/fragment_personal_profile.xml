@@ -1,89 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.PersonalProfile" >
+    tools:context=".view.PersonalProfile"
+    android:fillViewport="true"
+    >
 
-    <Button
-        android:id="@+id/fragment_personal_profile_editProfile_btn"
-        android:layout_width="121dp"
-        android:layout_height="53dp"
-        android:backgroundTint="@android:color/holo_orange_light"
-        android:fontFamily="sans-serif"
-        android:text="@string/edit_profile"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.841"
-        tools:autoText="true" />
 
-    <TextView
-        android:id="@+id/fragment_personal_profile_personName"
-        android:layout_width="291dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="276dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:gravity="center"
-        android:text="@string/personal_name"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_editProfile_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.214" />
-
-    <TextView
-        android:id="@+id/fragment_personal_profile_age"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_light"
-        android:gravity="center"
-        android:text="@string/personal_age"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_editProfile_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_personName"
-        app:layout_constraintVertical_bias="0.05" />
-
-    <TextView
-        android:id="@+id/fragment_personal_profile_bio"
-        android:layout_width="279dp"
-        android:layout_height="49dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="@string/personal_description"
-        android:textAlignment="center"
-        android:textColor="#A6000000"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_editProfile_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_age"
-        app:layout_constraintVertical_bias="0.123" />
-
-    <ImageView
-        android:id="@+id/fragment_personal_profile_picture"
-        android:layout_width="175dp"
-        android:layout_height="156dp"
-        android:src="@drawable/round_profile_pic"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_personName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.775" />
+        >
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/fragment_personal_profile_picture"
+            android:layout_width="175dp"
+            android:layout_height="156dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/round_profile_pic"
+
+            app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_personName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_bias=".1"
+
+            />
+
+        <TextView
+            android:id="@+id/fragment_personal_profile_personName"
+            android:layout_width="291dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="@string/personal_name"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+
+            app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_age"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_picture"
+
+
+            />
+
+        <TextView
+            android:id="@+id/fragment_personal_profile_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="center"
+            android:text="@string/personal_age"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_personName"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_bio"
+
+             />
+
+        <TextView
+            android:id="@+id/fragment_personal_profile_bio"
+            android:layout_width="279dp"
+            android:layout_height="49dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/personal_description"
+            android:textAlignment="center"
+            android:textColor="#A6000000"
+            android:textSize="14sp"
+            android:layout_marginTop="30dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_age"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_editProfile_btn"
+
+            />
+
+
+
+
+
+        <Button
+            android:id="@+id/fragment_personal_profile_editProfile_btn"
+            android:layout_width="205dp"
+            android:layout_height="59dp"
+            android:backgroundTint="@android:color/holo_orange_light"
+            android:fontFamily="sans-serif"
+            android:text="@string/edit_profile"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_bio"
+            tools:autoText="true"
+
+            android:layout_marginTop="100dp"
+
+
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</ScrollView>

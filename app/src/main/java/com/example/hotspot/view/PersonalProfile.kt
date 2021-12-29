@@ -77,8 +77,9 @@ class PersonalProfile : Fragment(),View.OnClickListener {
 
         if (userProfile != null) {
             binding.fragmentPersonalProfilePersonName.text = userProfile.name
-            binding.fragmentPersonalProfileAge.text = userProfile.age.toString()
+            binding.fragmentPersonalProfileAge.text = "${userProfile.age} år"
             binding.fragmentPersonalProfileBio.text = userProfile.bio
+
 
 
 
