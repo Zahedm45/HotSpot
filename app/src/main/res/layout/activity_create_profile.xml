@@ -57,7 +57,7 @@
                     android:layout_width="114dp"
                     android:layout_height="match_parent">
 
-                    <ImageButton
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/activity_create_profile_image"
                         android:layout_width="111dp"
                         android:layout_height="108dp"
@@ -66,9 +66,18 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.347">
+                        app:layout_constraintVertical_bias="0.347"
 
-                    </ImageButton>
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp"
+
+                        />
+
+
+
+
+
+
 
                     <TextView
                         android:id="@+id/activity_create_profile_select_img_tv"
@@ -222,6 +231,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 
 </ScrollView>
