@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.LoginActivity"
     android:orientation="vertical"
     android:gravity="center"
@@ -17,8 +18,8 @@
 
     <EditText
         android:id="@+id/activity_login_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="244dp"
+        android:layout_height="71dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/edittext_background1"
         android:ems="10"
@@ -27,19 +28,37 @@
         android:inputType="textEmailAddress"
         android:minHeight="48dp" />
 
-    <EditText
-        android:id="@+id/activity_login_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edittext_background1"
-        android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
-        android:ems="10"
-        android:fontFamily="sans-serif"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="244dp"
+        android:layout_height="71dp"
+        android:layout_marginVertical="8dp"
+        android:backgroundTint="@color/black"
         android:hint="@string/password2"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:paddingEnd="10dp" />
+        app:counterTextColor="@color/black"
+        app:boxStrokeColor="@color/teal_200"
+        app:hintTextColor="@color/black"
+
+
+
+
+
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/activity_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_background1"
+            android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:inputType="textPassword"
+            android:theme="@style/Theme.HotSpot"
+
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <CheckBox
