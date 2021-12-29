@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
 import com.example.hotspot.databinding.ActivityLoginBinding
-import com.example.hotspot.model.User
+import com.example.hotspot.model.UserProfile
 import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.CreateProfileActivity
 import com.example.hotspot.view.LoginActivity
@@ -104,7 +104,7 @@ class Repository {
             gender = men.text.toString()
         }
 
-        val user = User(
+        val user = UserProfile(
             name = name,
             age = age.toInt(),
             emailAddress = email,
@@ -249,9 +249,11 @@ class Repository {
                     val bio = document.get("bio").toString()
                     val gender = document.get("gender").toString()
 
-                    val user = User(name, age, email, userName, password, bio, gender)
-                    getUserPic(fbUserId, user)
-                    PersonalProfileViewModel.mutableUser = MutableLiveData(user)
+                    val userProfile = UserProfile(name = name, age =  age, emailAddress = email,
+                        userName =  userName, password =  password, bio = bio, gender = gender)
+
+                    getUserPic(fbUserId, userProfile)
+                    PersonalProfileViewModel.mutableUserProfile = MutableLiveData(userProfile)
 
                     progressDialog?.dismiss()
                     updateUI(activity)
@@ -270,7 +272,7 @@ class Repository {
 
     }
 
-    private fun getUserPic(fbUserId: String, user: User) {
+    private fun getUserPic(fbUserId: String, userProfile: UserProfile) {
         if(fbUserId == null) {
             return
         }
@@ -282,8 +284,8 @@ class Repository {
             .addOnSuccessListener { img ->
 
                 val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-                user.bitmapImg = bitmap
-                PersonalProfileViewModel.mutableUser = MutableLiveData(user)
+                userProfile.bitmapImg = bitmap
+                PersonalProfileViewModel.mutableUserProfile = MutableLiveData(userProfile)
 
             }
 
