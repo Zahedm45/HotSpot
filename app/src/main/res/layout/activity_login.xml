@@ -61,6 +61,7 @@
         android:text="@string/log_in2" />
 
     <TextView
+        android:id="@+id/activity_login_forgotPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

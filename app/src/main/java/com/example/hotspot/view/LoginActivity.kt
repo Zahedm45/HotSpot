@@ -1,12 +1,13 @@
 package com.example.hotspot.view
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Checkable
+import android.text.InputType
+import android.widget.EditText
+import android.widget.Toast
 import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.LoginActivityVM
@@ -61,6 +62,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.activityLoginForgotPassword.setOnClickListener {
+            forgotPassword()
+        }
+
 
 
 
@@ -103,6 +108,46 @@ class LoginActivity : AppCompatActivity() {
         binding.activityLoginEmail.setText(email)
         binding.activityLoginPassword.setText(password)
         binding.activityLoginRememberMe.isChecked = isSaveChecked
+
+    }
+
+
+
+
+    private fun forgotPassword() {
+
+
+        val builder = android.app.AlertDialog.Builder(this)
+        builder.setTitle("Reset your password")
+
+        val input = EditText(this)
+        input.hint = "Enter email"
+        input.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+
+        builder.setView(input)
+
+        builder.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, it ->
+            val email = input.text.toString()
+
+            Firebase.auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this.baseContext, "A mail sent to $email", Toast.LENGTH_SHORT).show()
+
+                    } else {
+                        Toast.makeText(this.baseContext, "$email is not found", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+        })
+
+        builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, it ->
+
+        })
+
+        builder.show()
+
+
 
     }
 
