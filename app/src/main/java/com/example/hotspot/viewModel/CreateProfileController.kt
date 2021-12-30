@@ -18,9 +18,9 @@ class CreateProfileController(
 
 
 
-    fun createNewProfile(uri: Uri?, bitmap: Bitmap?, onSuccess: () -> Unit, onFail: () -> Unit) {
+    fun createNewProfile(bitmap: Bitmap?, onSuccess: () -> Unit, onFail: () -> Unit) {
 
-        val user = verifyInput(uri, bitmap) ?: return
+        val user = verifyInput( bitmap) ?: return
         rp2.createUserInFirebase(createProfileActivity, user, {onSuccess()}, {onFail()})
 
 
@@ -32,7 +32,7 @@ class CreateProfileController(
 
 
 
-    private fun verifyInput(uri: Uri?, bitmap: Bitmap?): User? {
+    private fun verifyInput(bitmap: Bitmap?): User? {
 
         val userName = binding.activityCreateProfileUsername.text
         val name = binding.activityCreateProfileName.text
@@ -53,7 +53,7 @@ class CreateProfileController(
             return null
         }
 
-        if (uri == null) {
+        if (bitmap == null) {
             Toast.makeText(
                 createProfileActivity.baseContext,
                 "Select image..! ",
@@ -121,7 +121,6 @@ class CreateProfileController(
             bio = bio.toString(),
             gender = gender,
             password = password.toString(),
-            imgUri = uri,
             bitmapImg = bitmap
         )
 

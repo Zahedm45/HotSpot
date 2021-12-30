@@ -18,12 +18,14 @@ import com.google.firebase.ktx.Firebase
 class CreateProfileActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
-    var uri: Uri? = null
+
     var bitMDrawable: BitmapDrawable? = null
 
     private lateinit var createProfileVM : CreateProfileController
 
     private lateinit var binding: ActivityCreateProfileBinding
+
+    var bitMap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +49,12 @@ class CreateProfileActivity : AppCompatActivity() {
 
 
         binding.createprofileBtn.setOnClickListener {
-            createProfileVM.createNewProfile(uri, bitMap, { -> upgateUIOnSuccess()}, { -> updateUIOnFail()})
+            createProfileVM.createNewProfile(bitMap, { -> upgateUIOnSuccess()}, { -> updateUIOnFail()})
 
         }
     }
 
-    var bitMap: Bitmap? = null
+
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -60,7 +62,7 @@ class CreateProfileActivity : AppCompatActivity() {
 
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
 
-            uri = data.data
+            val uri = data.data
             bitMap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
             bitMDrawable = BitmapDrawable(bitMap)
             binding.activityCreateProfileImage.setBackgroundDrawable(bitMDrawable)

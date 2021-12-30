@@ -13,6 +13,5 @@ data class UserProfile(
 //    var password: String,
     var bio: String? = null,
     val gender: String,
-    var img: Uri? = null,
     var bitmapImg: Bitmap? = null
     )
