@@ -148,7 +148,7 @@ class Repository {
 
                     DataHolder.fbUser = fbUser
                     val msg = "Account is successfully created."
-                    getUser(null, createProfileActivity, msg)
+                 //   getUser(null, createProfileActivity, msg)
  //                   Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
@@ -200,7 +200,7 @@ class Repository {
                     DataHolder.fbUser = auth.currentUser
 
                     val msg = "Login successfully."
-                    getUser(loginActivity, null, msg)
+                   // getUser(loginActivity, null, msg)
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
 
 
