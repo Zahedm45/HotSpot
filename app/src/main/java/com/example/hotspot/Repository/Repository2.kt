@@ -5,15 +5,19 @@ import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
 import android.widget.Toast
 import com.example.hotspot.model.User
+import com.example.hotspot.model.UserProfile
 import com.example.hotspot.viewModel.DataHolder
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 class Repository2 {
     private var progressDialog: ProgressDialog? = null
@@ -157,13 +161,11 @@ class Repository2 {
     ) {
 
 
-        if( (progressDialog == null) || (progressDialog?.isShowing == false) ) {
-            progressDialog = ProgressDialog(activity)
-            progressDialog!!.setTitle("Please wait")
-            progressDialog!!.setMessage("Loading ...")
-            progressDialog!!.show()
-        }
 
+       val pd = ProgressDialog(activity)
+        pd.setTitle("Please wait")
+        pd.setMessage("Loading ...")
+        pd.show()
 
 
         auth.signInWithEmailAndPassword(email, password)
@@ -175,14 +177,16 @@ class Repository2 {
                     val msg = "Login successfully."
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
                     if (onSuccess != null) {
+                        pd.dismiss()
                         onSuccess()
                     }
 
 
                 } else {
-                    progressDialog?.dismiss()
+                  //  pd.dismiss()
                     Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
                     if (onFail != null) {
+                        pd.dismiss()
                         onFail()
                     }
 
@@ -190,6 +194,59 @@ class Repository2 {
             }
 
     }
+
+
+
+
+
+
+    fun getUserProfile(onDataChange: (snapshot: DocumentSnapshot) -> Unit) {
+
+        if (fbUser == null) {
+            Log.i(TAG, "User is not logged in..")
+            return
+        }
+
+
+        val docRef = db.collection("users").document(fbUser.uid)
+
+        docRef.addSnapshotListener { snapshot, e ->
+
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+
+            if (snapshot != null && snapshot.exists()) {
+                Log.d(TAG, "Current data: ${snapshot.data}")
+               onDataChange(snapshot)
+
+            } else {
+                Log.d(TAG, "Current data: null")
+            }
+        }
+    }
+
+
+
+    fun getUserPicFromDB(updateUI: (it: ByteArray?) -> Unit) {
+        if(fbUser == null) {
+            return
+        }
+
+        val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
+        val ONE_MEGABYTE: Long = 1024 * 1024
+
+        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+            updateUI(it)
+        }
+
+
+    }
+
+
+
 
 
 }

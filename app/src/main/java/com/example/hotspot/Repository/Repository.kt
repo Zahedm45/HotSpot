@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
 import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.model.UserProfile
@@ -17,7 +16,6 @@ import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.CreateProfileActivity
 import com.example.hotspot.view.LoginActivity
 import com.example.hotspot.viewModel.DataHolder
-import com.example.hotspot.viewModel.PersonalProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
@@ -258,7 +256,7 @@ class Repository {
                         userName =  userName,  bio = bio, gender = gender)
 
                     getUserPic(fbUserId, userProfile)
-                    PersonalProfileViewModel.mutableUserProfile = MutableLiveData(userProfile)
+//                    PersonalProfileVM.mutableUserProfile = MutableLiveData(userProfile)
 
                     progressDialog?.dismiss()
                     updateUI(activity)
@@ -290,7 +288,7 @@ class Repository {
 
                 val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
                 userProfile.bitmapImg = bitmap
-                PersonalProfileViewModel.mutableUserProfile = MutableLiveData(userProfile)
+//                PersonalProfileVM.mutableUserProfile = MutableLiveData(userProfile)
 
             }
 

@@ -9,9 +9,7 @@ import android.text.InputType
 import android.widget.EditText
 import android.widget.Toast
 import com.example.hotspot.databinding.ActivityLoginBinding
-import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.LoginActivityVM
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -45,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.activityLoginLoginBtn.setOnClickListener {
-            loginActivityMV.login( {upgateUIOnSuccess()}, {updateUIOnFail()} )
+            loginActivityMV.login( {updateUIOnSuccess()}, {updateUIOnFail()} )
 
             if (binding.activityLoginRememberMe.isChecked){
                 saveLoginInfo()
@@ -154,7 +152,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    private fun upgateUIOnSuccess() {
+    private fun updateUIOnSuccess() {
 
         Toast.makeText(baseContext, "Successfully login.", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, AfterLoginActivity::class.java)
