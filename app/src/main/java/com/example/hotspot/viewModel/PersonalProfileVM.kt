@@ -4,7 +4,7 @@ import android.content.ContentValues.TAG
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
-import com.example.hotspot.Repository.Repository2
+import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import com.example.hotspot.model.UserProfile
 import com.google.firebase.firestore.DocumentSnapshot
@@ -16,7 +16,7 @@ class PersonalProfileVM(
     companion object {
 
         private lateinit var binding: FragmentPersonalProfileBinding
-        private val repository = Repository2
+        private val repository = Repository
 
         private var userPic: Bitmap? = null
 

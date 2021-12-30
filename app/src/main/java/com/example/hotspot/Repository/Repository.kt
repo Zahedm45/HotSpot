@@ -4,315 +4,248 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.ContentValues.TAG
-import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.Uri
+import android.graphics.Bitmap
 import android.util.Log
 import android.widget.Toast
-import com.example.hotspot.databinding.ActivityCreateProfileBinding
-import com.example.hotspot.databinding.ActivityLoginBinding
-import com.example.hotspot.model.UserProfile
-import com.example.hotspot.view.AfterLoginActivity
-import com.example.hotspot.view.CreateProfileActivity
-import com.example.hotspot.view.LoginActivity
-import com.example.hotspot.viewModel.DataHolder
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.example.hotspot.model.User
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import java.io.File
+import java.io.ByteArrayOutputStream
 
 class Repository {
 
-//    val db = Firebase.firestore
-//    var uri: Uri? = null
-//    var progressDialog: ProgressDialog? = null
-//
-//    fun createUserInFirebase(
-//        createProfileActivity: CreateProfileActivity,
-//        binding: ActivityCreateProfileBinding,
-//        auth: FirebaseAuth,
-//        uri: Uri?,
-//
-//        ) {
-//
-//
-//        progressDialog = ProgressDialog(createProfileActivity)
-//        progressDialog!!.setTitle("Please wait")
-//        progressDialog!!.setMessage("Loading ...")
-//        progressDialog!!.show()
-//
-//
-//        val baseContext = createProfileActivity.baseContext
-//       // var userID: String? = null
-//
-//        val email = binding.activityCreateProfileEmailinput.text.toString()
-//        val password = binding.activityCreateProfilePassword.text.toString()
-//
-//        if(email.isBlank() || password.isBlank()) {
-//            progressDialog!!.dismiss()
-//            return
-//        }
-//
-//        auth.createUserWithEmailAndPassword(email, password)
-//            .addOnCompleteListener { task ->
-//
-//                if (task.isSuccessful) {
-//                    this.uri = uri
-//                    addProfileToFirebase(binding, auth.currentUser!!, createProfileActivity)
-//
-//
-//                } else {
-//                    progressDialog!!.dismiss()
-//                    Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-//                    Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
-//
-//
-//                }
-//            }
-//
-//    }
-//
-//   private fun addProfileToFirebase(
-//        binding: ActivityCreateProfileBinding,
-//        fbUser: FirebaseUser,
-//        createProfileActivity: CreateProfileActivity,
-//
-//    ) {
-//
-//        val uid = fbUser.uid
-//
-//        val userName = binding.activityCreateProfileUsername.text.toString()
-//        val name = binding.activityCreateProfileName.text.toString()
-//        val password = binding.activityCreateProfilePassword.text.toString()
-//        val repeatPassword = binding.activityCreateProfileRepeatPassword.text.toString()
-//        val email = binding.activityCreateProfileEmailinput.text.toString()
-//        val age = binding.activityCreateProfileAge.text.toString()
-//        val bio = binding.activityCreateProfileBio.text.toString()
-//        val women = binding.activityCreateProfileWomen
-//        val men = binding.activityCreateProfileMen
-//        var gender: String = "Non"
-//        val img = uri
-//
-//        if (women.isChecked) {
-//            gender = women.text.toString()
-//
-//        } else if (men.isChecked) {
-//            gender = men.text.toString()
-//        }
-//
-//        val user = UserProfile(
-//            name = name,
-//            age = age.toInt(),
-//            emailAddress = email,
-//            userName = userName,
-//            bio = bio,
-//            gender = gender
-//
-//        )
-//
-//
-//        val baseContext = createProfileActivity.baseContext
-//
-//        db.collection("users").document(uid).set(user)
-//            .addOnSuccessListener {
-//                addImageToFirebase(fbUser, createProfileActivity)
-//            }
-//
-//            .addOnFailureListener {e ->
-//                if (fbUser != null) {
-//                    DataHolder.fbUser = null
-//                    fbUser.delete()
-//                }
-//                progressDialog?.dismiss()
-//                Log.w(ContentValues.TAG, "Error adding document", e)
-//                Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
-//
-//            }
-//
-//    }
-//
-//
-//
-//    fun addImageToFirebase(fbUser: FirebaseUser, createProfileActivity: CreateProfileActivity) {
-//
-//        val baseContext = createProfileActivity.baseContext
-//
-//        val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
-//        if (uri != null) {
-//            ref.putFile(uri!!)
-//                .addOnSuccessListener {
-//
-//                    DataHolder.fbUser = fbUser
-//                    val msg = "Account is successfully created."
-//                 //   getUser(null, createProfileActivity, msg)
-// //                   Toast.makeText(baseContext, "Profile is successfully created! ", Toast.LENGTH_SHORT).show()
-//
-//                    val intent = Intent(createProfileActivity, AfterLoginActivity::class.java)
-//                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-//                    createProfileActivity.startActivity(intent)
-//                    createProfileActivity.finish()
-//
-//
-//
-//
-//                }
-//                .addOnFailureListener { it ->
-//                    if (fbUser != null) {
-//                        DataHolder.fbUser = null
-//                        fbUser.delete()
-//                    }
-//                    progressDialog?.dismiss()
-//                    Log.w(ContentValues.TAG, "Error uploading image to database", it)
-//                    Toast.makeText(baseContext, "Error uploading image to database! ", Toast.LENGTH_SHORT).show()
-//
-//                }
-//
-//        }
-//
-//    }
-//
-//
-//
-//     fun login(loginActivity: LoginActivity, binding: ActivityLoginBinding, auth: FirebaseAuth) {
-//
-//
-//         if( (progressDialog == null) || (progressDialog?.isShowing == false) ) {
-//             progressDialog = ProgressDialog(loginActivity)
-//             progressDialog!!.setTitle("Please wait")
-//             progressDialog!!.setMessage("Loading ...")
-//             progressDialog!!.show()
-//         }
-//
-//         val email = binding.activityLoginEmail.text.toString()
-//         val password = binding.activityLoginPassword.text.toString()
-//         val baseContext = loginActivity.baseContext
-//
-//
-//
-//        auth.signInWithEmailAndPassword(email, password)
-//            .addOnCompleteListener(loginActivity) { task ->
-//                if (task.isSuccessful) {
-//
-//                    DataHolder.fbUser = auth.currentUser
-//
-//                    val msg = "Login successfully."
-//                   // getUser(loginActivity, null, msg)
-//                    Log.d(ContentValues.TAG, "signInWithEmail:success")
-//
-//
-//                } else {
-//                    progressDialog?.dismiss()
-//                    Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
-//                    Toast.makeText(baseContext, "Authentication failed.",
-//                        Toast.LENGTH_SHORT).show()
-//                    // updateUI(null)
-//                }
-//            }
-//
-//    }
-//
-//
-//
-//    private fun getUser(loginActivity: LoginActivity?, createProfileActivity: CreateProfileActivity?, msg: String) {
-//        var activity: Activity? = null
-//
-//        if (loginActivity != null) {
-//            activity = loginActivity
-//
-//        } else if (createProfileActivity != null) {
-//            activity = createProfileActivity
-//
-//        } else {
-//            Log.i(TAG, "getUser is being called without a parameter..")
-//            return
-//        }
-//
-//
-//
-//
-//        if (DataHolder.fbUser == null) {
-//            return
-//        }
-//
-//        val fbUserId = DataHolder.fbUser!!.uid
-//
-//        val docRef = db.collection("users").document(fbUserId)
-//        docRef.get()
-//            .addOnSuccessListener { document ->
-//
-//                if (document != null) {
-//
-//                    val name = document.get("name").toString()
-//                    val userName = document.get("userName").toString()
-//                    val age = document.get("age").toString().toInt()
-//                    val email = document.get("emailAddress").toString()
-//                //    val password = document.get("password").toString()
-//                    val bio = document.get("bio").toString()
-//                    val gender = document.get("gender").toString()
-//
-//                    val userProfile = UserProfile(name = name, age =  age, emailAddress = email,
-//                        userName =  userName,  bio = bio, gender = gender)
-//
-//                    getUserPic(fbUserId, userProfile)
-////                    PersonalProfileVM.mutableUserProfile = MutableLiveData(userProfile)
-//
-//                    progressDialog?.dismiss()
-//                    updateUI(activity)
-//                    Toast.makeText(activity.baseContext, msg, Toast.LENGTH_SHORT).show()
-//
-//
-//                } else {
-//                    Log.d(TAG, "No such document")
-//                }
-//            }
-//
-//            .addOnFailureListener { exception ->
-//                Log.d(TAG, "get failed with ", exception)
-//
-//            }
-//
-//    }
-//
-//    private fun getUserPic(fbUserId: String, userProfile: UserProfile) {
-//        if(fbUserId == null) {
-//            return
-//        }
-//
-//        val ref = FirebaseStorage.getInstance().getReference("/images/${fbUserId}")
-//        val localFile = File.createTempFile("localImage", "jpeg")
-//
-//        ref.getFile(localFile)
-//            .addOnSuccessListener { img ->
-//
-//                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-//                userProfile.bitmapImg = bitmap
-////                PersonalProfileVM.mutableUserProfile = MutableLiveData(userProfile)
-//
-//            }
-//
-//    }
-//
-//
-//    private fun updateUI(activity: Activity) {
-//
-//        val intent = Intent(activity, AfterLoginActivity::class.java)
-//
-//
-//        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        activity.startActivity(intent)
-//        activity.finish()
-//        activity.startActivity(intent)
-//
-//
-//
-//      //  intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-//    }
-//
-//
-//
-//
+
+    companion object {
+
+        private var progressDialog: ProgressDialog? = null
+        private val auth = Firebase.auth
+        private val db = Firebase.firestore
+        private val fbUser = Firebase.auth.currentUser
+
+
+        // this function is consist of two other functions, which are addProfileToFirebase() and addImageToFirebase()
+        fun createUserInFirebase(
+            activity: Activity,
+            user: User,
+            onSuccess: (() -> Unit)?,
+            onFail: (() -> Unit)?
+
+        ) {
+
+
+
+            // var userID: String? = null
+
+            val email = user.emailAddress
+            val password = user.password
+
+            if(email.isBlank() || password.isBlank()) {
+                return
+            }
+
+
+            progressDialog = ProgressDialog(activity)
+            progressDialog!!.setTitle("Please wait")
+            progressDialog!!.setMessage("Loading ...")
+            progressDialog!!.show()
+
+            val baseContext = activity.baseContext
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+
+                    if (task.isSuccessful) {
+                        addProfileToFirebase(activity, user, onSuccess, onFail)
+
+                    } else {
+                        progressDialog!!.dismiss()
+                        Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+        }
+
+
+
+
+
+        private fun addProfileToFirebase(
+            activity: Activity,
+            user: User,
+            onSuccess: (() -> Unit)?,
+            onFail: (() -> Unit)?
+
+        ) {
+
+
+
+            val baseContext = activity.baseContext
+
+            if (fbUser != null) {
+                Log.w(ContentValues.TAG, "User not found")
+
+                val bitmap = user.bitmapImg
+                user.bitmapImg = null
+                user.imgUri = null
+
+
+                db.collection("users").document(fbUser.uid).set(user)
+                    .addOnSuccessListener {
+                        if (bitmap != null) {
+                            addImageToFirebase(bitmap, onSuccess, onFail)
+                        }
+                    }
+
+                    .addOnFailureListener {e ->
+                        fbUser.delete()
+                        progressDialog?.dismiss()
+                        Log.w(ContentValues.TAG, "Error adding document", e)
+                        Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
+
+                    }
+            }
+
+        }
+
+
+
+        private fun addImageToFirebase(bitmap: Bitmap, onSuccess: (() -> Unit)?, onFail: (() -> Unit)? ) {
+
+            if (fbUser == null) {
+                Log.i(TAG, "User is not sign in.")
+                return
+            }
+
+            val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
+
+            val bytArr = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytArr)
+            val data = bytArr.toByteArray()
+
+
+            ref.putBytes(data)
+                .addOnSuccessListener {
+                    progressDialog?.dismiss()
+
+                    if (onSuccess != null) {
+                        onSuccess()
+                    }
+                }
+
+                .addOnFailureListener {
+                    fbUser.delete()
+                    progressDialog?.dismiss()
+
+                    if (onFail != null) {
+                        onFail()
+                    }
+
+                }
+
+        }
+
+
+
+
+
+
+        fun login(
+            activity: Activity,
+            email: String,
+            password: String,
+            onSuccess: (() -> Unit)?,
+            onFail: (() -> Unit)?
+
+        ) {
+
+
+
+            val pd = ProgressDialog(activity)
+            pd.setTitle("Please wait")
+            pd.setMessage("Loading ...")
+            pd.show()
+
+
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(activity) { task ->
+                    if (task.isSuccessful) {
+                        Log.d(ContentValues.TAG, "signInWithEmail:success")
+                        if (onSuccess != null) {
+                            pd.dismiss()
+                            onSuccess()
+                        }
+
+
+                    } else {
+                        //  pd.dismiss()
+                        Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
+                        if (onFail != null) {
+                            pd.dismiss()
+                            onFail()
+                        }
+
+                    }
+                }
+
+        }
+
+
+
+
+
+
+        fun getUserProfile(onDataChange: (snapshot: DocumentSnapshot) -> Unit) {
+
+            if (fbUser == null) {
+                Log.i(TAG, "User is not logged in..")
+                return
+            }
+
+
+            val docRef = db.collection("users").document(fbUser.uid)
+
+            docRef.addSnapshotListener { snapshot, e ->
+
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e)
+                    return@addSnapshotListener
+                }
+
+
+                if (snapshot != null && snapshot.exists()) {
+ //                   Log.d(TAG, "Current data: ${snapshot.data}")
+                    onDataChange(snapshot)
+
+                } else {
+                    Log.d(TAG, "Current data: null")
+                }
+            }
+        }
+
+
+
+        fun getUserPicFromDB(updateUI: (it: ByteArray?) -> Unit) {
+            if(fbUser == null) {
+                return
+            }
+
+            val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
+            val ONE_MEGABYTE: Long = 1024 * 1024
+
+            ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                updateUI(it)
+            }
+
+
+        }
+
+
+    }
+
 
 
 
