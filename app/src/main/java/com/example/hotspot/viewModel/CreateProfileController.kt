@@ -34,7 +34,7 @@ class CreateProfileController(
 
     private fun verifyInput(bitmap: Bitmap?): User? {
 
-        val userName = binding.activityCreateProfileUsername.text
+//        val userName = binding.activityCreateProfileUsername.text
         val name = binding.activityCreateProfileName.text
         val email = binding.activityCreateProfileEmailinput.text
         val age = binding.activityCreateProfileAge.text
@@ -44,14 +44,14 @@ class CreateProfileController(
         val repeatPassword = binding.activityCreateProfileRepeatPassword.text
         val bio = binding.activityCreateProfileBio.text
 
-        if (userName.isNullOrBlank()) {
-            Toast.makeText(
-                createProfileActivity.baseContext,
-                "User name er tom! ",
-                Toast.LENGTH_SHORT
-            ).show()
-            return null
-        }
+//        if (userName.isNullOrBlank()) {
+//            Toast.makeText(
+//                createProfileActivity.baseContext,
+//                "User name er tom! ",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//            return null
+//        }
 
         if (bitmap == null) {
             Toast.makeText(
@@ -117,7 +117,6 @@ class CreateProfileController(
             name = name.toString(),
             age = age.toString().toInt(),
             emailAddress = email.toString(),
-            userName = userName.toString(),
             bio = bio.toString(),
             gender = gender,
             password = password.toString(),

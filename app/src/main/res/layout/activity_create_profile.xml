@@ -41,7 +41,7 @@
                         android:textColor="@color/orange"
                         android:textSize="30sp" />
 
-                    <EditText
+<!--                    <EditText
                         android:id="@+id/activity_create_profile_username"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
@@ -50,7 +50,7 @@
                         android:background="@drawable/edittext_background1"
                         android:fontFamily="sans-serif"
                         android:hint="@string/username"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress" />-->
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
