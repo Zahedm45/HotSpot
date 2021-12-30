@@ -11,6 +11,6 @@ data class User(
     var password: String,
     var bio: String? = null,
     val gender: String,
-    var img: Uri? = null,
+    var imgUri: Uri? = null,
     var bitmapImg: Bitmap? = null
 )

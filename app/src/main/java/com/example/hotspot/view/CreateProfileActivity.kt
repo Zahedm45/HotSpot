@@ -2,18 +2,17 @@ package com.example.hotspot.view
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
+import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Toast
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
-import com.example.hotspot.viewModel.CreateProfileViewModel
-import com.example.hotspot.viewModel.DataHolder
+import com.example.hotspot.viewModel.CreateProfileController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class CreateProfileActivity : AppCompatActivity() {
@@ -22,8 +21,7 @@ class CreateProfileActivity : AppCompatActivity() {
     var uri: Uri? = null
     var bitMDrawable: BitmapDrawable? = null
 
-    private val repository = DataHolder.repository
-    private lateinit var createProfileVM : CreateProfileViewModel
+    private lateinit var createProfileVM : CreateProfileController
 
     private lateinit var binding: ActivityCreateProfileBinding
 
@@ -35,7 +33,7 @@ class CreateProfileActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         auth = Firebase.auth
-        createProfileVM = CreateProfileViewModel(repository, this, binding)
+        createProfileVM = CreateProfileController(this,  binding)
 
 
 
@@ -49,11 +47,12 @@ class CreateProfileActivity : AppCompatActivity() {
 
 
         binding.createprofileBtn.setOnClickListener {
-            createProfileVM.createNewProfile(auth, uri)
+            createProfileVM.createNewProfile(uri, bitMap, { -> upgateUIOnSuccess()}, { -> updateUIOnFail()})
 
         }
     }
 
+    var bitMap: Bitmap? = null
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -62,7 +61,7 @@ class CreateProfileActivity : AppCompatActivity() {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
 
             uri = data.data
-            val bitMap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+            bitMap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
             bitMDrawable = BitmapDrawable(bitMap)
             binding.activityCreateProfileImage.setBackgroundDrawable(bitMDrawable)
 
@@ -79,5 +78,23 @@ class CreateProfileActivity : AppCompatActivity() {
     }
 
 
+
+
+
+
+    private fun upgateUIOnSuccess() {
+
+        Toast.makeText(baseContext, "Successfully profile created.", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, AfterLoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
+
+    }
+
+
+    private fun updateUIOnFail() {
+        Toast.makeText(baseContext, "Error uploading image to database! ", Toast.LENGTH_SHORT).show()
+    }
 
 }

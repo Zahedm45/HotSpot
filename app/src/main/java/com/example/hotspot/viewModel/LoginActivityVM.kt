@@ -8,14 +8,14 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivityVM(
     private val activity: LoginActivity,
-    private val binding: ActivityLoginBinding,
-    private val repository: Repository
-
+    private val binding: ActivityLoginBinding
     ){
 
+    private val repository = DataHolder.repository2
 
-
-    fun login(auth: FirebaseAuth) {
+    fun login(
+        onSuccess: (() -> Unit),
+        onFail: (() -> Unit)) {
 
         val email = binding.activityLoginEmail.text?.toString()
         val password = binding.activityLoginPassword.text?.toString()
@@ -30,7 +30,7 @@ class LoginActivityVM(
             return
         }
 
-        repository.login(activity, binding, auth)
+         repository.login(activity, email, password, {onSuccess()}, { onFail()} )
 
     }
 

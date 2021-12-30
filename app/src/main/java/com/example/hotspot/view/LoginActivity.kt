@@ -19,9 +19,7 @@ import com.google.firebase.ktx.Firebase
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var auth: FirebaseAuth
     private lateinit var loginActivityMV: LoginActivityVM
-    private val repository = DataHolder.repository
 
 
 
@@ -31,16 +29,12 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_login)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         supportActionBar?.hide()
 
-        auth = Firebase.auth
-
-        loginActivityMV = LoginActivityVM(this, binding, repository)
+        loginActivityMV = LoginActivityVM(this, binding)
 
         loadLoginInfo()
 
@@ -51,8 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.activityLoginLoginBtn.setOnClickListener {
-
-            loginActivityMV.login(auth)
+            loginActivityMV.login( {upgateUIOnSuccess()}, {updateUIOnFail()} )
 
             if (binding.activityLoginRememberMe.isChecked){
                 saveLoginInfo()
@@ -151,6 +144,29 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+    }
+
+
+
+
+
+
+
+
+
+    private fun upgateUIOnSuccess() {
+
+        Toast.makeText(baseContext, "Successfully login.", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, AfterLoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
+
+    }
+
+
+    private fun updateUIOnFail() {
+        Toast.makeText(baseContext, "Login error! ", Toast.LENGTH_SHORT).show()
     }
 
 
