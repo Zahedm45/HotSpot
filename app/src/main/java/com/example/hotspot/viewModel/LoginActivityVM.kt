@@ -2,6 +2,7 @@ package com.example.hotspot.viewModel
 
 import android.widget.Toast
 import com.example.hotspot.Repository.Repository
+import com.example.hotspot.Repository.Repository2
 import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.view.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -11,7 +12,7 @@ class LoginActivityVM(
     private val binding: ActivityLoginBinding
     ){
 
-    private val repository = DataHolder.repository2
+    private val repository = Repository2
 
     fun login(
         onSuccess: (() -> Unit),

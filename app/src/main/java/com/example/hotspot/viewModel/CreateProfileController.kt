@@ -3,6 +3,7 @@ package com.example.hotspot.viewModel
 import android.graphics.Bitmap
 import android.net.Uri
 import android.widget.Toast
+import com.example.hotspot.Repository.Repository2
 
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
 import com.example.hotspot.model.User
@@ -13,7 +14,7 @@ class CreateProfileController(
     private val binding: ActivityCreateProfileBinding
 ) {
 
-    val rp2 = DataHolder.repository2
+    val rp2 = Repository2
 
 
 

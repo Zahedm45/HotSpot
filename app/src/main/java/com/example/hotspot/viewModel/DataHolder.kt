@@ -13,18 +13,7 @@ class DataHolder {
 
 
     companion object {
-     //   val repository = Repository()
-        val repository2 = Repository2()
-        var fbUser : FirebaseUser? = null
-//        var userProfile: UserProfile? = null
-
-
-        fun showProgress(context: Context): ProgressDialog {
-            val pd = ProgressDialog(context)
-            pd.setTitle("Please wait")
-            pd.setMessage("Loading ...")
-            return pd
-        }
+      //  val repository2 = Repository2()
 
     }
 }
