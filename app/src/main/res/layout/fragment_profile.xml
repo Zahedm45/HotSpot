@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OthersProfile"
+    tools:context=".view.OthersProfile"
     android:id="@+id/fragment_profile">
 
 
@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.214" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/fragment_personal_profile_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
@@ -71,7 +71,7 @@
         app:layout_constraintBottom_toTopOf="@+id/send_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_age"
         app:layout_constraintVertical_bias="0.193" />
 
     <ImageView

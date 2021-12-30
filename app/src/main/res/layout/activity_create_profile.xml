@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shutterstock">
+    android:background="@drawable/shutterstock"
+    tools:context=".view.CreateProfileActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp"
-        tools:context=".CreateProfile">
+        tools:context=".view.CreateProfileActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,38 +23,78 @@
             android:padding="20dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="332dp"
+                android:layout_height="149dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="133dp"
                     android:layout_marginEnd="20dp"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="161dp"
+                        android:layout_height="36dp"
+                        android:fontFamily="@font/poppins_semibold"
                         android:text="@string/opret_profil2"
                         android:textColor="@color/orange"
                         android:textSize="30sp" />
 
                     <EditText
-                        android:id="@+id/username"
+                        android:id="@+id/activity_create_profile_username"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="55dp"
                         android:layout_marginTop="20dp"
                         android:autofillHints="username"
                         android:background="@drawable/edittext_background1"
+                        android:fontFamily="sans-serif"
                         android:hint="@string/username"
                         android:inputType="textEmailAddress" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="110dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/circle_for_profile_picture" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="114dp"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/activity_create_profile_image"
+                        android:layout_width="111dp"
+                        android:layout_height="108dp"
+                        android:background="@drawable/person"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.347">
+
+                    </ImageButton>
+
+                    <TextView
+                        android:id="@+id/activity_create_profile_select_img_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Select image"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        app:layout_constraintHorizontal_bias="0.516"
+                        app:layout_constraintStart_toStartOf="parent"
+
+                        app:layout_constraintTop_toBottomOf="@+id/activity_create_profile_image"
+                        app:layout_constraintVertical_bias="0.058"
+
+
+                        />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </LinearLayout>
 
@@ -61,18 +104,19 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName"
+                    android:id="@+id/activity_create_profile_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:autofillHints="emailAddress"
                     android:background="@drawable/edittext_background1"
-                    android:hint="@string/e_mail"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/name"
                     android:inputType="textEmailAddress"
                     android:minHeight="48dp" />
 
                 <EditText
-                    android:id="@+id/CreateTextPassword"
+                    android:id="@+id/activity_create_profile_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -86,13 +130,14 @@
                     tools:ignore="RtlSymmetry" />
 
                 <EditText
-                    android:id="@+id/RepeatTextPassword"
+                    android:id="@+id/activity_create_profile_repeat_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:autofillHints="password"
                     android:background="@drawable/edittext_background1"
                     android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
+                    android:fontFamily="sans-serif"
                     android:hint="@string/repeat_password"
                     android:inputType="textPassword"
                     android:minHeight="48dp"
@@ -100,25 +145,40 @@
                     tools:ignore="RtlSymmetry" />
 
                 <EditText
-                    android:id="@+id/emailinput"
+                    android:id="@+id/activity_create_profile_emailinput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:autofillHints="emailAddress"
                     android:background="@drawable/edittext_background1"
+                    android:fontFamily="sans-serif"
                     android:hint="@string/e_mail"
                     android:inputType="textEmailAddress"
                     android:minHeight="48dp" />
 
 
                 <EditText
-                    android:id="@+id/editTextDate"
+                    android:id="@+id/activity_create_profile_bio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/edittext_background1"
                     android:ems="10"
-                    android:inputType="date" />
+                    android:fontFamily="@font/poppins_light"
+                    android:hint="@string/bio_text"
+                    android:inputType="textCapWords" />
+
+                <EditText
+                    android:id="@+id/activity_create_profile_age"
+                    android:layout_width="154dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/edittext_background1"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_light"
+                    android:hint="@string/age"
+                    android:inputType="numberSigned" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -127,17 +187,21 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/activity_create_profile_women"
                         android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/edittext_background1"
+                        android:fontFamily="sans-serif"
                         android:text="@string/kvinde" />
 
                     <RadioButton
+                        android:id="@+id/activity_create_profile_men"
                         android:layout_width="140dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="left"
                         android:background="@drawable/edittext_background1"
+                        android:fontFamily="sans-serif"
                         android:text="@string/mand"
                         tools:ignore="RtlHardcoded" />
 
@@ -152,9 +216,12 @@
                     android:width="200dp"
                     android:backgroundTint="@color/orange"
                     android:text="@string/opret_profil2" />
+
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+
 </ScrollView>

@@ -13,7 +13,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".BeforeCheckIn"
+        tools:context=".view.BeforeCheckIn"
         >
 
 
@@ -53,6 +53,7 @@
             android:layout_height="33dp"
             android:layout_alignParentBottom="true"
             android:layout_toStartOf="@+id/humbergerMenu"
+            android:fontFamily="@font/poppins_semibold"
             android:text="@string/locationName"
             android:textColor="@color/black"
             android:textSize="26dp"
@@ -79,11 +80,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+                android:fontFamily="@font/poppins_light"
                 android:lineSpacingExtra="5dp"
                 android:padding="10dp"
                 android:text="@string/address"
-                android:textSize="15dp"
 
+                android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.07"
@@ -91,7 +93,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/checkInButton"
+                android:id="@+id/checkInButton1"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
                 android:layout_width="141dp"
                 android:layout_height="68dp"

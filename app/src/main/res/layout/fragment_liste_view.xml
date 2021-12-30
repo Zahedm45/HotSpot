@@ -12,7 +12,7 @@
         android:background="@drawable/shutterstock"
         android:orientation="vertical"
         android:padding="20dp"
-        tools:context=".CreateProfile">
+        tools:context=".view.CreateProfileActivity">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.LoginActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="30dp"
+    android:background="@drawable/shutterstock">
+
+    <ImageView
+        android:id="@+id/activity_login_imageView"
+        android:layout_width="330dp"
+        android:layout_height="90dp"
+        android:src="@drawable/hotspot_logo" />
+
+    <EditText
+        android:id="@+id/activity_login_email"
+        android:layout_width="244dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edittext_background1"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="244dp"
+        android:layout_height="71dp"
+        android:layout_marginVertical="8dp"
+        android:backgroundTint="@color/black"
+        android:hint="@string/password2"
+        app:counterTextColor="@color/black"
+        app:boxStrokeColor="@color/teal_200"
+        app:hintTextColor="@color/black"
+
+
+
+
+
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/activity_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_background1"
+            android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
+            android:ems="10"
+            android:fontFamily="sans-serif"
+            android:inputType="textPassword"
+            android:theme="@style/Theme.HotSpot"
+
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <CheckBox
+        android:id="@+id/activity_login_remember_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:text="@string/rememberMe" />
+
+    <Button
+        android:id="@+id/activity_login_login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/orange"
+        android:ems="7"
+        android:text="@string/log_in2" />
+
+    <TextView
+        android:id="@+id/activity_login_forgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_light"
+        android:gravity="center"
+        android:text="@string/glemt_log_in"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/activity_login_create_profile_btn"
+        android:layout_width="148dp"
+        android:layout_height="41dp"
+        android:layout_margin="30dp"
+        android:backgroundTint="@color/orange"
+        android:ems="8"
+        android:text="@string/create_profile"
+        android:textSize="12dp" />
+
+
+
+
+</LinearLayout>
