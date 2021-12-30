@@ -212,12 +212,28 @@
 
                 </RadioGroup>
 
+
+                <CheckBox
+                    android:id="@+id/activity_create_profile_remember_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="13dp"
+                    android:text="@string/rememberMe"
+                    android:layout_gravity="center"
+                    />
+
+
+
+
                 <Button
-                    android:id="@+id/createprofile_btn"
+                    android:id="@+id/activity_create_profile_createprofile_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:width="200dp"
                     android:backgroundTint="@color/orange"
                     android:text="@string/opret_profil2" />

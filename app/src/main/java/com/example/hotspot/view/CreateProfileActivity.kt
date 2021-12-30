@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -48,8 +47,8 @@ class CreateProfileActivity : AppCompatActivity() {
 
 
 
-        binding.createprofileBtn.setOnClickListener {
-            createProfileVM.createNewProfile(bitMap, { -> upgateUIOnSuccess()}, { -> updateUIOnFail()})
+        binding.activityCreateProfileCreateprofileBtn.setOnClickListener {
+            createProfileVM.createNewProfile(bitMap, { -> updateUIOnSuccess()}, { -> updateUIOnFail()})
 
         }
     }
@@ -84,7 +83,7 @@ class CreateProfileActivity : AppCompatActivity() {
 
 
 
-    private fun upgateUIOnSuccess() {
+    private fun updateUIOnSuccess() {
 
         Toast.makeText(baseContext, "Successfully profile created.", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, AfterLoginActivity::class.java)
@@ -98,5 +97,14 @@ class CreateProfileActivity : AppCompatActivity() {
     private fun updateUIOnFail() {
         Toast.makeText(baseContext, "Error uploading image to database! ", Toast.LENGTH_SHORT).show()
     }
+
+
+
+
+
+
+
+
+
 
 }
