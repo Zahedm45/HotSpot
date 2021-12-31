@@ -10,7 +10,7 @@ data class UserProfile(
     var age: Int,
     var emailAddress: String,
     var userName: String,
-//    var password: String,
+    var password: String,
     var bio: String? = null,
     val gender: String,
     var bitmapImg: Bitmap? = null

@@ -151,11 +151,11 @@
             android:autofillHints="emailAddress"
             android:background="@drawable/edittext_background1"
             android:ems="10"
+            android:minHeight="48dp"
             android:fontFamily="@font/poppins_light"
             android:hint="@string/e_mail"
             android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:text="Ny email: Not changeable for now!"
+            android:text="Ny email"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

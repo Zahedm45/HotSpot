@@ -17,8 +17,8 @@ class PersonalProfileVM(
 
         private lateinit var binding: FragmentPersonalProfileBinding
         private val repository = Repository
-
-        private var userPic: Bitmap? = null
+        var userPic: Bitmap? = null
+        lateinit var userProfile: UserProfile
 
 
         fun getProfile(binding: FragmentPersonalProfileBinding) {
@@ -32,7 +32,7 @@ class PersonalProfileVM(
             }
 
 
-            repository.getUserProfile( { snapshot -> updateProfileUI(snapshot) } )
+            repository.getUserProfile { snapshot -> updateProfileUI(snapshot) }
         }
 
 
@@ -48,11 +48,12 @@ class PersonalProfileVM(
             val gender = snapshot.get("gender").toString()
             val userName = snapshot.get("userName").toString()
             val bio = snapshot.get("bio").toString()
+            val password = snapshot.get("password").toString()
 
 
 
 
-            val userProfile = UserProfile(name = name, age = age,
+            userProfile = UserProfile(name = name, age = age, password = password,
                 emailAddress = email, gender = gender, userName = userName, bio = bio)
 
             binding.fragmentPersonalProfilePersonName.text = userProfile.name

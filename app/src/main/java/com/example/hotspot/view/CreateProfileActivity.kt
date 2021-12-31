@@ -18,7 +18,7 @@ class CreateProfileActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
 
-    var bitMDrawable: BitmapDrawable? = null
+  //  var bitMDrawable: BitmapDrawable? = null
 
     private lateinit var createProfileVM : CreateProfileController
 
@@ -63,8 +63,9 @@ class CreateProfileActivity : AppCompatActivity() {
 
             val uri = data.data
             bitMap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-            bitMDrawable = BitmapDrawable(bitMap)
-            binding.activityCreateProfileImage.setBackgroundDrawable(bitMDrawable)
+            binding.activityCreateProfileImage.setImageBitmap(bitMap)
+//            val bitMDrawable = BitmapDrawable(bitMap)
+//            binding.activityCreateProfileImage.setBackgroundDrawable(bitMDrawable)
 
         }
     }
