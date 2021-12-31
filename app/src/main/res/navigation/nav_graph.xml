@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/afterLogin_map">
+    app:startDestination="@id/mapsFragment">
 
 
     <fragment
@@ -100,4 +100,9 @@
         tools:layout="@layout/fragment_home_map" >
 
     </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.hotspot.view.MapsFragment"
+        android:label="fragment_maps4"
+        tools:layout="@layout/fragment_maps4" />
 </navigation>
