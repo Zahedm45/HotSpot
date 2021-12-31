@@ -20,11 +20,13 @@ class LoginActivityVM(
         val password = binding.activityLoginPassword.text?.toString()
 
         if (email.isNullOrBlank()) {
+            onFail()
             Toast.makeText(activity.baseContext ,"Email..! ", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (password.isNullOrBlank()) {
+            onFail()
             Toast.makeText(activity.baseContext ,"Password..! ", Toast.LENGTH_SHORT).show()
             return
         }

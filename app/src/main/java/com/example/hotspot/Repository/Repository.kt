@@ -48,10 +48,10 @@ class Repository {
             }
 
 
-            progressDialog = ProgressDialog(activity)
-            progressDialog!!.setTitle("Please wait")
-            progressDialog!!.setMessage("Loading ...")
-            progressDialog!!.show()
+//            progressDialog = ProgressDialog(activity)
+//            progressDialog!!.setTitle("Please wait")
+//            progressDialog!!.setMessage("Loading ...")
+//            progressDialog!!.show()
 
 
             auth.createUserWithEmailAndPassword(email, password)
@@ -167,27 +167,18 @@ class Repository {
 
 
 
-            val pd = ProgressDialog(activity)
-            pd.setTitle("Please wait")
-            pd.setMessage("Loading ...")
-            pd.show()
-
-
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity) { task ->
                     if (task.isSuccessful) {
                         Log.d(ContentValues.TAG, "signInWithEmail:success")
                         if (onSuccess != null) {
-                            pd.dismiss()
                             onSuccess()
                         }
 
 
                     } else {
-                        //  pd.dismiss()
                         Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
                         if (onFail != null) {
-                            pd.dismiss()
                             onFail()
                         }
 
