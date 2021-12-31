@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
 import com.example.hotspot.viewModel.EditProfileVM
@@ -26,7 +27,10 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false)
+        val view = inflater.inflate(R.layout.fragment_edit_profile, container, false)
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Edit Profile"
+        return view
     }
 
 
