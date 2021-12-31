@@ -47,12 +47,13 @@ class PersonalProfileVM(
             val email = snapshot.get("email").toString()
             val gender = snapshot.get("gender").toString()
             val userName = snapshot.get("userName").toString()
+            val bio = snapshot.get("bio").toString()
 
 
 
 
             val userProfile = UserProfile(name = name, age = age,
-                emailAddress = email, gender = gender, userName = userName)
+                emailAddress = email, gender = gender, userName = userName, bio = bio)
 
             binding.fragmentPersonalProfilePersonName.text = userProfile.name
             binding.fragmentPersonalProfileAge.text = "${userProfile.age} år"
@@ -60,7 +61,6 @@ class PersonalProfileVM(
 
 
             if (userProfile.bitmapImg != null) {
-                Log.i(TAG, "Here is the from Personal profile ${userProfile.bitmapImg}")
                 binding.fragmentPersonalProfilePicture.setImageBitmap(userProfile.bitmapImg)
             }
 
