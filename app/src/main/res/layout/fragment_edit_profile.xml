@@ -183,13 +183,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_profile_new_email"
-            app:layout_constraintBottom_toTopOf="@id/edit_profile_password"
+            app:layout_constraintBottom_toTopOf="@id/edit_profile_password_layout"
 
             />
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edit_profile_password"
+            android:id="@+id/edit_profile_password_layout"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
@@ -210,7 +210,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/edit_profile_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="password"
@@ -246,7 +246,7 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_profile_password"
+            app:layout_constraintTop_toBottomOf="@id/edit_profile_password_layout"
             app:layout_constraintBottom_toBottomOf="parent"
 
 

@@ -1,13 +1,10 @@
 package com.example.hotspot.view
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +17,11 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
     private val editProfileVM = EditProfileVM
+    var bitmap: Bitmap? = null
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,13 +45,12 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
         binding.editProfileSaveChangeBtn.setOnClickListener {
            // Log.i(TAG, "Clicked...")
-            editProfileVM.updateUserProfile()
+            editProfileVM.updateUserProfile(bitmap)
         }
 
 
     }
 
-    lateinit var bitMap: Bitmap
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -57,9 +58,8 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK && data != null) {
 
             val uri = data.data
-            bitMap = MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
-            binding.fragmentEditProfileEditPicture.setImageBitmap(bitMap)
-
+            bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
+            binding.fragmentEditProfileEditPicture.setImageBitmap(bitmap)
         }
     }
 

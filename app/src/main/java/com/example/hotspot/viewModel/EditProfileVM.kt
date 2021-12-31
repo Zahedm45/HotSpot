@@ -2,11 +2,9 @@ package com.example.hotspot.viewModel
 
 import android.content.ContentValues.TAG
 import android.graphics.Bitmap
-import android.text.Editable
 import android.util.Log
 import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.FragmentEditProfileBinding
-import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 
 class EditProfileVM {
 
@@ -14,8 +12,8 @@ class EditProfileVM {
 
         private val repository = Repository
         private lateinit var binding: FragmentEditProfileBinding
-        val userProfile = PersonalProfileVM.userProfile
-        var userPic: Bitmap? = PersonalProfileVM.userPic
+        private val userProfile = PersonalProfileVM.userProfile
+        private var userPic: Bitmap? = PersonalProfileVM.userPic
 
 
 
@@ -34,18 +32,42 @@ class EditProfileVM {
 
 
 
-        fun updateUserProfile() {
+        fun updateUserProfile(bitMap: Bitmap?) {
 
-            val password = binding.editProfilePassword.toString()
-            Log.i(TAG, "here is password ${userProfile.password.toString()}")
-
+            val password = binding.editProfilePassword.text.toString()
             if (password != userProfile.password) {
                 return
             }
 
+            if (bitMap != null) {
+                repository.updateUserPicInDB(bitMap, null, null)
 
 
+            }
 
+
+            val newName = binding.editProfileNewName.text.toString()
+            val email = binding.editProfileNewEmail.text.toString()
+            val newBio = binding.editProfileBioText.text.toString()
+
+            val strArr = ArrayList<String>()
+
+
+            if (newName != userProfile.name) {
+                strArr.add("name")
+                strArr.add(newName)
+            }
+
+            if (email != userProfile.emailAddress){
+                // not doing anything for now...
+            }
+
+            if (newBio != userProfile.bio) {
+                strArr.add("bio")
+                strArr.add(newBio)
+            }
+
+            repository.getUpdate("users", strArr)
 
 
         }

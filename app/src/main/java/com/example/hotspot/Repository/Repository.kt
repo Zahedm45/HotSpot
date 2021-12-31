@@ -244,7 +244,88 @@ class Repository {
         }
 
 
+
+
+
+
+
+
+        /**
+         *  getUpdate()
+         *
+         */
+
+        fun getUpdate(collectionPath: String, strArr: ArrayList<String>) {
+
+            if (fbUser == null) {
+                Log.i(TAG, "user is null....")
+                return
+            }
+
+
+
+            when(strArr.size) {
+                2 -> {
+                    db.collection(collectionPath).document(fbUser.uid).update(strArr[0], strArr[1])
+                }
+
+                4 -> {
+                    db.collection(collectionPath).document(fbUser.uid).update(strArr[0], strArr[1], strArr[2], strArr[3])
+                }
+
+                6 -> {
+                    db.collection(collectionPath).document(fbUser.uid).update(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5])
+                }
+            }
+
+        }
+
+
+
+
+
+
+         fun updateUserPicInDB(bitmap: Bitmap, onSuccess: (() -> Unit)?, onFail: (() -> Unit)? ) {
+
+            if (fbUser == null) {
+                Log.i(TAG, "User is not sign in.")
+                return
+            }
+
+            val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
+
+            val bytArr = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytArr)
+            val data = bytArr.toByteArray()
+
+            ref.putBytes(data)
+                .addOnSuccessListener {
+
+                    if (onSuccess != null) {
+                        onSuccess()
+                    }
+                }
+
+                .addOnFailureListener {
+                    if (onFail != null) {
+                        onFail()
+                    }
+
+                }
+
+        }
+
+
+
+
+
+
+
+
+
     }
+
+
 
 
 
