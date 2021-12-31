@@ -1,7 +1,6 @@
 package com.example.hotspot.viewModel
 
 import android.graphics.Bitmap
-import android.net.Uri
 import android.widget.Toast
 import com.example.hotspot.Repository.Repository
 
@@ -10,7 +9,7 @@ import com.example.hotspot.model.User
 import com.example.hotspot.view.CreateProfileActivity
 
 class CreateProfileController(
-    val createProfileActivity: CreateProfileActivity,
+    private val createProfileActivity: CreateProfileActivity,
     private val binding: ActivityCreateProfileBinding
 ) {
 
@@ -18,10 +17,10 @@ class CreateProfileController(
 
 
 
-    fun createNewProfile(bitmap: Bitmap?, onSuccess: () -> Unit, onFail: () -> Unit) {
+    fun createNewProfile(bitmap: Bitmap?, onSuccess: () -> Unit, onFail: (msg: String) -> Unit) {
 
-        val user = verifyInput( bitmap) ?: return
-        rp2.createUserInFirebase(createProfileActivity, user, {onSuccess()}, {onFail()})
+        val user = verifyInput( bitmap) { msg -> onFail(msg) } ?: return
+        rp2.createUserInFirebase( user, {onSuccess()}, { mgs -> onFail(mgs)})
 
 
 
@@ -32,7 +31,7 @@ class CreateProfileController(
 
 
 
-    private fun verifyInput(bitmap: Bitmap?): User? {
+    private fun verifyInput(bitmap: Bitmap?, onFailure: (message: String) -> Unit): User? {
 
 //        val userName = binding.activityCreateProfileUsername.text
         val name = binding.activityCreateProfileName.text
@@ -54,48 +53,54 @@ class CreateProfileController(
 //        }
 
         if (bitmap == null) {
-            Toast.makeText(
-                createProfileActivity.baseContext,
-                "Select image..! ",
-                Toast.LENGTH_SHORT
-            ).show()
+            onFailure("Select image..! ")
+//            Toast.makeText(
+//                createProfileActivity.baseContext,
+//                "Select image..! ",
+//                Toast.LENGTH_SHORT
+//            ).show()
             return null
         }
 
         if (name.isNullOrBlank()) {
-            Toast.makeText(createProfileActivity.baseContext, "Navn ", Toast.LENGTH_SHORT).show()
+            onFailure("Navn?")
+//            Toast.makeText(createProfileActivity.baseContext, "Navn ", Toast.LENGTH_SHORT).show()
             return null
         }
 
         if (password.isNullOrBlank()) {
-            Toast.makeText(
-                createProfileActivity.baseContext,
-                "Kodeord er tom! ",
-                Toast.LENGTH_SHORT
-            ).show()
+            onFailure("Kodeord er tom!")
+//            Toast.makeText(
+//                createProfileActivity.baseContext,
+//                "Kodeord er tom! ",
+//                Toast.LENGTH_SHORT
+//            ).show()
             return null
         }
 
 
         if (password.toString() != repeatPassword.toString()) {
-            Toast.makeText(
-                createProfileActivity.baseContext,
-                "Kodeord != GentageKodeord",
-                Toast.LENGTH_SHORT
-            ).show()
+            onFailure("Kodeord != GentageKodeord")
+//            Toast.makeText(
+//                createProfileActivity.baseContext,
+//                "Kodeord != GentageKodeord",
+//                Toast.LENGTH_SHORT
+//            ).show()
             return null
         }
 
 
         if (email.isNullOrBlank()) {
-            Toast.makeText(createProfileActivity.baseContext, "Email er tom! ", Toast.LENGTH_SHORT)
-                .show()
+            onFailure("Email er tom! ")
+//            Toast.makeText(createProfileActivity.baseContext, "Email er tom! ", Toast.LENGTH_SHORT)
+//                .show()
             return null
         }
 
         if (age.isNullOrBlank()) {
-            Toast.makeText(createProfileActivity.baseContext, "Alder er tom! ", Toast.LENGTH_SHORT)
-                .show()
+            onFailure("Alder er tom!")
+//            Toast.makeText(createProfileActivity.baseContext, "Alder er tom!", Toast.LENGTH_SHORT)
+//                .show()
             return null
         }
 
@@ -109,7 +114,8 @@ class CreateProfileController(
         }
 
         if (gender == null) {
-            Toast.makeText(createProfileActivity.baseContext, "Køn? ", Toast.LENGTH_SHORT).show()
+            onFailure("Køn?")
+//            Toast.makeText(createProfileActivity.baseContext, "Køn?", Toast.LENGTH_SHORT).show()
             return null
         }
 

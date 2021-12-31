@@ -1,12 +1,10 @@
 package com.example.hotspot.Repository
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.graphics.Bitmap
 import android.util.Log
-import android.widget.Toast
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
 import com.google.firebase.auth.ktx.auth
@@ -21,7 +19,7 @@ class Repository {
 
     companion object {
 
-        private var progressDialog: ProgressDialog? = null
+     //   private var progressDialog: ProgressDialog? = null
         private val auth = Firebase.auth
         private val db = Firebase.firestore
         private val fbUser = Firebase.auth.currentUser
@@ -29,10 +27,9 @@ class Repository {
 
         // this function is consist of two other functions, which are addProfileToFirebase() and addImageToFirebase()
         fun createUserInFirebase(
-            activity: Activity,
             user: User,
-            onSuccess: (() -> Unit)?,
-            onFail: (() -> Unit)?
+            onSuccess: (() -> Unit),
+            onFailure: ((message: String) -> Unit)
 
         ) {
 
@@ -48,25 +45,16 @@ class Repository {
             }
 
 
-//            progressDialog = ProgressDialog(activity)
-//            progressDialog!!.setTitle("Please wait")
-//            progressDialog!!.setMessage("Loading ...")
-//            progressDialog!!.show()
-
-
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
-                        addProfileToFirebase(user, onSuccess, onFail)
+                        addProfileToFirebase(user, onSuccess, onFailure)
 
                     } else {
-                        progressDialog!!.dismiss()
+
                         Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
- //                       Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
-                        if (onFail != null) {
-                            onFail()
-                        }
+                        onFailure(task.exception.toString())
                     }
                 }
 
@@ -78,45 +66,43 @@ class Repository {
 
         private fun addProfileToFirebase(
             user: User,
-            onSuccess: (() -> Unit)?,
-            onFail: (() -> Unit)?
+            onSuccess: (() -> Unit),
+            onFailure: ((msg: String) -> Unit)
 
         ) {
 
 
 
-
-            if (fbUser != null) {
+            if (fbUser == null) {
+                // something went wrong
                 Log.w(ContentValues.TAG, "User not found")
-
-                val bitmap = user.bitmapImg
-                user.bitmapImg = null
-//                user.imgUri = null
-
-
-                db.collection("users").document(fbUser.uid).set(user)
-                    .addOnSuccessListener {
-                        if (bitmap != null) {
-                            addImageToFirebase(bitmap, onSuccess, onFail)
-                        }
-                    }
-
-                    .addOnFailureListener {e ->
-                        fbUser.delete()
-                        progressDialog?.dismiss()
-                        Log.w(ContentValues.TAG, "Error adding document", e)
- //                       Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
-                        if (onFail != null) {
-                            onFail()
-                        }
-                    }
+                return
             }
+
+
+            val bitmap = user.bitmapImg
+            user.bitmapImg = null
+
+
+            db.collection("users").document(fbUser.uid).set(user)
+                .addOnSuccessListener {
+                    if (bitmap != null) {
+                        addImageToFirebase(bitmap, {onSuccess()}, { msg -> onFailure(msg) })
+                    }
+                }
+
+                .addOnFailureListener {e ->
+                    fbUser.delete()
+                    Log.w(ContentValues.TAG, "Error adding document", e)
+//                       Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
+                    onFailure(e.toString())
+                }
 
         }
 
 
 
-        private fun addImageToFirebase(bitmap: Bitmap, onSuccess: (() -> Unit)?, onFail: (() -> Unit)? ) {
+        private fun addImageToFirebase(bitmap: Bitmap, onSuccess: (() -> Unit), onFailure: ((msg: String) -> Unit) ) {
 
             if (fbUser == null) {
                 Log.i(TAG, "User is not sign in.")
@@ -132,20 +118,14 @@ class Repository {
 
             ref.putBytes(data)
                 .addOnSuccessListener {
-                    progressDialog?.dismiss()
 
-                    if (onSuccess != null) {
-                        onSuccess()
-                    }
+                    onSuccess()
                 }
 
                 .addOnFailureListener {
                     fbUser.delete()
-                    progressDialog?.dismiss()
 
-                    if (onFail != null) {
-                        onFail()
-                    }
+                    onFailure(it.toString())
 
                 }
 
