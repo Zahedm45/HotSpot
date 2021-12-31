@@ -41,7 +41,7 @@
                         android:textColor="@color/orange"
                         android:textSize="30sp" />
 
-                    <EditText
+<!--                    <EditText
                         android:id="@+id/activity_create_profile_username"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
@@ -50,25 +50,30 @@
                         android:background="@drawable/edittext_background1"
                         android:fontFamily="sans-serif"
                         android:hint="@string/username"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress" />-->
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="114dp"
+                    android:layout_width="123dp"
                     android:layout_height="match_parent">
 
-                    <ImageButton
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/activity_create_profile_image"
                         android:layout_width="111dp"
                         android:layout_height="108dp"
                         android:background="@drawable/person"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.347">
 
-                    </ImageButton>
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.347"
+
+                        >
+
+                    </de.hdodenhof.circleimageview.CircleImageView>
 
                     <TextView
                         android:id="@+id/activity_create_profile_select_img_tv"
@@ -77,8 +82,8 @@
                         android:layout_marginTop="4dp"
                         android:text="Select image"
                         android:textAlignment="center"
-                        android:textStyle="bold"
                         android:textColor="@color/black"
+                        android:textStyle="bold"
 
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -207,12 +212,28 @@
 
                 </RadioGroup>
 
+
+                <CheckBox
+                    android:id="@+id/activity_create_profile_remember_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="13dp"
+                    android:text="@string/rememberMe"
+                    android:layout_gravity="center"
+                    />
+
+
+
+
                 <Button
-                    android:id="@+id/createprofile_btn"
+                    android:id="@+id/activity_create_profile_createprofile_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:width="200dp"
                     android:backgroundTint="@color/orange"
                     android:text="@string/opret_profil2" />
@@ -222,6 +243,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 
 </ScrollView>

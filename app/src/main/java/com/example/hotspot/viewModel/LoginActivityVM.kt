@@ -4,33 +4,32 @@ import android.widget.Toast
 import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.view.LoginActivity
-import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivityVM(
     private val activity: LoginActivity,
-    private val binding: ActivityLoginBinding,
-    private val repository: Repository
-
+    private val binding: ActivityLoginBinding
     ){
 
+    private val repository = Repository
 
-
-    fun login(auth: FirebaseAuth) {
+    fun login(
+        onSuccess: (() -> Unit),
+        onFail: ((msg: String) -> Unit)) {
 
         val email = binding.activityLoginEmail.text?.toString()
         val password = binding.activityLoginPassword.text?.toString()
 
         if (email.isNullOrBlank()) {
-            Toast.makeText(activity.baseContext ,"Email..! ", Toast.LENGTH_SHORT).show()
+            onFail("Email? ")
             return
         }
 
         if (password.isNullOrBlank()) {
-            Toast.makeText(activity.baseContext ,"Password..! ", Toast.LENGTH_SHORT).show()
+            onFail("Password?")
             return
         }
 
-        repository.login(activity, binding, auth)
+         repository.login(activity, email, password, {onSuccess()}, {msg -> onFail(msg)} )
 
     }
 

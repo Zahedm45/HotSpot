@@ -37,7 +37,15 @@
         android:id="@+id/editProfile"
         android:name="com.example.hotspot.view.EditProfile"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfile_to_personalProfile"
+            app:destination="@id/personalProfile" />
+    </fragment>
+
+
+
+
     <fragment
         android:id="@+id/favorites"
         android:name="com.example.hotspot.view.Favorites"

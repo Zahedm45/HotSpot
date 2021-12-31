@@ -1,31 +1,27 @@
 package com.example.hotspot.view
 
-import android.content.ContentValues
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
-import com.example.hotspot.model.UserProfile
-import com.example.hotspot.viewModel.PersonalProfileViewModel
 import androidx.appcompat.app.AppCompatActivity
-
-
+import com.example.hotspot.viewModel.PersonalProfileVM
 
 
 class PersonalProfile : Fragment(),View.OnClickListener {
 
     lateinit var navController: NavController
-    private val userModel : PersonalProfileViewModel by viewModels()
+//    private val userModel : PersonalProfileVM by viewModels()
     private var _binding: FragmentPersonalProfileBinding? = null
     private val binding get() = _binding!!
+
+   // lateinit var personalProfileVM: PersonalProfileVM
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +32,9 @@ class PersonalProfile : Fragment(),View.OnClickListener {
         val view = binding.root
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My Profile"
 
+        PersonalProfileVM.getProfile(binding)
 
 
-        val user = userModel.getUserData().value
-        updateProfileUI(user)
 
         return view
     }
@@ -60,57 +55,12 @@ class PersonalProfile : Fragment(),View.OnClickListener {
     }
 
 
-
-    override fun onResume() {
-        super.onResume()
-
-        userModel.getUserData().observe(this, {user ->
-            updateProfileUI(user)
-        })
-
-    }
-
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
 
-
-
-    fun updateProfileUI(userProfile: UserProfile?) {
-
-        if (userProfile != null) {
-            binding.fragmentPersonalProfilePersonName.text = userProfile.name
-            binding.fragmentPersonalProfileAge.text = "${userProfile.age} år"
-            binding.fragmentPersonalProfileBio.text = userProfile.bio
-
-
-
-
-            if (userProfile.bitmapImg != null) {
-                Log.i(ContentValues.TAG, "Here is the from Personal profile ${userProfile.bitmapImg}")
-                binding.fragmentPersonalProfilePicture.setImageBitmap(userProfile.bitmapImg)
-            }
-
-
-
-       //     binding.fragmentPersonalProfilePicture.setImageURI(null)
-
-//            val storageRef = FirebaseStorage.getInstance().reference.child("images/${DataHolder.fbUser!!.uid}")
-//            val localFile = File.createTempFile("temImage", "jpeg")
-//
-//            storageRef.getFile(localFile).addOnSuccessListener {
-//
-//                val bit = BitmapFactory.decodeFile(localFile.absolutePath)
-//
-//                binding.fragmentPersonalProfilePicture.setImageBitmap(bit)
-//
-//            }
-
-        }
-    }
 
 
 }

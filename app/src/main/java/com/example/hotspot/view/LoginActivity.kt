@@ -1,17 +1,20 @@
 package com.example.hotspot.view
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
 import android.widget.Toast
+import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.ActivityLoginBinding
+import com.example.hotspot.model.LoginInfo
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.LoginActivityVM
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -19,28 +22,18 @@ import com.google.firebase.ktx.Firebase
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var auth: FirebaseAuth
     private lateinit var loginActivityMV: LoginActivityVM
-    private val repository = DataHolder.repository
-
-
-
-
-
+    private var progressDialog: ProgressDialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_login)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         supportActionBar?.hide()
 
-        auth = Firebase.auth
-
-        loginActivityMV = LoginActivityVM(this, binding, repository)
+        loginActivityMV = LoginActivityVM(this, binding)
 
         loadLoginInfo()
 
@@ -50,9 +43,15 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        binding.activityLoginLoginBtn.setOnClickListener {
 
-            loginActivityMV.login(auth)
+        progressDialog = ProgressDialog(this)
+        progressDialog?.setTitle("Please wait")
+        progressDialog?.setMessage("Loading ...")
+
+
+        binding.activityLoginLoginBtn.setOnClickListener {
+            progressDialog!!.show()
+            loginActivityMV.login( {updateUIOnSuccess()}, { msg -> updateUIOnFail(msg)} )
 
             if (binding.activityLoginRememberMe.isChecked){
                 saveLoginInfo()
@@ -151,6 +150,29 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+    }
+
+
+
+
+
+
+
+    private fun updateUIOnSuccess() {
+
+        progressDialog?.dismiss()
+        Toast.makeText(baseContext, "Successfully login.", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, AfterLoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish()
+
+    }
+
+
+    private fun updateUIOnFail(msg: String) {
+        progressDialog?.dismiss()
+        Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
     }
 
 

@@ -1,29 +1,69 @@
 package com.example.hotspot.viewModel
 
-import android.app.ProgressDialog
+import android.app.Activity
 import android.content.Context
-import com.example.hotspot.Repository.Repository
-import com.example.hotspot.model.UserProfile
-import com.google.firebase.auth.FirebaseUser
+import android.content.SharedPreferences
+import com.example.hotspot.model.LoginInfo
 
 
 class DataHolder {
 
- //   private lateinit var user: User
 
 
     companion object {
-        val repository = Repository()
-        var fbUser : FirebaseUser? = null
-//        var userProfile: UserProfile? = null
 
-
-        fun showProgress(context: Context): ProgressDialog {
-            val pd = ProgressDialog(context)
-            pd.setTitle("Please wait")
-            pd.setMessage("Loading ...")
-            return pd
-        }
+//        var isSaveChecked = false
+//        private lateinit var sharedP: SharedPreferences
+//
+//
+//
+//         fun saveLoginInfo(loginInfo: LoginInfo) {
+//
+//            val email = loginInfo.email
+//            val password = loginInfo.password
+//            val activity = loginInfo.activity
+////            val isSaveChecked = loginInfo.isRememberMeChecked
+//
+//             sharedP = activity.getSharedPreferences("userLogin", Context.MODE_PRIVATE)
+//            val editor = sharedP.edit()
+//
+//            editor.apply {
+//                putString("STRING_EMAIL", email)
+//                putString("STRING_PASSWORD", password)
+////                putBoolean("BOOLEAN_IS_SAVE_CHECKED", isSaveChecked)
+//
+//            }.apply()
+//
+//             isSaveChecked = true
+//
+//        }
+//
+//
+//
+//         fun loadLoginInfo(activity: Activity): SharedPreferences? {
+////            val isSaveChecked = sharedP.getBoolean("BOOLEAN_IS_SAVE_CHECKED", false)
+//            if (!isSaveChecked) {
+//                return null
+//            }
+//
+//             return activity.getSharedPreferences("userLogin", Context.MODE_PRIVATE)
+//        }
+//
+//
+//        fun deleteLoginInfo() {
+//            if (this::sharedP.isInitialized) {
+//                sharedP.edit().clear().apply()
+//            }
+//        }
 
     }
+
+
+
+
+
+
+
+
+
 }
