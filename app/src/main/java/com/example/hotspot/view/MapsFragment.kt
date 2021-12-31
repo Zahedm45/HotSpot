@@ -28,8 +28,8 @@ class MapsFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
         val dtu = LatLng(55.784110, 12.517820)
-        googleMap.addMarker(MarkerOptions().position(dtu).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(dtu))
+        googleMap.addMarker(MarkerOptions().position(dtu).title("Marker in DTU"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(dtu, 15f))
     }
 
     override fun onCreateView(
