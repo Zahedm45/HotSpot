@@ -14,24 +14,22 @@ class LoginActivityVM(
 
     fun login(
         onSuccess: (() -> Unit),
-        onFail: (() -> Unit)) {
+        onFail: ((msg: String) -> Unit)) {
 
         val email = binding.activityLoginEmail.text?.toString()
         val password = binding.activityLoginPassword.text?.toString()
 
         if (email.isNullOrBlank()) {
-            onFail()
-            Toast.makeText(activity.baseContext ,"Email..! ", Toast.LENGTH_SHORT).show()
+            onFail("Email? ")
             return
         }
 
         if (password.isNullOrBlank()) {
-            onFail()
-            Toast.makeText(activity.baseContext ,"Password..! ", Toast.LENGTH_SHORT).show()
+            onFail("Password?")
             return
         }
 
-         repository.login(activity, email, password, {onSuccess()}, { onFail()} )
+         repository.login(activity, email, password, {onSuccess()}, {msg -> onFail(msg)} )
 
     }
 

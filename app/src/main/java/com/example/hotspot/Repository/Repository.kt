@@ -25,7 +25,6 @@ class Repository {
         private val fbUser = Firebase.auth.currentUser
 
 
-        // this function is consist of two other functions, which are addProfileToFirebase() and addImageToFirebase()
         fun createUserInFirebase(
             user: User,
             onSuccess: (() -> Unit),
@@ -34,8 +33,6 @@ class Repository {
         ) {
 
 
-
-            // var userID: String? = null
 
             val email = user.emailAddress
             val password = user.password
@@ -54,7 +51,7 @@ class Repository {
                     } else {
 
                         Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                        onFailure(task.exception.toString())
+                        onFailure(task.exception?.message.toString())
                     }
                 }
 
@@ -95,7 +92,7 @@ class Repository {
                     fbUser.delete()
                     Log.w(ContentValues.TAG, "Error adding document", e)
 //                       Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
-                    onFailure(e.toString())
+                    onFailure(e.message.toString())
                 }
 
         }
@@ -118,14 +115,12 @@ class Repository {
 
             ref.putBytes(data)
                 .addOnSuccessListener {
-
                     onSuccess()
                 }
 
                 .addOnFailureListener {
                     fbUser.delete()
-
-                    onFailure(it.toString())
+                    onFailure(it.message.toString())
 
                 }
 
@@ -141,7 +136,7 @@ class Repository {
             email: String,
             password: String,
             onSuccess: (() -> Unit)?,
-            onFail: (() -> Unit)?
+            onFail: ((msg: String) -> Unit)?
 
         ) {
 
@@ -159,7 +154,7 @@ class Repository {
                     } else {
                         Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
                         if (onFail != null) {
-                            onFail()
+                            onFail(task.exception?.message.toString())
                         }
 
                     }

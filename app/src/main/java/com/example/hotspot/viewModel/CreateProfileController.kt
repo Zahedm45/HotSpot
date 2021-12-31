@@ -44,63 +44,38 @@ class CreateProfileController(
         val bio = binding.activityCreateProfileBio.text
 
 //        if (userName.isNullOrBlank()) {
-//            Toast.makeText(
-//                createProfileActivity.baseContext,
-//                "User name er tom! ",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//            return null
+
 //        }
 
         if (bitmap == null) {
             onFailure("Select image..! ")
-//            Toast.makeText(
-//                createProfileActivity.baseContext,
-//                "Select image..! ",
-//                Toast.LENGTH_SHORT
-//            ).show()
             return null
         }
 
         if (name.isNullOrBlank()) {
             onFailure("Navn?")
-//            Toast.makeText(createProfileActivity.baseContext, "Navn ", Toast.LENGTH_SHORT).show()
             return null
         }
 
         if (password.isNullOrBlank()) {
             onFailure("Kodeord er tom!")
-//            Toast.makeText(
-//                createProfileActivity.baseContext,
-//                "Kodeord er tom! ",
-//                Toast.LENGTH_SHORT
-//            ).show()
             return null
         }
 
 
         if (password.toString() != repeatPassword.toString()) {
             onFailure("Kodeord != GentageKodeord")
-//            Toast.makeText(
-//                createProfileActivity.baseContext,
-//                "Kodeord != GentageKodeord",
-//                Toast.LENGTH_SHORT
-//            ).show()
             return null
         }
 
 
         if (email.isNullOrBlank()) {
             onFailure("Email er tom! ")
-//            Toast.makeText(createProfileActivity.baseContext, "Email er tom! ", Toast.LENGTH_SHORT)
-//                .show()
             return null
         }
 
         if (age.isNullOrBlank()) {
             onFailure("Alder er tom!")
-//            Toast.makeText(createProfileActivity.baseContext, "Alder er tom!", Toast.LENGTH_SHORT)
-//                .show()
             return null
         }
 
@@ -115,7 +90,6 @@ class CreateProfileController(
 
         if (gender == null) {
             onFailure("Køn?")
-//            Toast.makeText(createProfileActivity.baseContext, "Køn?", Toast.LENGTH_SHORT).show()
             return null
         }
 

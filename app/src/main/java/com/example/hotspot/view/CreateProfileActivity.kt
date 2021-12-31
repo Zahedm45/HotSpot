@@ -12,7 +12,6 @@ import com.example.hotspot.databinding.ActivityCreateProfileBinding
 import com.example.hotspot.viewModel.CreateProfileController
 
 class CreateProfileActivity : AppCompatActivity() {
-//    private lateinit var auth: FirebaseAuth
     private lateinit var createProfileVM : CreateProfileController
     private var progressDialog: ProgressDialog? = null
 
@@ -28,7 +27,6 @@ class CreateProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-//        auth = Firebase.auth
         createProfileVM = CreateProfileController(this,  binding)
 
 
@@ -65,21 +63,9 @@ class CreateProfileActivity : AppCompatActivity() {
             val uri = data.data
             bitMap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
             binding.activityCreateProfileImage.setImageBitmap(bitMap)
-//            val bitMDrawable = BitmapDrawable(bitMap)
-//            binding.activityCreateProfileImage.setBackgroundDrawable(bitMDrawable)
 
         }
     }
-
-    override fun onStart() {
-        super.onStart()
-
-//        val currentUser = auth.currentUser
-//        if(currentUser != null){
-//       //     reload();
-//        }
-    }
-
 
 
 
@@ -88,7 +74,7 @@ class CreateProfileActivity : AppCompatActivity() {
     private fun updateUIOnSuccess() {
 
         progressDialog?.dismiss()
-        Toast.makeText(baseContext, "Successfully profile created.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(baseContext, "Successfully profile created.", Toast.LENGTH_LONG).show()
         val intent = Intent(this, AfterLoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
@@ -99,7 +85,7 @@ class CreateProfileActivity : AppCompatActivity() {
 
     private fun updateUIOnFailure(message: String) {
         progressDialog?.dismiss()
-        Toast.makeText(baseContext, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(baseContext, message, Toast.LENGTH_LONG).show()
     }
 
 

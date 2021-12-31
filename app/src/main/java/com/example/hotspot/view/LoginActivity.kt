@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.activityLoginLoginBtn.setOnClickListener {
             progressDialog!!.show()
-            loginActivityMV.login( {updateUIOnSuccess()}, {updateUIOnFail()} )
+            loginActivityMV.login( {updateUIOnSuccess()}, { msg -> updateUIOnFail(msg)} )
 
             if (binding.activityLoginRememberMe.isChecked){
                 saveLoginInfo()
@@ -175,9 +175,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun updateUIOnFail() {
+    private fun updateUIOnFail(msg: String) {
         progressDialog?.dismiss()
-        Toast.makeText(baseContext, "Login error! ", Toast.LENGTH_SHORT).show()
+        Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
     }
 
 
