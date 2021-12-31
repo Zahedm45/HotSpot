@@ -90,7 +90,7 @@ class Repository {
 
                 val bitmap = user.bitmapImg
                 user.bitmapImg = null
-                user.imgUri = null
+//                user.imgUri = null
 
 
                 db.collection("users").document(fbUser.uid).set(user)
