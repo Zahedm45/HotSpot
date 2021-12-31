@@ -38,10 +38,11 @@
             app:layout_constraintHorizontal_bias="0.078"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/edit_profile_new_name"
+            app:layout_constraintBottom_toTopOf="@id/fragment_edit_profile_edit_picture"
             tools:text="@string/edit_profil">
 
         </TextView>
+
 
         <TextView
             android:id="@+id/fragment_edit_profile_sub_headline"
@@ -64,6 +65,60 @@
         </TextView>
 
 
+
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fragment_edit_profile_edit_picture"
+            android:layout_width="173dp"
+            android:layout_height="159dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/round_profile_pic"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_bias=".1"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_headline_tv"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_edid_profile_change_pic_btn"
+            />
+
+        <Button
+            android:id="@+id/fragment_edid_profile_change_pic_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:minHeight="0dp"
+            android:text="Change picture"
+
+            android:textColor="@color/black"
+            android:textSize="12sp"
+
+            app:layout_constraintBottom_toTopOf="@id/edit_profile_new_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_edit_picture"
+
+            tools:ignore="TouchTargetSizeCheck">
+
+        </Button>
+
+
+
+
+
+
+
+
+
+
+
+
         <EditText
             android:id="@+id/edit_profile_new_name"
             android:layout_width="match_parent"
@@ -80,7 +135,7 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_edit_profile_headline_tv"
+            app:layout_constraintTop_toBottomOf="@id/fragment_edid_profile_change_pic_btn"
             app:layout_constraintBottom_toTopOf="@id/edit_profile_new_email"
 
 
@@ -100,7 +155,7 @@
             android:hint="@string/e_mail"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
-            android:text="Ny email"
+            android:text="Ny email: Not changeable for now!"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -196,12 +251,6 @@
 
 
             />
-
-
-
-
-
-
 
 
 
