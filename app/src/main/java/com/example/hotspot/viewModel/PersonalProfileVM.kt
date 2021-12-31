@@ -44,7 +44,7 @@ class PersonalProfileVM(
 
             val name = snapshot.get("name").toString()
             val age = snapshot.get("age").toString().toInt()
-            val email = snapshot.get("email").toString()
+            val email = snapshot.get("emailAddress").toString()
             val gender = snapshot.get("gender").toString()
             val userName = snapshot.get("userName").toString()
             val bio = snapshot.get("bio").toString()
@@ -58,6 +58,7 @@ class PersonalProfileVM(
             binding.fragmentPersonalProfilePersonName.text = userProfile.name
             binding.fragmentPersonalProfileAge.text = "${userProfile.age} år"
             binding.fragmentPersonalProfileBio.text = userProfile.bio
+            binding.fragmentPersonalProfileEmailTv.text = "Email: ${userProfile.emailAddress}"
 
 
             if (userProfile.bitmapImg != null) {
