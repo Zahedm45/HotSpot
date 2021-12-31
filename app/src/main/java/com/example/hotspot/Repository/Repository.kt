@@ -63,7 +63,10 @@ class Repository {
                     } else {
                         progressDialog!!.dismiss()
                         Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+ //                       Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        if (onFail != null) {
+                            onFail()
+                        }
                     }
                 }
 
@@ -104,8 +107,10 @@ class Repository {
                         fbUser.delete()
                         progressDialog?.dismiss()
                         Log.w(ContentValues.TAG, "Error adding document", e)
-                        Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
-
+ //                       Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
+                        if (onFail != null) {
+                            onFail()
+                        }
                     }
             }
 
@@ -255,7 +260,7 @@ class Repository {
          *
          */
 
-        fun getUpdate(collectionPath: String, strArr: ArrayList<String>) {
+        fun updateUserFieldInDB(collectionPath: String, strArr: ArrayList<String>, onSuccess: (() -> Unit)?, onFail: (() -> Unit)?) {
 
             if (fbUser == null) {
                 Log.i(TAG, "user is null....")
@@ -267,14 +272,45 @@ class Repository {
             when(strArr.size) {
                 2 -> {
                     db.collection(collectionPath).document(fbUser.uid).update(strArr[0], strArr[1])
+                        .addOnSuccessListener {
+                            if (onSuccess != null) {
+                                onSuccess()
+                            }
+                        }
+                        .addOnFailureListener {
+                            if (onFail != null) {
+                                onFail()
+                            }
+                        }
                 }
+
 
                 4 -> {
                     db.collection(collectionPath).document(fbUser.uid).update(strArr[0], strArr[1], strArr[2], strArr[3])
+                        .addOnSuccessListener {
+                            if (onSuccess != null) {
+                                onSuccess()
+                            }
+                        }
+                        .addOnFailureListener {
+                            if (onFail != null) {
+                                onFail()
+                            }
+                        }
                 }
 
                 6 -> {
                     db.collection(collectionPath).document(fbUser.uid).update(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5])
+                        .addOnSuccessListener {
+                            if (onSuccess != null) {
+                                onSuccess()
+                            }
+                        }
+                        .addOnFailureListener {
+                            if (onFail != null) {
+                                onFail()
+                            }
+                        }
                 }
             }
 

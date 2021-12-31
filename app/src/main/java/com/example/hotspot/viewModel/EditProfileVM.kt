@@ -1,10 +1,18 @@
 package com.example.hotspot.viewModel
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Log
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.example.hotspot.R
 import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.FragmentEditProfileBinding
+import com.example.hotspot.model.UserProfile
+import com.example.hotspot.view.PersonalProfile
 
 class EditProfileVM {
 
@@ -12,14 +20,22 @@ class EditProfileVM {
 
         private val repository = Repository
         private lateinit var binding: FragmentEditProfileBinding
-        private val userProfile = PersonalProfileVM.userProfile
+        private lateinit var userProfile: UserProfile
         private var userPic: Bitmap? = PersonalProfileVM.userPic
+        private lateinit var fragment: Fragment
+        private var counter1 = 0
+        private var counter2 = 0
 
 
 
-        fun getUserProfile(binding: FragmentEditProfileBinding) {
 
+        fun getUserProfile(binding: FragmentEditProfileBinding, fragment: Fragment) {
+            this.fragment = fragment
             this.binding = binding
+            userProfile = PersonalProfileVM.userProfile
+
+
+
             binding.editProfileNewName.setText(userProfile.name)
             binding.editProfileNewEmail.setText(userProfile.emailAddress)
             binding.editProfileBioText.setText(userProfile.bio)
@@ -32,16 +48,24 @@ class EditProfileVM {
 
 
 
-        fun updateUserProfile(bitMap: Bitmap?) {
 
+
+        fun updateUserProfile(bitMap: Bitmap?) {
             val password = binding.editProfilePassword.text.toString()
             if (password != userProfile.password) {
+                Toast.makeText(fragment.context, "Koden passe ikke! ", Toast.LENGTH_SHORT).show()
                 return
             }
 
-            if (bitMap != null) {
-                repository.updateUserPicInDB(bitMap, null, null)
 
+
+
+            counter2 = 0
+            counter1 = 0
+
+            if (bitMap != null) {
+                counter1++
+                repository.updateUserPicInDB(bitMap, { increaseCounter() }, null)
 
             }
 
@@ -67,10 +91,57 @@ class EditProfileVM {
                 strArr.add(newBio)
             }
 
-            repository.getUpdate("users", strArr)
+            if (strArr.size > 0) {
+                counter1++
+                repository.updateUserFieldInDB("users", strArr, { increaseCounter()}, null)
+
+            }
+
+
+
+
+
+
+
+//                while (counter2 != counter1) {
+//                    Log.i(TAG, "just $just")
+//                    just++
+//                }
+
+
+
+               // navigateToPersonalProfile()
 
 
         }
+
+
+
+
+        private fun navigateToPersonalProfile() {
+            Toast.makeText(fragment.context, "Successfully saved.", Toast.LENGTH_SHORT).show()
+
+            fragment.view?.let { Navigation.findNavController(it).navigate(R.id.action_editProfile_to_personalProfile) }
+
+
+        }
+
+
+
+        private fun increaseCounter() {
+            Log.i(TAG, "increased is called..")
+            counter2++
+
+            if (counter1 == counter2) {
+                Log.i(TAG, "navigate is called..")
+
+
+                navigateToPersonalProfile()
+            }
+
+        }
+
+
 
     }
 

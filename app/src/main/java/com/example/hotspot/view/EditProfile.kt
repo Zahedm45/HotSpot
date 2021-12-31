@@ -33,7 +33,7 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
-        editProfileVM.getUserProfile(binding)
+        editProfileVM.getUserProfile(binding, this)
 
 
 
