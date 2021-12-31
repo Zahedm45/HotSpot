@@ -179,13 +179,15 @@
 
         <Button
             android:id="@+id/edit_profile_saveChange_btn"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:width="200dp"
             android:backgroundTint="@color/orange"
-            android:text="@string/edit_profil"
-            tools:text="Godkend Ændring"
+            android:text="Godkend Ændring"
+            android:textSize="18sp"
+
+            android:layout_marginBottom="50dp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
