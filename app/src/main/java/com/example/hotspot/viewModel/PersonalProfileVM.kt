@@ -86,7 +86,7 @@ class PersonalProfileVM(
 
 
 
-        private fun setUserPicUI(bytes: ByteArray?) {
+        fun setUserPicUI(bytes: ByteArray?) {
 
             if (bytes == null) {
                 return

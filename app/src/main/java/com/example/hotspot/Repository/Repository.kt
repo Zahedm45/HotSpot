@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.util.Log
 import android.widget.Toast
 import com.example.hotspot.model.User
+import com.example.hotspot.viewModel.PersonalProfileVM
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -52,13 +53,12 @@ class Repository {
             progressDialog!!.setMessage("Loading ...")
             progressDialog!!.show()
 
-            val baseContext = activity.baseContext
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
-                        addProfileToFirebase(activity, user, onSuccess, onFail)
+                        addProfileToFirebase(user, onSuccess, onFail)
 
                     } else {
                         progressDialog!!.dismiss()
@@ -77,7 +77,6 @@ class Repository {
 
 
         private fun addProfileToFirebase(
-            activity: Activity,
             user: User,
             onSuccess: (() -> Unit)?,
             onFail: (() -> Unit)?
@@ -86,7 +85,6 @@ class Repository {
 
 
 
-            val baseContext = activity.baseContext
 
             if (fbUser != null) {
                 Log.w(ContentValues.TAG, "User not found")
@@ -337,9 +335,15 @@ class Repository {
             ref.putBytes(data)
                 .addOnSuccessListener {
 
+                    val ONE_MEGABYTE: Long = 1024 * 1024
+                    ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                        PersonalProfileVM.setUserPicUI(it)
+                    }
+
                     if (onSuccess != null) {
                         onSuccess()
                     }
+
                 }
 
                 .addOnFailureListener {

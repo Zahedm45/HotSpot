@@ -99,20 +99,6 @@ class EditProfileVM {
 
 
 
-
-
-
-
-//                while (counter2 != counter1) {
-//                    Log.i(TAG, "just $just")
-//                    just++
-//                }
-
-
-
-               // navigateToPersonalProfile()
-
-
         }
 
 
