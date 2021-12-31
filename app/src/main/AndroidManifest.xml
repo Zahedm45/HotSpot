@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotSpot">
         <activity
+            android:name=".view.PhoneAuthActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.CreateProfileActivity"
             android:exported="false" />
         <activity

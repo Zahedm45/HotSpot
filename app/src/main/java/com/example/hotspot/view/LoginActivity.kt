@@ -36,9 +36,22 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
+
+
         supportActionBar?.hide()
 
         auth = Firebase.auth
+
+        val user = Firebase.auth.currentUser
+
+        if (user != null) {
+            // User is signed in.
+        } else {
+            val intentPhoneAuth = Intent(this, PhoneAuthActivity::class.java)
+            startActivity(intentPhoneAuth)
+        }
 
         loginActivityMV = LoginActivityVM(this, binding, repository)
 
