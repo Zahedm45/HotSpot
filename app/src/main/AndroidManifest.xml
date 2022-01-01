@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotSpot">
         <activity
-            android:name=".view.createProfile.CreateProfileActivity_v2"
+            android:name=".view.createProfilePackage.ActivityCreateProfile"
             android:exported="false" />
         <!--
             The API key for Google Maps-based APIs is defined as a string resource.

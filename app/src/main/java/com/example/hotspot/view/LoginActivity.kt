@@ -4,17 +4,13 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
 import android.widget.Toast
-import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.ActivityLoginBinding
-import com.example.hotspot.model.LoginInfo
-import com.example.hotspot.view.createProfile.CreateProfileActivity_v2
-import com.example.hotspot.viewModel.DataHolder
+import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.example.hotspot.viewModel.LoginActivityVM
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -47,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
             auth.signOut() //TODO for now to troubleshoot sign up activity.
         } else {
 
-            val intentPhoneAuth = Intent(this, CreateProfileActivity_v2::class.java)
+            val intentPhoneAuth = Intent(this, ActivityCreateProfile::class.java)
             startActivity(intentPhoneAuth)
         }
 

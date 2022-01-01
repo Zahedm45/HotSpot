@@ -8,13 +8,13 @@
         android:background="#f7f7f7"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".view.createProfilePackage.FragmentUploadImage">
+        tools:context=".view.createProfilePackage.FragmentProfileText">
 
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progress="100"
+            android:progress="25"
             />
         <TextView
             android:layout_width="match_parent"
@@ -22,43 +22,45 @@
 
             android:fontFamily="@font/poppins_semibold"
             android:paddingTop="10dp"
-            android:text="Upload a photo"
+            android:text="Show HotSpot\n who you are!"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24sp" />
+        <EditText
+            android:id="@+id/firstNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Profile text..."
+            android:fontFamily="@font/poppins_light"
+            android:textColor="#000"
+            android:layout_marginHorizontal="30dp"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:paddingTop="10dp"
-            android:text="You need one photo \n in order to participate in HotSpots"
+            android:text="Everyone on HotSpot is required to\n write a sentence or two about themselves."
             android:textAlignment="center"
             android:textColor="#c5c5c5"
             android:textSize="12sp"
             android:layout_marginHorizontal="30dp"/>
-        <ImageView
-            android:id="@+id/uploadPhoto"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/person" />
 
         <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/continueButton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/custom_button"
-        android:textColor="#f7f7f7"
-        android:text="Create account"
-        android:textAllCaps="false"
-        />
-
-
-                <ImageView
+            android:id="@+id/continueButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/custom_button"
+            android:textColor="#f7f7f7"
+            android:text="Continue"
+            android:textAllCaps="false"
+            />
+        <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
@@ -69,4 +71,4 @@
 
 
 
-</LinearLayout>
+    </LinearLayout>

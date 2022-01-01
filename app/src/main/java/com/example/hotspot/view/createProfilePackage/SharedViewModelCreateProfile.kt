@@ -1,11 +1,11 @@
-package com.example.hotspot.view.createProfile
+package com.example.hotspot.view.createProfilePackage
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class CreateProfileSharedViewModel : ViewModel() {
+class SharedViewModelCreateProfile : ViewModel() {
     private val _firstName = MutableLiveData<String>()
     private val _profileText = MutableLiveData<String>()
     private val _dateString = MutableLiveData<String>()

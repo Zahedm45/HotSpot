@@ -1,4 +1,4 @@
-package com.example.hotspot.view.createProfile
+package com.example.hotspot.view.createProfilePackage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,9 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityCreateProfileV2Binding
-import com.example.hotspot.databinding.ActivityPhoneAuthBinding
 
-class CreateProfileActivity_v2 : AppCompatActivity() {
+class ActivityCreateProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateProfileV2Binding
 

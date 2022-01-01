@@ -1,4 +1,4 @@
-package com.example.hotspot.view.createProfile
+package com.example.hotspot.view.createProfilePackage
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -9,18 +9,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.hotspot.R
-import com.example.hotspot.databinding.CreateProfileGenderFragmentBinding
 import com.example.hotspot.databinding.FragmentCreateProfileUploadImageBinding
 
 
-class CreateProfileUploadImageFragment : Fragment() {
+class FragmentUploadImage : Fragment() {
 
-    private val viewModel: CreateProfileSharedViewModel by activityViewModels()
+    private val viewModel: SharedViewModelCreateProfile by activityViewModels()
     private var _binding: FragmentCreateProfileUploadImageBinding? = null
     private val binding get() = _binding!!
 
