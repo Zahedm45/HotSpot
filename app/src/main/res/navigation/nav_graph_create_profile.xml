@@ -20,5 +20,27 @@
         android:id="@+id/createProfileAgeFragment"
         android:name="com.example.hotspot.view.createProfile.CreateProfileAgeFragment"
         android:label="create_profile_age_fragment"
-        tools:layout="@layout/create_profile_age_fragment" />
+        tools:layout="@layout/create_profile_age_fragment" >
+        <action
+            android:id="@+id/action_createProfileAgeFragment_to_createProfileGenderFragment"
+            app:destination="@id/createProfileGenderFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/createProfileGenderFragment"
+        android:name="com.example.hotspot.view.createProfile.CreateProfileGenderFragment"
+        android:label="create_profile_gender_fragment"
+        tools:layout="@layout/create_profile_gender_fragment" >
+        <action
+            android:id="@+id/action_createProfileGenderFragment_to_createProfileUploadImageFragment"
+            app:destination="@id/createProfileUploadImageFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/createProfileUploadImageFragment"
+        android:name="com.example.hotspot.view.createProfile.CreateProfileUploadImageFragment"
+        android:label="fragment_create_profile_upload_image"
+        tools:layout="@layout/fragment_create_profile_upload_image" />
 </navigation>
