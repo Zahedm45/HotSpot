@@ -26,6 +26,9 @@ class CreateProfileAgeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = CreateProfileAgeFragmentBinding.inflate(inflater, container, false)
+        binding.dateButton.setOnClickListener{
+            initDatePicker()
+        }
         return binding.root
     }
 
@@ -36,10 +39,16 @@ class CreateProfileAgeFragment : Fragment() {
     }
 
     private fun initDatePicker(){
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)+1
+        val day = c.get(Calendar.DAY_OF_MONTH)
 
+        val dpd = DatePickerDialog(this.requireContext(), DatePickerDialog.OnDateSetListener { view, myear, mmonth, mdayOfMonth ->
+            binding.dateButton.setText("" + mdayOfMonth + "/" + mmonth +"/" + myear)
+        }, year, month, day)
+
+        dpd.show()
     }
 
-    private fun openDatePicker(){
-
-    }
 }
