@@ -54,6 +54,10 @@ class CreateProfileAgeFragment : Fragment() {
             viewModel.setYear(cyear)
         }
 
+        viewModel.getDateString().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            binding.dateButton.text = it.toString()
+        })
+
 
 
     }
@@ -61,26 +65,9 @@ class CreateProfileAgeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        var stringDay : String = "a"
-        var stringMonth : String = "b"
-        var stringYear : String = "c"
 
-        viewModel.getDayOfBirth().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            stringDay = it.toString()
-            if( stringDay.length == 1) stringDay = "0" + stringDay
-        })
-        //TODO there seems to be a delay in the observer.. fix later.
-        viewModel.getMonth().observe(viewLifecycleOwner,
-            androidx.lifecycle.Observer {
-                stringMonth = it.toString()
-                if( stringMonth.length == 1) stringMonth = "0" + stringMonth
-            })
 
-        viewModel.getYear().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            stringYear = it.toString()
-            val actualString = "" + stringDay + "/" + stringMonth + "/" + stringYear
-            binding.dateButton.text = actualString
-        })
+
     }
 
     private fun initDatePicker(){
@@ -92,18 +79,9 @@ class CreateProfileAgeFragment : Fragment() {
         val dpd = DatePickerDialog(this.requireContext(), DatePickerDialog.OnDateSetListener { view, myear, mMonth, mdayOfMonth ->
             val mmonth = mMonth +1
             setDateForDatabase(mdayOfMonth,mmonth,myear)
-
-            if(mmonth < 10 && mdayOfMonth< 10) {
-                binding.dateButton.setText("0" + mdayOfMonth + "/0" + mmonth + "/" + myear)
-            }
-            else if(mmonth < 10 ){
-                binding.dateButton.setText("" + mdayOfMonth + "/0" + mmonth + "/" + myear)
-            }
-            else if(mdayOfMonth < 10){
-                binding.dateButton.setText("0" + mdayOfMonth + "/" + mmonth + "/" + myear)
-            }
-            else
-            binding.dateButton.setText("" + mdayOfMonth + "/" + mmonth + "/" + myear)
+            val dateString = setDateString(mdayOfMonth, mmonth,myear)
+            binding.dateButton.setText(dateString)
+            viewModel.setdateString(dateString)
         }, year, month, day)
 
         dpd.show()
@@ -113,6 +91,21 @@ class CreateProfileAgeFragment : Fragment() {
         cday = xday
         cmonth = xmonth
         cyear = xyear
+    }
+
+    private fun setDateString(day : Int, month : Int, year : Int): String{
+        if(month < 10 && day< 10) {
+            return "0$day/0$month/$year"
+        }
+        else if(month < 10 ){
+            return "$day/0$month/$year"
+        }
+        else if(day < 10){
+            return "0$day/$month/$year"
+        }
+        else
+            return "$day/$month/$year"
+        return "null"
     }
 
 }
