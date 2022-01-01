@@ -1,16 +1,15 @@
 package com.example.hotspot.view
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import androidx.appcompat.app.AppCompatActivity
+import com.example.hotspot.other.UtilView
 import com.example.hotspot.viewModel.PersonalProfileVM
 
 
@@ -58,6 +57,27 @@ class PersonalProfile : Fragment(),View.OnClickListener {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.nav_top_menu, menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        UtilView.menuOptionClick(item, requireActivity())
+        return super.onOptionsItemSelected(item)
     }
 
 

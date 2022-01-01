@@ -13,6 +13,9 @@ import android.view.*
 import androidx.core.content.ContextCompat
 import com.example.hotspot.R
 import com.example.hotspot.other.Constants.PERMISSION_REQUEST_CODE
+import com.example.hotspot.other.UtilView
+import com.example.hotspot.other.UtilView.menuOptionClick
+import com.example.hotspot.other.UtilView.navigateToLoginPage
 import com.example.hotspot.other.UtilityMap
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -148,14 +151,17 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-
         if (Firebase.auth.uid == null) {
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
+        setHasOptionsMenu(true)
+
     }
+
+
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -164,26 +170,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-
-        when (item.itemId) {
-            R.id.menu_sign_out -> {
-                Firebase.auth.signOut()
-                navigateToLoginPage()
-            }
-            // more to be added..
-        }
+        menuOptionClick(item, requireActivity())
         return super.onOptionsItemSelected(item)
     }
 
 
 
-    private fun navigateToLoginPage() {
-        val intent = Intent(requireActivity(), LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
 
-    }
 
 
 
