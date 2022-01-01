@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.CreateProfileAgeFragmentBinding
@@ -20,7 +22,7 @@ class CreateProfileAgeFragment : Fragment() {
 
     private lateinit var datePicker: DatePickerDialog
 
-    private lateinit var viewModel: CreateProfileSharedViewModel
+    private val viewModel: CreateProfileSharedViewModel by activityViewModels()
 
     private var cday: Int = 0
     private var cmonth: Int = 0
@@ -43,7 +45,7 @@ class CreateProfileAgeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreateProfileSharedViewModel::class.java)
+
 
         binding.dateButton.setOnClickListener{
             initDatePicker()
@@ -51,6 +53,13 @@ class CreateProfileAgeFragment : Fragment() {
             viewModel.setMonth(cmonth)
             viewModel.setYear(cyear)
         }
+
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         var stringDay : String = "a"
         var stringMonth : String = "b"
@@ -72,7 +81,6 @@ class CreateProfileAgeFragment : Fragment() {
             val actualString = "" + stringDay + "/" + stringMonth + "/" + stringYear
             binding.dateButton.text = actualString
         })
-
     }
 
     private fun initDatePicker(){

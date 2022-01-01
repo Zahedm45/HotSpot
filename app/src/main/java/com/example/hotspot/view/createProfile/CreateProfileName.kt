@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
@@ -14,7 +15,7 @@ import com.example.hotspot.databinding.CreateProfileNameFragmentBinding
 class CreateProfileName : Fragment() {
 
 
-    private lateinit var viewModel: CreateProfileSharedViewModel
+    private val viewModel: CreateProfileSharedViewModel by activityViewModels()
 
     private var _binding: CreateProfileNameFragmentBinding? = null
     private val binding get() = _binding!!
@@ -30,7 +31,7 @@ class CreateProfileName : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreateProfileSharedViewModel::class.java)
+
 
         binding.continueButton.setOnClickListener{
             val a : String

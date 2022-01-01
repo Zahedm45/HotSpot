@@ -12,7 +12,7 @@ class CreateProfileSharedViewModel : ViewModel() {
     private val _monthOfBirth = MutableLiveData<Int>()
     private val _yearOfBirth = MutableLiveData<Int>()
     private val _gender = MutableLiveData<String>()
-    private val _image = MutableLiveData<Uri>()
+    private val _image = MutableLiveData<Uri?>()
 
     //Getters BEGIN
     fun getFirstName() : LiveData<String> {
@@ -39,7 +39,7 @@ class CreateProfileSharedViewModel : ViewModel() {
         return _gender
     }
 
-    fun getImage() : LiveData<Uri> {
+    fun getImage() : LiveData<Uri?> {
         return _image
     }
     // Getters END
@@ -70,7 +70,7 @@ class CreateProfileSharedViewModel : ViewModel() {
         _gender.value = gender
     }
 
-    fun setImageUri(uriCode : Uri){
+    fun setImageUri(uriCode : Uri?){
         _image.value = uriCode
     }
 

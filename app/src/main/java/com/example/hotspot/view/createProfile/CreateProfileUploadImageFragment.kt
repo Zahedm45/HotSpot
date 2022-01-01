@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.hotspot.R
 import com.example.hotspot.databinding.CreateProfileGenderFragmentBinding
@@ -17,7 +20,7 @@ import com.example.hotspot.databinding.FragmentCreateProfileUploadImageBinding
 
 class CreateProfileUploadImageFragment : Fragment() {
 
-    private lateinit var viewModel: CreateProfileSharedViewModel
+    private val viewModel: CreateProfileSharedViewModel by activityViewModels()
     private var _binding: FragmentCreateProfileUploadImageBinding? = null
     private val binding get() = _binding!!
 
@@ -39,19 +42,41 @@ class CreateProfileUploadImageFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+
         if (resultCode == RESULT_OK && requestCode == pickImage) {
             imageUri = data?.data
             binding.uploadPhoto.setImageURI(imageUri)
+            if(imageUri != null)
+            viewModel.setImageUri(imageUri)
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreateProfileSharedViewModel::class.java)
 
 
+        viewModel.getImage().observe(viewLifecycleOwner, Observer {
+            binding.uploadPhoto.setImageURI(it)
+            //Toast.makeText(this.requireContext(),"test", Toast.LENGTH_SHORT).show()
+        })
+    }
 
-        // TODO: Use the ViewModel
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(this.requireContext(),viewModel.getFirstName().value.toString(), Toast.LENGTH_SHORT).show()
+        //binding.uploadPhoto.setImageURI(viewModel.getImage().value)
+        viewModel.getImage().observe(viewLifecycleOwner,  {
+            binding.uploadPhoto.setImageURI(it)
+            //Toast.makeText(this.requireContext(),"test", Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getImage().observe(viewLifecycleOwner, Observer {
+            binding.uploadPhoto.setImageURI(it)
+        })
     }
 
 
