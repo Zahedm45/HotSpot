@@ -55,6 +55,7 @@
         <entry key="app/src/main/res/layout/fragment_personal_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/menu/nav_top_menu.xml" value="0.37604166666666666" />
       </map>
     </option>
   </component>

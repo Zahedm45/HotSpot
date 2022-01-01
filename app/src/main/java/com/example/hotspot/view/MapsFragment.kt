@@ -3,14 +3,13 @@ package com.example.hotspot.view
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.ContextCompat
 import com.example.hotspot.R
 import com.example.hotspot.other.Constants.PERMISSION_REQUEST_CODE
@@ -23,6 +22,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -145,9 +146,44 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+
+        if (Firebase.auth.uid == null) {
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.nav_top_menu, menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+
+        when (item.itemId) {
+            R.id.menu_sign_out -> {
+                Firebase.auth.signOut()
+                navigateToLoginPage()
+            }
+            // more to be added..
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 
 
+    private fun navigateToLoginPage() {
+        val intent = Intent(requireActivity(), LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+
+    }
 
 
 

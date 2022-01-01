@@ -31,7 +31,6 @@ class PersonalProfileVM(
                 binding.fragmentPersonalProfilePicture.setImageBitmap(userPic)
             }
 
-
             repository.getUserProfile { snapshot -> updateProfileUI(snapshot) }
         }
 
