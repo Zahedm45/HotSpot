@@ -1,8 +1,6 @@
 package com.example.hotspot.other
 
-import android.Manifest
 import android.content.Context
-import android.os.Build
 import pub.devrel.easypermissions.EasyPermissions
 
 object UtilityMap {

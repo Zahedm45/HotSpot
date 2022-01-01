@@ -1,8 +1,9 @@
 package com.example.hotspot.view
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
-import android.os.Build
+import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -10,12 +11,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.example.hotspot.R
 import com.example.hotspot.other.Constants.PERMISSION_REQUEST_CODE
 import com.example.hotspot.other.UtilityMap
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -27,7 +30,8 @@ import pub.devrel.easypermissions.EasyPermissions
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 // https://www.youtube.com/watch?v=6CTIvIAHjrU
 
-    lateinit var fussedLPC: FusedLocationProviderClient
+    lateinit var mMap: GoogleMap
+    var fussedLPC: FusedLocationProviderClient? = null
 
 
     override fun onCreateView(
@@ -44,12 +48,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-
-
         fussedLPC = LocationServices.getFusedLocationProviderClient(requireContext())
+
+
         requestLocPermission()
 
 
@@ -66,7 +67,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         if (location != null) {
             googleMap.addMarker(MarkerOptions().position(location!!).title("Marker in DTU"))
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 11f))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 10f))
         }
 
     }
@@ -74,10 +75,31 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
     private fun requestLocPermission() {
+
+
+
+
+
+
+
+
+
+
         if(UtilityMap.hasLocationPermission(requireContext())) {
 
+
             Log.i(TAG, "You got it...")
-            val task = fussedLPC.lastLocation
+
+
+
+            val i =  ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            val i2 = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+
+            if(i == PackageManager.PERMISSION_GRANTED && i2 == PackageManager.PERMISSION_GRANTED ) {
+
+
+
+                val task = fussedLPC!!.lastLocation
                 task.addOnSuccessListener {
 
                     Log.i(TAG, "You got it... ${it.latitude} and ${it.longitude}.")
@@ -89,7 +111,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
                 }
 
-            return
+            }
+
+
+
+
 
         } else {
 
@@ -102,15 +128,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             )
         }
 
-
-
-
-//        task.addOnSuccessListener {
-//
-//            if (it != null) {
-//
-//            }
-//        }
 
     }
 
