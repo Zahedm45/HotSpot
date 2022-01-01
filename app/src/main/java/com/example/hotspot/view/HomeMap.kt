@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import com.example.hotspot.R
 
@@ -15,8 +16,9 @@ class HomeMap : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home_map, container, false)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Hotspots"
+
 
 //        view.findViewById<ImageButton>(R.id.mapImage).setOnClickListener {
 //

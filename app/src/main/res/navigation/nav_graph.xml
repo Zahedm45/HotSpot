@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/afterLogin_map">
+    app:startDestination="@id/mapsFragment">
 
 
     <fragment
@@ -37,7 +37,15 @@
         android:id="@+id/editProfile"
         android:name="com.example.hotspot.view.EditProfile"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfile_to_personalProfile"
+            app:destination="@id/personalProfile" />
+    </fragment>
+
+
+
+
     <fragment
         android:id="@+id/favorites"
         android:name="com.example.hotspot.view.Favorites"
@@ -92,4 +100,9 @@
         tools:layout="@layout/fragment_home_map" >
 
     </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.hotspot.view.MapsFragment"
+        android:label="fragment_maps4"
+        tools:layout="@layout/fragment_maps4" />
 </navigation>

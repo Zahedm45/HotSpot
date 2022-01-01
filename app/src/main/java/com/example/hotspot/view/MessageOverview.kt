@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -19,8 +20,10 @@ class MessageOverview : Fragment(), View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message_overview, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_message_overview, container, false)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Messages"
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
