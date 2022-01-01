@@ -22,14 +22,16 @@ class CreateProfileAgeFragment : Fragment() {
 
     private lateinit var viewModel: CreateProfileSharedViewModel
 
+    private var cday: Int = 0
+    private var cmonth: Int = 0
+    private var cyear: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = CreateProfileAgeFragmentBinding.inflate(inflater, container, false)
-        binding.dateButton.setOnClickListener{
-            initDatePicker()
-        }
+
 
         binding.continueButton.setOnClickListener{
             findNavController().navigate(R.id.action_createProfileAgeFragment_to_createProfileGenderFragment)
@@ -42,7 +44,35 @@ class CreateProfileAgeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CreateProfileSharedViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        binding.dateButton.setOnClickListener{
+            initDatePicker()
+            viewModel.setDayOfBirth(cday)
+            viewModel.setMonth(cmonth)
+            viewModel.setYear(cyear)
+        }
+
+        var stringDay : String = "a"
+        var stringMonth : String = "b"
+        var stringYear : String = "c"
+
+        viewModel.getDayOfBirth().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            stringDay = it.toString()
+            if( stringDay.length == 1) stringDay = "0" + stringDay
+        })
+        //TODO there seems to be a delay in the observer.. fix later.
+        viewModel.getMonth().observe(viewLifecycleOwner,
+            androidx.lifecycle.Observer {
+                stringMonth = it.toString()
+                if( stringMonth.length == 1) stringMonth = "0" + stringMonth
+            })
+
+        viewModel.getYear().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            stringYear = it.toString()
+            val actualString = "" + stringDay + "/" + stringMonth + "/" + stringYear
+            binding.dateButton.text = actualString
+        })
+
     }
 
     private fun initDatePicker(){
@@ -53,6 +83,7 @@ class CreateProfileAgeFragment : Fragment() {
 
         val dpd = DatePickerDialog(this.requireContext(), DatePickerDialog.OnDateSetListener { view, myear, mMonth, mdayOfMonth ->
             val mmonth = mMonth +1
+            setDateForDatabase(mdayOfMonth,mmonth,myear)
 
             if(mmonth < 10 && mdayOfMonth< 10) {
                 binding.dateButton.setText("0" + mdayOfMonth + "/0" + mmonth + "/" + myear)
@@ -68,6 +99,12 @@ class CreateProfileAgeFragment : Fragment() {
         }, year, month, day)
 
         dpd.show()
+    }
+
+    private fun setDateForDatabase(xday : Int, xmonth : Int, xyear : Int){
+        cday = xday
+        cmonth = xmonth
+        cyear = xyear
     }
 
 }

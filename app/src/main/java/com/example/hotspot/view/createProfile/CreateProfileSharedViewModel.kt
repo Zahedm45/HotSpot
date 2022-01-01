@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel
 class CreateProfileSharedViewModel : ViewModel() {
     private val _firstName = MutableLiveData<String>()
     private val _profileText = MutableLiveData<String>()
-    private val _age = MutableLiveData<Int>()
+    private val _dayOfBirth = MutableLiveData<Int>()
+    private val _monthOfBirth = MutableLiveData<Int>()
+    private val _yearOfBirth = MutableLiveData<Int>()
     private val _gender = MutableLiveData<String>()
     private val _image = MutableLiveData<Uri>()
 
@@ -21,8 +23,16 @@ class CreateProfileSharedViewModel : ViewModel() {
         return _profileText
     }
 
-    fun getAge() : LiveData<Int> {
-        return _age
+    fun getDayOfBirth() : LiveData<Int> {
+        return _dayOfBirth
+    }
+
+    fun getMonth() : LiveData<Int> {
+        return _monthOfBirth
+    }
+
+    fun getYear() : LiveData<Int> {
+        return _yearOfBirth
     }
 
     fun getGender() : LiveData<String> {
@@ -44,8 +54,16 @@ class CreateProfileSharedViewModel : ViewModel() {
         _profileText.value = profileText
     }
 
-    fun setAge(age : Int){
-        _age.value = age
+    fun setDayOfBirth(day : Int){
+        _dayOfBirth.value = day
+    }
+
+    fun setMonth(age : Int){
+        _monthOfBirth.value = age
+    }
+
+    fun setYear(age : Int){
+        _yearOfBirth.value = age
     }
 
     fun setGender(gender : String){
