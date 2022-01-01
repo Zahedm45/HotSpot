@@ -48,7 +48,9 @@ class LoginActivity : AppCompatActivity() {
 
         if (user != null) {
             // User is signed in.
+            auth.signOut() //TODO for now to troubleshoot sign up activity.
         } else {
+
             val intentPhoneAuth = Intent(this, PhoneAuthActivity::class.java)
             startActivity(intentPhoneAuth)
         }
