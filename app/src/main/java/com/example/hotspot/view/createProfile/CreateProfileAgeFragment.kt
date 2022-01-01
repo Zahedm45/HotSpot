@@ -20,7 +20,7 @@ class CreateProfileAgeFragment : Fragment() {
 
     private lateinit var datePicker: DatePickerDialog
 
-    private lateinit var viewModel: CreateProfileAgeViewModel
+    private lateinit var viewModel: CreateProfileSharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,7 @@ class CreateProfileAgeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreateProfileAgeViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CreateProfileSharedViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

@@ -13,7 +13,7 @@ import com.example.hotspot.databinding.CreateProfileGenderFragmentBinding
 
 class CreateProfileGenderFragment : Fragment() {
 
-    private lateinit var viewModel: CreateProfileGenderViewModel
+    private lateinit var viewModel: CreateProfileSharedViewModel
 
     private var _binding: CreateProfileGenderFragmentBinding? = null
     private val binding get() = _binding!!
@@ -36,7 +36,7 @@ class CreateProfileGenderFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreateProfileGenderViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(CreateProfileSharedViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
