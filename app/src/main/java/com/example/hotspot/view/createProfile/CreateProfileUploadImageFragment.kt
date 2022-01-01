@@ -64,7 +64,6 @@ class CreateProfileUploadImageFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Toast.makeText(this.requireContext(),viewModel.getFirstName().value.toString(), Toast.LENGTH_SHORT).show()
         //binding.uploadPhoto.setImageURI(viewModel.getImage().value)
         viewModel.getImage().observe(viewLifecycleOwner,  {
             binding.uploadPhoto.setImageURI(it)
