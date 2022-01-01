@@ -29,6 +29,8 @@ class CreateProfileAgeFragment : Fragment() {
         binding.dateButton.setOnClickListener{
             initDatePicker()
         }
+
+
         return binding.root
     }
 
@@ -41,11 +43,23 @@ class CreateProfileAgeFragment : Fragment() {
     private fun initDatePicker(){
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)+1
+        val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        val dpd = DatePickerDialog(this.requireContext(), DatePickerDialog.OnDateSetListener { view, myear, mmonth, mdayOfMonth ->
-            binding.dateButton.setText("" + mdayOfMonth + "/" + mmonth +"/" + myear)
+        val dpd = DatePickerDialog(this.requireContext(), DatePickerDialog.OnDateSetListener { view, myear, mMonth, mdayOfMonth ->
+            val mmonth = mMonth +1
+
+            if(mmonth < 10 && mdayOfMonth< 10) {
+                binding.dateButton.setText("0" + mdayOfMonth + "/0" + mmonth + "/" + myear)
+            }
+            else if(mmonth < 10 ){
+                binding.dateButton.setText("" + mdayOfMonth + "/0" + mmonth + "/" + myear)
+            }
+            else if(mdayOfMonth < 10){
+                binding.dateButton.setText("0" + mdayOfMonth + "/" + mmonth + "/" + myear)
+            }
+            else
+            binding.dateButton.setText("" + mdayOfMonth + "/" + mmonth + "/" + myear)
         }, year, month, day)
 
         dpd.show()
