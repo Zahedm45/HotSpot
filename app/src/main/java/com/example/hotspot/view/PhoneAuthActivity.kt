@@ -21,6 +21,8 @@ class PhoneAuthActivity : AppCompatActivity() {
     private lateinit var mCallBacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private lateinit var firebaseAuth: FirebaseAuth
 
+    private lateinit var verifyID: String
+
     private val TAG = "MAIN_TAG"
 
     private lateinit var progressDialog: ProgressBar
@@ -43,11 +45,14 @@ class PhoneAuthActivity : AppCompatActivity() {
                 //this callback will be invoked in two situations:
                 // 1: Instantly verified: In some cases, phone can automatically verify phone number
                 // 2: Auto-retrieval: One some devices Google Play might be able to auto verify.
+                errorToast("Verification success. Attempting to sign in.")
+                signInWithPhoneAuthCredential(phoneAuthCredential)
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
                 // called when an invalid request i made.
                 // for example if an invalid phone number is entered.
+                Log.w(TAG, "onVerificationFailed", e)
                 binding.progressBar.visibility = View.GONE
                 binding.phoneAuthContinueButton.visibility = View.VISIBLE
                 errorToast("Invalid phone number.")
@@ -56,7 +61,14 @@ class PhoneAuthActivity : AppCompatActivity() {
             override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                 //This method is called if code has been succesfully sent.
                 // User should now be notified to enter the code.
+                verifyID = verificationId
+                forceResendtingToken = token
                 errorToast("Code sent.")
+                binding.enterVerificationLinearLayout.visibility = View.VISIBLE
+                binding.enterNumberLinearLayout.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
+
+
             }
         }
 
@@ -66,11 +78,12 @@ class PhoneAuthActivity : AppCompatActivity() {
         }
 
         binding.submitButton.setOnClickListener{
-
+            verifyPhoneNumberWithCode(verifyID, binding.verifyCodeTextEdit.text.toString().trim())
         }
 
         binding.resendText.setOnClickListener{
-
+            val phoneNumber = binding.phoneNumberEditText.text.toString().trim()
+            resendVerificationCode(phoneNumber, forceResendtingToken)
         }
 
     }
@@ -92,23 +105,27 @@ class PhoneAuthActivity : AppCompatActivity() {
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
 
-    private fun resendVerificationCode(phoneNumber: String, token: PhoneAuthProvider.ForceResendingToken){
-        binding.progressBar.visibility = View.VISIBLE
-        binding.phoneAuthContinueButton.visibility = View.GONE
-
-        val options = PhoneAuthOptions.newBuilder(firebaseAuth)
-            .setPhoneNumber(phoneNumber)
-            .setTimeout(60L,TimeUnit.SECONDS)
-            .setActivity(this)
-            .setCallbacks(mCallBacks)
-            .setForceResendingToken(token)
-            .build()
-        PhoneAuthProvider.verifyPhoneNumber(options)
+    // [START resend_verification]
+    private fun resendVerificationCode(
+        phoneNumber: String,
+        token: PhoneAuthProvider.ForceResendingToken?
+    ) {
+        val optionsBuilder = PhoneAuthOptions.newBuilder(firebaseAuth)
+            .setPhoneNumber(phoneNumber)       // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(this)                 // Activity (for callback binding)
+            .setCallbacks(mCallBacks)          // OnVerificationStateChangedCallbacks
+        if (token != null) {
+            optionsBuilder.setForceResendingToken(token) // callback's ForceResendingToken
+        }
+        PhoneAuthProvider.verifyPhoneNumber(optionsBuilder.build())
     }
+    // [END resend_verification]
 
     private fun verifyPhoneNumberWithCode(verificationId: String?, code: String){
         // [START verify_with_code]
         val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
+        signInWithPhoneAuthCredential(credential)
         // [END verify_with_code]
     }
 
@@ -125,6 +142,7 @@ class PhoneAuthActivity : AppCompatActivity() {
                     // Sign in failed, display a message and update the UI
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        errorToast("Invalid verification code.")
                         // The verification code entered was invalid
                     }
                     // Update UI
