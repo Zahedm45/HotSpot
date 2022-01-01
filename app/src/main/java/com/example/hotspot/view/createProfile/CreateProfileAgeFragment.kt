@@ -30,6 +30,10 @@ class CreateProfileAgeFragment : Fragment() {
             initDatePicker()
         }
 
+        binding.continueButton.setOnClickListener{
+
+        }
+
 
         return binding.root
     }
