@@ -5,9 +5,6 @@ import pub.devrel.easypermissions.EasyPermissions
 
 object UtilityMap {
 
-// https://www.youtube.com/watch?v=6CTIvIAHjrU
-
-
     fun hasLocationPermission(context: Context) =
 
         EasyPermissions.hasPermissions(

@@ -28,10 +28,11 @@ import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
-// https://www.youtube.com/watch?v=6CTIvIAHjrU
 
     lateinit var mMap: GoogleMap
     var fussedLPC: FusedLocationProviderClient? = null
+    var location:  LatLng? = null
+
 
 
     override fun onCreateView(
@@ -57,59 +58,44 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
-    var location:  LatLng? = null
 
 
 
     private val callback = OnMapReadyCallback { googleMap ->
 
         //val dtu = LatLng(55.784110, 12.517820)
-
         if (location != null) {
-            googleMap.addMarker(MarkerOptions().position(location!!).title("Marker in DTU"))
+            googleMap.addMarker(MarkerOptions().position(location!!).title("Your current location"))
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 10f))
         }
 
     }
 
 
-
     private fun requestLocPermission() {
-
-
-
-
-
-
-
-
 
 
         if(UtilityMap.hasLocationPermission(requireContext())) {
 
+            val la1 =  ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            val la2 = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
 
-            Log.i(TAG, "You got it...")
+            if(la1 != PackageManager.PERMISSION_GRANTED && la2 != PackageManager.PERMISSION_GRANTED ) {
+                // this should not be true
+                Log.i(TAG, "Location access is denied")
+                return
 
+            }
 
+            val task = fussedLPC!!.lastLocation
+            task.addOnSuccessListener {
 
-            val i =  ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-            val i2 = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                Log.i(TAG, "Here is user location... ${it.latitude} and ${it.longitude}.")
 
-            if(i == PackageManager.PERMISSION_GRANTED && i2 == PackageManager.PERMISSION_GRANTED ) {
+                location = LatLng(it.latitude, it.longitude)
 
-
-
-                val task = fussedLPC!!.lastLocation
-                task.addOnSuccessListener {
-
-                    Log.i(TAG, "You got it... ${it.latitude} and ${it.longitude}.")
-
-                    location = LatLng(it.latitude, it.longitude)
-
-                    val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-                    mapFragment?.getMapAsync(callback)
-
-                }
+                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+                mapFragment?.getMapAsync(callback)
 
             }
 
