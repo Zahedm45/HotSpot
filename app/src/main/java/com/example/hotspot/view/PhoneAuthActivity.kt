@@ -31,7 +31,7 @@ class PhoneAuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPhoneAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar?.hide()
         binding.enterVerificationLinearLayout.visibility = View.GONE
         binding.progressBar.visibility = View.GONE
 

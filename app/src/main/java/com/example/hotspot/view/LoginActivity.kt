@@ -13,8 +13,10 @@ import android.widget.Toast
 import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.model.LoginInfo
+import com.example.hotspot.view.createProfile.CreateProfileActivity_v2
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.LoginActivityVM
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -45,11 +47,11 @@ class LoginActivity : AppCompatActivity() {
             auth.signOut() //TODO for now to troubleshoot sign up activity.
         } else {
 
-            val intentPhoneAuth = Intent(this, PhoneAuthActivity::class.java)
+            val intentPhoneAuth = Intent(this, CreateProfileActivity_v2::class.java)
             startActivity(intentPhoneAuth)
         }
 
-        loginActivityMV = LoginActivityVM(this, binding, repository)
+        loginActivityMV = LoginActivityVM(this, binding)
 
         loadLoginInfo()
 
