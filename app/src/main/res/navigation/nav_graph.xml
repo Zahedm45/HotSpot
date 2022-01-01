@@ -93,13 +93,7 @@
             app:destination="@id/chat" />
     </fragment>
 
-    <fragment
-        android:id="@+id/afterLogin_map"
-        android:name="com.example.hotspot.view.HomeMap"
-        android:label="fragment_home_map"
-        tools:layout="@layout/fragment_home_map" >
 
-    </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.hotspot.view.MapsFragment"
