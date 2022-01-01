@@ -60,7 +60,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-
     private val callback = OnMapReadyCallback { googleMap ->
 
         //val dtu = LatLng(55.784110, 12.517820)
