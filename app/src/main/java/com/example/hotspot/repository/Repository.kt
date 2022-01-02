@@ -22,7 +22,6 @@ class Repository {
 
        // private val auth = Firebase.auth
        // private val fbUser = Firebase.auth.currentUser
-        @SuppressLint("StaticFieldLeak")
         //private val db = Firebase.firestore
 
 
