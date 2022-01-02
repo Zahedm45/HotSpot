@@ -67,13 +67,16 @@
             android:indeterminate="true"
             android:progress="1" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/phoneAuthContinueButton"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/custom_button"
+            android:textColor="#f7f7f7"
             android:text="Continue"
+            android:textAllCaps="false"
 
             />
 
@@ -118,13 +121,16 @@
             android:textColorHint="#c5c5c5"
             />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/submitButton"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/custom_button"
+            android:textColor="#f7f7f7"
             android:text="Submit code"
+            android:textAllCaps="false"
             />
         <TextView
             android:id="@+id/resendText"

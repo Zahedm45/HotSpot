@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "119711614320",
+    "firebase_url": "https://hotspot-onmyown-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "hotspot-onmyown",
     "storage_bucket": "hotspot-onmyown.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "119711614320-mbgbmp7dshmi6a5om28r0rin7nf5lej7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hotspot",
+            "certificate_hash": "314af68c3bbca890e782e92db8e68c07150646c6"
+          }
+        },
         {
           "client_id": "119711614320-l3bqj4rm0u08md49s7l1tmv247uel9pd.apps.googleusercontent.com",
           "client_type": 3

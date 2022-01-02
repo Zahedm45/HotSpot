@@ -1,6 +1,7 @@
 package com.example.hotspot.view
 
 import android.app.ProgressDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
+import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import java.util.concurrent.TimeUnit
@@ -73,6 +75,10 @@ class PhoneAuthActivity : AppCompatActivity() {
         }
 
         binding.phoneAuthContinueButton.setOnClickListener{
+            if(binding.phoneNumberEditText.text.isEmpty()){
+                Toast.makeText(this,"Please enter a phone number.",Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             val phoneNumber = binding.phoneNumberEditText.text.toString().trim()
             startPhoneNumberVerification(phoneNumber)
         }
@@ -136,8 +142,9 @@ class PhoneAuthActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-
                     val user = task.result?.user
+                    val intentCreateProfile = Intent(this, ActivityCreateProfile::class.java)
+                    startActivity(intentCreateProfile)
                 } else {
                     // Sign in failed, display a message and update the UI
                     Log.w(TAG, "signInWithCredential:failure", task.exception)

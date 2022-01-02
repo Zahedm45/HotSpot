@@ -96,7 +96,7 @@
         android:layout_margin="30dp"
         android:backgroundTint="@color/orange"
         android:ems="8"
-        android:text="@string/create_profile"
+        android:text="Sign up"
         android:textSize="12dp" />
 
 

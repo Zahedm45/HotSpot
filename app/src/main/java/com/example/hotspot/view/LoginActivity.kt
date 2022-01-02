@@ -43,8 +43,7 @@ class LoginActivity : AppCompatActivity() {
             auth.signOut() //TODO for now to troubleshoot sign up activity.
         } else {
 
-            val intentPhoneAuth = Intent(this, ActivityCreateProfile::class.java)
-            startActivity(intentPhoneAuth)
+
         }
 
         loginActivityMV = LoginActivityVM(this, binding)
@@ -52,8 +51,8 @@ class LoginActivity : AppCompatActivity() {
         loadLoginInfo()
 
         binding.activityLoginCreateProfileBtn.setOnClickListener {
-            val intent = Intent(this, CreateProfileActivity::class.java)
-            startActivity(intent)
+            val intentPhoneAuth = Intent(this, PhoneAuthActivity::class.java)
+            startActivity(intentPhoneAuth)
         }
 
 

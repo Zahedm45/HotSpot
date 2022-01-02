@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.hotspot.databinding.FragmentCreateProfileUploadImageBinding
@@ -32,6 +33,11 @@ class FragmentUploadImage : Fragment() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
+
+        binding.continueButton.setOnClickListener {
+            viewModel.createUserInDatabase()
+        }
+
 
         return binding.root
     }
@@ -73,6 +79,8 @@ class FragmentUploadImage : Fragment() {
             binding.uploadPhoto.setImageURI(it)
         })
     }
+
+
 
 
 }
