@@ -12,7 +12,7 @@
 
     <ImageView
         android:id="@+id/activity_login_imageView"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="90dp"
         android:src="@drawable/hotspot_logo" />
 
