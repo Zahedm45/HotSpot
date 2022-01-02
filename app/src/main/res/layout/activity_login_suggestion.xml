@@ -38,7 +38,7 @@
         android:id="@+id/activity_login_forgotPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/poppins_light"
         android:gravity="center"
         android:text="@string/glemt_log_in"
