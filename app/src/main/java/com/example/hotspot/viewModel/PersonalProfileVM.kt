@@ -1,10 +1,8 @@
 package com.example.hotspot.viewModel
 
-import android.content.ContentValues.TAG
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.util.Log
-import com.example.hotspot.Repository.Repository
+import com.example.hotspot.repository.Repository
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import com.example.hotspot.model.UserProfile
 import com.google.firebase.firestore.DocumentSnapshot

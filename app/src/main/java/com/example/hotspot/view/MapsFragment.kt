@@ -151,10 +151,14 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (Firebase.auth.uid == null) {
+            Log.i(TAG, "not logged in ..")
+
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
+
         }
         setHasOptionsMenu(true)
 

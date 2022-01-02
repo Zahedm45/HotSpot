@@ -4,16 +4,12 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
 import android.widget.Toast
-import com.example.hotspot.Repository.Repository
 import com.example.hotspot.databinding.ActivityLoginBinding
-import com.example.hotspot.model.LoginInfo
-import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.LoginActivityVM
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

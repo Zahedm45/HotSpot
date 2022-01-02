@@ -1,4 +1,4 @@
-package com.example.hotspot.Repository
+package com.example.hotspot.repository
 
 import android.app.Activity
 import android.content.ContentValues
@@ -21,7 +21,7 @@ class Repository {
 
      //   private var progressDialog: ProgressDialog? = null
       //  private val auth = Firebase.auth
-        private val db = Firebase.firestore
+    //    private val db = Firebase.firestore
        // private val fbUser = Firebase.auth.currentUser
 
 
@@ -81,20 +81,32 @@ class Repository {
             val bitmap = user.bitmapImg
             user.bitmapImg = null
 
+            Log.i(TAG, "it is here....1")
+
+            val db = Firebase.firestore
+
+            Log.i(TAG, "it is here....2 user id is ${fbUser.uid}")
 
             db.collection("users").document(fbUser.uid).set(user)
                 .addOnSuccessListener {
+                    Log.i(TAG, "it is here....3")
+
                     if (bitmap != null) {
                         addImageToFirebase(bitmap, {onSuccess()}, { msg -> onFailure(msg) })
                     }
                 }
 
+
                 .addOnFailureListener {e ->
+                    Log.i(TAG, "it is here....4")
                     fbUser.delete()
                     Log.w(ContentValues.TAG, "Error adding document", e)
 //                       Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
                     onFailure(e.message.toString())
                 }
+
+            Log.i(TAG, "it is here....5")
+
 
         }
 
@@ -105,11 +117,17 @@ class Repository {
             val fbUser = Firebase.auth.currentUser
 
             if (fbUser == null) {
-                Log.i(TAG, "User is not sign in.")
+                Log.i(TAG, "User is not signed in.")
                 return
             }
 
             val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
+
+            if (ref == null) {
+                Log.i(TAG, "Collection path not found.")
+                return
+
+            }
 
             val bytArr = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytArr)
@@ -185,6 +203,7 @@ class Repository {
             }
 
 
+            val db = Firebase.firestore
             val docRef = db.collection("users").document(fbUser.uid)
 
             docRef.addSnapshotListener { snapshot, e ->
@@ -247,7 +266,7 @@ class Repository {
                 return
             }
 
-
+            val db = Firebase.firestore
 
             when(strArr.size) {
                 2 -> {
