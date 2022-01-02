@@ -79,11 +79,6 @@ class Repository {
             val bitmap = user.bitmapImg
             user.bitmapImg = null
 
-            Log.i(TAG, "it is here....1")
-
-
-
-            Log.i(TAG, "it is here....2 user id is ${fbUser.uid}")
             val db = Firebase.firestore
 
             db.collection("users").document(fbUser.uid).set(user)
@@ -96,31 +91,8 @@ class Repository {
                 .addOnFailureListener {e ->
                     fbUser.delete()
                     Log.w(ContentValues.TAG, "Error adding document", e)
-//                       Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
                     onFailure(e.message.toString())
                 }
-
-
-
-//            db.collection("users").document(fbUser.uid).set(user)
-//                .addOnSuccessListener {
-//                    Log.i(TAG, "it is here....3")
-//
-//                    if (bitmap != null) {
-//                        addImageToFirebase(bitmap, {onSuccess()}, { msg -> onFailure(msg) })
-//                    }
-//                }
-//
-//
-//                .addOnFailureListener {e ->
-//                    Log.i(TAG, "it is here....4")
-//                    fbUser.delete()
-//                    Log.w(ContentValues.TAG, "Error adding document", e)
-////                       Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
-//                    onFailure(e.message.toString())
-//                }
-
-            Log.i(TAG, "it is here....5")
 
 
         }
@@ -208,7 +180,6 @@ class Repository {
 
 
         fun getUserProfile(onDataChange: (snapshot: DocumentSnapshot) -> Unit) {
-            Log.i(TAG, "getProfile is called..")
 
             val fbUser = Firebase.auth.currentUser
 
@@ -230,7 +201,6 @@ class Repository {
 
 
                 if (snapshot != null && snapshot.exists()) {
- //                   Log.d(TAG, "Current data: ${snapshot.data}")
                     onDataChange(snapshot)
 
                 } else {
