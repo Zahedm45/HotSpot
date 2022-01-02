@@ -31,8 +31,9 @@ import pub.devrel.easypermissions.EasyPermissions
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     lateinit var mMap: GoogleMap
-    var fussedLPC: FusedLocationProviderClient? = null
+//    var fussedLPC: FusedLocationProviderClient? = null
     var location:  LatLng? = null
+    var isMakerShowing = false
 
 
 
@@ -47,7 +48,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fussedLPC = LocationServices.getFusedLocationProviderClient(requireContext())
+//        fussedLPC = LocationServices.getFusedLocationProviderClient(requireContext())
 
 
         requestLocPermission()
@@ -64,6 +65,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         if (location != null) {
             googleMap.addMarker(MarkerOptions().position(location!!).title("Your current location"))
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 10f))
+            isMakerShowing = true
         }
 
     }
@@ -84,6 +86,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
             }
 
+           val fussedLPC = LocationServices.getFusedLocationProviderClient(requireContext())
             val task = fussedLPC!!.lastLocation
             task.addOnSuccessListener {
 
@@ -108,10 +111,21 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 PERMISSION_REQUEST_CODE,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
+
             )
+
         }
 
 
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        if (!isMakerShowing) {
+            requestLocPermission()
+        }
     }
 
 
