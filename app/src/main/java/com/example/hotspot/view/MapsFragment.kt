@@ -1,7 +1,6 @@
 package com.example.hotspot.view
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,9 +12,7 @@ import android.view.*
 import androidx.core.content.ContextCompat
 import com.example.hotspot.R
 import com.example.hotspot.other.Constants.PERMISSION_REQUEST_CODE
-import com.example.hotspot.other.UtilView
 import com.example.hotspot.other.UtilView.menuOptionClick
-import com.example.hotspot.other.UtilView.navigateToLoginPage
 import com.example.hotspot.other.UtilityMap
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -112,8 +109,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 this,
                 "You need to give location permission to run this app.",
                 PERMISSION_REQUEST_CODE,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
             )
         }
 

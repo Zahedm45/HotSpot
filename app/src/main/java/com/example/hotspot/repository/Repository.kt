@@ -20,10 +20,10 @@ class Repository {
 
     companion object {
 
-        private val auth = Firebase.auth
-        private val fbUser = Firebase.auth.currentUser
+       // private val auth = Firebase.auth
+       // private val fbUser = Firebase.auth.currentUser
         @SuppressLint("StaticFieldLeak")
-        private val db = Firebase.firestore
+        //private val db = Firebase.firestore
 
 
         fun createUserInFirebase(
@@ -42,7 +42,7 @@ class Repository {
                 return
             }
 
-
+           val auth = Firebase.auth
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
 
@@ -68,7 +68,7 @@ class Repository {
             onFailure: ((msg: String) -> Unit)
 
         ) {
-
+            val fbUser = Firebase.auth.currentUser
 
             if (fbUser == null) {
                 // something went wrong
@@ -85,7 +85,7 @@ class Repository {
 
 
             Log.i(TAG, "it is here....2 user id is ${fbUser.uid}")
-
+            val db = Firebase.firestore
 
             db.collection("users").document(fbUser.uid).set(user)
                 .addOnSuccessListener {
@@ -129,6 +129,7 @@ class Repository {
 
 
         private fun addImageToFirebase(bitmap: Bitmap, onSuccess: (() -> Unit), onFailure: ((msg: String) -> Unit) ) {
+            val fbUser = Firebase.auth.currentUser
 
 
             if (fbUser == null) {
