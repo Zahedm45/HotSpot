@@ -23,25 +23,26 @@
             android:padding="20dp">
 
             <LinearLayout
-                android:layout_width="332dp"
-                android:layout_height="149dp"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="246dp"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="133dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="161dp"
+                        android:layout_width="match_parent"
                         android:layout_height="36dp"
+                        android:layout_gravity="center"
                         android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
                         android:text="@string/opret_profil2"
                         android:textColor="@color/orange"
                         android:textSize="30sp" />
 
-<!--                    <EditText
+                    <!--                    <EditText
                         android:id="@+id/activity_create_profile_username"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
@@ -54,14 +55,17 @@
                 </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="123dp"
-                    android:layout_height="match_parent">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="28dp"
+                    >
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/activity_create_profile_image"
-                        android:layout_width="111dp"
-                        android:layout_height="108dp"
-                        android:background="@drawable/person"
+                        android:layout_width="121dp"
+                        android:layout_height="118dp"
+                        android:background="@drawable/circle_for_profile_picture"
                         app:civ_border_color="#FF000000"
                         app:civ_border_width="2dp"
                         app:layout_constraintBottom_toBottomOf="parent"
