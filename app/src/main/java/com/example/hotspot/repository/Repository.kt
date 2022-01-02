@@ -1,6 +1,4 @@
 package com.example.hotspot.repository
-
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG

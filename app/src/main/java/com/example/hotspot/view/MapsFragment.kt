@@ -41,11 +41,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_maps4, container, false)
 
-
-
-        return view
+        return inflater.inflate(R.layout.fragment_maps4, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -155,7 +152,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
-
+            requireActivity().finish()
         }
         setHasOptionsMenu(true)
 
