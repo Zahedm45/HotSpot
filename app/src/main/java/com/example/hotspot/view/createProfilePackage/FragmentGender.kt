@@ -33,12 +33,12 @@ class FragmentGender : Fragment() {
 
         binding.manButton.setOnClickListener {
             viewModel.setGender("Male")
-            findNavController().navigate(R.id.action_createProfileGenderFragment_to_createProfileUploadImageFragment)
+            findNavController().navigate(R.id.action_createProfileGenderFragment_to_fragmentProfileText)
         }
 
         binding.womanButton.setOnClickListener {
             viewModel.setGender("Female")
-            findNavController().navigate(R.id.action_createProfileGenderFragment_to_createProfileUploadImageFragment)
+            findNavController().navigate(R.id.action_createProfileGenderFragment_to_fragmentProfileText)
         }
 
     }

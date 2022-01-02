@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progress="25"
+            android:progress="80"
             />
         <TextView
             android:layout_width="match_parent"

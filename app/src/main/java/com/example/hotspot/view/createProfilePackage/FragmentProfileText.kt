@@ -5,23 +5,35 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
+import com.example.hotspot.databinding.CreateProfileGenderFragmentBinding
+import com.example.hotspot.databinding.FragmentProfileTextBinding
 
 
 class FragmentProfileText : Fragment() {
+    private val viewModel: SharedViewModelCreateProfile by activityViewModels()
 
+    private var _binding: FragmentProfileTextBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_text, container, false)
+        _binding = FragmentProfileTextBinding.inflate(inflater, container, false)
+
+
+        binding.continueButton.setOnClickListener {
+            viewModel.setProfileText(binding.firstNameText.text.toString())
+            findNavController().navigate(R.id.action_fragmentProfileText_to_createProfileUploadImageFragment)
+        }
+
+
+        return binding.root
     }
 
 
