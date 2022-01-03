@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.hotspot.databinding.FragmentCreateProfileUploadImageBinding
+import android.content.ContentResolver
+import com.example.hotspot.view.AfterLoginActivity
 
 
 class FragmentUploadImage : Fragment() {
@@ -35,7 +37,13 @@ class FragmentUploadImage : Fragment() {
         }
 
         binding.continueButton.setOnClickListener {
-            viewModel.createUserInDatabase()
+            viewModel.createNewProfile( { ->
+                updateUIOnSuccess()
+            },
+                {
+                        msg -> updateUIOnFailure(msg)
+                }
+            )
         }
 
 
@@ -49,8 +57,9 @@ class FragmentUploadImage : Fragment() {
         if (resultCode == RESULT_OK && requestCode == pickImage) {
             imageUri = data?.data
             binding.uploadPhoto.setImageURI(imageUri)
-            if(imageUri != null)
-            viewModel.setImageUri(imageUri)
+            val bitMap = MediaStore.Images.Media.getBitmap(this.context?.contentResolver, imageUri)
+            if(bitMap != null)
+            viewModel.setImageUri(bitMap)
         }
     }
 
@@ -59,7 +68,7 @@ class FragmentUploadImage : Fragment() {
 
 
         viewModel.getImage().observe(viewLifecycleOwner, Observer {
-            binding.uploadPhoto.setImageURI(it)
+            binding.uploadPhoto.setImageBitmap(it)
             //Toast.makeText(this.requireContext(),"test", Toast.LENGTH_SHORT).show()
         })
     }
@@ -68,7 +77,7 @@ class FragmentUploadImage : Fragment() {
         super.onResume()
         //binding.uploadPhoto.setImageURI(viewModel.getImage().value)
         viewModel.getImage().observe(viewLifecycleOwner,  {
-            binding.uploadPhoto.setImageURI(it)
+            binding.uploadPhoto.setImageBitmap(it)
             //Toast.makeText(this.requireContext(),"test", Toast.LENGTH_SHORT).show()
         })
     }
@@ -76,8 +85,21 @@ class FragmentUploadImage : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModel.getImage().observe(viewLifecycleOwner, Observer {
-            binding.uploadPhoto.setImageURI(it)
+            binding.uploadPhoto.setImageBitmap(it)
         })
+    }
+
+    private fun updateUIOnSuccess(){
+        // signal to user that there was error
+        Toast.makeText(this.requireContext(), "Success", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this.context, AfterLoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
+
+    private fun updateUIOnFailure(errorMessage: String){
+        Toast.makeText(this.requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+        // signal to user that there was an error
     }
 
 

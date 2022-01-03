@@ -22,7 +22,7 @@ class Repository {
        // private val fbUser = Firebase.auth.currentUser
         //private val db = Firebase.firestore
 
-
+/*
         fun createUserInFirebase(
             user: User,
             onSuccess: (() -> Unit),
@@ -54,12 +54,12 @@ class Repository {
                 }
 
         }
+*/ //TODO we no longer need this method.
 
 
 
 
-
-        private fun addProfileToFirebase(
+        fun addProfileToFirebase(
             user: User,
             onSuccess: (() -> Unit),
             onFailure: ((msg: String) -> Unit)

@@ -1,6 +1,5 @@
-package com.example.hotspot.view
+package com.example.hotspot.view.phoneAuthentification
 
-import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,14 +7,13 @@ import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import java.util.concurrent.TimeUnit
 
-class PhoneAuthActivity : AppCompatActivity() {
+class ActivityPhoneAuthentification : AppCompatActivity() {
 
     private lateinit var binding: ActivityPhoneAuthBinding
 

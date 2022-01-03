@@ -47,7 +47,13 @@ class CreateProfileActivity : AppCompatActivity() {
 
         binding.activityCreateProfileCreateprofileBtn.setOnClickListener {
             progressDialog!!.show()
-            createProfileVM.createNewProfile(bitMap, { -> updateUIOnSuccess()}, { msg -> updateUIOnFailure(msg)})
+            createProfileVM.createNewProfile(bitMap, { ->
+                updateUIOnSuccess()
+                                                     },
+                {
+                        msg -> updateUIOnFailure(msg)
+                }
+            )
 
         }
     }

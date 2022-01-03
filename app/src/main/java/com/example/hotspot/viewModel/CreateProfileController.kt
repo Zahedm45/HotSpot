@@ -19,7 +19,7 @@ class CreateProfileController(
     fun createNewProfile(bitmap: Bitmap?, onSuccess: () -> Unit, onFail: (msg: String) -> Unit) {
 
         val user = verifyInput( bitmap) { msg -> onFail(msg) } ?: return
-        rp2.createUserInFirebase( user, {onSuccess()}, { mgs -> onFail(mgs)})
+        //rp2.createUserInFirebase( user, {onSuccess()}, { mgs -> onFail(mgs)})
 
 
 
@@ -94,11 +94,10 @@ class CreateProfileController(
 
         return User(
             name = name.toString(),
-            age = age.toString().toInt(),
+            age = 5,
             emailAddress = email.toString(),
             bio = bio.toString(),
             gender = gender,
-            password = password.toString(),
             bitmapImg = bitmap
         )
 

@@ -53,6 +53,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="i_did_not_receive_a_verification_code_resend">I did not receive a verification code? <b>Resend</b></string>
+    <string name="sign_out">"Sign out"</string>
 
 
 </resources>

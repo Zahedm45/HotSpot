@@ -9,9 +9,9 @@ import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
 import android.widget.Toast
-import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.databinding.ActivityLoginSuggestionBinding
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
+import com.example.hotspot.view.phoneAuthentification.ActivityPhoneAuthentification
 import com.example.hotspot.viewModel.LoginActivityVM
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -40,8 +40,12 @@ class LoginActivity : AppCompatActivity() {
         val user = Firebase.auth.currentUser
 
         if (user != null) {
+            val intent = Intent(this, ActivityCreateProfile::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
             // User is signed in.
-            auth.signOut() //TODO for now to troubleshoot sign up activity.
+            //auth.signOut() //TODO for now to troubleshoot sign up activity.
         } else {
 
         }
@@ -51,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
         loadLoginInfo()
 
         binding.activityLoginCreateProfileBtn.setOnClickListener {
-            val intentPhoneAuth = Intent(this, PhoneAuthActivity::class.java)
+            val intentPhoneAuth = Intent(this, ActivityPhoneAuthentification::class.java)
             startActivity(intentPhoneAuth)
         }
 

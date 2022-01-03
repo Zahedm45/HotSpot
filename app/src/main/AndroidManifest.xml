@@ -39,7 +39,7 @@
             android:value="AIzaSyAV8uwHojKs4W-jTXNBHwLUCAecLNgL3us" />
 
         <activity
-            android:name=".view.PhoneAuthActivity"
+            android:name=".view.phoneAuthentification.ActivityPhoneAuthentification"
             android:exported="false" />
 
         <activity

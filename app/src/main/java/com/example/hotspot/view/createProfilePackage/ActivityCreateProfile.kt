@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityCreateProfileV2Binding
+import com.example.hotspot.viewModel.CreateProfileController
 
 class ActivityCreateProfile : AppCompatActivity() {
 
@@ -17,6 +18,8 @@ class ActivityCreateProfile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         binding = ActivityCreateProfileV2Binding.inflate(layoutInflater)
+
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
                 as NavHostFragment
         navController = navHostFragment.navController
