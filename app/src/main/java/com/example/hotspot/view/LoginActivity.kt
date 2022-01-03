@@ -44,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
             auth.signOut() //TODO for now to troubleshoot sign up activity.
         } else {
 
-
         }
 
         loginActivityMV = LoginActivityVM(this)

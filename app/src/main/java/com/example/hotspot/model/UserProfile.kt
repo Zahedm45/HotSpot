@@ -9,9 +9,9 @@ data class UserProfile(
     var name: String,
     var age: Int,
     var emailAddress: String,
-    var userName: String,
-    var password: String,
+    var userName: String, //delete?
+    var password: String, // delete?
     var bio: String? = null,
     val gender: String,
-    var bitmapImg: Bitmap? = null
+    var bitmapImg: Bitmap? = null // unnecessary?
     )
