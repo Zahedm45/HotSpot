@@ -8,9 +8,12 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
+import com.example.hotspot.repository.Repository
+import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
+import com.google.firebase.firestore.DocumentSnapshot
 import java.util.concurrent.TimeUnit
 
 class ActivityPhoneAuthentification : AppCompatActivity() {
@@ -26,6 +29,9 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     private val TAG = "MAIN_TAG"
 
     private lateinit var progressDialog: ProgressBar
+
+    private val repository = Repository
+    private var isUserCreated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -141,8 +147,18 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     val user = task.result?.user
-                    val intentCreateProfile = Intent(this, ActivityCreateProfile::class.java)
-                    startActivity(intentCreateProfile)
+                    repository.getUserProfile {
+                            snapshot -> isUserProfileCreated(snapshot)
+                    }
+                    //start create profile activity
+                    if(!isUserCreated) {
+                        val intentCreateProfile = Intent(this, ActivityCreateProfile::class.java)
+                        startActivity(intentCreateProfile)
+                    }
+                    else{
+                        val intent = Intent(this, AfterLoginActivity::class.java)
+                        startActivity(intent)
+                    }
                 } else {
                     // Sign in failed, display a message and update the UI
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -155,4 +171,10 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
             }
     }
     // [END sign_in_with_phone]
+
+    private fun isUserProfileCreated(snapshot: DocumentSnapshot){
+        if(snapshot.exists()){
+            isUserCreated = true
+        }
+    }
 }

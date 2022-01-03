@@ -7,15 +7,24 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import com.example.hotspot.databinding.ActivityLoginSuggestionBinding
+import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.example.hotspot.view.phoneAuthentification.ActivityPhoneAuthentification
 import com.example.hotspot.viewModel.LoginActivityVM
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.core.Repo
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class LoginActivity : AppCompatActivity() {
@@ -24,6 +33,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var loginActivityMV: LoginActivityVM
     private var progressDialog: ProgressDialog? = null
+    private val repository = Repository
+    private var isDocumentsCreated = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,17 +50,7 @@ class LoginActivity : AppCompatActivity() {
 
         val user = Firebase.auth.currentUser
 
-        if (user != null) {
-            val intent = Intent(this, ActivityCreateProfile::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
-            // User is signed in.
-            //auth.signOut() //TODO for now to troubleshoot sign up activity.
-        } else {
-
-        }
-
+        //hello()
         loginActivityMV = LoginActivityVM(this)
 
         loadLoginInfo()
@@ -67,17 +68,41 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.activityLoginLoginBtn.setOnClickListener {
-            progressDialog!!.show()
-            loginActivityMV.login( {updateUIOnSuccess()}, { msg -> updateUIOnFail(msg)} )
+            Toast.makeText(this,"To be implemented", Toast.LENGTH_SHORT).show()
+            //progressDialog!!.show()
+            //loginActivityMV.login( {updateUIOnSuccess()}, { msg -> updateUIOnFail(msg)} )
 
 
         }
 
         binding.activityLoginForgotPassword.setOnClickListener {
-            forgotPassword()
+            //TODO delete forgot password function, no longer necessary
+           // forgotPassword()
         }
 
 
+    }
+
+    private fun hello() {
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+            CoroutineScope(IO).launch {
+                val isCreated = repository.isUserProfileCreated()
+                Log.d("LUCASLOFT", isCreated.toString())
+            }
+
+            /*
+            val intent = Intent(this, ActivityCreateProfile::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
+
+             */
+            // User is signed in.
+            //auth.signOut() //TODO for now to troubleshoot sign up activity.
+        } else {
+
+        }
     }
 
 
@@ -99,6 +124,18 @@ class LoginActivity : AppCompatActivity() {
 
         }.apply()
 
+    }
+
+    private fun isUserCreated(snapshot: DocumentSnapshot){
+        if(snapshot.exists()) {
+            auth = Firebase.auth
+
+            isDocumentsCreated = true
+            Toast.makeText(this,"auth.currentUser?.phoneNumber", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(this,"no Snapshot", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

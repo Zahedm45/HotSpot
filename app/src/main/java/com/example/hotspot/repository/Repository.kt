@@ -6,11 +6,15 @@ import android.graphics.Bitmap
 import android.util.Log
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
+import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 
 class Repository {
@@ -190,6 +194,7 @@ class Repository {
             val db = Firebase.firestore
             val docRef = db.collection("users").document(fbUser.uid)
 
+
             docRef.addSnapshotListener { snapshot, e ->
 
                 if (e != null) {
@@ -200,14 +205,33 @@ class Repository {
 
                 if (snapshot != null && snapshot.exists()) {
                     onDataChange(snapshot)
+                    Log.d(TAG, "snapshot found")
 
                 } else {
                     Log.d(TAG, "Current data: null")
                 }
             }
+
         }
 
 
+        suspend fun isUserProfileCreated() : Boolean{
+            val fbUser = Firebase.auth.currentUser
+                if (fbUser == null) {
+                    Log.i(TAG, "User is not logged in..")
+                    return false
+                }
+
+            val db = Firebase.firestore
+            val docRef =  db.collection("users").document(fbUser.uid)
+            val result = docRef.get()
+                .await()
+            if( result.exists()){
+                Log.d(TAG, result.exists().toString())
+                return true
+            }
+            else return false
+        }
 
         fun getUserPicFromDB(updateUI: (it: ByteArray?) -> Unit) {
 
