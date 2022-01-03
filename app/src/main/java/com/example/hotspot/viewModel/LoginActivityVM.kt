@@ -7,7 +7,7 @@ import com.example.hotspot.view.LoginActivity
 
 class LoginActivityVM(
     private val activity: LoginActivity,
-    private val binding: ActivityLoginBinding
+
     ){
 
     private val repository = Repository
@@ -16,8 +16,8 @@ class LoginActivityVM(
         onSuccess: (() -> Unit),
         onFail: ((msg: String) -> Unit)) {
 
-        val email = binding.activityLoginEmail.text?.toString()
-        val password = binding.activityLoginPassword.text?.toString()
+        val email = "email"
+        val password = "pw"
 
         if (email.isNullOrBlank()) {
             onFail("Email? ")

@@ -10,6 +10,7 @@ import android.text.InputType
 import android.widget.EditText
 import android.widget.Toast
 import com.example.hotspot.databinding.ActivityLoginBinding
+import com.example.hotspot.databinding.ActivityLoginSuggestionBinding
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.example.hotspot.viewModel.LoginActivityVM
 import com.google.firebase.auth.FirebaseAuth
@@ -19,7 +20,7 @@ import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivityLoginSuggestionBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var loginActivityMV: LoginActivityVM
     private var progressDialog: ProgressDialog? = null
@@ -29,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_login)
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginSuggestionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.hide()
@@ -46,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-        loginActivityMV = LoginActivityVM(this, binding)
+        loginActivityMV = LoginActivityVM(this)
 
         loadLoginInfo()
 
@@ -66,14 +67,7 @@ class LoginActivity : AppCompatActivity() {
             progressDialog!!.show()
             loginActivityMV.login( {updateUIOnSuccess()}, { msg -> updateUIOnFail(msg)} )
 
-            if (binding.activityLoginRememberMe.isChecked){
-                saveLoginInfo()
 
-            } else {
-
-                val sharedP = getSharedPreferences("userLogin", Context.MODE_PRIVATE)
-                sharedP.edit().clear().apply()
-            }
         }
 
         binding.activityLoginForgotPassword.setOnClickListener {
@@ -91,9 +85,9 @@ class LoginActivity : AppCompatActivity() {
 
         val sharedP = getSharedPreferences("userLogin", Context.MODE_PRIVATE)
         val editor = sharedP.edit()
-        val email = binding.activityLoginEmail.text.toString()
-        val password = binding.activityLoginPassword.text.toString()
-        val isSaveChecked = binding.activityLoginRememberMe.isChecked
+        val email = "email"
+        val password = "pw"
+        val isSaveChecked = true
 
         editor.apply {
             putString("STRING_EMAIL", email)
@@ -119,9 +113,7 @@ class LoginActivity : AppCompatActivity() {
         val password = sharedP.getString("STRING_PASSWORD", null)
 
 
-        binding.activityLoginEmail.setText(email)
-        binding.activityLoginPassword.setText(password)
-        binding.activityLoginRememberMe.isChecked = isSaveChecked
+
 
     }
 

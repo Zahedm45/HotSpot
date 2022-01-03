@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="30dp"
-    android:background="@drawable/background_hotspot">
+    android:background="@drawable/dancing_pic">
 
     <ImageView
         android:id="@+id/activity_login_imageView"
