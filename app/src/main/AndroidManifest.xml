@@ -36,7 +36,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyAV8uwHojKs4W-jTXNBHwLUCAecLNgL3us" />
 
 
         <activity
@@ -46,12 +46,14 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
 
         <activity
             android:name=".view.LoginActivity"
             android:exported="true">
+
 
         </activity>
 

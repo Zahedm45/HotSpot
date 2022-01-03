@@ -90,9 +90,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             val task = fussedLPC!!.lastLocation
             task.addOnSuccessListener {
 
-                Log.i(TAG, "Here is user location... ${it.latitude} and ${it.longitude}.")
+                //Log.i(TAG, "Here is user location... ${it.latitude} and ${it.longitude}.")
 
-                location = LatLng(it.latitude, it.longitude)
+                //location = LatLng(it.latitude, it.longitude)
 
                 val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
                 mapFragment?.getMapAsync(callback)
