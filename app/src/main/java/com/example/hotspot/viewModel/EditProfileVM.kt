@@ -1,18 +1,15 @@
 package com.example.hotspot.viewModel
 
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
-import com.example.hotspot.Repository.Repository
+import com.example.hotspot.repository.Repository
 import com.example.hotspot.databinding.FragmentEditProfileBinding
 import com.example.hotspot.model.UserProfile
-import com.example.hotspot.view.PersonalProfile
 
 class EditProfileVM {
 

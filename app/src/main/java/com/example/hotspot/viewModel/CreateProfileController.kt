@@ -1,8 +1,7 @@
 package com.example.hotspot.viewModel
 
 import android.graphics.Bitmap
-import android.widget.Toast
-import com.example.hotspot.Repository.Repository
+import com.example.hotspot.repository.Repository
 
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
 import com.example.hotspot.model.User

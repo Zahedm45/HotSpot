@@ -29,7 +29,13 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_edit_profile, container, false)
 
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Edit Profile"
+        (activity as AppCompatActivity?)!!.supportActionBar!!.apply {
+            title = "Edit Profile"
+//            setDisplayHomeAsUpEnabled(true)
+//            setDisplayShowHomeEnabled(true)
+        }
+
+
         return view
     }
 

@@ -1,7 +1,6 @@
 package com.example.hotspot.viewModel
 
-import android.widget.Toast
-import com.example.hotspot.Repository.Repository
+import com.example.hotspot.repository.Repository
 import com.example.hotspot.databinding.ActivityLoginBinding
 import com.example.hotspot.view.LoginActivity
 

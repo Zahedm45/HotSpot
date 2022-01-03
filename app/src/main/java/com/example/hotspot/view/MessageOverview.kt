@@ -1,15 +1,14 @@
 package com.example.hotspot.view
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
+import com.example.hotspot.other.UtilView
 
 
 class MessageOverview : Fragment(), View.OnClickListener {
@@ -37,5 +36,25 @@ class MessageOverview : Fragment(), View.OnClickListener {
         when(chatsView!!.id){
             R.id.chatOnClick -> navController.navigate(R.id.action_messageOverview_to_chat)
         }
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.nav_top_menu, menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        UtilView.menuOptionClick(item, requireActivity())
+        return super.onOptionsItemSelected(item)
     }
 }

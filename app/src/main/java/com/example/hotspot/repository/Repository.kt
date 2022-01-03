@@ -1,5 +1,4 @@
-package com.example.hotspot.Repository
-
+package com.example.hotspot.repository
 import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
@@ -19,10 +18,9 @@ class Repository {
 
     companion object {
 
-     //   private var progressDialog: ProgressDialog? = null
-        private val auth = Firebase.auth
-        private val db = Firebase.firestore
-        private val fbUser = Firebase.auth.currentUser
+       // private val auth = Firebase.auth
+       // private val fbUser = Firebase.auth.currentUser
+        //private val db = Firebase.firestore
 
 
         fun createUserInFirebase(
@@ -41,7 +39,7 @@ class Repository {
                 return
             }
 
-
+           val auth = Firebase.auth
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
 
@@ -67,8 +65,7 @@ class Repository {
             onFailure: ((msg: String) -> Unit)
 
         ) {
-
-
+            val fbUser = Firebase.auth.currentUser
 
             if (fbUser == null) {
                 // something went wrong
@@ -80,6 +77,7 @@ class Repository {
             val bitmap = user.bitmapImg
             user.bitmapImg = null
 
+            val db = Firebase.firestore
 
             db.collection("users").document(fbUser.uid).set(user)
                 .addOnSuccessListener {
@@ -91,22 +89,30 @@ class Repository {
                 .addOnFailureListener {e ->
                     fbUser.delete()
                     Log.w(ContentValues.TAG, "Error adding document", e)
-//                       Toast.makeText(baseContext, "Profile creation failed! ", Toast.LENGTH_SHORT).show()
                     onFailure(e.message.toString())
                 }
+
 
         }
 
 
 
         private fun addImageToFirebase(bitmap: Bitmap, onSuccess: (() -> Unit), onFailure: ((msg: String) -> Unit) ) {
+            val fbUser = Firebase.auth.currentUser
+
 
             if (fbUser == null) {
-                Log.i(TAG, "User is not sign in.")
+                Log.i(TAG, "User is not signed in.")
                 return
             }
 
             val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
+
+            if (ref == null) {
+                Log.i(TAG, "Collection path not found.")
+                return
+
+            }
 
             val bytArr = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytArr)
@@ -140,12 +146,16 @@ class Repository {
 
         ) {
 
-
+            val auth = Firebase.auth
 
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity) { task ->
                     if (task.isSuccessful) {
-                        Log.d(ContentValues.TAG, "signInWithEmail:success")
+                        if(Firebase.auth.currentUser != null) {
+                            Log.d(ContentValues.TAG, "signInWithEmail:success")
+
+                        }
+
                         if (onSuccess != null) {
                             onSuccess()
                         }
@@ -169,12 +179,15 @@ class Repository {
 
         fun getUserProfile(onDataChange: (snapshot: DocumentSnapshot) -> Unit) {
 
+            val fbUser = Firebase.auth.currentUser
+
             if (fbUser == null) {
                 Log.i(TAG, "User is not logged in..")
                 return
             }
 
 
+            val db = Firebase.firestore
             val docRef = db.collection("users").document(fbUser.uid)
 
             docRef.addSnapshotListener { snapshot, e ->
@@ -186,7 +199,6 @@ class Repository {
 
 
                 if (snapshot != null && snapshot.exists()) {
- //                   Log.d(TAG, "Current data: ${snapshot.data}")
                     onDataChange(snapshot)
 
                 } else {
@@ -198,7 +210,11 @@ class Repository {
 
 
         fun getUserPicFromDB(updateUI: (it: ByteArray?) -> Unit) {
+
+            val fbUser = Firebase.auth.currentUser
+
             if(fbUser == null) {
+                Log.i(TAG, "User is null")
                 return
             }
 
@@ -226,12 +242,14 @@ class Repository {
 
         fun updateUserFieldInDB(collectionPath: String, strArr: ArrayList<String>, onSuccess: (() -> Unit)?, onFail: (() -> Unit)?) {
 
+            val fbUser = Firebase.auth.currentUser
+
             if (fbUser == null) {
                 Log.i(TAG, "user is null....")
                 return
             }
 
-
+            val db = Firebase.firestore
 
             when(strArr.size) {
                 2 -> {
@@ -286,6 +304,8 @@ class Repository {
 
 
          fun updateUserPicInDB(bitmap: Bitmap, onSuccess: (() -> Unit)?, onFail: (() -> Unit)? ) {
+
+             val fbUser = Firebase.auth.currentUser
 
             if (fbUser == null) {
                 Log.i(TAG, "User is not sign in.")
