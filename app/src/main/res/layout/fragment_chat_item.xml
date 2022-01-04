@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/profile_pic_chat"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/person" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/profile_pic_chat"
+                android:layout_toStartOf="@+id/unseen_messages_dot">
+
+                <TextView
+                    android:id="@+id/message_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textSize="20dp"
+                    android:text="Full name"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/latest_received_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="1"
+                    android:text="Latest receieved message"
+                    android:textSize="15dp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:text="1"
+                android:textSize="10sp"
+                android:textColor="@color/orange"
+                android:gravity="center"
+                android:background="@drawable/unseen_messages_dot"
+                android:id="@+id/unseen_messages_dot"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

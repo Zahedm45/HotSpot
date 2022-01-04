@@ -73,7 +73,7 @@ class Repository {
 
             if (fbUser == null) {
                 // something went wrong
-                Log.w(ContentValues.TAG, "User not found")
+                Log.w(TAG, "User not found")
                 return
             }
 
@@ -92,7 +92,7 @@ class Repository {
 
                 .addOnFailureListener {e ->
                     fbUser.delete()
-                    Log.w(ContentValues.TAG, "Error adding document", e)
+                    Log.w(TAG, "Error adding document", e)
                     onFailure(e.message.toString())
                 }
 
@@ -156,7 +156,7 @@ class Repository {
                 .addOnCompleteListener(activity) { task ->
                     if (task.isSuccessful) {
                         if(Firebase.auth.currentUser != null) {
-                            Log.d(ContentValues.TAG, "signInWithEmail:success")
+                            Log.d(TAG, "signInWithEmail:success")
 
                         }
 
@@ -166,7 +166,7 @@ class Repository {
 
 
                     } else {
-                        Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
+                        Log.w(TAG, "signInWithEmail:failure", task.exception)
                         if (onFail != null) {
                             onFail(task.exception?.message.toString())
                         }
