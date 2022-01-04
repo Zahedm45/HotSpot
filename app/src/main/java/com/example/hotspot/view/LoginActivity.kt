@@ -10,6 +10,7 @@ import android.text.InputType
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
+import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLoginSuggestionBinding
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
@@ -43,10 +44,6 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        auth = Firebase.auth
-
-        val user = Firebase.auth.currentUser
-
         loginActivityMV = LoginActivityVM(this)
 
         loadLoginInfo()
@@ -55,14 +52,14 @@ class LoginActivity : AppCompatActivity() {
             val intentPhoneAuth = Intent(this, ActivityPhoneAuthentification::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intentPhoneAuth)
-            finish()
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         binding.activityLoginLoginBtn.setOnClickListener {
             val intentPhoneAuth = Intent(this, ActivityPhoneAuthentification::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intentPhoneAuth)
-            finish()
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
 

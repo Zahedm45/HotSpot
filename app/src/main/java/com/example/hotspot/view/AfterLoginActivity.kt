@@ -21,8 +21,6 @@ class AfterLoginActivity: AppCompatActivity() {
         val btn = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navCont = findNavController(R.id.nav_host_fragment)
         btn.setupWithNavController(navCont)
-
-
     }
 
 
