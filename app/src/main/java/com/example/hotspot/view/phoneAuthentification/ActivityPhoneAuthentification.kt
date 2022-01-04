@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.AfterLoginActivity
+import com.example.hotspot.view.LoginActivity
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
@@ -32,6 +33,8 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     private val TAG = "MAIN_TAG"
 
     private val repository = Repository
+
+    private lateinit var loginActivity : LoginActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -147,19 +150,21 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-                    val user = task.result?.user
+                    //val user = task.result?.user
                     var isCreated = false
                     CoroutineScope(IO).launch {
                         isCreated = repository.isUserProfileCreated()
                         if(!isCreated) {
                             val intentCreateProfile = Intent(this@ActivityPhoneAuthentification, ActivityCreateProfile::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             startActivity(intentCreateProfile)
                             finish()
                         }
                         else{
                             val intent = Intent(this@ActivityPhoneAuthentification, AfterLoginActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             startActivity(intent)
                             finish()
                         }
