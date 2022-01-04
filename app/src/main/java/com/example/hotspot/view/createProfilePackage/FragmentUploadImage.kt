@@ -35,8 +35,10 @@ class FragmentUploadImage : Fragment() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
-
+        binding.progressBarIndeterminate.visibility = View.GONE
         binding.continueButton.setOnClickListener {
+            binding.progressBar.visibility = View.GONE
+            binding.progressBarIndeterminate.visibility = View.VISIBLE
             viewModel.createNewProfile( { ->
                 updateUIOnSuccess()
             },
@@ -45,8 +47,6 @@ class FragmentUploadImage : Fragment() {
                 }
             )
         }
-
-
         return binding.root
     }
 

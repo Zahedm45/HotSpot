@@ -47,14 +47,22 @@ class LoginActivity : AppCompatActivity() {
 
         val user = Firebase.auth.currentUser
 
-
         loginActivityMV = LoginActivityVM(this)
 
         loadLoginInfo()
 
         binding.activityLoginCreateProfileBtn.setOnClickListener {
             val intentPhoneAuth = Intent(this, ActivityPhoneAuthentification::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intentPhoneAuth)
+            finish()
+        }
+
+        binding.activityLoginLoginBtn.setOnClickListener {
+            val intentPhoneAuth = Intent(this, ActivityPhoneAuthentification::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intentPhoneAuth)
+            finish()
         }
 
 
@@ -64,13 +72,6 @@ class LoginActivity : AppCompatActivity() {
         progressDialog?.setMessage("Loading ...")
 
 
-        binding.activityLoginLoginBtn.setOnClickListener {
-            Toast.makeText(this,"To be implemented", Toast.LENGTH_SHORT).show()
-            //progressDialog!!.show()
-            //loginActivityMV.login( {updateUIOnSuccess()}, { msg -> updateUIOnFail(msg)} )
-
-
-        }
 
         binding.activityLoginForgotPassword.setOnClickListener {
             //TODO delete forgot password function, no longer necessary

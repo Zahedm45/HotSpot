@@ -31,8 +31,6 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
 
     private val TAG = "MAIN_TAG"
 
-    private lateinit var progressDialog: ProgressBar
-
     private val repository = Repository
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,10 +40,10 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         supportActionBar?.hide()
         binding.enterVerificationLinearLayout.visibility = View.GONE
         binding.progressBar.visibility = View.GONE
+        binding.progressBar2.visibility = View.GONE
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        progressDialog = ProgressBar(this)
 
         mCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -143,6 +141,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
 
     // [START sign_in_with_phone]
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        binding.progressBar2.visibility = View.VISIBLE
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -168,10 +167,12 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                     //start create profile activity
 
                 } else {
+                    binding.progressBar2.visibility = View.GONE
                     // Sign in failed, display a message and update the UI
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         errorToast("Invalid verification code.")
+                        binding.progressBar2.visibility = View.GONE
                         // The verification code entered was invalid
                     }
                     // Update UI
