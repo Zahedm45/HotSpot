@@ -14,6 +14,9 @@ import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class ActivityPhoneAuthentification : AppCompatActivity() {
@@ -147,11 +150,12 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     val user = task.result?.user
-                    repository.getUserProfile {
-                            snapshot -> isUserProfileCreated(snapshot)
+                    var isCreated = false
+                    CoroutineScope(IO).launch {
+                        isCreated = repository.isUserProfileCreated()
                     }
                     //start create profile activity
-                    if(!isUserCreated) {
+                    if(!isCreated) {
                         val intentCreateProfile = Intent(this, ActivityCreateProfile::class.java)
                         startActivity(intentCreateProfile)
                     }
@@ -172,9 +176,5 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     }
     // [END sign_in_with_phone]
 
-    private fun isUserProfileCreated(snapshot: DocumentSnapshot){
-        if(snapshot.exists()){
-            isUserCreated = true
-        }
-    }
+
 }

@@ -226,8 +226,8 @@ class Repository {
             val docRef =  db.collection("users").document(fbUser.uid)
             val result = docRef.get()
                 .await()
-            if( result.exists()){
-                Log.d(TAG, result.exists().toString())
+            if( result.data != null){
+                Log.d(TAG, result.data.toString())
                 return true
             }
             else return false

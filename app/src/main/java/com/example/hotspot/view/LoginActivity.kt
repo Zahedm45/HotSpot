@@ -16,15 +16,12 @@ import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.example.hotspot.view.phoneAuthentification.ActivityPhoneAuthentification
 import com.example.hotspot.viewModel.LoginActivityVM
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.core.Repo
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 class LoginActivity : AppCompatActivity() {
@@ -33,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var loginActivityMV: LoginActivityVM
     private var progressDialog: ProgressDialog? = null
-    private val repository = Repository
+
     private var isDocumentsCreated = false
 
 
@@ -50,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
 
         val user = Firebase.auth.currentUser
 
-        //hello()
+
         loginActivityMV = LoginActivityVM(this)
 
         loadLoginInfo()
@@ -83,27 +80,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun hello() {
-        val user = Firebase.auth.currentUser
-        if (user != null) {
-            CoroutineScope(IO).launch {
-                val isCreated = repository.isUserProfileCreated()
-                Log.d("LUCASLOFT", isCreated.toString())
-            }
 
-            /*
-            val intent = Intent(this, ActivityCreateProfile::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
-
-             */
-            // User is signed in.
-            //auth.signOut() //TODO for now to troubleshoot sign up activity.
-        } else {
-
-        }
-    }
 
 
 
