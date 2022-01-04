@@ -188,7 +188,5 @@ class SharedViewModelCreateProfile : ViewModel() {
             gender = gender,
             bitmapImg = bitMap
         )
-
-
     }
 }

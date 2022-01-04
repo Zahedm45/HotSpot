@@ -34,7 +34,6 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     private lateinit var progressDialog: ProgressBar
 
     private val repository = Repository
-    private var isUserCreated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -153,16 +152,21 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                     var isCreated = false
                     CoroutineScope(IO).launch {
                         isCreated = repository.isUserProfileCreated()
+                        if(!isCreated) {
+                            val intentCreateProfile = Intent(this@ActivityPhoneAuthentification, ActivityCreateProfile::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intentCreateProfile)
+                            finish()
+                        }
+                        else{
+                            val intent = Intent(this@ActivityPhoneAuthentification, AfterLoginActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                            finish()
+                        }
                     }
                     //start create profile activity
-                    if(!isCreated) {
-                        val intentCreateProfile = Intent(this, ActivityCreateProfile::class.java)
-                        startActivity(intentCreateProfile)
-                    }
-                    else{
-                        val intent = Intent(this, AfterLoginActivity::class.java)
-                        startActivity(intent)
-                    }
+
                 } else {
                     // Sign in failed, display a message and update the UI
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
