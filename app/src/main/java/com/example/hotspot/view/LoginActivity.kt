@@ -65,6 +65,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.activityLoginLoginBtn.setOnClickListener {
+            val animation_up = AnimationUtils.loadAnimation(this, R.anim.scale_button_up)
+            binding.activityLoginLoginBtn.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this, R.anim.scale_button_down)
+            binding.activityLoginLoginBtn.startAnimation(animation_down)
+
             val intentPhoneAuth = Intent(this, ActivityPhoneAuthentification::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intentPhoneAuth)
