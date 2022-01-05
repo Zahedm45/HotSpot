@@ -1,6 +1,8 @@
 package com.example.hotspot.view.phoneAuthentification
 
 import android.content.Intent
+import android.graphics.Color.BLACK
+import android.graphics.Color.RED
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +17,8 @@ import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.DocumentSnapshot
+import com.hbb20.CountryCodePicker
+import com.hbb20.CountryCodePicker.PhoneNumberValidityChangeListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -34,7 +38,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
 
     private val repository = Repository
 
-    private lateinit var loginActivity : LoginActivity
+    private lateinit var phoneNumber: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +51,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        countrySelector()
 
         mCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -73,6 +78,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                 verifyID = verificationId
                 forceResendtingToken = token
                 errorToast("Code sent.")
+                binding.PhoneNumberSentTo.text = "Verification code sent to: "+ "$phoneNumber"
                 binding.enterVerificationLinearLayout.visibility = View.VISIBLE
                 binding.enterNumberLinearLayout.visibility = View.GONE
                 binding.progressBar.visibility = View.GONE
@@ -86,7 +92,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                 Toast.makeText(this,"Please enter a phone number.",Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            val phoneNumber = binding.phoneNumberEditText.text.toString().trim()
+            phoneNumber = binding.phoneNumberEditText.text.toString().trim()
             startPhoneNumberVerification(phoneNumber)
         }
 
@@ -187,4 +193,21 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     // [END sign_in_with_phone]
 
 
+    private fun countrySelector(){
+        binding.ccp.registerCarrierNumberEditText(binding.phoneNumberEditText)
+
+        binding.ccp.setPhoneNumberValidityChangeListener(PhoneNumberValidityChangeListener {
+
+        })
+
+
+        binding.ccp.setPhoneNumberValidityChangeListener {
+            if(!it){
+                binding.phoneNumberEditText.setTextColor(RED)
+            }
+            else{
+                binding.phoneNumberEditText.setTextColor(BLACK)
+            }
+        }
+    }
 }
