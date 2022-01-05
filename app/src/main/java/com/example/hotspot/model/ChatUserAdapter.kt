@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hotspot.R
+import com.example.hotspot.view.chatActivity
 
 class ChatUserAdapter (private val context: Context, private val userList: ArrayList<User>) :
     RecyclerView.Adapter<ChatUserAdapter.ViewHolder>(){
@@ -28,8 +29,10 @@ class ChatUserAdapter (private val context: Context, private val userList: Array
         Glide.with(context).load(user.bitmapImg).into(holder.profilePic)
 
         holder.card.setOnClickListener{
-            val intent = Intent()
+            val intent = Intent(context, chatActivity::class.java)
             intent.putExtra("UserId", user.name)
+            context.startActivity(intent)
+            context.finish()
         }
     }
 
