@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
@@ -33,6 +34,17 @@ class FragmentAge : Fragment() {
 
 
         binding.continueButton.setOnClickListener{
+            /*
+            For now there is a problem with the context saying as followed
+            "Type mismatch: inferred type is FragmentAge but Context! was expected"
+
+            code:
+            val animation_up = AnimationUtils.loadAnimation(this, R.anim.scale_button_up)
+            binding.continueButton.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this, R.anim.scale_button_down)
+            binding.continueButton.startAnimation(animation_down)
+            */
+
             findNavController().navigate(R.id.action_createProfileAgeFragment_to_createProfileGenderFragment)
         }
 
