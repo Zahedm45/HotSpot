@@ -92,7 +92,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                 Toast.makeText(this,"Please enter a phone number.",Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            phoneNumber = binding.phoneNumberEditText.text.toString().trim()
+            phoneNumber = binding.ccp.fullNumberWithPlus
             startPhoneNumberVerification(phoneNumber)
         }
 
@@ -101,7 +101,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         }
 
         binding.resendText.setOnClickListener{
-            val phoneNumber = binding.phoneNumberEditText.text.toString().trim()
+            val phoneNumber = binding.ccp.fullNumberWithPlus
             resendVerificationCode(phoneNumber, forceResendtingToken)
         }
 
@@ -199,7 +199,6 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         binding.ccp.setPhoneNumberValidityChangeListener(PhoneNumberValidityChangeListener {
 
         })
-
 
         binding.ccp.setPhoneNumberValidityChangeListener {
             if(!it){
