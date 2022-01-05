@@ -55,7 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:ccp_countryPreference="dk"
                 app:layout_constraintStart_toStartOf="parent"
-                android:backgroundTint="@color/black"
+                app:ccp_autoDetectCountry="true"
                  />
 
             <EditText
