@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/chat"
-        android:name="com.example.hotspot.view.Chat"
+        android:name="com.example.hotspot.view.chat.ChatActivity"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
 

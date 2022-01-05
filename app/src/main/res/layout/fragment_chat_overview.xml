@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MessageOverview"
     android:id="@+id/fragment_message"
     android:orientation="vertical">
 
@@ -45,9 +44,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRecyclerView"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/messagesRecyclerView"
         />
 
 </LinearLayout>

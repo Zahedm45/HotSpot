@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:circularflow_angles="0"
     app:circularflow_defaultAngle="0"
-    tools:context=".view.Chat">
+    tools:context=".view.chat.ChatActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="225dp"
