@@ -7,7 +7,9 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.animation.AnimationUtils
 import android.widget.Toast
+import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
 import com.example.hotspot.viewModel.CreateProfileController
 
@@ -37,6 +39,12 @@ class CreateProfileActivity : AppCompatActivity() {
 
 
         binding.activityCreateProfileSelectImgTv.setOnClickListener {
+            //TODO
+            //check if this animation is needed after all
+            val animation_up = AnimationUtils.loadAnimation(this, R.anim.scale_button_up)
+            binding.activityCreateProfileSelectImgTv.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this, R.anim.scale_button_down)
+            binding.activityCreateProfileSelectImgTv.startAnimation(animation_down)
 
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -46,6 +54,13 @@ class CreateProfileActivity : AppCompatActivity() {
 
 
         binding.activityCreateProfileCreateprofileBtn.setOnClickListener {
+            //todo
+            //check if this is animation that is needed too
+            val animation_up = AnimationUtils.loadAnimation(this, R.anim.scale_button_up)
+            binding.activityCreateProfileCreateprofileBtn.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this, R.anim.scale_button_down)
+            binding.activityCreateProfileCreateprofileBtn.startAnimation(animation_down)
+
             progressDialog!!.show()
             createProfileVM.createNewProfile(bitMap, { ->
                 updateUIOnSuccess()
