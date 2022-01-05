@@ -243,7 +243,7 @@ class Repository {
             }
 
             val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
-            val ONE_MEGABYTE: Long = 1024 * 1024
+            val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
 
             ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                 updateUI(it)
@@ -345,7 +345,7 @@ class Repository {
             ref.putBytes(data)
                 .addOnSuccessListener {
 
-                    val ONE_MEGABYTE: Long = 1024 * 1024
+                    val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
                     ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                         PersonalProfileVM.setUserPicUI(it)
                     }
