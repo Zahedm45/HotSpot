@@ -35,8 +35,14 @@
         <entry key="app/src/main/res/layout/activity_create_profile.xml" value="0.3484375" />
         <entry key="app/src/main/res/layout/activity_create_profile_v2.xml" value="0.3484375" />
         <entry key="app/src/main/res/layout/activity_loading_page.xml" value="0.3484375" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1118659420289855" />
+        <entry key="app/src/main/res/layout/activity_login_suggestion.xml" value="0.1118659420289855" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18958333333333333" />
+        <entry key="app/src/main/res/layout/activity_phone_auth.xml" value="0.1118659420289855" />
         <entry key="app/src/main/res/layout/chat_item.xml" value="0.3442028985507246" />
+        <entry key="app/src/main/res/layout/content_main_create_profile.xml" value="0.1118659420289855" />
+        <entry key="app/src/main/res/layout/create_profile_age_fragment.xml" value="0.1118659420289855" />
+        <entry key="app/src/main/res/layout/create_profile_gender_fragment.xml" value="0.1118659420289855" />
         <entry key="app/src/main/res/layout/fragment_after_check_in.xml" value="0.12487335359675786" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_create_profile.xml" value="0.25" />
@@ -45,7 +51,7 @@
         <entry key="app/src/main/res/layout/fragment_liste_view.xml" value="0.15443840579710144" />
         <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/fragment_log_in_or_create_profile.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_message_overview.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_message_overview.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_personal_profile.xml" value="0.18533604887983707" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.18958333333333333" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.33" />
