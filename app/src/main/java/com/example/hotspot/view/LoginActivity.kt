@@ -8,8 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLoginSuggestionBinding
 import com.example.hotspot.repository.Repository
@@ -37,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_login)
+        //setContentView(R.layout.activity_login)
 
         binding = ActivityLoginSuggestionBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -49,6 +52,12 @@ class LoginActivity : AppCompatActivity() {
         loadLoginInfo()
 
         binding.activityLoginCreateProfileBtn.setOnClickListener {
+            //Animation for the button being clicked on
+            val animation_up = AnimationUtils.loadAnimation(this, R.anim.scale_button_up)
+            binding.activityLoginCreateProfileBtn.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this, R.anim.scale_button_down)
+            binding.activityLoginCreateProfileBtn.startAnimation(animation_down)
+
             val intentPhoneAuth = Intent(this, ActivityPhoneAuthentification::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intentPhoneAuth)
