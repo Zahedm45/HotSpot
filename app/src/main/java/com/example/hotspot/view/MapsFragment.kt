@@ -61,8 +61,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         requestLocPermission()
 
 
-        sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
-        observeUserPosition()
+
 
     }
 
@@ -77,18 +76,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun requestLocPermission() {
 
         if(TrackingUtility.hasLocationPermission(requireContext())) {
-            return
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+            observeUserPosition()
         }
 
-
-
-        EasyPermissions.requestPermissions(
-            this,
-            "You need to accept location permission to find HotSpots",
-            REQUEST_CODE_LOCATION_PERMISSION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        )
 
 
 
@@ -169,9 +160,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     override fun onResume() {
         super.onResume()
 
-//        if (!isMakerShowing) {
-//            requestLocPermission()
-//        }
+        if (TrackingUtility.hasLocationPermission(requireContext())) {
+            requestLocPermission()
+        }
     }
 
 

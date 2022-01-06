@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import androidx.fragment.app.Fragment
 import pub.devrel.easypermissions.EasyPermissions
 
 object TrackingUtility {
@@ -62,5 +63,18 @@ object TrackingUtility {
 
 
 
+
+
+
+
+    fun requestPermission(fragment: Fragment) {
+        EasyPermissions.requestPermissions(
+            fragment,
+            "You need to accept location permission to find HotSpots",
+            Constants.REQUEST_CODE_LOCATION_PERMISSION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+    }
 
 }
