@@ -33,13 +33,10 @@ import pub.devrel.easypermissions.EasyPermissions
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
-   // var location:  LatLng? = null
+
     var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
 
-
-//    private var isTracking = false
-//    private var pathPoints = mutableListOf<Polyline>()
     private var marker: Marker? = null
 
 
@@ -78,7 +75,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         if(TrackingUtility.hasLocationPermission(requireContext())) {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
             observeUserPosition()
+
+        } else {
+
+            TrackingUtility.requestPermission(this)
         }
+
+
+
+
 
 
 
@@ -258,7 +263,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
              marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
             isMakerShowing = true
-
 
         }
 
