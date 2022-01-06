@@ -74,7 +74,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onResume() {
         super.onResume()
-        requestLocPermission()
+     //   requestLocPermission()
     }
 
 
@@ -178,21 +178,36 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun updateMarker(location: LatLng) {
 
-        if (markers.isNotEmpty()) {
-            markers.clear()
-        }
+
+
+        marker?.remove()
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync {
-            val marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
-
-            if (marker != null) {
-                markers.add(marker)
-            }
+            marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
             isMakerShowing = true
 
         }
+
+
+
+
+//        if (markers.isNotEmpty()) {
+//            markers.clear()
+//        }
+//
+//        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+//        mapFragment?.getMapAsync {
+//            val marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
+//
+//            if (marker != null) {
+//                markers.add(marker)
+//            }
+//            it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+//            isMakerShowing = true
+//
+//        }
 
     }
 
