@@ -113,7 +113,7 @@ class TrackingService : LifecycleService() {
     private fun updateLocationTracking(isTracking: Boolean) {
         if (isTracking) {
 
-            if (TrackingUtility.hasLocationPermissions(this)) {
+            if (TrackingUtility.hasLocationPermission(this)) {
                 // maybe wrong
                 val request = com.google.android.gms.location.LocationRequest().apply {
                     interval = LOCATION_UPDATE_INTERVAL
@@ -201,10 +201,9 @@ class TrackingService : LifecycleService() {
 
         val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
             .setAutoCancel(true)
-            .setOngoing(true)
-            .setSmallIcon(R.drawable.img_1)
+            .setOngoing(false)
+            .setSmallIcon(R.drawable.dancing_pic)
             .setContentTitle("Running App")
-            .setContentText("00:00:00")
             .setContentIntent(getMainActivityPendingIntent())
 
         startForeground(NOTIFICATION_ID, notificationBuilder.build())
