@@ -56,10 +56,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding = FragmentMaps4Binding.bind(view)
 
         requestLocPermission()
-
-
-
-
     }
 
 
@@ -81,93 +77,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             TrackingUtility.requestPermission(this)
         }
 
-
-
-
-
-
-
-
-
-//        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-//            EasyPermissions.requestPermissions(
-//                this,
-//                "You need to accept location permission to find HotSpots",
-//                REQUEST_CODE_LOCATION_PERMISSION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            )
-//        } else {
-//            EasyPermissions.requestPermissions(
-//                this,
-//                "You need to accept location permissions to find HotSpots.",
-//                REQUEST_CODE_LOCATION_PERMISSION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-//            )
-//        }
-
-
-
-
-
-
-//        if(UtilityMap.hasLocationPermission(requireContext())) {
-//
-//            val la1 =  ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-//            val la2 = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
-//
-//            if(la1 != PackageManager.PERMISSION_GRANTED && la2 != PackageManager.PERMISSION_GRANTED ) {
-//                // this should not be true
-//                Log.i(TAG, "Location access is denied")
-//                return
-//
-//            }
-//
-//           val fussedLPC = LocationServices.getFusedLocationProviderClient(requireContext())
-//            val task = fussedLPC!!.lastLocation
-//            task.addOnSuccessListener {
-//
-//                //Log.i(TAG, "Here is user location... ${it.latitude} and ${it.longitude}.")
-//
-//                //location = LatLng(it.latitude, it.longitude)
-//
-//                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-//                mapFragment?.getMapAsync(callback)
-//
-//            }
-//
-//
-//
-//
-//
-//        } else {
-//
-//
-//
-//            EasyPermissions.requestPermissions(
-//                this,
-//                "You need to give location permission to run this app.",
-//                PERMISSION_REQUEST_CODE,
-//                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-//
-//            )
-//
-//        }
-
-
     }
 
 
     override fun onResume() {
         super.onResume()
-
-        if (TrackingUtility.hasLocationPermission(requireContext())) {
-            requestLocPermission()
-        }
+        requestLocPermission()
     }
 
 
@@ -284,8 +199,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 //    }
 
 
-    // implementation of top menu
 
+
+
+
+    // implementations of top menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.nav_top_menu, menu)
