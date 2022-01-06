@@ -12,6 +12,8 @@ import android.util.Log
 import android.view.*
 import androidx.core.content.ContextCompat
 import com.example.hotspot.R
+import com.example.hotspot.databinding.FragmentMaps4Binding
+import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.Constants.PERMISSION_REQUEST_CODE
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.UtilityMap
@@ -36,6 +38,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 //    var fussedLPC: FusedLocationProviderClient? = null
     var location:  LatLng? = null
     var isMakerShowing = false
+    private lateinit var binding: FragmentMaps4Binding
 
 
 
@@ -53,7 +56,14 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 //        fussedLPC = LocationServices.getFusedLocationProviderClient(requireContext())
 
 
+        binding = FragmentMaps4Binding.bind(view)
+
         requestLocPermission()
+
+        binding.foregroundOnlyLocationButton.setOnClickListener {
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+
+        }
 
 
     }
