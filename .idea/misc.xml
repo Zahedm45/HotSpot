@@ -67,10 +67,14 @@
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/menu/nav_top_menu.xml" value="0.22604166666666667" />
         <entry key="app/src/main/res/drawable-v24/edittext_background1.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_remove_red_eye_24.xml" value="0.40208333333333335" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/drawable-xxxhdpi/background_border.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable-xxxhdpi/ic_directions_run_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/direction_run_black.xml" value="0.26481481481481484" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/humberger_menu_bar_background.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/ic_baseline_crop_portrait_24.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/person.xml" value="0.3921875" />
         <entry key="app/src/main/res/layout-w936dp/map_for_test.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_after_login.xml" value="0.10833333333333334" />

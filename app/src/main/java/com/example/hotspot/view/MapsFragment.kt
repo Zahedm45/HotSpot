@@ -16,10 +16,8 @@ import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.example.hotspot.other.TrackingUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
-import com.example.hotspot.other.service.Polyline
 import com.example.hotspot.other.service.TrackingService
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -58,15 +56,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentMaps4Binding.bind(view)
 
         requestLocPermission()
-
-/*        binding.foregroundOnlyLocationButton.setOnClickListener {
-            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
-
-        }*/
 
 
         sendCommandToService(ACTION_START_OR_RESUME_SERVICE)

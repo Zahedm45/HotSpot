@@ -200,9 +200,9 @@ class TrackingService : LifecycleService() {
         }
 
         val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-            .setAutoCancel(false)
+            .setAutoCancel(true)
             .setOngoing(true)
-            .setSmallIcon(R.drawable.ic_directions_run_black_24dp)
+            .setSmallIcon(R.drawable.img_1)
             .setContentTitle("Running App")
             .setContentText("00:00:00")
             .setContentIntent(getMainActivityPendingIntent())
