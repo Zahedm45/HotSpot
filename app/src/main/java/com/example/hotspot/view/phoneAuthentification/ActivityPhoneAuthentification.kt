@@ -89,7 +89,6 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                 binding.enterNumberLinearLayout.visibility = View.GONE
                 binding.progressBar.visibility = View.GONE
 
-
             }
         }
 
