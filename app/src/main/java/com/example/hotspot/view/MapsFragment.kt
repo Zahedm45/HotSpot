@@ -14,9 +14,9 @@ import androidx.core.content.ContextCompat
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
-import com.example.hotspot.other.Constants.PERMISSION_REQUEST_CODE
+import com.example.hotspot.other.Constants.REQUEST_CODE_LOCATION_PERMISSION
+import com.example.hotspot.other.TrackingUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
-import com.example.hotspot.other.UtilityMap
 import com.example.hotspot.other.service.TrackingService
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -76,7 +76,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun requestLocPermission() {
 
-        if (UtilityMap.hasLocationPermission(requireContext())) {
+        if (TrackingUtility.hasLocationPermissions(requireContext())) {
 
             Log.i(TAG, "hellooo")
             return
@@ -86,7 +86,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             EasyPermissions.requestPermissions(
                 this,
                 "You need to accept...",
-                PERMISSION_REQUEST_CODE,
+                REQUEST_CODE_LOCATION_PERMISSION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
@@ -97,7 +97,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             EasyPermissions.requestPermissions(
                 this,
                 "You need to accept...",
-                PERMISSION_REQUEST_CODE,
+                REQUEST_CODE_LOCATION_PERMISSION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION

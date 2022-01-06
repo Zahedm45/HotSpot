@@ -21,6 +21,7 @@ import com.example.hotspot.other.Constants.ACTION_STOP_SERVICE
 import com.example.hotspot.other.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.hotspot.other.Constants.NOTIFICATION_CHANNEL_NAME
 import com.example.hotspot.other.Constants.NOTIFICATION_ID
+import com.example.hotspot.view.ActivityLoadingPage
 import timber.log.Timber
 
 
@@ -72,7 +73,7 @@ class TrackingService : LifecycleService() {
     private fun getMainActivityPendingIntent() = PendingIntent.getActivity(
         this,
         0,
-        Intent(this, MainActivity::class.java).also {
+        Intent(this, ActivityLoadingPage::class.java).also {
             it.action = ACTION_SHOW_TRACKING_FRAGMENT
         },
         FLAG_UPDATE_CURRENT
