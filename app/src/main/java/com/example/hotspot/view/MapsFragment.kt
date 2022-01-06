@@ -22,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -75,19 +76,19 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
             val i = it.last()
 
-//            if(it.last().isNotEmpty()) {
-//
-//
-//                val i = it.last().last()
-//                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
-//
-//
-//                val latitude =   it.last()?.last()?.latitude
-//                val longitude =   it.last()?.last()?.longitude
-//
-//                val location = LatLng(latitude, longitude)
-//
-//                updateMarker(location)
+            if(it.last().isNotEmpty()) {
+
+
+                val i = it.last().last()
+                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
+
+
+                val latitude =   it.last()?.last()?.latitude
+                val longitude =   it.last()?.last()?.longitude
+
+                val location = LatLng(latitude, longitude)
+
+                updateMarker(location)
             }
 
 
@@ -264,14 +265,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-
+    var marker: Marker? = null
 
     private fun updateMarker(location: LatLng) {
 
+        marker?.remove()
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync {
-
-            it.addMarker(MarkerOptions().position(location).title("Your current location"))
+             marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
             isMakerShowing = true
 
