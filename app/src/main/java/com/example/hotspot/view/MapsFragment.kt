@@ -61,11 +61,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-
-
-
-
-
     private fun requestLocPermission() {
 
         if(TrackingUtility.hasLocationPermission(requireContext())) {
@@ -182,23 +177,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
     }
-
-
-
-
-
-//    private val callback = OnMapReadyCallback { googleMap ->
-//
-//        //val dtu = LatLng(55.784110, 12.517820)
-//        if (location != null) {
-//            googleMap.addMarker(MarkerOptions().position(location!!).title("Your current location"))
-//            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 10f))
-//            isMakerShowing = true
-//        }
-//
-//    }
-
-
 
 
 
