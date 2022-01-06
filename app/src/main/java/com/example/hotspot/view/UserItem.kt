@@ -10,7 +10,6 @@ class UserItem(val user: User): Item<ViewHolder>() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.user_name.text = user.name
 
-
     }
 
     override fun getLayout() = R.layout.fragment_message_overview
