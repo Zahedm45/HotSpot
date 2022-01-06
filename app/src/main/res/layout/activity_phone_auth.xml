@@ -124,7 +124,7 @@
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please enter verification code sent to 11 22 33 44"
+            android:text="Please enter 6-digit verification code sent to 11 22 33 44"
             android:textAlignment="center"
             android:textColor="#777777"
 
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="#fff"
-            android:hint="11 22 33 44"
+            android:hint="123 456"
             android:inputType="phone"
             android:padding="10dp"
             android:textAlignment="center"
