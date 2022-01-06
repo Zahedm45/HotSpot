@@ -174,7 +174,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private var markers: ArrayList<Marker> = ArrayList()
+   // private var markers: ArrayList<Marker> = ArrayList()
 
     private fun updateMarker(location: LatLng) {
 
