@@ -3,7 +3,6 @@ package com.example.hotspot.view
 import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.fragment.app.Fragment
 
@@ -16,10 +15,11 @@ import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.example.hotspot.other.TrackingUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
+import com.example.hotspot.other.service.Polyline
 import com.example.hotspot.other.service.TrackingService
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.ktx.auth
@@ -33,10 +33,12 @@ import pub.devrel.easypermissions.EasyPermissions
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
-//    var fussedLPC: FusedLocationProviderClient? = null
     var location:  LatLng? = null
     var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
+
+    private var isTracking = false
+    private var pathPoints = mutableListOf<Polyline>()
 
 
 
@@ -51,8 +53,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        fussedLPC = LocationServices.getFusedLocationProviderClient(requireContext())
-
 
         binding = FragmentMaps4Binding.bind(view)
 
@@ -64,7 +64,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
 
+
+
     }
+
+
 
 
 
@@ -222,6 +226,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+
+    private fun updateMarker() {
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(callback)
+
+    }
 
 
 
