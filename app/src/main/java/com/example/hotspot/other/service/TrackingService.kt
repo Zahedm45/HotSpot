@@ -1,9 +1,9 @@
 package com.example.hotspot.other.service
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_LOW
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -14,13 +14,17 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import com.example.hotspot.R
 import com.example.hotspot.other.Constants.ACTION_PAUSE_SERVICE
+import com.example.hotspot.other.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
-import com.example.hotspot.other.Constants.ACTION_STOPPED_SERVICE
+import com.example.hotspot.other.Constants.ACTION_STOP_SERVICE
 import com.example.hotspot.other.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.hotspot.other.Constants.NOTIFICATION_CHANNEL_NAME
+import com.example.hotspot.other.Constants.NOTIFICATION_ID
 import com.example.hotspot.view.AfterLoginActivity
 
 class TrackingService : LifecycleService() {
+
+    var isFirstRun = true
 
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -28,14 +32,22 @@ class TrackingService : LifecycleService() {
             when (it.action) {
 
                 ACTION_START_OR_RESUME_SERVICE -> {
-                    Log.i(TAG,"Started or resumed service ")
+                    if (isFirstRun) {
+                        startForegroundService()
+                        isFirstRun = false
+
+
+                    } else {
+                        Log.i(TAG,"Resuming service ")
+                    }
+
                 }
 
                 ACTION_PAUSE_SERVICE -> {
                     Log.i(TAG,"Pause service ")
                 }
 
-                ACTION_STOPPED_SERVICE -> {
+                ACTION_STOP_SERVICE -> {
                     Log.i(TAG,"Stopped service ")
                 }
 
@@ -62,19 +74,24 @@ class TrackingService : LifecycleService() {
             .setSmallIcon(R.drawable.direction_run_black)
             .setContentTitle("Running App")
             .setContentText("00:00:00")
+            .setContentIntent(getMainActivityPendingIntent())
+
+
+        startForeground(NOTIFICATION_ID, notificationBuilder.build())
     }
 
 
 
 
-//
-//    private fun getMainActivityPendingIntent() = PendingIntent.getActivity(
-//        this,
-//        0,
-//        Intent(this, AfterLoginActivity)
-//
-//
-//    )
+// .....
+    private fun getMainActivityPendingIntent() = PendingIntent.getActivity(
+        this,
+        0,
+        Intent(this, AfterLoginActivity::class.java).also {
+            it.action = ACTION_SHOW_TRACKING_FRAGMENT
+        },
+        FLAG_UPDATE_CURRENT
+    )
 
 
 

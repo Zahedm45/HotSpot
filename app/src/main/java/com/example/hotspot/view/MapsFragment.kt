@@ -100,7 +100,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 PERMISSION_REQUEST_CODE,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
-            )
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                )
 
         }
 
@@ -108,7 +109,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-//
+
 //        if(UtilityMap.hasLocationPermission(requireContext())) {
 //
 //            val la1 =  ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)

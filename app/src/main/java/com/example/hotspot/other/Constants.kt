@@ -9,7 +9,7 @@ object Constants {
 
     const val ACTION_PAUSE_SERVICE = "ACTION_PAUSE_SERVICE"
 
-    const val ACTION_STOPPED_SERVICE = "ACTION_STOP_SERVICE"
+    const val ACTION_STOP_SERVICE = "ACTION_STOP_SERVICE"
 
     const val ACTION_SHOW_TRACKING_FRAGMENT = "ACTION_SHOW_TRACKING_FRAGMENT"
 
@@ -17,7 +17,7 @@ object Constants {
 
     const val NOTIFICATION_CHANNEL_NAME = "tracking"
 
-    const val NOTIFICATION_IDS = 1
+    const val NOTIFICATION_ID = 1
 
 
 

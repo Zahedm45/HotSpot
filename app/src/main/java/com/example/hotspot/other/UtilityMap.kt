@@ -14,33 +14,33 @@ object UtilityMap {
 
 
 
-        EasyPermissions.hasPermissions(
-            context,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-        )
+//        EasyPermissions.hasPermissions(
+//            context,
+//            Manifest.permission.ACCESS_FINE_LOCATION,
+//            Manifest.permission.ACCESS_COARSE_LOCATION,
+//        )
 
 
 
-//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-//            Log.i(ContentValues.TAG, "hellooo1")
-//            EasyPermissions.hasPermissions(
-//                context,
-//                Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            )
-//
-//        } else {
-//
-//            Log.i(ContentValues.TAG, "hellooo2")
-//
-//            EasyPermissions.hasPermissions(
-//                context,
-//                Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-//            )
-//        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            Log.i(ContentValues.TAG, "hellooo1")
+            EasyPermissions.hasPermissions(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+
+        } else {
+
+            Log.i(ContentValues.TAG, "hellooo2")
+
+            EasyPermissions.hasPermissions(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
+        }
 
 
 

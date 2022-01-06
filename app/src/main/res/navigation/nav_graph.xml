@@ -99,4 +99,11 @@
         android:name="com.example.hotspot.view.MapsFragment"
         android:label="fragment_maps4"
         tools:layout="@layout/fragment_maps4" />
+
+
+
+    <action android:id="@+id/trackingFragment"
+        app:destination="@+id/mapsFragment"
+        app:launchSingleTop="true" />
+
 </navigation>
