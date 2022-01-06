@@ -75,6 +75,13 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
     implementation 'com.github.devlight.navigationtabstrip:navigationtabstrip:+'
 
+// may need to delete
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+
+
+
 
 
 
