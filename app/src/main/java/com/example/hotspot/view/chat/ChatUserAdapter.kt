@@ -35,14 +35,6 @@ class ChatUserAdapter(private val context: Context, private val chatUserList: Ar
         val user = chatUserList[position]
         holder.messageName.text = user.name
         Glide.with(context).load(user.bitmapImg).into(holder.profilePic)
-
-/*        holder.card.setOnClickListener{
-            val intent = Intent(context, chatActivity::class.java)
-            intent.putExtra("UserId", user.name)
-            context.startActivity(intent)
-            context.finish()
-
-    }*/
     }
         override fun getItemCount(): Int {
             return chatUserList.size
