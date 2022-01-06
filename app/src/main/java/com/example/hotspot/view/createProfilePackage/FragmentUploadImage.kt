@@ -14,6 +14,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.hotspot.databinding.FragmentCreateProfileUploadImageBinding
 import android.content.ContentResolver
+import android.util.Log
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.view.AfterLoginActivity
 
 
@@ -35,6 +37,7 @@ class FragmentUploadImage : Fragment() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
+
         binding.progressBarIndeterminate.visibility = View.GONE
         binding.continueButton.setOnClickListener {
             binding.progressBar.visibility = View.GONE
@@ -69,7 +72,15 @@ class FragmentUploadImage : Fragment() {
 
         viewModel.getImage().observe(viewLifecycleOwner, Observer {
             binding.uploadPhoto.setImageBitmap(it)
-            //Toast.makeText(this.requireContext(),"test", Toast.LENGTH_SHORT).show()
+
+            if(it.toString().isNotEmpty()){
+                ButtonAnimations.fadeIn(binding.continueButton)
+                Log.d("Empty", "Empty")
+            }
+            else{
+                ButtonAnimations.fadeOut(binding.continueButton)
+                Log.d("not", "not")
+            }
         })
     }
 

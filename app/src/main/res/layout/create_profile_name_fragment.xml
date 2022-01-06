@@ -58,6 +58,7 @@
         android:background="@drawable/custom_button"
         android:textColor="#f7f7f7"
         android:text="Continue"
+        android:alpha="0.1"
         android:textAllCaps="false"
         />
     <ImageView

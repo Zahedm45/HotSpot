@@ -14,6 +14,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.LoginActivity
@@ -209,18 +210,10 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         binding.ccp.setPhoneNumberValidityChangeListener {
             if(!it){
                 binding.phoneNumberEditText.setTextColor(RED)
-
-                binding.phoneAuthContinueButton.animate().apply {
-                    duration = 110
-                    this.alpha(0.1f)
-                }.start()
+                ButtonAnimations.fadeOut(binding.phoneAuthContinueButton)
             }
             else if(it){
-                binding.phoneAuthContinueButton.animate().apply {
-                    duration = 150
-                    this.alpha(1f)
-                }.start()
-
+                ButtonAnimations.fadeIn(binding.phoneAuthContinueButton)
                 binding.phoneNumberEditText.setTextColor(BLACK)
             }
         }
@@ -237,12 +230,12 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
 
                 Log.d("Editable",s.length.toString())
                 if (s.length == 6) {
-                    fadeIn()
+                    ButtonAnimations.fadeIn(binding.submitButton)
                     binding.verifyCodeTextEdit.setTextColor(BLACK)
                 }
                 else {
                     binding.verifyCodeTextEdit.setTextColor(RED)
-                    fadeOut()
+                    ButtonAnimations.fadeOut(binding.submitButton)
                 }
             }
         }
@@ -251,19 +244,5 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
         }
-    }
-
-    private fun fadeIn(){
-        binding.submitButton.animate().apply {
-            duration = 150
-            this.alpha(1f)
-        }.start()
-    }
-
-    private fun fadeOut(){
-        binding.submitButton.animate().apply {
-            duration = 110
-            this.alpha(0.1f)
-        }.start()
     }
 }
