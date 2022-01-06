@@ -69,7 +69,7 @@
         android:id="@+id/messageOverview"
         android:name="com.example.hotspot.view.MessageOverview"
         android:label="fragment_message_overview"
-        tools:layout="@layout/fragment_message_overview" >
+        tools:layout="@layout/fragment_message_overview">
         <action
             android:id="@+id/action_messageOverview_to_chat"
             app:destination="@id/chat" />
@@ -99,4 +99,9 @@
         android:name="com.example.hotspot.view.MapsFragment"
         android:label="fragment_maps4"
         tools:layout="@layout/fragment_maps4" />
+    <activity
+        android:id="@+id/latestMessagesActivity"
+        android:name="com.example.hotspot.view.LatestMessagesActivity"
+        android:label="activity_latest_messages"
+        tools:layout="@layout/activity_latest_messages" />
 </navigation>
