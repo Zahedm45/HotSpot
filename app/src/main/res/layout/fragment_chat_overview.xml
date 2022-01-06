@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_message"
+    android:background="#f7f7f7"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
