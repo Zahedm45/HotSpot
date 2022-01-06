@@ -5,7 +5,8 @@
     android:id="@+id/cardView_favorites"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_margin="15dp">
+    android:layout_margin="15dp"
+    android:clickable="true">
 
 
     <ImageView
@@ -17,15 +18,46 @@
         android:layout_marginBottom="5dp"
         tools:src="@mipmap/ic_profile" />
 
+    <TextView
+        android:id="@+id/messageContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        tools:text="Distance" />
 
     <TextView
         android:id="@+id/hotspot_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_semibold"
-        tools:text="Hotspot name"
         android:textColor="#000000"
-        android:textSize="18dp" />
+        android:textSize="18sp"
+        android:textStyle="italic"
+        tools:text="Hotspot name" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart ="150dp"
+        tools:text="Location" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/white"
+        app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
+
+
 </androidx.cardview.widget.CardView>
