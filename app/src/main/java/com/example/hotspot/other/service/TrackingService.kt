@@ -25,6 +25,8 @@ import com.example.hotspot.view.ActivityLoadingPage
 import timber.log.Timber
 
 
+// https://www.youtube.com/watch?v=JpVBPKf2mIU&list=PLQkwcJG4YTCQ6emtoqSZS2FVwZR9FT3BV&index=12
+
 
 class TrackingService : LifecycleService() {
     var isFirstRun = true

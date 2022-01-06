@@ -28,6 +28,9 @@ import com.google.firebase.ktx.Firebase
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
+//https://www.youtube.com/watch?v=JpVBPKf2mIU&list=PLQkwcJG4YTCQ6emtoqSZS2FVwZR9FT3BV&index=12
+
+
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 //    var fussedLPC: FusedLocationProviderClient? = null
