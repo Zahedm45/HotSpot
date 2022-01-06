@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
@@ -48,13 +49,27 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
 
         binding.fragmentEdidProfileChangePicBtn.setOnClickListener {
+
+            //Todo
+            //here there is also a problem with the content being a fragment and not context
+
+            val animation_up = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_up)
+            binding.fragmentEdidProfileChangePicBtn.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_down)
+            binding.fragmentEdidProfileChangePicBtn.startAnimation(animation_down)
+
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
         }
 
         binding.editProfileSaveChangeBtn.setOnClickListener {
-           // Log.i(TAG, "Clicked...")
+            val animation_up = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_up)
+            binding.editProfileSaveChangeBtn.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_down)
+            binding.editProfileSaveChangeBtn.startAnimation(animation_down)
+
+            // Log.i(TAG, "Clicked...")
             editProfileVM.updateUserProfile(bitmap)
         }
 
