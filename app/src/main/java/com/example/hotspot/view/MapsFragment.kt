@@ -1,9 +1,7 @@
 package com.example.hotspot.view
 
-import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.os.Build
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -13,7 +11,6 @@ import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
-import com.example.hotspot.other.Constants.REQUEST_CODE_LOCATION_PERMISSION
 import com.example.hotspot.other.TrackingUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.TrackingService
@@ -147,7 +144,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun observeUserPosition() {
 
 
-        TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
+        TrackingService.lastLocation.observe(viewLifecycleOwner, Observer {
             if(it != null) {
 //                val i = it.last().last()
 //                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
@@ -177,15 +174,21 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-
+    private var markers: ArrayList<Marker> = ArrayList()
 
     private fun updateMarker(location: LatLng) {
 
-        marker?.remove()
+        if (markers.isNotEmpty()) {
+            markers.clear()
+        }
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync {
-             marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
+            val marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
+
+            if (marker != null) {
+                markers.add(marker)
+            }
             it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
             isMakerShowing = true
 

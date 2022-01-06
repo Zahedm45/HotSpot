@@ -11,7 +11,6 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.location.Location
-import android.location.LocationRequest
 import android.os.Build
 import android.os.Looper
 import android.util.Log
@@ -53,7 +52,7 @@ class TrackingService : LifecycleService() {
     companion object {
 
         val isTracking = MutableLiveData<Boolean>()
-        val pathPoints = MutableLiveData<LatLng>()
+        val lastLocation = MutableLiveData<LatLng>()
 
 
     }
@@ -128,8 +127,6 @@ class TrackingService : LifecycleService() {
             }
 
 
-
-
         } else {
             fusedLocationProviderClient.removeLocationUpdates(locationCallback)
         }
@@ -146,8 +143,7 @@ class TrackingService : LifecycleService() {
                 result?.locations?.let { locations ->
 
                     for (location in locations) {
-
-                        addPathPoint(location)
+                        addLastLocation(location)
                     }
 
                 }
@@ -159,14 +155,15 @@ class TrackingService : LifecycleService() {
 
 
 
-    private fun addPathPoint(location: Location?) {
+    private fun addLastLocation(location: Location?) {
         location?.let {
             val position = LatLng(location.latitude, location.longitude)
-            pathPoints.postValue(position)
 
-            Log.i(TAG, "New locaiton: ${pathPoints.value?.latitude} and ${pathPoints.value?.longitude}")
+            if (!lastLocation.equals(position)) {
+                lastLocation.postValue(position)
+            }
 
-
+            Log.i(TAG, "New locaiton: ${lastLocation.value?.latitude} and ${lastLocation.value?.longitude}")
 
         }
 
@@ -176,19 +173,10 @@ class TrackingService : LifecycleService() {
 
 
 
-//    private fun addEmptyPolyline() = pathPoints.value?.apply {
-//        add(mutableListOf())
-//        pathPoints.postValue(this)
-//    } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
-//
-
-
 
     private fun startForegroundService() {
-       // addEmptyPolyline()
 
         isTracking.postValue(true)
-
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
                 as NotificationManager
