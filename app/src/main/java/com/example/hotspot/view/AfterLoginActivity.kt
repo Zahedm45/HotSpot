@@ -20,7 +20,7 @@ class AfterLoginActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_after_login)
 
-        navigateToMapFragment(intent)
+//        navigateToMapFragment(intent)
 
         val btn = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navCont = findNavController(R.id.nav_host_fragment)
@@ -28,18 +28,18 @@ class AfterLoginActivity: AppCompatActivity() {
     }
 
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        navigateToMapFragment(intent)
-    }
-
-
-    private fun navigateToMapFragment(intent: Intent?) {
-        if (intent?.action == ACTION_SHOW_TRACKING_FRAGMENT) {
-            // Reconsideration is needed
-            findNavController(R.id.nav_host_fragment).navigate(R.id.trackingFragment)
-        }
-
-    }
+//    override fun onNewIntent(intent: Intent?) {
+//        super.onNewIntent(intent)
+//        navigateToMapFragment(intent)
+//    }
+//
+//
+//    private fun navigateToMapFragment(intent: Intent?) {
+//        if (intent?.action == ACTION_SHOW_TRACKING_FRAGMENT) {
+//            // Reconsideration is needed
+//            findNavController(R.id.nav_host_fragment).navigate(R.id.trackingFragment)
+//        }
+//
+//    }
 
 }

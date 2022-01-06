@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.core.content.ContextCompat
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
@@ -19,11 +18,8 @@ import com.example.hotspot.other.TrackingUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.TrackingService
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.ktx.auth
@@ -34,7 +30,6 @@ import pub.devrel.easypermissions.EasyPermissions
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
-    lateinit var mMap: GoogleMap
 //    var fussedLPC: FusedLocationProviderClient? = null
     var location:  LatLng? = null
     var isMakerShowing = false
@@ -76,33 +71,26 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun requestLocPermission() {
 
-        if (TrackingUtility.hasLocationPermissions(requireContext())) {
-
-            Log.i(TAG, "hellooo")
+        if(TrackingUtility.hasLocationPermissions(requireContext())) {
             return
         }
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             EasyPermissions.requestPermissions(
                 this,
-                "You need to accept...",
+                "You need to accept location permissions to use this app.",
                 REQUEST_CODE_LOCATION_PERMISSION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
-
         } else {
-
-
             EasyPermissions.requestPermissions(
                 this,
-                "You need to accept...",
+                "You need to accept location permissions to use this app.",
                 REQUEST_CODE_LOCATION_PERMISSION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                )
-
+            )
         }
 
 
