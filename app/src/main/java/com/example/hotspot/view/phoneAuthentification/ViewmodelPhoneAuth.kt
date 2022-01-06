@@ -1,4 +1,10 @@
 package com.example.hotspot.view.phoneAuthentification
 
-class ViewmodelPhoneAuth {
+import androidx.lifecycle.ViewModel
+import com.example.hotspot.repository.Repository
+
+class ViewmodelPhoneAuth: ViewModel() {
+    private val repository = Repository
+
+
 }

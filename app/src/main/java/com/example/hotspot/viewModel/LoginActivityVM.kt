@@ -11,26 +11,6 @@ class LoginActivityVM(
 
     private val repository = Repository
 
-    fun login(
-        onSuccess: (() -> Unit),
-        onFail: ((msg: String) -> Unit)) {
-
-        val email = "email"
-        val password = "pw"
-
-        if (email.isNullOrBlank()) {
-            onFail("Email? ")
-            return
-        }
-
-        if (password.isNullOrBlank()) {
-            onFail("Password?")
-            return
-        }
-
-         repository.login(activity, email, password, {onSuccess()}, {msg -> onFail(msg)} )
-
-    }
 
 
 }
