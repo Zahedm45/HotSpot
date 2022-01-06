@@ -26,8 +26,7 @@ class TrackingService : LifecycleService() {
                     Log.i(TAG,"Stopped service ")
                 }
 
-
-
+                else -> {}
             }
         }
 

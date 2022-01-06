@@ -66,6 +66,13 @@
             android:name=".view.CreateProfileActivity"
             android:exported="false" />
 
+        <service
+            android:name=".other.service.TrackingService"
+            android:foregroundServiceType="location"/>
+
+
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
