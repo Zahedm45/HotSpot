@@ -96,6 +96,7 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/custom_button"
             android:textColor="#f7f7f7"
+            android:alpha="0.1"
             android:text="Continue"
             android:textAllCaps="false"
 
@@ -152,6 +153,7 @@
             android:background="@drawable/custom_button"
             android:textColor="#f7f7f7"
             android:text="Submit code"
+            android:alpha="0.1"
             android:textAllCaps="false"
             />
         <TextView

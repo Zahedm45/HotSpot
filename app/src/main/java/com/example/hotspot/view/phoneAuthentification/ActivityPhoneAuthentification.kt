@@ -5,10 +5,14 @@ import android.graphics.Color.BLACK
 import android.graphics.Color.RED
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.AfterLoginActivity
@@ -52,6 +56,8 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         countrySelector()
+
+        hasCodeBeenEntered()
 
         mCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -196,6 +202,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     private fun countrySelector(){
         binding.ccp.registerCarrierNumberEditText(binding.phoneNumberEditText)
 
+
         binding.ccp.setPhoneNumberValidityChangeListener(PhoneNumberValidityChangeListener {
 
         })
@@ -203,10 +210,61 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         binding.ccp.setPhoneNumberValidityChangeListener {
             if(!it){
                 binding.phoneNumberEditText.setTextColor(RED)
+
+                binding.phoneAuthContinueButton.animate().apply {
+                    duration = 110
+                    this.alpha(0.1f)
+                }.start()
             }
-            else{
+            else if(it){
+                binding.phoneAuthContinueButton.animate().apply {
+                    duration = 150
+                    this.alpha(1f)
+                }.start()
+
                 binding.phoneNumberEditText.setTextColor(BLACK)
             }
         }
+    }
+
+    private fun hasCodeBeenEntered(){
+
+        binding.verifyCodeTextEdit.addTextChangedListener(textWatcher)
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+            if (s != null) {
+
+                Log.d("Editable",s.length.toString())
+                if (s.length == 6) {
+                    fadeIn()
+                    binding.verifyCodeTextEdit.setTextColor(BLACK)
+                }
+                else {
+                    binding.verifyCodeTextEdit.setTextColor(RED)
+                    fadeOut()
+                }
+            }
+        }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+        }
+    }
+
+    private fun fadeIn(){
+        binding.submitButton.animate().apply {
+            duration = 150
+            this.alpha(1f)
+        }.start()
+    }
+
+    private fun fadeOut(){
+        binding.submitButton.animate().apply {
+            duration = 110
+            this.alpha(0.1f)
+        }.start()
     }
 }
