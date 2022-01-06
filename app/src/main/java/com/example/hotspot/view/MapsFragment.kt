@@ -68,6 +68,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         }*/
 
+
+        sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
         observeUserPosition()
 
     }
