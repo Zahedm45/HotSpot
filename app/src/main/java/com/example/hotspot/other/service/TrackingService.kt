@@ -8,11 +8,13 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
+import android.location.Location
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.R
 import com.example.hotspot.other.Constants.ACTION_PAUSE_SERVICE
 import com.example.hotspot.other.Constants.ACTION_SHOW_TRACKING_FRAGMENT
@@ -22,14 +24,39 @@ import com.example.hotspot.other.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.hotspot.other.Constants.NOTIFICATION_CHANNEL_NAME
 import com.example.hotspot.other.Constants.NOTIFICATION_ID
 import com.example.hotspot.view.ActivityLoadingPage
+import com.google.android.gms.maps.model.LatLng
 import timber.log.Timber
 
 
 // https://www.youtube.com/watch?v=JpVBPKf2mIU&list=PLQkwcJG4YTCQ6emtoqSZS2FVwZR9FT3BV&index=12
 
 
+typealias Polyline = MutableList<LatLng>
+typealias Polylines = MutableList<Polyline>
+
 class TrackingService : LifecycleService() {
     var isFirstRun = true
+
+
+
+    companion object {
+
+        val isTracking = MutableLiveData<Boolean>()
+        val pathPoints = MutableLiveData<Polylines>()
+
+
+    }
+
+
+    private fun postInitialValues() {
+        isTracking.postValue(false)
+        pathPoints.postValue(mutableListOf())
+
+
+    }
+
+
+
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
@@ -53,7 +80,37 @@ class TrackingService : LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
+
+
+    private fun addPathPoint(location: Location?) {
+        location?.let {
+            val position = LatLng(location.latitude, location.longitude)
+            pathPoints.value?.apply {
+                last().add(position)
+                pathPoints.postValue(this)
+
+            }
+
+        }
+
+    }
+
+
+
+
+
+    private fun addEmptyPolyline() = pathPoints.value?.apply {
+        add(mutableListOf())
+        pathPoints.postValue(this)
+    } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
+
+
+
+
     private fun startForegroundService() {
+        addEmptyPolyline()
+
+
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
                 as NotificationManager
 
