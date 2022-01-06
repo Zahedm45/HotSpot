@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
@@ -33,7 +34,7 @@ import pub.devrel.easypermissions.EasyPermissions
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
-    var location:  LatLng? = null
+   // var location:  LatLng? = null
     var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
 
@@ -62,6 +63,40 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
 
         }
+
+
+
+
+
+
+
+        TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
+           // pathPoints = it
+
+            val i = it.last()
+
+//            if(it.last().isNotEmpty()) {
+//
+//
+//                val i = it.last().last()
+//                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
+//
+//
+//                val latitude =   it.last()?.last()?.latitude
+//                val longitude =   it.last()?.last()?.longitude
+//
+//                val location = LatLng(latitude, longitude)
+//
+//                updateMarker(location)
+            }
+
+
+
+        })
+
+
+
+
 
 
 
@@ -227,26 +262,38 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private fun updateMarker() {
+
+
+
+
+    private fun updateMarker(location: LatLng) {
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+        mapFragment?.getMapAsync {
 
-    }
-
-
-
-
-
-    private val callback = OnMapReadyCallback { googleMap ->
-
-        //val dtu = LatLng(55.784110, 12.517820)
-        if (location != null) {
-            googleMap.addMarker(MarkerOptions().position(location!!).title("Your current location"))
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 10f))
+            it.addMarker(MarkerOptions().position(location).title("Your current location"))
+            it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
             isMakerShowing = true
+
+
         }
 
     }
+
+
+
+
+
+//    private val callback = OnMapReadyCallback { googleMap ->
+//
+//        //val dtu = LatLng(55.784110, 12.517820)
+//        if (location != null) {
+//            googleMap.addMarker(MarkerOptions().position(location!!).title("Your current location"))
+//            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 10f))
+//            isMakerShowing = true
+//        }
+//
+//    }
 
 
     // implementation of top menu
