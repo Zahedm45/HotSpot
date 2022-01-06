@@ -63,25 +63,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         requestLocPermission()
 
-        binding.foregroundOnlyLocationButton.setOnClickListener {
+/*        binding.foregroundOnlyLocationButton.setOnClickListener {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
 
-        }
+        }*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        observeUserPosition()
 
     }
 
