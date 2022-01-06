@@ -1,3 +1,4 @@
+/*
 package com.example.hotspot.view
 
 import android.content.Intent
@@ -32,4 +33,4 @@ class LatestMessagesActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
     //Refer to 9:00 of video 4 to create menuRes
-}
+}*/

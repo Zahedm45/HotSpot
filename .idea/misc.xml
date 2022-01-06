@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_after_login.xml" value="0.23369565217391305" />
         <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_latest_messages.xml" value="0.2477355072463768" />
         <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_chat_item.xml" value="0.2477355072463768" />
         <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_chat_overview.xml" value="0.264" />
         <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_favorites.xml" value="0.1" />
+        <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_maps4.xml" value="0.23369565217391305" />
         <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_message_overview.xml" value="0.22192028985507245" />
+        <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_profile.xml" value="0.23369565217391305" />
         <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navigation.xml" value="0.25" />
         <entry key="..\:/Users/Jhinstalock/AndroidStudioProjects/HotSpot/app/src/main/res/menu/nav_top_menu.xml" value="0.13177083333333334" />
         <entry key="..\:/Users/Shroom/StudioProjects/HotSpot/app/src/main/res/drawable/home.xml" value="0.3828125" />
