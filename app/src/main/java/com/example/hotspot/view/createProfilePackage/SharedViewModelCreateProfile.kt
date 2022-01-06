@@ -13,10 +13,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class SharedViewModelCreateProfile : ViewModel() {
-    private lateinit var auth : FirebaseAuth
-    private lateinit var databaseReference : DatabaseReference
-    private lateinit var storageReference : StorageReference
-
     private val _firstName = MutableLiveData<String>()
     private val _profileText = MutableLiveData<String>()
     private val _dateString = MutableLiveData<String>()
