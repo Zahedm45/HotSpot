@@ -39,8 +39,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
 
-    private var isTracking = false
-    private var pathPoints = mutableListOf<Polyline>()
+
+//    private var isTracking = false
+//    private var pathPoints = mutableListOf<Polyline>()
+    private var marker: Marker? = null
+
 
 
 
@@ -71,29 +74,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-        TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
-           // pathPoints = it
 
-            val i = it.last()
-
-            if(it.last().isNotEmpty()) {
-
-
-                val i = it.last().last()
-                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
-
-
-                val latitude =   it.last()?.last()?.latitude
-                val longitude =   it.last()?.last()?.longitude
-
-                val location = LatLng(latitude, longitude)
-
-                updateMarker(location)
-            }
-
-
-
-        })
 
 
 
@@ -120,7 +101,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             EasyPermissions.requestPermissions(
                 this,
-                "You need to accept location permissions to use this app.",
+                "You need to accept location permission to find HotSpots",
                 REQUEST_CODE_LOCATION_PERMISSION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -128,7 +109,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         } else {
             EasyPermissions.requestPermissions(
                 this,
-                "You need to accept location permissions to use this app.",
+                "You need to accept location permissions to find HotSpots.",
                 REQUEST_CODE_LOCATION_PERMISSION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -262,10 +243,25 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+    private fun observeUserPosition() {
+
+        TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
+            if(it.last().isNotEmpty()) {
+//                val i = it.last().last()
+//                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
+                val latitude =   it.last().last()?.latitude
+                val longitude =   it.last().last()?.longitude
+                val location = LatLng(latitude, longitude)
+                updateMarker(location)
+            }
+        })
+
+
+    }
 
 
 
-    var marker: Marker? = null
+
 
     private fun updateMarker(location: LatLng) {
 
