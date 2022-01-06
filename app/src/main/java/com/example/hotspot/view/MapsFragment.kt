@@ -146,16 +146,31 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun observeUserPosition() {
 
+
         TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
-            if(it.last().isNotEmpty()) {
+            if(it != null) {
 //                val i = it.last().last()
 //                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
-                val latitude =   it.last().last()?.latitude
-                val longitude =   it.last().last()?.longitude
+                val latitude =   it.latitude
+                val longitude =   it.longitude
                 val location = LatLng(latitude, longitude)
                 updateMarker(location)
             }
         })
+
+
+
+
+//        TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
+//            if(it.last().isNotEmpty()) {
+////                val i = it.last().last()
+////                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
+//                val latitude =   it.last().last()?.latitude
+//                val longitude =   it.last().last()?.longitude
+//                val location = LatLng(latitude, longitude)
+//                updateMarker(location)
+//            }
+//        })
 
 
     }

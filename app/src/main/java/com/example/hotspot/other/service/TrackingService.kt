@@ -41,8 +41,8 @@ import timber.log.Timber
 
 
 
-typealias Polyline = MutableList<LatLng>
-typealias Polylines = MutableList<Polyline>
+//typealias Polyline = MutableList<LatLng>
+//typealias Polylines = MutableList<Polyline>
 
 class TrackingService : LifecycleService() {
     var isFirstRun = true
@@ -53,7 +53,7 @@ class TrackingService : LifecycleService() {
     companion object {
 
         val isTracking = MutableLiveData<Boolean>()
-        val pathPoints = MutableLiveData<Polylines>()
+        val pathPoints = MutableLiveData<LatLng>()
 
 
     }
@@ -61,7 +61,7 @@ class TrackingService : LifecycleService() {
 
     private fun postInitialValues() {
         isTracking.postValue(false)
-        pathPoints.postValue(mutableListOf())
+ //       pathPoints.postValue()
 
 
     }
@@ -146,8 +146,8 @@ class TrackingService : LifecycleService() {
                 result?.locations?.let { locations ->
 
                     for (location in locations) {
+
                         addPathPoint(location)
-                        Log.i(TAG, "New locaiton: ${location.latitude} and ${location.longitude}")
                     }
 
                 }
@@ -162,11 +162,11 @@ class TrackingService : LifecycleService() {
     private fun addPathPoint(location: Location?) {
         location?.let {
             val position = LatLng(location.latitude, location.longitude)
-            pathPoints.value?.apply {
-                last().add(position)
-                pathPoints.postValue(this)
+            pathPoints.postValue(position)
 
-            }
+            Log.i(TAG, "New locaiton: ${pathPoints.value?.latitude} and ${pathPoints.value?.longitude}")
+
+
 
         }
 
@@ -176,16 +176,16 @@ class TrackingService : LifecycleService() {
 
 
 
-    private fun addEmptyPolyline() = pathPoints.value?.apply {
-        add(mutableListOf())
-        pathPoints.postValue(this)
-    } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
-
+//    private fun addEmptyPolyline() = pathPoints.value?.apply {
+//        add(mutableListOf())
+//        pathPoints.postValue(this)
+//    } ?: pathPoints.postValue(mutableListOf(mutableListOf()))
+//
 
 
 
     private fun startForegroundService() {
-        addEmptyPolyline()
+       // addEmptyPolyline()
 
         isTracking.postValue(true)
 
