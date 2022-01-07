@@ -22,7 +22,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         //Perform check to see if user is logged in (if necessary)
         val uid = FirebaseAuth.getInstance().uid
         if (uid == null) {
-            val intent = Intent(this, RegisterActivity::class)
+            val intent = Intent(this, CreateProfileActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
@@ -45,7 +45,7 @@ class LatestMessagesActivity : AppCompatActivity() {
             R.id.menu_sign_out -> {
                 FirebaseAuth.getInstance().signOut()
                 //Run registration activity
-                val intent = Intent(this, RegisterActivity::class.java)
+                val intent = Intent(this, CreateProfileActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
