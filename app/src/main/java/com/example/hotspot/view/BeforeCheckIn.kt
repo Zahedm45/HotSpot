@@ -24,11 +24,11 @@ class BeforeCheckIn : Fragment() {
             Gonna have to change something so I get the button to make animations
 
             code:
+
              val animation_up = AnimationUtils.loadAnimation(this, R.anim.scale_button_up)
             binding.checkInButton1.startAnimation(animation_up)
             val animation_down = AnimationUtils.loadAnimation(this, R.anim.scale_button_down)
             binding.checkInButton1.startAnimation(animation_down)
-
 
             */
 

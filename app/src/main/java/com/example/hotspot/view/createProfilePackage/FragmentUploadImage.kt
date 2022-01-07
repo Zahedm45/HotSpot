@@ -14,6 +14,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.hotspot.databinding.FragmentCreateProfileUploadImageBinding
 import android.content.ContentResolver
+import android.view.animation.AnimationUtils
+import com.example.hotspot.R
 import com.example.hotspot.view.AfterLoginActivity
 
 
@@ -37,6 +39,10 @@ class FragmentUploadImage : Fragment() {
         }
         binding.progressBarIndeterminate.visibility = View.GONE
         binding.continueButton.setOnClickListener {
+            val animation_up = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_up)
+            binding.continueButton.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_down)
+            binding.continueButton.startAnimation(animation_down)
             binding.progressBar.visibility = View.GONE
             binding.progressBarIndeterminate.visibility = View.VISIBLE
             viewModel.createNewProfile( { ->

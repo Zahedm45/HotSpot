@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
@@ -32,11 +33,19 @@ class FragmentGender : Fragment() {
 
 
         binding.manButton.setOnClickListener {
+            val animation_up = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_up)
+            binding.manButton.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_down)
+            binding.manButton.startAnimation(animation_down)
             viewModel.setGender("Male")
             findNavController().navigate(R.id.action_createProfileGenderFragment_to_fragmentProfileText)
         }
 
         binding.womanButton.setOnClickListener {
+            val animation_up = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_up)
+            binding.womanButton.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_down)
+            binding.womanButton.startAnimation(animation_down)
             viewModel.setGender("Female")
             findNavController().navigate(R.id.action_createProfileGenderFragment_to_fragmentProfileText)
         }

@@ -49,10 +49,6 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
 
         binding.fragmentEdidProfileChangePicBtn.setOnClickListener {
-
-            //Todo
-            //here there is also a problem with the content being a fragment and not context
-
             val animation_up = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_up)
             binding.fragmentEdidProfileChangePicBtn.startAnimation(animation_up)
             val animation_down = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_down)
