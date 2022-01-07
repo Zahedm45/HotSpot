@@ -197,8 +197,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     @SuppressLint("MissingPermission")
     private fun updateMarker(location: LatLng) {
 
-
-
         //marker?.remove()
         circleAroundPos?.remove()
         circleAroundPos2?.remove()
