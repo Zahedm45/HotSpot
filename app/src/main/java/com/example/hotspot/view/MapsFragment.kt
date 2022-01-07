@@ -38,6 +38,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,10 +58,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
 
             if (location != null && googleMap != null) {
-                googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 10f))
+                googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 14f))
 
             }
-
 
         }
     }
@@ -207,11 +207,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             //it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
             googleMap = it
 
+//            it.setMaxZoomPreference(14.0f)
+//            it.setMinZoomPreference(6.0f)
 
             circleAroundPos2 = it.addCircle(
                 CircleOptions()
                     .center(location)
-                    .radius(1000.0)
+                    .radius(100.0)
                     .strokeWidth(3f)
                     .strokeColor(Color.BLUE)
                     .fillColor(Color.CYAN) )
@@ -221,12 +223,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             circleAroundPos = it.addCircle(
                 CircleOptions()
                     .center(location)
-                    .radius(4000.0)
+                    .radius(400.0)
                     .strokeWidth(3f)
                     .strokeColor(Color.GREEN)
                     .fillColor(Color.argb(70, 50, 100, 50)))
 
-            isMakerShowing = true
+
+            if(!isMakerShowing) {
+                it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 14f))
+                isMakerShowing = true
+            }
 
         }
 
