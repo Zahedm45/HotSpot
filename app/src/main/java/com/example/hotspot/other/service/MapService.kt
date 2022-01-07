@@ -53,15 +53,12 @@ class MapService : LifecycleService() {
     }
 
 
-    private fun postInitialValues() {
-        isTracking.postValue(false)
-    }
 
 
     @SuppressLint("VisibleForTests")
     override fun onCreate() {
         super.onCreate()
-        postInitialValues()
+        isTracking.postValue(false)
         // maybe need to change
         fusedLocationProviderClient = FusedLocationProviderClient(this)
 
@@ -82,18 +79,24 @@ class MapService : LifecycleService() {
                         startForegroundService()
                         isFirstRun = false
                     } else {
-                        Log.i(TAG,"Resuming service...")
+                        // do nothing for now
+                        Log.i(TAG,"Resuming service")
                     }
                 }
                 ACTION_PAUSE_SERVICE -> {
+                    // do nothing for now
                     Log.i(TAG,"Paused service")
                 }
                 ACTION_STOP_SERVICE -> {
+                    // do nothing for now
                     Log.i(TAG,"Stopped service")
                 }
 
 
-                else -> {Log.i(TAG, "Messages is not found")}
+                else -> {
+                    // do nothing for now
+                    Log.i(TAG, "Messages is not found")
+                }
             }
         }
         return super.onStartCommand(intent, flags, startId)
@@ -183,7 +186,7 @@ class MapService : LifecycleService() {
             .setAutoCancel(true)
             .setOngoing(false)
             .setSmallIcon(R.drawable.dancing_icon_foreground)
-            .setContentTitle("Running App")
+            .setContentTitle("HotSpots")
             .setContentIntent(getMainActivityPendingIntent())
 
         startForeground(NOTIFICATION_ID, notificationBuilder.build())
