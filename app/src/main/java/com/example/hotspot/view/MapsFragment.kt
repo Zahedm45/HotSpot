@@ -11,9 +11,9 @@ import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
-import com.example.hotspot.other.TrackingUtility
+import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
-import com.example.hotspot.other.service.TrackingService
+import com.example.hotspot.other.service.MapService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -58,13 +58,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun requestLocPermission() {
 
-        if(TrackingUtility.hasLocationPermission(requireContext())) {
+        if(MapUtility.hasLocationPermission(requireContext())) {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
             observeUserPosition()
 
         } else {
 
-            TrackingUtility.requestPermission(this)
+            MapUtility.requestPermission(this)
         }
 
     }
@@ -130,7 +130,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun sendCommandToService(action: String) =
 
-        Intent(requireContext(), TrackingService::class.java).also {
+        Intent(requireContext(), MapService::class.java).also {
             it.action = action
             requireContext().startService(it)
         }
@@ -142,7 +142,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun observeUserPosition() {
 
 
-        TrackingService.lastLocation.observe(viewLifecycleOwner, Observer {
+        MapService.lastLocation.observe(viewLifecycleOwner, Observer {
             if(it != null) {
 //                val i = it.last().last()
 //                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")

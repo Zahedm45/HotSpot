@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import pub.devrel.easypermissions.EasyPermissions
 
-object TrackingUtility {
+object MapUtility {
 
     fun hasLocationPermission(context: Context) =
         EasyPermissions.hasPermissions(

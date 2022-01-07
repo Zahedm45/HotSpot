@@ -28,7 +28,7 @@ import com.example.hotspot.other.Constants.LOCATION_UPDATE_INTERVAL
 import com.example.hotspot.other.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.hotspot.other.Constants.NOTIFICATION_CHANNEL_NAME
 import com.example.hotspot.other.Constants.NOTIFICATION_ID
-import com.example.hotspot.other.TrackingUtility
+import com.example.hotspot.other.MapUtility
 import com.example.hotspot.view.ActivityLoadingPage
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -39,7 +39,7 @@ import timber.log.Timber
 
 
 
-class TrackingService : LifecycleService() {
+class MapService : LifecycleService() {
     var isFirstRun = true
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
@@ -103,7 +103,7 @@ class TrackingService : LifecycleService() {
     private fun updateLocationTracking(isTracking: Boolean) {
         if (isTracking) {
 
-            if (TrackingUtility.hasLocationPermission(this)) {
+            if (MapUtility.hasLocationPermission(this)) {
                 // maybe wrong
                 val request = com.google.android.gms.location.LocationRequest().apply {
                     interval = LOCATION_UPDATE_INTERVAL

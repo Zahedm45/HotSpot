@@ -80,7 +80,7 @@
             android:exported="false" />
 
         <service
-            android:name=".other.service.TrackingService"
+            android:name=".other.service.MapService"
             android:foregroundServiceType="location"/>
 
 
