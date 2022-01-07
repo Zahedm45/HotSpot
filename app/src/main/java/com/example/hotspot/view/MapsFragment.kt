@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.example.hotspot.other.Constants.ACTION_STOP_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
@@ -58,10 +59,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
 
-            if (location != null && googleMap != null) {
-                moveCamara(12f)
+            sendCommandToService(ACTION_STOP_SERVICE)
 
-            }
+//            if (location != null && googleMap != null) {
+//                moveCamara(12f)
+//
+//            }
 
         }
     }

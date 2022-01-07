@@ -49,7 +49,6 @@ class MapService : LifecycleService() {
         val isTracking = MutableLiveData<Boolean>()
         val lastLocation = MutableLiveData<LatLng>()
 
-
     }
 
 
@@ -90,6 +89,7 @@ class MapService : LifecycleService() {
                 ACTION_STOP_SERVICE -> {
                     // do nothing for now
                     Log.i(TAG,"Stopped service")
+                    stopForeground(true)
                 }
 
 
@@ -190,7 +190,13 @@ class MapService : LifecycleService() {
             .setContentIntent(getMainActivityPendingIntent())
 
         startForeground(NOTIFICATION_ID, notificationBuilder.build())
+
     }
+
+
+
+
+
 
 
 
@@ -203,6 +209,7 @@ class MapService : LifecycleService() {
             it.action = ACTION_SHOW_TRACKING_FRAGMENT
         },
         FLAG_UPDATE_CURRENT
+
     )
 
 
