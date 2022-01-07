@@ -19,7 +19,7 @@ object MapUtility {
 
 
     fun requestPermission(fragment: Fragment) {
-        EasyPermissions.requestPermissions(
+         EasyPermissions.requestPermissions(
             fragment,
             "You need to accept location permission to find HotSpots",
             Constants.REQUEST_CODE_LOCATION_PERMISSION,
@@ -27,5 +27,7 @@ object MapUtility {
             Manifest.permission.ACCESS_FINE_LOCATION
         )
     }
+
+
 
 }

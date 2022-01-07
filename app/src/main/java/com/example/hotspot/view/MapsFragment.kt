@@ -50,13 +50,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMaps4Binding.bind(view)
 
-        requestLocPermission()
+        requestLocPermissionAndTrackLocation()
     }
 
 
 
 
-    private fun requestLocPermission() {
+    private fun requestLocPermissionAndTrackLocation() {
 
         if(MapUtility.hasLocationPermission(requireContext())) {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
@@ -64,15 +64,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         } else {
 
-            MapUtility.requestPermission(this)
+           val i = MapUtility.requestPermission(this)
         }
 
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-     //   requestLocPermission()
     }
 
 
@@ -80,6 +74,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        requestLocPermissionAndTrackLocation()
 
     }
 
@@ -88,7 +83,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         if(EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             AppSettingsDialog.Builder(this).build().show()
         } else {
-            requestLocPermission()
+            requestLocPermissionAndTrackLocation()
         }
 
     }
