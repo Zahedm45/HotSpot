@@ -2,6 +2,7 @@ package com.example.hotspot.view.createProfilePackage
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.CreateProfileAgeFragmentBinding
+import com.example.hotspot.other.ButtonAnimations
 import java.util.*
 
 class FragmentAge : Fragment() {
@@ -53,19 +55,18 @@ class FragmentAge : Fragment() {
 
         viewModel.getDateString().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             binding.dateButton.text = it.toString()
+            if(it.toString().isNotEmpty()){
+                ButtonAnimations.fadeIn(binding.continueButton)
+                Log.d("Empty", "Empty")
+            }
+            else{
+                ButtonAnimations.fadeOut(binding.continueButton)
+                Log.d("not", "not")
+            }
         })
 
-
-
     }
 
-    override fun onResume() {
-        super.onResume()
-
-
-
-
-    }
 
     private fun initDatePicker(){
         val c = Calendar.getInstance()

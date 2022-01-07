@@ -23,7 +23,6 @@ class FragmentGender : Fragment() {
     ): View {
         _binding = CreateProfileGenderFragmentBinding.inflate(inflater, container, false)
 
-
         return binding.root
     }
 
