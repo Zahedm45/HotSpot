@@ -14,7 +14,7 @@ object TrackingUtility {
         EasyPermissions.hasPermissions(
             context,
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
+ //           Manifest.permission.ACCESS_COARSE_LOCATION
         )
 
 
@@ -23,7 +23,7 @@ object TrackingUtility {
             fragment,
             "You need to accept location permission to find HotSpots",
             Constants.REQUEST_CODE_LOCATION_PERMISSION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
+ //           Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION
         )
     }
