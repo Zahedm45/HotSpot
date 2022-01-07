@@ -1,6 +1,5 @@
 package com.example.hotspot.other.service
 
-
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -57,9 +56,6 @@ class TrackingService : LifecycleService() {
 
     private fun postInitialValues() {
         isTracking.postValue(false)
- //       pathPoints.postValue()
-
-
     }
 
 
