@@ -17,6 +17,7 @@ import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.ktx.auth
@@ -54,8 +55,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
-            Log.i(TAG, "YOU CLICKED ME")
-           // it.setBackgroundColor(Color.BLUE)
+
+            if (location != null && googleMap != null) {
+                googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 10f))
+
+            }
+
+
         }
     }
 
@@ -178,9 +184,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    var circleAroundPos: Circle? = null
-    var circleAroundPos2: Circle? = null
-
+    private var circleAroundPos: Circle? = null
+    private var circleAroundPos2: Circle? = null
+    private var googleMap: GoogleMap? = null
 
 
 
@@ -198,7 +204,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync {
          //   marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
-            it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+            //it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+            googleMap = it
 
 
             circleAroundPos2 = it.addCircle(
