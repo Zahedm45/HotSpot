@@ -50,6 +50,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding = FragmentMaps4Binding.bind(view)
 
         requestLocPermissionAndTrackLocation()
+
+
+        binding.fragmentMapsMyLocationBtn.setOnClickListener {
+            Log.i(TAG, "YOU CLICKED ME")
+           // it.setBackgroundColor(Color.BLUE)
+        }
     }
 
 
