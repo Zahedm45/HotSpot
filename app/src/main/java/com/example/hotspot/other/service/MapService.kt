@@ -182,7 +182,7 @@ class MapService : LifecycleService() {
         val notificationBuilder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
             .setAutoCancel(true)
             .setOngoing(false)
-            .setSmallIcon(R.drawable.dancing_pic)
+            .setSmallIcon(R.drawable.dancing_icon_foreground)
             .setContentTitle("Running App")
             .setContentIntent(getMainActivityPendingIntent())
 
