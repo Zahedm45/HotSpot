@@ -3,6 +3,7 @@ package com.example.hotspot.view
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
+import android.location.Location
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -136,19 +137,23 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-
+    var location: LatLng? = null
 
     private fun observeUserPosition() {
 
 
-        MapService.lastLocation.observe(viewLifecycleOwner, Observer {
+        MapService.lastLocation.observe(viewLifecycleOwner, Observer { it ->
             if(it != null) {
 //                val i = it.last().last()
 //                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
                 val latitude =   it.latitude
                 val longitude =   it.longitude
-                val location = LatLng(latitude, longitude)
-                updateMarker(location)
+                location = LatLng(latitude, longitude)
+
+                location?.let {
+                    updateMarker(it)
+                }
+
             }
         })
 
@@ -177,11 +182,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     var circleAroundPos2: Circle? = null
 
 
+
+
     // private var markers: ArrayList<Marker> = ArrayList()
 
     private fun updateMarker(location: LatLng) {
-
-
 
 
 
@@ -193,7 +198,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync {
          //   marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
-            //it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+            it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
 
 
             circleAroundPos2 = it.addCircle(
@@ -202,7 +207,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     .radius(1000.0)
                     .strokeWidth(3f)
                     .strokeColor(Color.BLUE)
-                    .fillColor(Color.BLUE) )
+                    .fillColor(Color.CYAN) )
 
 
 
@@ -213,8 +218,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     .strokeWidth(3f)
                     .strokeColor(Color.GREEN)
                     .fillColor(Color.argb(70, 50, 100, 50)))
-
-
 
             isMakerShowing = true
 
