@@ -1,5 +1,6 @@
 package com.example.hotspot.view
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
@@ -193,6 +194,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     // private var markers: ArrayList<Marker> = ArrayList()
 
+    @SuppressLint("MissingPermission")
     private fun updateMarker(location: LatLng) {
 
 
@@ -209,9 +211,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             googleMap = it
 
 
-//            it.setMaxZoomPreference(14.0f)
-//            it.setMinZoomPreference(6.0f)
+/*            it.setMaxZoomPreference(14.0f)
+            it.setMinZoomPreference(6.0f)*/
 
+
+
+/*
             circleAroundPos2 = it.addCircle(
                 CircleOptions()
                     .center(location)
@@ -230,12 +235,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 //                    .strokeColor(Color.GREEN)
 //                    .fillColor(Color.argb(70, 50, 100, 50))
                     )
+*/
 
 
-
-            val zoom = it.cameraPosition.zoom
-
-//            it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoom))
+            it.isMyLocationEnabled = true
 
             if(!isMakerShowing) {
                 moveCamara(14f)
