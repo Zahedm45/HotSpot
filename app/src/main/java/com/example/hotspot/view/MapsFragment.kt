@@ -58,12 +58,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
 
             if (location != null && googleMap != null) {
-                googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 14f))
+                moveCamara(14f)
 
             }
 
         }
     }
+
 
 
 
@@ -207,13 +208,14 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             //it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
             googleMap = it
 
+
 //            it.setMaxZoomPreference(14.0f)
 //            it.setMinZoomPreference(6.0f)
 
             circleAroundPos2 = it.addCircle(
                 CircleOptions()
                     .center(location)
-                    .radius(100.0)
+                    .radius(10.0)
                     .strokeWidth(3f)
                     .strokeColor(Color.BLUE)
                     .fillColor(Color.CYAN) )
@@ -223,16 +225,24 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             circleAroundPos = it.addCircle(
                 CircleOptions()
                     .center(location)
-                    .radius(400.0)
-                    .strokeWidth(3f)
-                    .strokeColor(Color.GREEN)
-                    .fillColor(Color.argb(70, 50, 100, 50)))
+//                    .radius(140.0)
+//                    .strokeWidth(3f)
+//                    .strokeColor(Color.GREEN)
+//                    .fillColor(Color.argb(70, 50, 100, 50))
+                    )
 
+
+
+            val zoom = it.cameraPosition.zoom
+
+//            it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, zoom))
 
             if(!isMakerShowing) {
-                it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 14f))
+                moveCamara(14f)
                 isMakerShowing = true
             }
+
+
 
         }
 
@@ -256,6 +266,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 //        }
 
     }
+
+
+
+    private fun moveCamara(zoom: Float) {
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, zoom))
+    }
+
+
+
+
 
 
 
