@@ -55,15 +55,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         requestLocPermissionAndTrackLocation()
 
-
-        binding.fragmentMapsMyLocationBtn.setOnClickListener {
-
-            if (location != null && googleMap != null) {
-                moveCamara(14f)
-
-            }
-
-        }
+//
+//        binding.fragmentMapsMyLocationBtn.setOnClickListener {
+//
+//            if (location != null && googleMap != null) {
+//                moveCamara(14f)
+//
+//            }
+//
+//        }
     }
 
 
