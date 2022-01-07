@@ -29,7 +29,7 @@ import pub.devrel.easypermissions.EasyPermissions
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
-    var isMakerShowing = false
+    private var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
 
     private var marker: Marker? = null
@@ -63,8 +63,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             observeUserPosition()
 
         } else {
-
-           val i = MapUtility.requestPermission(this)
+            MapUtility.requestPermission(this)
         }
 
     }

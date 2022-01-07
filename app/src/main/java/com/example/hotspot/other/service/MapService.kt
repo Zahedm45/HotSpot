@@ -40,7 +40,7 @@ import com.google.android.gms.maps.model.LatLng
 
 class MapService : LifecycleService() {
     var isFirstRun = true
-    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
 
 
