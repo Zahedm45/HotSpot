@@ -59,7 +59,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
 
             if (location != null && googleMap != null) {
-                moveCamara(14f)
+                moveCamara(12f)
 
             }
 
@@ -238,9 +238,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
             it.isMyLocationEnabled = true
             it.uiSettings.isMyLocationButtonEnabled = false
-
             if(!isMakerShowing) {
-                moveCamara(14f)
+                moveCamara(12f)
                 isMakerShowing = true
             }
 
