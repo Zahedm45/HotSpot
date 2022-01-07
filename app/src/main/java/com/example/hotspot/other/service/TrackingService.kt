@@ -40,9 +40,6 @@ import timber.log.Timber
 
 
 
-//typealias Polyline = MutableList<LatLng>
-//typealias Polylines = MutableList<Polyline>
-
 class TrackingService : LifecycleService() {
     var isFirstRun = true
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
