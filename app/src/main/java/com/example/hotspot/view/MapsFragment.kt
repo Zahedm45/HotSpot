@@ -55,15 +55,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         requestLocPermissionAndTrackLocation()
 
-//
-//        binding.fragmentMapsMyLocationBtn.setOnClickListener {
-//
-//            if (location != null && googleMap != null) {
-//                moveCamara(14f)
-//
-//            }
-//
-//        }
+
+        binding.fragmentMapsMyLocationBtn.setOnClickListener {
+
+            if (location != null && googleMap != null) {
+                moveCamara(14f)
+
+            }
+
+        }
     }
 
 
@@ -168,7 +168,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-//        TrackingService.pathPoints.observe(viewLifecycleOwner, Observer {
+//        TrackingService.lastLocation.observe(viewLifecycleOwner, Observer {
 //            if(it.last().isNotEmpty()) {
 ////                val i = it.last().last()
 ////                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
@@ -239,6 +239,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
             it.isMyLocationEnabled = true
+            it.uiSettings.isMyLocationButtonEnabled = false
 
             if(!isMakerShowing) {
                 moveCamara(14f)
