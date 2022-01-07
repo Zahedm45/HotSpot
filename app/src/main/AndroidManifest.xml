@@ -18,6 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotSpot">
         <activity
+            android:name=".view.NewMessageActivity"
+            android:exported="true" />
+<!--            meta-data part added at 15:15 or so in video 4-->
+             <meta-data android:name="android.support.PARENT_ACTIVITY"
+                 android:value=".view.LatestMessagesActivity"/>
+
+        <activity
             android:name=".view.LatestMessagesActivity"
             android:exported="true" />
         <activity
