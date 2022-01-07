@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.AfterLoginActivity
@@ -79,6 +81,11 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         }
 
         binding.phoneAuthContinueButton.setOnClickListener{
+            val animation_up = AnimationUtils.loadAnimation(this, R.anim.scale_button_up)
+            binding.phoneAuthContinueButton.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this, R.anim.scale_button_down)
+            binding.phoneAuthContinueButton.startAnimation(animation_down)
+
             if(binding.phoneNumberEditText.text.isEmpty()){
                 Toast.makeText(this,"Please enter a phone number.",Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -88,10 +95,18 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         }
 
         binding.submitButton.setOnClickListener{
+            val animation_up = AnimationUtils.loadAnimation(this, R.anim.scale_button_up)
+            binding.submitButton.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this, R.anim.scale_button_down)
+            binding.submitButton.startAnimation(animation_down)
             verifyPhoneNumberWithCode(verifyID, binding.verifyCodeTextEdit.text.toString().trim())
         }
 
         binding.resendText.setOnClickListener{
+            val animation_up = AnimationUtils.loadAnimation(this, R.anim.scale_button_up)
+            binding.resendText.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this, R.anim.scale_button_down)
+            binding.resendText.startAnimation(animation_down)
             val phoneNumber = binding.phoneNumberEditText.text.toString().trim()
             resendVerificationCode(phoneNumber, forceResendtingToken)
         }
