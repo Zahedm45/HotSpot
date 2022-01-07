@@ -29,7 +29,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(menuRes, menu)
+        menuInflater.inflate(R.menu.nav_top_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
     //Refer to 9:00 of video 4 to create menuRes

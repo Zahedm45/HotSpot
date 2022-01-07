@@ -22,10 +22,12 @@ class NewMessageActivity : AppCompatActivity() {
         supportActionBar?.title = "Select a Person"
 
         val adapter = GroupAdapter<ViewHolder>()
-        adapter.add
+        adapter.add(UserItem())
+
+
 
         recyclerView = findViewById(R.id.recyclerview_newMessage)
-        recyclerView.adapter
+        recyclerView.adapter = adapter
         //layoutmanager set in xml file -> recyclerView.layoutManager = LinearLayoutManager(this)
 
 
