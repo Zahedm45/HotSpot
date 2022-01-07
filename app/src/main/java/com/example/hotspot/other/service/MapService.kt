@@ -35,7 +35,6 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.model.LatLng
-import timber.log.Timber
 
 
 
@@ -59,6 +58,7 @@ class MapService : LifecycleService() {
     }
 
 
+    @SuppressLint("VisibleForTests")
     override fun onCreate() {
         super.onCreate()
         postInitialValues()
@@ -73,6 +73,7 @@ class MapService : LifecycleService() {
 
 
 
+    @SuppressLint("LogNotTimber")
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.let {
             when (it.action) {
@@ -81,15 +82,18 @@ class MapService : LifecycleService() {
                         startForegroundService()
                         isFirstRun = false
                     } else {
-                        Timber.d("Resuming service...")
+                        Log.i(TAG,"Resuming service...")
                     }
                 }
                 ACTION_PAUSE_SERVICE -> {
-                    Timber.d("Paused service")
+                    Log.i(TAG,"Paused service")
                 }
                 ACTION_STOP_SERVICE -> {
-                    Timber.d("Stopped service")
+                    Log.i(TAG,"Stopped service")
                 }
+
+
+                else -> {Log.i(TAG, "Messages is not found")}
             }
         }
         return super.onStartCommand(intent, flags, startId)
@@ -138,7 +142,6 @@ class MapService : LifecycleService() {
                     for (location in locations) {
                         addLastLocation(location)
                     }
-
                 }
 
             }
@@ -155,9 +158,7 @@ class MapService : LifecycleService() {
             if (!lastLocation.equals(position)) {
                 lastLocation.postValue(position)
             }
-
-            Log.i(TAG, "New locaiton: ${lastLocation.value?.latitude} and ${lastLocation.value?.longitude}")
-
+//            Log.i(TAG, "New location: ${lastLocation.value?.latitude} and ${lastLocation.value?.longitude}")
         }
 
     }
