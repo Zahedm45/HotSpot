@@ -2,6 +2,7 @@ package com.example.hotspot.view
 
 import android.os.Bundle
 import android.view.*
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import android.widget.Button
 import androidx.navigation.NavController
@@ -41,7 +42,13 @@ class PersonalProfile : Fragment(),View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.fragment_personal_profile_editProfile_btn).setOnClickListener(this)
+        binding.fragmentPersonalProfileEditProfileBtn.setOnClickListener{
+            val animation_up = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_up)
+            binding.fragmentPersonalProfileEditProfileBtn.startAnimation(animation_up)
+            val animation_down = AnimationUtils.loadAnimation(this.requireContext(), R.anim.scale_button_down)
+            binding.fragmentPersonalProfileEditProfileBtn.startAnimation(animation_down)
+            this
+        }
 
     }
 
