@@ -25,6 +25,47 @@
         app:layout_constraintTop_toTopOf="parent"
          />
 
+    <ImageButton
+        android:id="@+id/fragment_maps_my_location_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_btn"
+        android:focusable="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="6dp"
+
+        android:src="@drawable/ic_round_my_location_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <!--
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fragment_maps_my_location_btn"
+            android:layout_width="66dp"
+            android:layout_height="69dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/circle_for_profile_picture"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.953"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            android:src="@drawable/ic_round_my_location_24"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_maps_my_location_btn"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_maps_my_location_btn"
+            app:layout_constraintStart_toStartOf="@+id/fragment_maps_my_location_btn"
+            app:layout_constraintTop_toTopOf="@+id/fragment_maps_my_location_btn" />-->
+
 
     <!--    <Button
             android:id="@+id/foreground_only_location_button"

@@ -76,6 +76,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_crop_portrait_24.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/person.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/round_btn.xml" value="0.3921875" />
         <entry key="app/src/main/res/layout-w936dp/map_for_test.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_after_login.xml" value="0.10833333333333334" />
         <entry key="app/src/main/res/layout/activity_create_profile.xml" value="0.22" />

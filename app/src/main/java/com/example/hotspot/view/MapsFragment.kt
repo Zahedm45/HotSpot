@@ -2,6 +2,7 @@ package com.example.hotspot.view
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Color
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -16,9 +17,7 @@ import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -166,18 +165,51 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-   // private var markers: ArrayList<Marker> = ArrayList()
+
+
+    var circleAroundPos: Circle? = null
+    var circleAroundPos2: Circle? = null
+
+
+    // private var markers: ArrayList<Marker> = ArrayList()
 
     private fun updateMarker(location: LatLng) {
 
 
 
-        marker?.remove()
+
+
+        //marker?.remove()
+        circleAroundPos?.remove()
+        circleAroundPos2?.remove()
+
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync {
-            marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
-            it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+         //   marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
+            //it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+
+
+            circleAroundPos2 = it.addCircle(
+                CircleOptions()
+                    .center(location)
+                    .radius(1000.0)
+                    .strokeWidth(3f)
+                    .strokeColor(Color.BLUE)
+                    .fillColor(Color.BLUE) )
+
+
+
+            circleAroundPos = it.addCircle(
+                CircleOptions()
+                    .center(location)
+                    .radius(4000.0)
+                    .strokeWidth(3f)
+                    .strokeColor(Color.GREEN)
+                    .fillColor(Color.argb(70, 50, 100, 50)))
+
+
+
             isMakerShowing = true
 
         }

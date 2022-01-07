@@ -158,7 +158,7 @@ class MapService : LifecycleService() {
             if (!lastLocation.equals(position)) {
                 lastLocation.postValue(position)
             }
-//            Log.i(TAG, "New location: ${lastLocation.value?.latitude} and ${lastLocation.value?.longitude}")
+            Log.i(TAG, "New location: ${lastLocation.value?.latitude} and ${lastLocation.value?.longitude}")
         }
 
     }

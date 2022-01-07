@@ -13,6 +13,10 @@
     <color name="light_gold">#EAC690</color>
     <color name="blue">#EB11E6D2</color>
 
+    <color name="soft_cyan">#add8e6</color>
 
-    <color name="yellow">#2B2B2B</color>
+
+
+
+    <color name="yellow">#add8e6</color>
 </resources>
