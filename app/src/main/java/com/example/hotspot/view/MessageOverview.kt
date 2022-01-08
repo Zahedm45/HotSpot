@@ -11,7 +11,7 @@ import com.example.hotspot.R
 import com.example.hotspot.other.UtilView
 
 
-class MessageOverview : Fragment(), View.OnClickListener {
+abstract class MessageOverview : Fragment(), View.OnClickListener {
 
     lateinit var navController : NavController
 

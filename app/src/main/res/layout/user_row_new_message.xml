@@ -39,7 +39,7 @@
                 android:layout_toEndOf="@id/profile_pic_chat">
 
                 <TextView
-                    android:id="@+id/message_name"
+                    android:id="@+id/row_message_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"

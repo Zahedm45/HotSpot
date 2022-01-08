@@ -77,24 +77,5 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_menu_icon" />
 
-    <com.gigamole.navigationtabstrip.NavigationTabStrip
-
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="70dp"
-        app:nts_active_color="#673AB7"
-        app:nts_animation_duration="300"
-        app:nts_color="#D9673AB7"
-        app:nts_corners_radius="50dp"
-        app:nts_factor="2.5"
-        app:nts_gravity="top"
-        app:nts_inactive_color="#c4c4c4"
-        app:nts_size="15sp"
-        app:nts_titles="@array/titles"
-        app:nts_type="line"
-        app:nts_typeface="fonts/typeface.otf"
-        app:nts_weight="5dp" />
-
-
 
 </FrameLayout>
