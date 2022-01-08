@@ -75,9 +75,7 @@
 
 
 
-        <activity
-            android:name=".view.CreateProfileActivity"
-            android:exported="false" />
+
 
         <service
             android:name=".other.service.MapService"

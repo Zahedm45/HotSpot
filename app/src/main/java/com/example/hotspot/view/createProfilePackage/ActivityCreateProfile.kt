@@ -6,11 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityCreateProfileV2Binding
-import com.example.hotspot.viewModel.CreateProfileController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class ActivityCreateProfile : AppCompatActivity() {
 
