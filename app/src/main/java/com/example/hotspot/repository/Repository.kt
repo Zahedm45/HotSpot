@@ -380,7 +380,7 @@ class Repository {
 
 
         fun getHotSpots(
-            onSuccess: ((hotSpots: QuerySnapshot) -> Unit)?,
+            onSuccess: ((hotSpots: ArrayList<HotSpot>) -> Unit)?,
             onFailure: ((msg: String) -> Unit)?
         ) {
 
@@ -390,33 +390,11 @@ class Repository {
             colRef.get()
                 .addOnSuccessListener {document ->
                     document?.let {
-                        val hotSpots: ArrayList<HotSpot>
+                        val hotSpots: ArrayList<HotSpot> = ArrayList()
                         it.forEach { crrHotspot ->
-
-
                             val hotSpot = crrHotspot.toObject<HotSpot>()
-                            hotSpots.add()
+                            hotSpots.add(hotSpot)
 
-
-/*                            val name = crrHotspot.get("hotSpotName")
-                            val address = crrHotspot.getGeoPoint("address")
-                            val overallRating = crrHotspot.getDouble("overallRating")
-
-                            val ss: ArrayList<String> = ArrayList<String>()
-
-                            val checkedIn = crrHotspot.get("ccj", ss)
-
-                            //Log.i(TAG, "hotspots..${address?.latitude.toString()} and ${address?.longitude.toString()}")
-
-                            val hotspot = address?.let {
-                                HotSpot(
-                                    hotSpotName = name.toString(),
-                                    address = it,
-                                    overallRating = overallRating,
-                                    checkedIn = checkedIn
-
-                                )
-                            }*/
                         }
 
 
