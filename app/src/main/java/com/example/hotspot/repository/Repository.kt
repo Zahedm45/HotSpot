@@ -233,6 +233,10 @@ class Repository {
             else return false
         }
 
+
+
+
+
         fun getUserPicFromDB(updateUI: (it: ByteArray?) -> Unit) {
 
             val fbUser = Firebase.auth.currentUser
@@ -370,6 +374,21 @@ class Repository {
 
 
         fun getHotSpots() {
+
+            val db = Firebase.firestore
+            val docRef = db.collection("hotSpots")
+
+            docRef.get()
+                .addOnSuccessListener {
+                    if(it != null) {
+                        Log.i(TAG, "hotspots..${it.documents}")
+                    }
+
+
+
+                }
+
+
 
         }
 
