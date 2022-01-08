@@ -17,6 +17,7 @@ import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
+import com.example.hotspot.viewModel.MapsAndHotspotsVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -58,10 +59,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
 
-            if (location != null && googleMap != null) {
-                moveCamara(12f)
+            MapsAndHotspotsVM.showHotSpots()
 
-            }
+//            if (location != null && googleMap != null) {
+//                moveCamara(12f)
+//
+//            }
 
         }
     }

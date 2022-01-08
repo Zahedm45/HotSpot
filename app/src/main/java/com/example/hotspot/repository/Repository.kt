@@ -3,12 +3,16 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.graphics.Bitmap
+import android.location.Location
 import android.util.Log
+import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -373,22 +377,58 @@ class Repository {
 
 
 
-        fun getHotSpots() {
+        fun getHotSpots(
+            onSuccess: ((hotSpots: QuerySnapshot) -> Unit)?,
+            onFailure: ((msg: String) -> Unit)?
+        ) {
 
             val db = Firebase.firestore
-            val docRef = db.collection("hotSpots")
+            val colRef = db.collection("hotSpots")
 
-            docRef.get()
-                .addOnSuccessListener {
-                    if(it != null) {
-                        Log.i(TAG, "hotspots..${it.documents}")
+            colRef.get()
+                .addOnSuccessListener {document ->
+                    document?.let { hotSpots ->
+                        hotSpots.forEach { crrHotspot ->
+
+                            val name = crrHotspot.get("hotSpotName")
+                            val address = crrHotspot.getGeoPoint("address")
+                            val overallRating = crrHotspot.getDouble("overallRating")
+                            val checkedIn = crrHotspot.get("checkedIn", ArrayList<String>())
+
+                            Log.i(TAG, "hotspots..${address?.latitude.toString()} and ${address?.longitude.toString()}")
+
+                            val hotspot = address?.let {
+                                HotSpot(
+                                    hotSpotName = name.toString(),
+                                    address = it,
+                                    overallRating = overallRating,
+                                    checkedIn = checkedIn
+
+                                )
+                            }
+                        }
+
+
+
+
+//
+//                        if (onSuccess != null) {
+//
+//                            onSuccess(it)
+//                        }
+
+                        //    Log.i(TAG, "hotspots..${it.documents}")
                     }
 
 
 
                 }
 
-
+//                .addOnFailureListener {
+//                    it.message?.let {
+//                            it1 -> onFailure(it1)
+//                    }
+//                }
 
         }
 
