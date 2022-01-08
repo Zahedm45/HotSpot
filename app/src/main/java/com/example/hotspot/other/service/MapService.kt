@@ -90,6 +90,7 @@ class MapService : LifecycleService() {
                     // do nothing for now
                     Log.i(TAG,"Stopped service")
                     stopForeground(true)
+
                 }
 
 
