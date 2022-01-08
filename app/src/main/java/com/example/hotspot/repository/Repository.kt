@@ -369,6 +369,12 @@ class Repository {
 
 
 
+        fun getHotSpots() {
+
+        }
+
+
+
 
 
 
