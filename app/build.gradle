@@ -58,8 +58,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
 
-    implementation 'com.xwray:groupie:2.1.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'pub.devrel:easypermissions:2.0.1'
 
@@ -77,10 +75,14 @@ dependencies {
 
     //Groupie
     implementation 'com.xwray:groupie:2.1.0'
-    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.1.0"
+    implementation 'com.xwray:groupie-databinding:2.1.0'
+
+    //implementation "com.github.lisawray.groupie:groupie-viewbinding:2.10.0"
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 
     // pls do not update this dependency, bugs could occur...
     implementation 'com.google.android.gms:play-services-location:17.1.0'
