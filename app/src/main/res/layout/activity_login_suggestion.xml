@@ -31,7 +31,7 @@
         android:ems="8"
         android:padding="20dp"
         android:text="@string/log_in2"
-        android:fontFamily="@font/poppins_semibold"
+        android:fontFamily="@font/poppins_light"
         android:textSize="16sp"/>
 
     <TextView
@@ -41,7 +41,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/poppins_light"
         android:gravity="center"
-        android:text="@string/glemt_log_in"
+        android:text="@string/Forgot_login"
         android:textColor="#99FFFFFF"
         android:textSize="12sp"/>
 

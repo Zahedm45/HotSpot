@@ -22,7 +22,7 @@
     <string name="password">kodeord</string>
     <string name="repeat_password">gentag kodeord</string>
     <string name="log_in2">Log In</string>
-    <string name="glemt_log_in">Glemt log in</string>
+    <string name="Forgot_login">Forgot login info?</string>
     <string name="password2">Password</string>
     <string name="bio_text">Statusbesked</string>
     <string name="kvinde">Kvinde</string>
