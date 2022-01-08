@@ -10,9 +10,11 @@ import android.provider.MediaStore
 import android.widget.Toast
 import com.example.hotspot.databinding.ActivityCreateProfileBinding
 import com.example.hotspot.viewModel.CreateProfileController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class CreateProfileActivity : AppCompatActivity() {
-    private lateinit var createProfileVM : CreateProfileController
+    private lateinit var createProfileVM: CreateProfileController
     private var progressDialog: ProgressDialog? = null
 
 
@@ -27,7 +29,7 @@ class CreateProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        createProfileVM = CreateProfileController(this,  binding)
+        createProfileVM = CreateProfileController(this, binding)
 
 
         progressDialog = ProgressDialog(this)
@@ -49,16 +51,14 @@ class CreateProfileActivity : AppCompatActivity() {
             progressDialog!!.show()
             createProfileVM.createNewProfile(bitMap, { ->
                 updateUIOnSuccess()
-                                                     },
-                {
-                        msg -> updateUIOnFailure(msg)
+            },
+                { msg ->
+                    updateUIOnFailure(msg)
                 }
             )
 
         }
     }
-
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -72,9 +72,6 @@ class CreateProfileActivity : AppCompatActivity() {
 
         }
     }
-
-
-
 
 
     private fun updateUIOnSuccess() {
@@ -93,14 +90,4 @@ class CreateProfileActivity : AppCompatActivity() {
         progressDialog?.dismiss()
         Toast.makeText(baseContext, message, Toast.LENGTH_LONG).show()
     }
-
-
-
-
-
-
-
-
-
-
 }

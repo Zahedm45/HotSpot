@@ -8,5 +8,5 @@ data class User(
     var emailAddress: String,
     var bio: String? = null,
     val gender: String,
-    var bitmapImg: String = null
+    var bitmapImg: bitMap = null
 ){}

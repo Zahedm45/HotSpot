@@ -76,9 +76,8 @@ dependencies {
     implementation 'com.github.devlight.navigationtabstrip:navigationtabstrip:+'
 
     //Groupie
-    implementation 'com.xwray:groupie:2.1.0'
-    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.1.0"
-
+    implementation "com.github.lisawray.groupie:groupie:2.8.0"
+    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.8.0"
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
