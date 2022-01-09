@@ -317,6 +317,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             val lat = crrHotSpot.address?.latitude
             val lng = crrHotSpot.address?.longitude
             val name = crrHotSpot.hotSpotName.toString()
+            val rating = crrHotSpot.overallRating
 
             if (lat != null && lng != null) {
                 val location = LatLng(lat, lng)
@@ -325,6 +326,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                         MarkerOptions()
                             .position(location)
                             .title(name)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
+
                     )?.apply {
                         Log.i(TAG, "Tss ${this.id}")
                         this.showInfoWindow()
