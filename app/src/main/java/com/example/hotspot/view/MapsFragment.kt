@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
+import com.example.hotspot.model.HotSpot
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
@@ -67,7 +68,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         }
 
-        upDateHotSpots()
+
     }
 
 
@@ -193,21 +194,23 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var circleAroundPos: Circle? = null
     private var circleAroundPos2: Circle? = null
     private var googleMap: GoogleMap? = null
+    private var mapFragment: SupportMapFragment? = null
 
-    var  googleMap2: MutableLiveData<GoogleMap>? = GoogleMap
 
 
-    private fun upDateHotSpots() {
 
-        googleMap2?.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                MapsAndHotspotsVM.showHotSpots(it)
-                googleMap2!!.removeObservers(viewLifecycleOwner)
-            }
 
-        })
-
-    }
+//    private fun upDateHotSpots() {
+//
+//        googleMap2?.observe(viewLifecycleOwner, Observer {
+//            if (it != null) {
+//
+//                googleMap2!!.removeObservers(viewLifecycleOwner)
+//            }
+//
+//        })
+//
+//    }
 
 
 
@@ -220,14 +223,17 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         circleAroundPos?.remove()
         circleAroundPos2?.remove()
 
+      //  mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        if (mapFragment == null) {
+            mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        }
+
 
         mapFragment?.getMapAsync {
          //   marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
             //it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
-            googleMap2 = MutableLiveData()
-            googleMap2!!.value = it
+
             googleMap = it
 
 
@@ -262,6 +268,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             it.isMyLocationEnabled = true
             it.uiSettings.isMyLocationButtonEnabled = false
             if(!isMakerShowing) {
+                MapsAndHotspotsVM.showHotSpots({hotSpots -> onSuccess(hotSpots)})
                 moveCamara(12f)
                 isMakerShowing = true
             }
@@ -298,8 +305,30 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+    private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
 
+        hotSpots.forEach { crrHotSpot ->
+            val lat = crrHotSpot.address?.latitude
+            val lng = crrHotSpot.address?.longitude
+            val name = crrHotSpot.hotSpotName.toString()
 
+            if (lat != null && lng != null) {
+                val location = LatLng(lat, lng)
+                googleMap?.let {
+                    it.addMarker(
+                        MarkerOptions()
+                            .position(location)
+                            .title(name)
+                    )?.apply {
+                        Log.i(TAG, "Tss ${this.id}")
+                        this.showInfoWindow()
+                    }
+
+                }
+            }
+        }
+
+    }
 
 
 

@@ -18,8 +18,7 @@ class MapsAndHotspotsVM {
 
 
 
-        fun showHotSpots(googleMap: GoogleMap) {
-            this.googleMap = googleMap
+        fun showHotSpots(onSuccess: (hotSpots: ArrayList<HotSpot>) -> Unit) {
 
             Repository.getHotSpots({ hotSpots -> onSuccess(hotSpots)}, null)
 
@@ -27,36 +26,10 @@ class MapsAndHotspotsVM {
 
 
 
-
-
-
-
-
-
         }
 
 
 
-
-
-
-
-        private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
-
-
-
-                    val lat = hotSpots.get(0).address?.latitude
-                    val lng = hotSpots.get(0).address?.longitude
-
-                Log.i(TAG, "you.. $lat")
-
-                    if (lat != null && lng != null) {
-                        val location = LatLng(lat, lng)
-                        googleMap?.addMarker(MarkerOptions().position(location).title("Your current location"))
-                    }
-
-
-        }
 
 
 
