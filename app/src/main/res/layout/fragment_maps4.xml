@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
 
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/round_btn"
         android:clickable="true"
         android:focusable="true"
