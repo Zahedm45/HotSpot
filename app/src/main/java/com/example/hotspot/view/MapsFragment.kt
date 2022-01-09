@@ -17,6 +17,7 @@ import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
+import com.example.hotspot.view.infoWindow.InfoWindow
 import com.example.hotspot.viewModel.MapsAndHotspotsVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -299,17 +300,26 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             if (lat != null && lng != null) {
                 val location = LatLng(lat, lng)
                 googleMap?.let {
+
                     it.addMarker(
                         MarkerOptions()
                             .position(location)
                             .title(name)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
+//                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
                             .snippet("Rating: $rating")
+
+
+
 
                     )?.apply {
                         Log.i(TAG, "Tss ${this.id}")
                         this.showInfoWindow()
                     }
+
+
+
+                    it.setInfoWindowAdapter(InfoWindow(requireContext()))
+                    it.setOnInfoWindowClickListener{false}
 
 
                 }
