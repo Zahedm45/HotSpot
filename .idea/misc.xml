@@ -73,6 +73,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/drawable-xxxhdpi/background_border.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable-xxxhdpi/ic_directions_run_black_24dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/border_for_info_window.xml" value="0.3861538461538462" />
         <entry key="app/src/main/res/drawable/dancing_icon_background.xml" value="0.11296296296296296" />
         <entry key="app/src/main/res/drawable/direction_run_black.xml" value="0.26481481481481484" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.3921875" />
