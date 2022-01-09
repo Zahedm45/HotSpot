@@ -13,6 +13,10 @@ import com.example.hotspot.other.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AfterLoginActivity: AppCompatActivity() {
 
@@ -31,10 +35,17 @@ class AfterLoginActivity: AppCompatActivity() {
             when(destination.id){
                 R.id.chat -> {
                 btn.animate().apply {
-                    duration = 110
-                    this.alpha(0.1f)
-                }.start()}
-                else -> btn.visibility = View.VISIBLE
+                    duration = 150
+                    this.alpha(0f)
+                }.withEndAction { btn.visibility = View.GONE }.start()
+                }
+                else -> {
+                    btn.visibility = View.VISIBLE
+                    btn.animate().apply {
+                        duration = 150
+                        this.alpha(1f)
+                    }.start()
+                }
             }
         }
     }
