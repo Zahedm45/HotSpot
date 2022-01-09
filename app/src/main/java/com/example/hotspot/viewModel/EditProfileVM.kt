@@ -33,8 +33,8 @@ class EditProfileVM {
 
 
 
-            binding.editProfileNewEmail.setText(userProfile.emailAddress)
-            binding.editProfileBioText.setText(userProfile.bio)
+            binding.editProfileNewEmail.setHint(userProfile.emailAddress)
+            binding.editProfileBioText.setHint(userProfile.bio)
 
             if (userPic != null) {
                 binding.fragmentEditProfileEditPicture.setImageBitmap(userPic)
