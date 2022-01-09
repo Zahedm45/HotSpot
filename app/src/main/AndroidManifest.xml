@@ -56,7 +56,9 @@
 
         <activity
             android:name=".view.AfterLoginActivity"
-            android:exported="false">
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing"
+            >
 
 <!--            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

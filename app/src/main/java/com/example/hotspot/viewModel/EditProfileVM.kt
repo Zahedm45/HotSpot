@@ -33,7 +33,6 @@ class EditProfileVM {
 
 
 
-            binding.editProfileNewName.setText(userProfile.name)
             binding.editProfileNewEmail.setText(userProfile.emailAddress)
             binding.editProfileBioText.setText(userProfile.bio)
 
@@ -48,15 +47,6 @@ class EditProfileVM {
 
 
         fun updateUserProfile(bitMap: Bitmap?) {
-            val password = binding.editProfilePassword.text.toString()
-            if (password != userProfile.password) {
-                Toast.makeText(fragment.context, "Koden passe ikke! ", Toast.LENGTH_SHORT).show()
-                return
-            }
-
-
-
-
             counter2 = 0
             counter1 = 0
 
@@ -67,17 +57,10 @@ class EditProfileVM {
             }
 
 
-            val newName = binding.editProfileNewName.text.toString()
             val email = binding.editProfileNewEmail.text.toString()
             val newBio = binding.editProfileBioText.text.toString()
 
             val strArr = ArrayList<String>()
-
-
-            if (newName != userProfile.name) {
-                strArr.add("name")
-                strArr.add(newName)
-            }
 
             if (email != userProfile.emailAddress){
                 // not doing anything for now...

@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
+import com.example.hotspot.other.UtilView
 import com.example.hotspot.viewModel.EditProfileVM
 
 class EditProfile : Fragment(R.layout.fragment_edit_profile) {
@@ -51,6 +52,10 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
+        }
+
+        binding.tvSignOut.setOnClickListener{
+            UtilView.signOut(this.requireActivity())
         }
 
         binding.editProfileSaveChangeBtn.setOnClickListener {

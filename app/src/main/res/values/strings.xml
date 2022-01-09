@@ -10,7 +10,7 @@
     <string name="map">Map</string>
     <string name="log_in">Log in</string>
     <string name="opret_profil">opret profil</string>
-    <string name="edit_profil">Rediger profil</string>
+    <string name="edit_profil">Edit Profile</string>
     <string name="username">Username</string>
     <string name="e_mail">Email</string>
     <string name="name">Navn</string>
@@ -53,7 +53,10 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="i_did_not_receive_a_verification_code_resend">I did not receive a verification code? <b>Resend</b></string>
-    <string name="sign_out">"Sign out"</string>
+    <string name="sign_out">Sign out</string>
+    <string name="Submit_changes">Submit changes</string>
+    <string name="change_profile_message">Profile message</string>
+    <string name="delete_account">Delete account</string>
 
 
 </resources>
