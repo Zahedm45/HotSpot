@@ -21,7 +21,7 @@
 
     <string name="password">kodeord</string>
     <string name="repeat_password">gentag kodeord</string>
-    <string name="log_in2">Log In</string>
+    <string name="log_in2">Sign in</string>
     <string name="Forgot_login">Forgot login info?</string>
     <string name="password2">Password</string>
     <string name="bio_text">Enter profile text</string>

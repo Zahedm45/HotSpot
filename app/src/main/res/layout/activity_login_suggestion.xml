@@ -15,13 +15,6 @@
         android:layout_height="90dp"
         android:src="@drawable/hotspot_logo" />
 
-
-
-
-
-
-
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/activity_login_login_btn"
         android:layout_width="match_parent"
@@ -29,10 +22,10 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/button_empty"
         android:ems="8"
-        android:padding="20dp"
+        android:padding="16dp"
         android:text="@string/log_in2"
         android:fontFamily="@font/poppins_light"
-        android:textSize="16sp"/>
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/activity_login_forgotPassword"
@@ -49,10 +42,10 @@
         android:id="@+id/activity_login_create_profile_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_filled"
         android:ems="8"
-android:padding="20dp"
+        android:padding="16dp"
         android:fontFamily="@font/poppins_light"
         android:drawableStart="@drawable/phone_vector"
         android:text="Sign up with phone"
