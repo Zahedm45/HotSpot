@@ -22,18 +22,6 @@ class MapsAndHotspotsVM {
 
 
 
-
-
-
-//
-//        private fun onSuccess(documents: QuerySnapshot): ArrayList<HotSpot> {
-//
-//            documents.forEach {
-//                it.get("na")
-//            }
-//
-//        }
-
     }
 
 
