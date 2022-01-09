@@ -1,5 +1,6 @@
 package com.example.hotspot.view
 
+import android.content.ClipData
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
@@ -9,8 +10,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 
@@ -52,12 +53,9 @@ class NewMessageActivity : AppCompatActivity() {
     // the name element in the fragment to the real database name.
 
 class UserItem(val user: User): Item() {
-
-
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
         viewHolder.itemView.row_message_name.text = user.name
-        viewHolder.itemView.profile_pic_chat.setImageBitmap(user.bitmapImg)
     }
 
     override fun getLayout(): Int {
