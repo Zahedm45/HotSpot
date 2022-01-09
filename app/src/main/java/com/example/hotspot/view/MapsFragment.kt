@@ -3,13 +3,12 @@ package com.example.hotspot.view
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.Color
-import android.location.Location
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
@@ -59,14 +58,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
 
-            MapsAndHotspotsVM.showHotSpots()
+          //  MapsAndHotspotsVM.showHotSpots(binding, mapFragment)
 
-//            if (location != null && googleMap != null) {
-//                moveCamara(12f)
-//
-//            }
+            if (location != null && googleMap != null) {
+                moveCamara(12f)
+
+            }
 
         }
+
+        upDateHotSpots()
     }
 
 
@@ -162,7 +163,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 location = LatLng(latitude, longitude)
 
                 location?.let {
-                    updateMarker(it)
+                    updateBlueDot(it)
                 }
 
             }
@@ -193,12 +194,27 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var circleAroundPos2: Circle? = null
     private var googleMap: GoogleMap? = null
 
+    var  googleMap2: MutableLiveData<GoogleMap>? = GoogleMap
+
+
+    private fun upDateHotSpots() {
+
+        googleMap2?.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                MapsAndHotspotsVM.showHotSpots(it)
+                googleMap2!!.removeObservers(viewLifecycleOwner)
+            }
+
+        })
+
+    }
+
 
 
     // private var markers: ArrayList<Marker> = ArrayList()
 
     @SuppressLint("MissingPermission")
-    private fun updateMarker(location: LatLng) {
+    private fun updateBlueDot(location: LatLng) {
 
         //marker?.remove()
         circleAroundPos?.remove()
@@ -206,10 +222,14 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+
         mapFragment?.getMapAsync {
          //   marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
             //it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+            googleMap2 = MutableLiveData()
+            googleMap2!!.value = it
             googleMap = it
+
 
 
 /*            it.setMaxZoomPreference(14.0f)
@@ -276,6 +296,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun moveCamara(zoom: Float) {
         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, zoom))
     }
+
+
+
+
+
+
+
 
 
 

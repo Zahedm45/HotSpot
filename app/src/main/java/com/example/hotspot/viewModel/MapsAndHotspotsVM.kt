@@ -1,23 +1,62 @@
 package com.example.hotspot.viewModel
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.repository.Repository
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsAndHotspotsVM {
 
     companion object {
 
         private val hotSpots: ArrayList<HotSpot>? = null
+        private var googleMap: GoogleMap? = null
 
 
 
-        fun showHotSpots() {
-            Repository.getHotSpots(null, null)
+        fun showHotSpots(googleMap: GoogleMap) {
+            this.googleMap = googleMap
+
+            Repository.getHotSpots({ hotSpots -> onSuccess(hotSpots)}, null)
+
+
+
+
+
+
+
+
+
+
 
         }
 
 
+
+
+
+
+
+        private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
+
+
+
+                    val lat = hotSpots.get(0).address?.latitude
+                    val lng = hotSpots.get(0).address?.longitude
+
+                Log.i(TAG, "you.. $lat")
+
+                    if (lat != null && lng != null) {
+                        val location = LatLng(lat, lng)
+                        googleMap?.addMarker(MarkerOptions().position(location).title("Your current location"))
+                    }
+
+
+        }
 
 
 
