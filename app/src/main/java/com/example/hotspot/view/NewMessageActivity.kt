@@ -1,6 +1,5 @@
 package com.example.hotspot.view
 
-import android.content.ClipData
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
