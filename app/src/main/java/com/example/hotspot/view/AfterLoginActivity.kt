@@ -3,6 +3,7 @@ package com.example.hotspot.view
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -25,6 +26,17 @@ class AfterLoginActivity: AppCompatActivity() {
         val btn = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navCont = findNavController(R.id.nav_host_fragment)
         btn.setupWithNavController(navCont)
+
+        navCont.addOnDestinationChangedListener{_, destination, _ ->
+            when(destination.id){
+                R.id.chat -> {
+                btn.animate().apply {
+                    duration = 110
+                    this.alpha(0.1f)
+                }.start()}
+                else -> btn.visibility = View.VISIBLE
+            }
+        }
     }
 
 
