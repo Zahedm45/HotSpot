@@ -219,11 +219,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     @SuppressLint("MissingPermission")
     private fun updateBlueDot(location: LatLng) {
 
-        //marker?.remove()
         circleAroundPos?.remove()
         circleAroundPos2?.remove()
-
-      //  mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
 
         if (mapFragment == null) {
             mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -238,8 +235,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-/*            it.setMaxZoomPreference(14.0f)
-            it.setMinZoomPreference(6.0f)*/
 
 
 
