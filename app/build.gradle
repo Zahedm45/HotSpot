@@ -5,8 +5,15 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'kotlin-android-extensions'
 
 }
+
+
+androidExtensions {
+    experimental = true
+}
+
 
 android {
     compileSdk 30
@@ -22,8 +29,9 @@ android {
 
     buildFeatures {
         viewBinding true
-
     }
+
+
 
     buildTypes {
         release {
@@ -57,9 +65,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
-
-    implementation 'com.xwray:groupie:2.1.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     implementation 'pub.devrel:easypermissions:2.0.1'
 
@@ -76,10 +82,21 @@ dependencies {
     implementation 'com.github.devlight.navigationtabstrip:navigationtabstrip:+'
 
     //Groupie
-    implementation "com.github.lisawray.groupie:groupie:2.8.0"
-    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.8.0"
+    implementation 'com.xwray:groupie:2.9.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.9.0'
+
+//    implementation "com.github.lisawray.groupie:groupie:2.10.0"
+//    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.10.0"
+
+
+    //   implementation 'com.xwray:groupie-databinding:2.1.0'
+
+    //implementation "com.github.lisawray.groupie:groupie-viewbinding:2.10.0"
+
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 
     // pls do not update this dependency, bugs could occur...
     implementation 'com.google.android.gms:play-services-location:17.1.0'

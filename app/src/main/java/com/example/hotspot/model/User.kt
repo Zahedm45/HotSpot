@@ -1,5 +1,6 @@
 package com.example.hotspot.model
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 
 data class User(
@@ -8,5 +9,5 @@ data class User(
     var emailAddress: String,
     var bio: String? = null,
     val gender: String,
-    var bitmapImg: bitMap = null
+    var bitmapImg: Bitmap? = null
 ){}

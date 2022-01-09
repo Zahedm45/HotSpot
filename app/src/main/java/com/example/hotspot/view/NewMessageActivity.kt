@@ -1,20 +1,18 @@
 package com.example.hotspot.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.RecyclerView
-
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityNewMessageBinding
-import com.example.hotspot.databinding.UserRowNewMessageBinding
 import com.example.hotspot.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
-import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import com.xwray.groupie.kotlinandroidextensions.Item
+import kotlinx.android.synthetic.main.user_row_new_message.view.*
+
 
 
 class NewMessageActivity : AppCompatActivity() {
@@ -32,9 +30,7 @@ class NewMessageActivity : AppCompatActivity() {
         fetchUsers()
     }
 
-
-
-
+    // we fetch the users from the database
     private fun fetchUsers(){
 
         val db = Firebase.firestore
@@ -43,7 +39,7 @@ class NewMessageActivity : AppCompatActivity() {
         userRef.get()
             .addOnSuccessListener {
                 val users = it.toObjects<User>()
-                val adapter = GroupAdapter<ViewHolder>()
+                val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 users.forEach { user ->
                     adapter.add(UserItem(user))
                 }
@@ -52,23 +48,19 @@ class NewMessageActivity : AppCompatActivity() {
     }
 }
 
-class UserItem(val user: User): Item<ViewHolder>() {
+    // this class is used to bind the fragment and user in order to change
+    // the name element in the fragment to the real database name.
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        lateinit var bindingRow: UserRowNewMessageBinding
-        viewHolder.itemView.apply {
-            bindingRow.rowMessageName.text= user.name
-        }
+class UserItem(val user: User): Item() {
+
+
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+
+        viewHolder.itemView.row_message_name.text = user.name
+        viewHolder.itemView.profile_pic_chat.setImageBitmap(user.bitmapImg)
     }
 
     override fun getLayout(): Int {
         return R.layout.user_row_new_message
     }
 }
-
-/*
-class CustomAdapter: RecyclerView.Adapter<ViewHolder> {
-    override fun onBindViewHolder(p0:, p1: Int) {
-
-    }
-}*/
