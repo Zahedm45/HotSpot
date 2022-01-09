@@ -305,6 +305,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+
+
+
+
+
+
     private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
 
         hotSpots.forEach { crrHotSpot ->
