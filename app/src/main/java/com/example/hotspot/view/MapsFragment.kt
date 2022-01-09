@@ -305,7 +305,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                         MarkerOptions()
                             .position(location)
                             .title(name)
-//                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
                             .snippet("Rating: $rating")
 
 
