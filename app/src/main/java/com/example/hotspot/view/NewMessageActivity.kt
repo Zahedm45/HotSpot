@@ -1,8 +1,8 @@
 package com.example.hotspot.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.ClipData
 import android.os.Bundle
-
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityNewMessageBinding
 import com.example.hotspot.model.User
@@ -10,13 +10,15 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.Item
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import kotlinx.android.synthetic.main.user_row_new_message.view.*
+
 
 
 class NewMessageActivity : AppCompatActivity() {
 
- //   private lateinit var recyclerView: RecyclerView
+    //   private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityNewMessageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,66 +31,34 @@ class NewMessageActivity : AppCompatActivity() {
         fetchUsers()
     }
 
-
-
-
+    // we fetch the users from the database
     private fun fetchUsers(){
 
         val db = Firebase.firestore
-
-
         val userRef = db.collection("users")
-
 
         userRef.get()
             .addOnSuccessListener {
                 val users = it.toObjects<User>()
-                val adapter = GroupAdapter<ViewHolder>()
+                val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 users.forEach { user ->
                     adapter.add(UserItem(user))
                 }
                 binding.recyclerviewNewMessage.adapter = adapter
-
             }
-
-//        userRef.addListenerForSingleValueEvent(object: ValueEventListener{
-//            override fun onDataChange(p0: DataSnapshot){
-//                val adapter = GroupAdapter<ViewHolder>()
-//                p0.children.forEach {
-//                    val user = it.getValue(User::class.java)
-//                    if (user!=null) {
-//                        Log.i(TAG, "message. ${user.age}")
-//
-//                        adapter.add(UserItem(user))
-//                    }
-//                }
-//
-//                binding.recyclerviewNewMessage.adapter = adapter
-//
-//
-//            }
-//            override fun onCancelled(p0: DatabaseError){
-//
-//            }
-//        })
     }
 }
 
-class UserItem(val user: User): Item<ViewHolder>() {
+    // this class is used to bind the fragment and user in order to change
+    // the name element in the fragment to the real database name.
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
- //       viewHolder.itemView
-//        Picasso.get().load(user.bitmapImg)
+class UserItem(val user: User): Item() {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+
+        viewHolder.itemView.row_message_name.text = user.name
     }
 
     override fun getLayout(): Int {
         return R.layout.user_row_new_message
     }
 }
-
-/*
-class CustomAdapter: RecyclerView.Adapter<ViewHolder> {
-    override fun onBindViewHolder(p0:, p1: Int) {
-
-    }
-}*/
