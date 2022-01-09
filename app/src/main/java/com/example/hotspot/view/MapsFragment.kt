@@ -306,7 +306,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
                             .snippet("Rating: $rating")
 
-
                     )?.apply {
                         Log.i(TAG, "Tss ${this.id}")
                         this.showInfoWindow()
