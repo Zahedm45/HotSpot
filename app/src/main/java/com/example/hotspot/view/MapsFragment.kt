@@ -244,6 +244,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
             it.isMyLocationEnabled = true
             it.uiSettings.isMyLocationButtonEnabled = false
+            it.uiSettings.isCompassEnabled = true
+            it.setContentDescription("Test")
             if(!isMakerShowing) {
                 MapsAndHotspotsVM.showHotSpots { hotSpots -> onSuccess(hotSpots) }
                 moveCamara(12f)
@@ -305,10 +307,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             .title(name)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
 
+
                     )?.apply {
                         Log.i(TAG, "Tss ${this.id}")
                         this.showInfoWindow()
                     }
+
 
                 }
             }
