@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginActivity"
-    android:orientation="vertical"
+    android:background="@drawable/background_hotspot"
     android:gravity="center"
-    android:padding="30dp"
-    android:background="@drawable/background_hotspot">
+    android:orientation="vertical"
+    android:padding="32dp"
+    tools:context=".view.LoginActivity">
 
     <ImageView
         android:id="@+id/activity_login_imageView"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="88dp"
         android:src="@drawable/hotspot_logo" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -22,10 +22,10 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/button_empty"
         android:ems="8"
+        android:fontFamily="@font/poppins_light"
         android:padding="16dp"
         android:text="@string/log_in2"
-        android:fontFamily="@font/poppins_light"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/activity_login_forgotPassword"
@@ -36,7 +36,7 @@
         android:gravity="center"
         android:text="@string/Forgot_login"
         android:textColor="#99FFFFFF"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/activity_login_create_profile_btn"
@@ -44,10 +44,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_filled"
-        android:ems="8"
-        android:padding="16dp"
-        android:fontFamily="@font/poppins_light"
         android:drawableStart="@drawable/phone_vector"
+        android:ems="8"
+        android:fontFamily="@font/poppins_light"
+        android:padding="16dp"
         android:text="Sign up with phone"
         android:textSize="14sp" />
 
@@ -60,9 +60,7 @@
         android:gravity="center"
         android:text="By tapping sign up, you agree to our terms and services.\n "
         android:textColor="#E6FFFFFF"
-        android:textSize="10sp"/>
-
-
+        android:textSize="10sp" />
 
 
 </LinearLayout>
