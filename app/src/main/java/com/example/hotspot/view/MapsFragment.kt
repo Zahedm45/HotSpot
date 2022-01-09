@@ -1,6 +1,7 @@
 package com.example.hotspot.view
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.fragment.app.Fragment
@@ -8,7 +9,7 @@ import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.lifecycle.MutableLiveData
+import android.widget.Button
 import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+
 
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -88,7 +90,19 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             MapUtility.requestPermission(this)
         }
 
+
+
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog?.setTitle("Please wait")
+        progressDialog?.setMessage("Loading ...")
+      //  progressDialog.setButton(Button.CANCEL)
+        progressDialog?.setCancelable(false)
+        progressDialog?.show()
+
+
     }
+
+    var progressDialog: ProgressDialog? = null
 
 
 
@@ -135,6 +149,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             requireActivity().finish()
         }
         setHasOptionsMenu(true)
+
+
 
     }
 
@@ -307,20 +323,14 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             .title(name)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
                             .snippet("Rating: $rating")
-
-
-
-
                     )?.apply {
                         Log.i(TAG, "Tss ${this.id}")
                         this.showInfoWindow()
                     }
 
-
-
                     it.setInfoWindowAdapter(InfoWindow(requireContext()))
-                    it.setOnInfoWindowClickListener{false}
 
+                    progressDialog?.dismiss()
 
                 }
             }
