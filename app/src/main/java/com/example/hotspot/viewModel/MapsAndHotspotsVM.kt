@@ -17,29 +17,12 @@ class MapsAndHotspotsVM {
         private var googleMap: GoogleMap? = null
 
 
-
         fun showHotSpots(onSuccess: (hotSpots: ArrayList<HotSpot>) -> Unit) {
-
             Repository.getHotSpots({ hotSpots -> onSuccess(hotSpots)}, null)
-
-
-
-
 
         }
 
-
-
-
-
-
-
     }
-
-
-
-
-
 
 
 

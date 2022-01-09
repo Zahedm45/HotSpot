@@ -36,6 +36,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding: FragmentMaps4Binding
 
     private var marker: Marker? = null
+    private var circleAroundPos: Circle? = null
+    private var circleAroundPos2: Circle? = null
+    private var googleMap: GoogleMap? = null
+    private var mapFragment: SupportMapFragment? = null
 
 
 
@@ -58,8 +62,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
-
-          //  MapsAndHotspotsVM.showHotSpots(binding, mapFragment)
 
             if (location != null && googleMap != null) {
                 moveCamara(12f)
@@ -157,8 +159,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         MapService.lastLocation.observe(viewLifecycleOwner, Observer { it ->
             if(it != null) {
-//                val i = it.last().last()
-//                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
                 val latitude =   it.latitude
                 val longitude =   it.longitude
                 location = LatLng(latitude, longitude)
@@ -191,26 +191,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private var circleAroundPos: Circle? = null
-    private var circleAroundPos2: Circle? = null
-    private var googleMap: GoogleMap? = null
-    private var mapFragment: SupportMapFragment? = null
 
 
-
-
-
-//    private fun upDateHotSpots() {
-//
-//        googleMap2?.observe(viewLifecycleOwner, Observer {
-//            if (it != null) {
-//
-//                googleMap2!!.removeObservers(viewLifecycleOwner)
-//            }
-//
-//        })
-//
-//    }
 
 
 
@@ -263,7 +245,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             it.isMyLocationEnabled = true
             it.uiSettings.isMyLocationButtonEnabled = false
             if(!isMakerShowing) {
-                MapsAndHotspotsVM.showHotSpots({hotSpots -> onSuccess(hotSpots)})
+                MapsAndHotspotsVM.showHotSpots { hotSpots -> onSuccess(hotSpots) }
                 moveCamara(12f)
                 isMakerShowing = true
             }
