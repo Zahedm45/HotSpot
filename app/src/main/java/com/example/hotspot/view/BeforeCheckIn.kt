@@ -53,25 +53,32 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInEventLocationName.text = args.hotSpot.hotSpotName
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
 
+        binding.beforeCheckInDescriptionTv.text = getAddress()
 
+
+    }
+
+
+
+
+
+
+
+    private fun getAddress(): String {
 
         val lat = args.hotSpot.address?.latitude
         val lng = args.hotSpot.address?.longitude
-
         val realAddress: List<Address>
-
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
 
         if (lat != null && lng != null) {
             realAddress = geocoder.getFromLocation(lat, lng, 1)
 
         } else {
-            return
+            return "Address not found"
         }
 
-
-       // val address = realAddress.get(0).getAddressLine(0)
-
+        // val address = realAddress.get(0).getAddressLine(0)
 
         val roadName = realAddress.get(0).thoroughfare
         val doorNum = realAddress.get(0).subThoroughfare
@@ -81,21 +88,8 @@ class BeforeCheckIn : Fragment() {
         val country = realAddress.get(0).countryName
 
 
-        val address = "$roadName $doorNum, $floor \n$postalCode $town \n$country"
-
-        binding.beforeCheckInDescriptionTv.text = address
-
-
-
-
-
-
-
+        return "$roadName $doorNum, $floor \n$postalCode $town \n$country"
     }
-
-
-
-
 
 
 }
