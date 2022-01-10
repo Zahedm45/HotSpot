@@ -18,15 +18,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotSpot">
         <activity
+            android:name=".view.ChatLogActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.LatestMessagesActivity"/>
+        </activity>
+        <activity
             android:name=".view.NewMessageActivity"
-            android:exported="true" />
-<!--            meta-data part added at 15:15 or so in video 4-->
-             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                 android:value=".view.LatestMessagesActivity"/>
-
+            android:exported="true" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.LatestMessagesActivity" />
+        </activity>
         <activity
             android:name=".view.LatestMessagesActivity"
-            android:exported="true" />
+            android:exported="true" >
+        </activity>
         <activity
             android:name=".view.ActivityLoadingPage"
             android:exported="true">
