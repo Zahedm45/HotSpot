@@ -39,12 +39,17 @@ class Favorites : Fragment() {
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        binding = FragmentFavoritesBinding.inflate(layoutInflater)
+        //binding = FragmentFavoritesBinding.inflate(layoutInflater)
         fetchUsers()
+    } */
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
+        fetchUsers()
 
     }
 
@@ -56,11 +61,11 @@ class Favorites : Fragment() {
         userRef.get()
             .addOnSuccessListener{
                 val users = it.toObjects<User>()
-                val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
+                val adapter = GroupAdapter<GroupieViewHolder>()
                 users.forEach{user->
                     adapter.add(UserItem(user))
                 }
-               //binding.RVfavorites.adapter = adapter
+               binding.RVfavorites.adapter = adapter
             }
     }
 
@@ -75,6 +80,18 @@ class Favorites : Fragment() {
             return R.layout.fragment_favorites
         }
     }
+
+   /* class UserItem(val user: User): com.xwray.groupie.kotlinandroidextensions.Item() {
+        override fun bind(viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder, position: Int) {
+
+            viewHolder.itemView.row_message_name.text = user.name
+        }
+
+        override fun getLayout(): Int {
+            return R.layout.user_row_new_message
+        }
+    } */
+
 
 
 
