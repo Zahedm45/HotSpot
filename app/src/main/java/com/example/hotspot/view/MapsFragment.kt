@@ -43,12 +43,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
 
-    private var marker: Marker? = null
     private var circleAroundPos: Circle? = null
     private var circleAroundPos2: Circle? = null
     private var googleMap: GoogleMap? = null
     private var mapFragment: SupportMapFragment? = null
     lateinit var progressBar: ProgressBar
+    var location: LatLng? = null
 
 
 
@@ -80,10 +80,25 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
         }
 
-
-
     }
 
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (Firebase.auth.uid == null) {
+            Log.i(TAG, "not logged in ..")
+
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            requireActivity().finish()
+        }
+        setHasOptionsMenu(true)
+
+    }
 
 
 
@@ -99,8 +114,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
     }
-
-
 
 
 
@@ -134,42 +147,20 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        if (Firebase.auth.uid == null) {
-            Log.i(TAG, "not logged in ..")
 
-            val intent = Intent(requireActivity(), LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            requireActivity().finish()
+    private fun sendCommandToService(action: String): Intent {
+        return Intent(requireContext(), MapService::class.java).also {
+            it.action = action
+            requireContext().startService(it)
         }
-        setHasOptionsMenu(true)
-
-
-
     }
 
 
 
 
 
-
-
-    private fun sendCommandToService(action: String) =
-
-        Intent(requireContext(), MapService::class.java).also {
-            it.action = action
-            requireContext().startService(it)
-        }
-
-
-
-    var location: LatLng? = null
-
     private fun observeUserPosition() {
-
 
         MapService.lastLocation.observe(viewLifecycleOwner, Observer { it ->
             if(it != null) {
@@ -183,30 +174,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
             }
         })
-
-
-
-
-//        TrackingService.lastLocation.observe(viewLifecycleOwner, Observer {
-//            if(it.last().isNotEmpty()) {
-////                val i = it.last().last()
-////                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
-//                val latitude =   it.last().last()?.latitude
-//                val longitude =   it.last().last()?.longitude
-//                val location = LatLng(latitude, longitude)
-//                updateMarker(location)
-//            }
-//        })
-
-
     }
-
-
-
-
-
-
-
 
 
 
@@ -225,28 +193,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         mapFragment?.getMapAsync {
             googleMap = it
 
-/*
-            circleAroundPos2 = it.addCircle(
-                CircleOptions()
-                    .center(location)
-                    .radius(10.0)
-                    .strokeWidth(3f)
-                    .strokeColor(Color.BLUE)
-                    .fillColor(Color.CYAN) )
-
-
-
-            circleAroundPos = it.addCircle(
-                CircleOptions()
-                    .center(location)
-//                    .radius(140.0)
-//                    .strokeWidth(3f)
-//                    .strokeColor(Color.GREEN)
-//                    .fillColor(Color.argb(70, 50, 100, 50))
-                    )
-*/
-
-
             it.isMyLocationEnabled = true
             it.uiSettings.isMyLocationButtonEnabled = false
             if(!isMakerShowing) {
@@ -255,39 +201,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 isMakerShowing = true
             }
 
-
-
         }
 
 
-
-
-//        if (markers.isNotEmpty()) {
-//            markers.clear()
-//        }
-//
-//        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-//        mapFragment?.getMapAsync {
-//            val marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
-//
-//            if (marker != null) {
-//                markers.add(marker)
-//            }
-//            it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
-//            isMakerShowing = true
-//
-//        }
-
     }
-
-
-
-    private fun moveCamara(zoom: Float) {
-        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, zoom))
-    }
-
-
-
 
 
 
@@ -353,12 +270,18 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+    private fun moveCamara(zoom: Float) {
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, zoom))
+    }
 
 
 
 
 
-    // implementations of top menu
+
+
+
+    // implementations of the top menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.nav_top_menu, menu)
