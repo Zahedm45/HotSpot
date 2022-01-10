@@ -14,8 +14,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
-import com.xwray.groupie.kotlinandroidextensions.Item
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.favorite_item.view.*
 
 
@@ -26,11 +28,11 @@ class Favorites : Fragment() {
     private var param2: String? = null */
 
     private lateinit var binding: FragmentFavoritesBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My favorites"
         return view
@@ -40,6 +42,7 @@ class Favorites : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        binding = FragmentFavoritesBinding.inflate(layoutInflater)
         fetchUsers()
 
 
@@ -57,12 +60,12 @@ class Favorites : Fragment() {
                 users.forEach{user->
                     adapter.add(UserItem(user))
                 }
-                binding.RVfavorites.adapter = adapter
+               //binding.RVfavorites.adapter = adapter
             }
     }
 
 
-    class UserItem(val user: User): Item() {
+    class UserItem(val user: User): Item<GroupieViewHolder>() {
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
             viewHolder.itemView.hotspot_name.text = user.name
@@ -72,6 +75,8 @@ class Favorites : Fragment() {
             return R.layout.fragment_favorites
         }
     }
+
+
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
