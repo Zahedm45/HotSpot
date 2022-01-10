@@ -14,7 +14,6 @@ import com.example.hotspot.other.UtilView
 import com.example.hotspot.repository.Repository
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.chat_item.view.*
 import kotlinx.android.synthetic.main.fragment_message_overview.*
 
@@ -36,7 +35,7 @@ class MessageOverview : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        RVmessage_overview.adapter = GroupAdapter<ViewHolder>()
+        //RVmessage_overview.adapter = GroupAdapter<ViewHolder>()
         Repository.fetchMessages()
         view.findViewById<CardView>(R.id.chatOnClick).setOnClickListener(this)
 

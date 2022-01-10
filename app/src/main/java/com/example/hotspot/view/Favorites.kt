@@ -6,20 +6,22 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityAfterLoginBinding
+import com.example.hotspot.databinding.FragmentFavoritesBinding
 import com.example.hotspot.databinding.FragmentListeViewBinding
 import com.example.hotspot.model.User
 import com.example.hotspot.other.UtilView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
-import
+import com.xwray.groupie.GroupAdapter
+import kotlinx.android.synthetic.main.fragment_favorites.view.*
 
 
 class Favorites : Fragment() {
     /* Dont know what these are for?
     private var param1: String? = null
     private var param2: String? = null */
-    private lateinit var binding: FragmentListeViewBinding
+    private lateinit var binding: FragmentFavoritesBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
