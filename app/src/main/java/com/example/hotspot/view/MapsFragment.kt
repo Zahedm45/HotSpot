@@ -257,10 +257,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                      it.setInfoWindowAdapter(InfoWindow(requireContext()))
 
 
-                    if (crrHotSpot.hotSpotName == "No Stress Bar") {
-                        setOnClickListener(it, crrHotSpot)
-                    }
 
+                    setOnClickListener(it, crrHotSpot)
 
 
                 }
