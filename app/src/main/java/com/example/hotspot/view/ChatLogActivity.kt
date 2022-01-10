@@ -48,7 +48,7 @@ class ChatLogActivity : AppCompatActivity() {
 
     }
 
-/*    class chatMessage(val text: String)
+    class chatMessage(val text: String)
 
     // this is how we actually send a message to firebase
     private fun performSendMessage(){
@@ -60,7 +60,7 @@ class ChatLogActivity : AppCompatActivity() {
             Log.d(TAG,"Saved our chat message: ${reference.key}")
         }
 
-    }*/
+    }
 }
 
 class ChatFromItem(val text: String): Item() {
