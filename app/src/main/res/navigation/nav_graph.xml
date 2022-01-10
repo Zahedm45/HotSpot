@@ -17,6 +17,7 @@
     </fragment>
 
 
+
     <fragment
         android:id="@+id/beforeCheckIn"
         android:name="com.example.hotspot.view.BeforeCheckIn"
@@ -31,11 +32,17 @@
             app:argType="com.example.hotspot.model.HotSpot"
             />
     </fragment>
+
+
+
     <fragment
         android:id="@+id/chat"
         android:name="com.example.hotspot.view.Chat"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
+
+
+
 
     <fragment
         android:id="@+id/editProfile"
@@ -59,6 +66,9 @@
             android:id="@+id/action_favorites_to_beforeCheckIn"
             app:destination="@id/beforeCheckIn" />
     </fragment>
+
+
+
     <fragment
         android:id="@+id/listeView"
         android:name="com.example.hotspot.view.ListeView"
@@ -69,6 +79,8 @@
             app:destination="@id/beforeCheckIn" />
     </fragment>
 
+
+
     <fragment
         android:id="@+id/messageOverview"
         android:name="com.example.hotspot.view.MessageOverview"
@@ -78,6 +90,9 @@
             android:id="@+id/action_messageOverview_to_chat"
             app:destination="@id/chat" />
     </fragment>
+
+
+
     <fragment
         android:id="@+id/personalProfile"
         android:name="com.example.hotspot.view.PersonalProfile"
@@ -87,6 +102,9 @@
             android:id="@+id/action_personalProfile_to_editProfile"
             app:destination="@id/editProfile" />
     </fragment>
+
+
+
     <fragment
         android:id="@+id/othersProfile"
         android:name="com.example.hotspot.view.OthersProfile"
@@ -96,6 +114,10 @@
             android:id="@+id/action_othersProfile_to_chat"
             app:destination="@id/chat" />
     </fragment>
+
+
+
+
 
 
     <fragment
@@ -110,7 +132,7 @@
     </fragment>
 
 
-
+// global action
     <action android:id="@+id/trackingFragment"
         app:destination="@+id/mapsFragment"
         app:launchSingleTop="true" />

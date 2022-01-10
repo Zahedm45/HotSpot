@@ -1,22 +1,17 @@
 package com.example.hotspot.view
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Button
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
@@ -25,7 +20,6 @@ import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
-import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.example.hotspot.view.infoWindow.InfoWindow
 import com.example.hotspot.viewModel.MapsAndHotspotsVM
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -46,9 +40,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
-
-//    private var circleAroundPos: Circle? = null
-//    private var circleAroundPos2: Circle? = null
     private var googleMap: GoogleMap? = null
     private var mapFragment: SupportMapFragment? = null
     lateinit var progressBar: ProgressBar
@@ -199,9 +190,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     @SuppressLint("MissingPermission")
     private fun updateBlueDot() {
-
-//        circleAroundPos?.remove()
-//        circleAroundPos2?.remove()
 
         if (mapFragment == null) {
             mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
