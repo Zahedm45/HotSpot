@@ -10,9 +10,9 @@
     <string name="map">Map</string>
     <string name="log_in">Log in</string>
     <string name="opret_profil">opret profil</string>
-    <string name="edit_profil">Rediger profil</string>
+    <string name="edit_profil">Edit Profile</string>
     <string name="username">Username</string>
-    <string name="e_mail">Email</string>
+    <string name="e_mail">Enter e-mail</string>
     <string name="name">Navn</string>
     <string name="age">Alder</string>
     <string name="bio">Bio</string>
@@ -21,10 +21,10 @@
 
     <string name="password">kodeord</string>
     <string name="repeat_password">gentag kodeord</string>
-    <string name="log_in2">Log In</string>
-    <string name="glemt_log_in">Glemt log in</string>
+    <string name="log_in2">Sign in</string>
+    <string name="Forgot_login">Forgot login info?</string>
     <string name="password2">Password</string>
-    <string name="bio_text">Statusbesked</string>
+    <string name="bio_text">Enter profile text</string>
     <string name="kvinde">Kvinde</string>
     <string name="mand">Mand</string>
     <string name="opret_profil2">Opret Profil</string>
@@ -53,7 +53,11 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="i_did_not_receive_a_verification_code_resend">I did not receive a verification code? <b>Resend</b></string>
-    <string name="sign_out">"Sign out"</string>
+    <string name="sign_out">Sign out</string>
+    <string name="Submit_changes">Submit changes</string>
+    <string name="change_profile_message">Profile message</string>
+    <string name="delete_account">Delete account</string>
+    <string name="Done">Done</string>
 
 
 

@@ -4,17 +4,17 @@
     <item
         android:id="@+id/mapsFragment"
         android:title="@string/map"
-        android:icon="@drawable/home" />
+        android:icon="@drawable/bottom_nav_home_selector" />
     <item
         android:id="@+id/messageOverview"
         android:title="@string/messages"
-        android:icon="@drawable/message" />
+        android:icon="@drawable/bottom_nav_message_selector" />
     <item
         android:id="@+id/favorites"
         android:title="@string/favourites"
-        android:icon="@drawable/favorite"/>
+        android:icon="@drawable/bottom_nav_favorites_selector"/>
     <item
         android:id="@+id/personalProfile"
         android:title="@string/my_profile"
-        android:icon="@drawable/person"/>
+        android:icon="@drawable/bottom_nav_person_selector"/>
 </menu>

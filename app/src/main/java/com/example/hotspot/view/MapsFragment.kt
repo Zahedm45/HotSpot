@@ -1,39 +1,56 @@
 package com.example.hotspot.view
 
-import android.Manifest
+import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.PorterDuff
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Button
+import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import com.example.hotspot.R
-import com.example.hotspot.other.Constants.PERMISSION_REQUEST_CODE
+import com.example.hotspot.databinding.FragmentMaps4Binding
+import com.example.hotspot.model.HotSpot
+import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
-import com.example.hotspot.other.UtilityMap
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.example.hotspot.other.service.MapService
+import com.example.hotspot.view.infoWindow.InfoWindow
+import com.example.hotspot.viewModel.MapsAndHotspotsVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+
 
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
+
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
-    lateinit var mMap: GoogleMap
-//    var fussedLPC: FusedLocationProviderClient? = null
-    var location:  LatLng? = null
-    var isMakerShowing = false
+
+    private var isMakerShowing = false
+    private lateinit var binding: FragmentMaps4Binding
+
+    private var marker: Marker? = null
+    private var circleAroundPos: Circle? = null
+    private var circleAroundPos2: Circle? = null
+    private var googleMap: GoogleMap? = null
+    private var mapFragment: SupportMapFragment? = null
+    lateinit var progressBar: ProgressBar
+
+
 
 
 
@@ -43,104 +60,62 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_maps4, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_maps4, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        fussedLPC = LocationServices.getFusedLocationProviderClient(requireContext())
+        binding = FragmentMaps4Binding.bind(view)
 
+        requestLocPermissionAndTrackLocation()
 
-        requestLocPermission()
+        addProgressBar()
 
+        binding.fragmentMapsMyLocationBtn.setOnClickListener {
 
-    }
-
-
-
-
-    private val callback = OnMapReadyCallback { googleMap ->
-
-        //val dtu = LatLng(55.784110, 12.517820)
-        if (location != null) {
-            googleMap.addMarker(MarkerOptions().position(location!!).title("Your current location"))
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, 10f))
-            isMakerShowing = true
+            if (location != null && googleMap != null) {
+                moveCamara(12f)
+            }
         }
 
+
+
     }
 
 
-    private fun requestLocPermission() {
-
-
-        if(UtilityMap.hasLocationPermission(requireContext())) {
-
-            val la1 =  ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-            val la2 = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
-
-            if(la1 != PackageManager.PERMISSION_GRANTED && la2 != PackageManager.PERMISSION_GRANTED ) {
-                // this should not be true
-                Log.i(TAG, "Location access is denied")
-                return
-
-            }
-
-           val fussedLPC = LocationServices.getFusedLocationProviderClient(requireContext())
-            val task = fussedLPC!!.lastLocation
-            task.addOnSuccessListener {
-
-                //Log.i(TAG, "Here is user location... ${it.latitude} and ${it.longitude}.")
-
-                //location = LatLng(it.latitude, it.longitude)
-
-                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-                mapFragment?.getMapAsync(callback)
-
-            }
 
 
 
+    private fun requestLocPermissionAndTrackLocation() {
 
+        if(MapUtility.hasLocationPermission(requireContext())) {
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+            observeUserPosition()
 
         } else {
-
-            EasyPermissions.requestPermissions(
-                this,
-                "You need to give location permission to run this app.",
-                PERMISSION_REQUEST_CODE,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-
-            )
-
+            MapUtility.requestPermission(this)
         }
-
 
     }
 
-
-    override fun onResume() {
-        super.onResume()
-
-        if (!isMakerShowing) {
-            requestLocPermission()
-        }
-    }
 
 
 
 
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        requestLocPermissionAndTrackLocation()
 
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+
         if(EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             AppSettingsDialog.Builder(this).build().show()
         } else {
-            requestLocPermission()
+            requestLocPermissionAndTrackLocation()
         }
 
     }
@@ -157,6 +132,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -170,11 +147,218 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
         setHasOptionsMenu(true)
 
+
+
     }
 
 
 
 
+
+
+
+    private fun sendCommandToService(action: String) =
+
+        Intent(requireContext(), MapService::class.java).also {
+            it.action = action
+            requireContext().startService(it)
+        }
+
+
+
+    var location: LatLng? = null
+
+    private fun observeUserPosition() {
+
+
+        MapService.lastLocation.observe(viewLifecycleOwner, Observer { it ->
+            if(it != null) {
+                val latitude =   it.latitude
+                val longitude =   it.longitude
+                location = LatLng(latitude, longitude)
+
+                location?.let {
+                    updateBlueDot(it)
+                }
+
+            }
+        })
+
+
+
+
+//        TrackingService.lastLocation.observe(viewLifecycleOwner, Observer {
+//            if(it.last().isNotEmpty()) {
+////                val i = it.last().last()
+////                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
+//                val latitude =   it.last().last()?.latitude
+//                val longitude =   it.last().last()?.longitude
+//                val location = LatLng(latitude, longitude)
+//                updateMarker(location)
+//            }
+//        })
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    @SuppressLint("MissingPermission")
+    private fun updateBlueDot(location: LatLng) {
+
+        circleAroundPos?.remove()
+        circleAroundPos2?.remove()
+
+        if (mapFragment == null) {
+            mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        }
+
+
+        mapFragment?.getMapAsync {
+            googleMap = it
+
+/*
+            circleAroundPos2 = it.addCircle(
+                CircleOptions()
+                    .center(location)
+                    .radius(10.0)
+                    .strokeWidth(3f)
+                    .strokeColor(Color.BLUE)
+                    .fillColor(Color.CYAN) )
+
+
+
+            circleAroundPos = it.addCircle(
+                CircleOptions()
+                    .center(location)
+//                    .radius(140.0)
+//                    .strokeWidth(3f)
+//                    .strokeColor(Color.GREEN)
+//                    .fillColor(Color.argb(70, 50, 100, 50))
+                    )
+*/
+
+
+            it.isMyLocationEnabled = true
+            it.uiSettings.isMyLocationButtonEnabled = false
+            if(!isMakerShowing) {
+                MapsAndHotspotsVM.showHotSpots { hotSpots -> onSuccess(hotSpots) }
+                moveCamara(12f)
+                isMakerShowing = true
+            }
+
+
+
+        }
+
+
+
+
+//        if (markers.isNotEmpty()) {
+//            markers.clear()
+//        }
+//
+//        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+//        mapFragment?.getMapAsync {
+//            val marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
+//
+//            if (marker != null) {
+//                markers.add(marker)
+//            }
+//            it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+//            isMakerShowing = true
+//
+//        }
+
+    }
+
+
+
+    private fun moveCamara(zoom: Float) {
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, zoom))
+    }
+
+
+
+
+
+
+
+
+    private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
+
+        hotSpots.forEach { crrHotSpot ->
+            val lat = crrHotSpot.address?.latitude
+            val lng = crrHotSpot.address?.longitude
+            val name = crrHotSpot.hotSpotName.toString()
+            val rating = crrHotSpot.overallRating
+
+            if (lat != null && lng != null) {
+                val location = LatLng(lat, lng)
+                googleMap?.let {
+
+                    it.addMarker(
+                        MarkerOptions()
+                            .position(location)
+                            .title(name)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
+                            .snippet("Rating: $rating")
+                    )?.apply {
+                        Log.i(TAG, "Tss ${this.id}")
+                        this.showInfoWindow()
+                    }
+
+                    it.setInfoWindowAdapter(InfoWindow(requireContext()))
+
+                }
+            }
+        }
+
+        clearProgressBar()
+    }
+
+
+
+
+
+
+
+
+
+
+    private fun addProgressBar() {
+        progressBar = binding.fragmentMapsProgressBar
+        progressBar.indeterminateDrawable
+            .setColorFilter(ContextCompat.getColor(requireContext(), R.color.orange), PorterDuff.Mode.SRC_IN )
+//        requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+//            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
+    }
+
+
+    private fun clearProgressBar() {
+        progressBar.visibility = View.GONE
+       // requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        binding.fragmentMapsLoadingImg.isVisible = false
+    }
+
+
+
+
+
+
+
+
+
+    // implementations of top menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.nav_top_menu, menu)
