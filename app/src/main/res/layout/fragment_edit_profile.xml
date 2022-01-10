@@ -1,11 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+
+        >
+
+
+        <TextView
+            android:id="@+id/fragment_edit_profile_headline_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="0dp"
+            android:paddingTop="0dp"
+            android:text="@string/edit_profil"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="5dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="5dp"
+            android:text="@string/Done"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<ScrollView
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.EditProfile"
-    android:fillViewport="true"
+    android:fillViewport="false"
     >
 
 
@@ -17,21 +68,9 @@
         >
 
 
-        <TextView
-            android:id="@+id/fragment_edit_profile_headline_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:paddingTop="0dp"
-            android:text="@string/edit_profil"
-            android:textColor="@color/black"
-            android:textSize="14dp"
-            android:paddingStart="0dp"
-            android:layout_gravity="center_horizontal"
-            tools:text="@string/edit_profil">
 
-        </TextView>
+
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fragment_edit_profile_edit_picture"
@@ -40,11 +79,11 @@
             android:layout_height="80dp"
             android:layout_marginTop="24dp"
             android:src="@drawable/circle_for_profile_picture"
+            android:elevation="36dp"
             app:civ_border_color="#40000000"
             app:civ_border_width="1dp"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintVertical_bias=".1"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
@@ -60,7 +99,7 @@
             android:backgroundTint="@color/white"
             android:minHeight="0dp"
             android:text="Change picture"
-
+            android:elevation="16dp"
             android:textColor="@color/black"
             android:textSize="12sp"
 
@@ -81,6 +120,8 @@
             android:layout_marginTop="32dp"
             android:layout_gravity="left"
             android:textAllCaps="true"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             />
         <EditText
             android:id="@+id/edit_profile_BioText"
@@ -94,7 +135,8 @@
             android:hint="@string/bio_text"
             android:inputType="textMultiLine|text"
             android:minHeight="80dp"
-            android:autofillHints="Statusbesked"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             />
 
         <TextView
@@ -106,6 +148,8 @@
             android:layout_marginTop="32dp"
             android:layout_gravity="left"
             android:textAllCaps="true"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             />
 
         <EditText
@@ -117,26 +161,18 @@
             android:background="@color/white"
             android:textColor="#80000000"
             android:ems="10"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:minHeight="48dp"
             android:fontFamily="@font/poppins_light"
             android:hint="@string/e_mail"
             android:inputType="textEmailAddress"
             android:drawableStart="@drawable/vector_email"
-            android:drawablePadding="15dp"
+            android:drawablePadding="16dp"
+
             />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/edit_profile_saveChange_btn"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/custom_button"
-            android:textColor="#f7f7f7"
-            android:text="@string/Submit_changes"
-            android:alpha="1"
-            android:textAllCaps="false"
-            />
+
 
         <TextView
             android:id="@+id/tv_sign_out"
@@ -181,3 +217,4 @@
 
     </LinearLayout>
 </ScrollView>
+</LinearLayout>

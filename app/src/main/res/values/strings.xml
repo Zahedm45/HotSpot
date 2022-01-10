@@ -57,6 +57,7 @@
     <string name="Submit_changes">Submit changes</string>
     <string name="change_profile_message">Profile message</string>
     <string name="delete_account">Delete account</string>
+    <string name="Done">Done</string>
 
 
 </resources>
