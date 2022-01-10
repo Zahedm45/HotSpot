@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
@@ -11,6 +13,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ProgressBar
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.example.hotspot.R
@@ -333,6 +336,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun addProgressBar() {
         progressBar = binding.fragmentMapsProgressBar
+        progressBar.indeterminateDrawable
+            .setColorFilter(ContextCompat.getColor(requireContext(), R.color.orange), PorterDuff.Mode.SRC_IN )
 //        requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
 //            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
