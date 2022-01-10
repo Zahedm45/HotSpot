@@ -68,11 +68,20 @@ class BeforeCheckIn : Fragment() {
 
         val lat = args.hotSpot.address?.latitude
         val lng = args.hotSpot.address?.longitude
-        val realAddress: List<Address>
+      //  val realAddress: List<Address>
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
 
         if (lat != null && lng != null) {
-            realAddress = geocoder.getFromLocation(lat, lng, 1)
+            geocoder.getFromLocation(lat, lng, 1).apply {
+
+                val roadName = this[0].thoroughfare
+                val doorNum = this[0].subThoroughfare
+                val floor = this[0].featureName
+                val town = this[0].subLocality
+                val postalCode = this[0].postalCode
+                val country = this[0].countryName
+                return "$roadName $doorNum, $floor \n$postalCode $town \n$country"
+            }
 
         } else {
             return "Address not found"
@@ -80,15 +89,10 @@ class BeforeCheckIn : Fragment() {
 
         // val address = realAddress.get(0).getAddressLine(0)
 
-        val roadName = realAddress[0].thoroughfare
-        val doorNum = realAddress[0].subThoroughfare
-        val floor = realAddress[0].featureName
-        val town = realAddress[0].subLocality
-        val postalCode = realAddress[0].postalCode
-        val country = realAddress.get(0).countryName
 
 
-        return "$roadName $doorNum, $floor \n$postalCode $town \n$country"
+
+
     }
 
 

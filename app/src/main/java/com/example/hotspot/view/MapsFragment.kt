@@ -29,6 +29,11 @@ import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 import pub.devrel.easypermissions.AppSettingsDialog
@@ -244,7 +249,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
         setOnClickListener(hotSpots)
-        clearProgressBar()
+
+
+        CoroutineScope(IO).launch {
+            delay(1500)
+            CoroutineScope(Main).launch {
+                clearProgressBar()
+            }
+        }
+
+
     }
 
 
@@ -292,8 +306,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun clearProgressBar() {
         progressBar.visibility = View.GONE
-       // requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         binding.fragmentMapsLoadingImg.isVisible = false
+
+       // requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
     }
 
 
