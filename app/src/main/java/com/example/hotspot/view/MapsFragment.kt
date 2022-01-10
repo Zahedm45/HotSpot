@@ -47,8 +47,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
 
-    private var circleAroundPos: Circle? = null
-    private var circleAroundPos2: Circle? = null
+//    private var circleAroundPos: Circle? = null
+//    private var circleAroundPos2: Circle? = null
     private var googleMap: GoogleMap? = null
     private var mapFragment: SupportMapFragment? = null
     lateinit var progressBar: ProgressBar
@@ -185,7 +185,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 location = LatLng(latitude, longitude)
 
                 location?.let {
-                    updateBlueDot(it)
+                    updateBlueDot()
                 }
 
             }
@@ -198,10 +198,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
     @SuppressLint("MissingPermission")
-    private fun updateBlueDot(location: LatLng) {
+    private fun updateBlueDot() {
 
-        circleAroundPos?.remove()
-        circleAroundPos2?.remove()
+//        circleAroundPos?.remove()
+//        circleAroundPos2?.remove()
 
         if (mapFragment == null) {
             mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -254,8 +254,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
         }
 
-        clearProgressBar()
+
         setOnClickListener(hotSpots)
+        clearProgressBar()
     }
 
 
