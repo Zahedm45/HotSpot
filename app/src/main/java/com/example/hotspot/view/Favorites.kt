@@ -12,7 +12,7 @@ import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import android.view.View
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.favorite_item.view.*
 import androidx.recyclerview.widget.RecyclerView
@@ -50,7 +50,7 @@ class Favorites : Fragment() {
         userRef.get()
             .addOnSuccessListener{
                 val users = it.toObjects<User>()
-                val adapter = GroupAdapter<ViewHolder>()
+                val adapter = GroupAdapter<GroupieViewHolder>()
                 users.forEach{user->
                     adapter.add(UserItem(user))
                 }
@@ -59,8 +59,8 @@ class Favorites : Fragment() {
     }
 
 
-    class UserItem(val user: User): Item<ViewHolder>() {
-        override fun bind(viewHolder: ViewHolder, position: Int) {
+    class UserItem(val user: User): Item<GroupieViewHolder>() {
+        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
             viewHolder.itemView.hotspot_name.text = user.name
         }
