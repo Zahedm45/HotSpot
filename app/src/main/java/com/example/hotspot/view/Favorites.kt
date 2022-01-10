@@ -14,13 +14,17 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
-import kotlinx.android.synthetic.main.fragment_favorites.view.*
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
+import com.xwray.groupie.kotlinandroidextensions.Item
+import kotlinx.android.synthetic.main.favorite_item.view.*
+
 
 
 class Favorites : Fragment() {
     /* Dont know what these are for?
     private var param1: String? = null
     private var param2: String? = null */
+
     private lateinit var binding: FragmentFavoritesBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +61,17 @@ class Favorites : Fragment() {
             }
     }
 
+
+    class UserItem(val user: User): Item() {
+        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+
+            viewHolder.itemView.hotspot_name.text = user.name
+        }
+
+        override fun getLayout(): Int {
+            return R.layout.fragment_favorites
+        }
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

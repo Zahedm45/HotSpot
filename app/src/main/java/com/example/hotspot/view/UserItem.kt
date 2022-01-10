@@ -1,4 +1,4 @@
-package com.example.hotspot.view
+/*package com.example.hotspot.view
 
 import com.example.hotspot.R
 import com.example.hotspot.model.User
@@ -14,4 +14,4 @@ class UserItem(val user: User): Item<ViewHolder>() {
 
     override fun getLayout() = R.layout.fragment_message_overview
 
-}
+} */
