@@ -103,6 +103,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        clearProgressBar()
+    }
+
+
 
 
     private fun requestLocPermissionAndTrackLocation() {
