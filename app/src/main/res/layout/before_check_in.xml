@@ -49,8 +49,8 @@
 
         <TextView
             android:id="@+id/eventLocationName"
-            android:layout_width="105dp"
-            android:layout_height="33dp"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
             android:layout_alignParentBottom="true"
             android:layout_toStartOf="@+id/humbergerMenu"
             android:fontFamily="@font/poppins_semibold"

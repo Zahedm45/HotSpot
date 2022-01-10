@@ -33,6 +33,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.ktx.Firebase
 
 
@@ -251,6 +252,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             .title(name)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
                             .snippet("Rating: $rating")
+
                     )?.apply {
                         Log.i(TAG, "Tss ${this.id}")
                         this.showInfoWindow()
@@ -262,7 +264,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-                    setOnClickListener(it, crrHotSpot)
+
 
 
                 }
@@ -270,18 +272,37 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
         clearProgressBar()
+
+        setOnClickListener( hotSpots)
     }
 
 
 
 
 
-    private fun setOnClickListener( googleMap: GoogleMap, hotSpot: HotSpot) {
+    private fun setOnClickListener( hotSpots: ArrayList<HotSpot>) {
 
-        googleMap.setOnInfoWindowClickListener {
+        googleMap?.setOnInfoWindowClickListener { marker ->
 
-            val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(hotSpot)
-            view?.findNavController()?.navigate(action)
+            var hotSpot: HotSpot? = null
+
+            hotSpots.forEach {
+                if (it.hotSpotName == marker.title && it.address == GeoPoint(marker.position.latitude, marker.position.longitude) ) {
+                    hotSpot = it
+                    return@forEach
+                }
+            }
+
+            Log.i(TAG, "Marker is ${hotSpot?.hotSpotName}")
+
+
+
+            if (hotSpot != null) {
+                val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(hotSpot!!)
+                view?.findNavController()?.navigate(action)
+            }
+
+
            // view?.let { view -> Navigation.findNavController(view).navigate(R.id.action_mapsFragment_to_beforeCheckIn) }
 
         }
