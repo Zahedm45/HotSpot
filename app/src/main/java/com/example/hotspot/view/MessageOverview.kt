@@ -36,7 +36,7 @@ class MessageOverview : Fragment(), View.OnClickListener {
         navController = Navigation.findNavController(view)
 
         //RVmessage_overview.adapter = GroupAdapter<ViewHolder>()
-        Repository.fetchMessages()
+        //Repository.fetchMessages()
         view.findViewById<CardView>(R.id.chatOnClick).setOnClickListener(this)
 
     }

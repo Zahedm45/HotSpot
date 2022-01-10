@@ -16,10 +16,10 @@ import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.ViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.favorite_item.view.*
-
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
 class Favorites : Fragment() {
@@ -27,31 +27,26 @@ class Favorites : Fragment() {
     private var param1: String? = null
     private var param2: String? = null */
 
-    private lateinit var binding: FragmentFavoritesBinding
+    //private lateinit var binding: FragmentFavoritesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
+        //binding = FragmentFavoritesBinding.inflate(inflater,container, false)
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My favorites"
         return view
     }
 
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         //binding = FragmentFavoritesBinding.inflate(layoutInflater)
         fetchUsers()
-    } */
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
-        fetchUsers()
-
     }
+
 
     private fun fetchUsers(){
 
@@ -61,17 +56,17 @@ class Favorites : Fragment() {
         userRef.get()
             .addOnSuccessListener{
                 val users = it.toObjects<User>()
-                val adapter = GroupAdapter<GroupieViewHolder>()
+                val adapter = GroupAdapter<ViewHolder>()
                 users.forEach{user->
                     adapter.add(UserItem(user))
                 }
-               binding.RVfavorites.adapter = adapter
+               RVfavorites.adapter = adapter
             }
     }
 
 
-    class UserItem(val user: User): Item<GroupieViewHolder>() {
-        override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+    class UserItem(val user: User): Item<ViewHolder>() {
+        override fun bind(viewHolder: ViewHolder, position: Int) {
 
             viewHolder.itemView.hotspot_name.text = user.name
         }
@@ -80,20 +75,6 @@ class Favorites : Fragment() {
             return R.layout.fragment_favorites
         }
     }
-
-   /* class UserItem(val user: User): com.xwray.groupie.kotlinandroidextensions.Item() {
-        override fun bind(viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder, position: Int) {
-
-            viewHolder.itemView.row_message_name.text = user.name
-        }
-
-        override fun getLayout(): Int {
-            return R.layout.user_row_new_message
-        }
-    } */
-
-
-
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
