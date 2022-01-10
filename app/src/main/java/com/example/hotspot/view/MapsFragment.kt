@@ -126,7 +126,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         } else {
             MapUtility.requestPermission(this)
         }
-
     }
 
 
@@ -208,7 +207,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         }
 
-
         mapFragment?.getMapAsync {
             googleMap = it
 
@@ -220,14 +218,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 isMakerShowing = true
             }
         }
-
     }
-
-
-
-
-
-
 
 
 
@@ -246,7 +237,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 val location = LatLng(lat, lng)
                 googleMap?.let {
 
-                    val marker = it.addMarker(
+                    it.addMarker(
                         MarkerOptions()
                             .position(location)
                             .title(name)
@@ -258,22 +249,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                         this.showInfoWindow()
                     }
 
-
-
-                     it.setInfoWindowAdapter(InfoWindow(requireContext()))
-
-
-
-
-
-
+                    it.setInfoWindowAdapter(InfoWindow(requireContext()))
                 }
             }
         }
 
         clearProgressBar()
-
-        setOnClickListener( hotSpots)
+        setOnClickListener(hotSpots)
     }
 
 
@@ -285,25 +267,20 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         googleMap?.setOnInfoWindowClickListener { marker ->
 
             var hotSpot: HotSpot? = null
+            val address = GeoPoint(marker.position.latitude, marker.position.longitude)
 
             hotSpots.forEach {
-                if (it.hotSpotName == marker.title && it.address == GeoPoint(marker.position.latitude, marker.position.longitude) ) {
+                if (it.hotSpotName == marker.title && it.address == address) {
                     hotSpot = it
                     return@forEach
                 }
             }
-
-            Log.i(TAG, "Marker is ${hotSpot?.hotSpotName}")
-
 
 
             if (hotSpot != null) {
                 val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(hotSpot!!)
                 view?.findNavController()?.navigate(action)
             }
-
-
-           // view?.let { view -> Navigation.findNavController(view).navigate(R.id.action_mapsFragment_to_beforeCheckIn) }
 
         }
     }
