@@ -23,9 +23,6 @@ import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
 class Favorites : Fragment() {
-    /* Dont know what these are for?
-    private var param1: String? = null
-    private var param2: String? = null */
 
     private lateinit var binding: FragmentFavoritesBinding
 
