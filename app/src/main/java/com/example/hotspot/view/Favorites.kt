@@ -16,6 +16,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.favorite_item.view.*
 
 
+
 class Favorites : Fragment() {
 
     private lateinit var binding: FragmentFavoritesBinding
@@ -34,12 +35,15 @@ class Favorites : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         fetchUsers()
+
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavoritesBinding.bind(view)
+
+
 
     }
 
