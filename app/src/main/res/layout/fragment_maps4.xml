@@ -44,5 +44,25 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
 
+    <ImageView
+        android:id="@+id/fragment_maps_loading_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_hotspot"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="@+id/map"
+        app:layout_constraintStart_toStartOf="@+id/map"
+        app:layout_constraintTop_toTopOf="@+id/map" />
+
+    <ProgressBar
+        android:id="@+id/fragment_maps_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/map"
+        app:layout_constraintTop_toTopOf="@+id/map" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

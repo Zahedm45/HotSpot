@@ -10,6 +10,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Button
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
@@ -43,6 +45,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var circleAroundPos2: Circle? = null
     private var googleMap: GoogleMap? = null
     private var mapFragment: SupportMapFragment? = null
+    lateinit var progressBar: ProgressBar
 
 
 
@@ -54,7 +57,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_maps4, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_maps4, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,15 +68,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         requestLocPermissionAndTrackLocation()
 
+        addProgressBar()
 
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
 
             if (location != null && googleMap != null) {
                 moveCamara(12f)
-
             }
-
         }
+
 
 
     }
@@ -90,19 +95,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             MapUtility.requestPermission(this)
         }
 
-
-
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog?.setTitle("Please wait")
-        progressDialog?.setMessage("Loading ...")
-      //  progressDialog.setButton(Button.CANCEL)
-        progressDialog?.setCancelable(false)
-        progressDialog?.show()
-
-
     }
 
-    var progressDialog: ProgressDialog? = null
 
 
 
@@ -213,7 +207,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    // private var markers: ArrayList<Marker> = ArrayList()
 
     @SuppressLint("MissingPermission")
     private fun updateBlueDot(location: LatLng) {
@@ -227,15 +220,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
         mapFragment?.getMapAsync {
-         //   marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
-            //it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
-
             googleMap = it
-
-
-
-
-
 
 /*
             circleAroundPos2 = it.addCircle(
@@ -330,15 +315,35 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
                     it.setInfoWindowAdapter(InfoWindow(requireContext()))
 
-                    progressDialog?.dismiss()
-
                 }
             }
         }
 
+        clearProgressBar()
     }
 
 
+
+
+
+
+
+
+
+
+    private fun addProgressBar() {
+        progressBar = binding.fragmentMapsProgressBar
+//        requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+//            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
+    }
+
+
+    private fun clearProgressBar() {
+        progressBar.visibility = View.GONE
+       // requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        binding.fragmentMapsLoadingImg.isVisible = false
+    }
 
 
 
