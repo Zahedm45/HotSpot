@@ -1,6 +1,10 @@
 package com.example.hotspot.view
 
+import android.content.ContentValues.TAG
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +15,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
 import com.example.hotspot.databinding.FragmentMaps4Binding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class BeforeCheckIn : Fragment() {
@@ -48,7 +54,47 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
 
 
+
+        val lat = args.hotSpot.address?.latitude
+        val lng = args.hotSpot.address?.longitude
+
+        val realAddress: List<Address>
+
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+
+        if (lat != null && lng != null) {
+            realAddress = geocoder.getFromLocation(lat, lng, 1)
+
+        } else {
+            return
+        }
+
+
+       // val address = realAddress.get(0).getAddressLine(0)
+
+
+        val roadName = realAddress.get(0).thoroughfare
+        val doorNum = realAddress.get(0).subThoroughfare
+        val floor = realAddress.get(0).featureName
+        val town = realAddress.get(0).subLocality
+        val postalCode = realAddress.get(0).postalCode
+        val country = realAddress.get(0).countryName
+
+
+        val address = "$roadName $doorNum, $floor \n$postalCode $town \n$country"
+
+        binding.beforeCheckInDescriptionTv.text = address
+
+
+
+
+
+
+
     }
+
+
+
 
 
 

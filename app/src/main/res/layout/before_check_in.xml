@@ -66,6 +66,7 @@
             android:lineSpacingExtra="5dp"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:paddingStart="48dp"
             android:paddingEnd="10dp"
             android:paddingBottom="10dp"
@@ -111,6 +112,7 @@
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/poppins_light"
             android:lineSpacingExtra="5dp"
+
             android:padding="10dp"
             android:text="@string/address"
             android:textSize="15sp"
