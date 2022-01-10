@@ -12,6 +12,8 @@
     <color name="gold">#C6FFA200</color>
     <color name="light_gold">#EAC690</color>
     <color name="blue">#EB11E6D2</color>
+    <color name="orange_hotspot">#F18239</color>
+    <color name="purple_hotspot">#5B3AB7</color>
 
     <color name="soft_cyan">#add8e6</color>
 
@@ -19,4 +21,7 @@
 
 
     <color name="yellow">#add8e6</color>
+
+
+
 </resources>

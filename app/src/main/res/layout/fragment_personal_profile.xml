@@ -7,17 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".view.PersonalProfile"
     android:fillViewport="true"
-
-
-
     >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
+        android:background="@color/white"
+        android:elevation="0dp"
         >
 
 
@@ -27,8 +24,8 @@
             android:layout_height="159dp"
             android:layout_marginTop="24dp"
             android:src="@drawable/circle_for_profile_picture"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp"
+            app:civ_border_color="#40000000"
+            app:civ_border_width="1dp"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintVertical_bias=".1"
 
@@ -114,7 +111,6 @@
             android:textSize="16sp"
             android:layout_marginTop="20dp"
 
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_personal_profile_bio"
@@ -122,24 +118,22 @@
 
             />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_personal_profile_editProfile_btn"
-            android:layout_width="205dp"
-            android:layout_height="59dp"
-            android:backgroundTint="@android:color/holo_orange_light"
-            android:fontFamily="sans-serif"
-            android:text="@string/edit_profile"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            tools:autoText="true"
-            android:layout_marginVertical="50dp"
-
-
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:alpha="1"
+            android:background="@drawable/custom_button"
+            android:text="Edit Profile"
+            android:textAllCaps="false"
+            android:textColor="#f7f7f7"
+            android:elevation="75dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_personal_profile_email_tv"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_email_tv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

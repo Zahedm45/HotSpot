@@ -30,4 +30,9 @@ object UtilView {
             // more to be added..
         }
     }
+    //using this for now in edit profile
+    fun signOut(activity: Activity){
+        Firebase.auth.signOut()
+        navigateToLoginPage(activity)
+    }
 }

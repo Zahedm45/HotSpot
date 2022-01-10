@@ -1,68 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.CreateProfileActivity"
-    android:fillViewport="true"
-
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     >
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
 
         >
 
 
         <TextView
             android:id="@+id/fragment_edit_profile_headline_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:paddingTop="12dp"
-            android:text="@string/edit_profil"
-            android:textColor="@color/orange"
-            android:textSize="30dp"
-            android:ems="10"
-
-            android:paddingStart="5dp"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintVertical_bias=".1"
-
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.078"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/fragment_edit_profile_edit_picture"
-            tools:text="@string/edit_profil">
-
-        </TextView>
-
-
-        <TextView
-            android:id="@+id/fragment_edit_profile_sub_headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_light"
-            android:text="Tilføj ændringer"
-            android:textColor="@android:color/darker_gray"
-            android:paddingStart="5dp"
-
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="0dp"
+            android:paddingTop="0dp"
+            android:text="@string/edit_profil"
+            android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_edit_profile_headline_tv"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_profile_headline_tv"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_profile_headline_tv"
-            app:layout_constraintTop_toTopOf="@+id/fragment_edit_profile_headline_tv"
-            app:layout_constraintVertical_bias="0.0"
-            tools:text="Tilføj ændringer">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        </TextView>
+        <TextView
+            android:id="@+id/tv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="5dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="5dp"
+            android:text="@string/Done"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<ScrollView
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.EditProfile"
+    android:fillViewport="false"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#f7f7f7"
+        >
 
 
 
@@ -71,15 +74,16 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fragment_edit_profile_edit_picture"
-            android:layout_width="173dp"
-            android:layout_height="159dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginTop="24dp"
             android:src="@drawable/circle_for_profile_picture"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp"
+            android:elevation="36dp"
+            app:civ_border_color="#40000000"
+            app:civ_border_width="1dp"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintVertical_bias=".1"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
@@ -95,15 +99,11 @@
             android:backgroundTint="@color/white"
             android:minHeight="0dp"
             android:text="Change picture"
-
+            android:elevation="16dp"
             android:textColor="@color/black"
             android:textSize="12sp"
 
-            app:layout_constraintBottom_toTopOf="@id/edit_profile_new_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_profile_edit_picture"
-
+            android:layout_gravity="center_horizontal"
             tools:ignore="TouchTargetSizeCheck">
 
         </Button>
@@ -111,37 +111,46 @@
 
 
 
-
-
-
-
-
-
-
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_profile_message"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="left"
+            android:textAllCaps="true"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            />
         <EditText
-            android:id="@+id/edit_profile_new_name"
+            android:id="@+id/edit_profile_BioText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="username"
-            android:background="@drawable/edittext_background1"
-            android:ems="10"
-            android:fontFamily="@font/poppins_light"
-            android:hint="@string/username"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            android:text="Nyt navn"
             android:layout_marginTop="20dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_edid_profile_change_pic_btn"
-            app:layout_constraintBottom_toTopOf="@id/edit_profile_new_email"
-
-
+            android:background="@color/white"
+            android:ems="10"
+            android:textColor="#80000000"
+            android:fontFamily="@font/poppins_light"
+            android:hint="@string/bio_text"
+            android:inputType="textMultiLine|text"
+            android:minHeight="80dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             />
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="E-mail"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="left"
+            android:textAllCaps="true"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            />
 
         <EditText
             android:id="@+id/edit_profile_new_email"
@@ -149,111 +158,63 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:autofillHints="emailAddress"
-            android:background="@drawable/edittext_background1"
+            android:background="@color/white"
+            android:textColor="#80000000"
             android:ems="10"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:minHeight="48dp"
             android:fontFamily="@font/poppins_light"
             android:hint="@string/e_mail"
             android:inputType="textEmailAddress"
-            android:text="Ny email"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_profile_new_name"
-            app:layout_constraintBottom_toTopOf="@id/edit_profile_BioText"
+            android:drawableStart="@drawable/vector_email"
+            android:drawablePadding="16dp"
 
             />
 
 
 
-        <EditText
-            android:id="@+id/edit_profile_BioText"
+        <TextView
+            android:id="@+id/tv_sign_out"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edittext_background1"
-            android:ems="10"
-            android:fontFamily="@font/poppins_light"
-            android:hint="@string/bio_text"
-            android:inputType="textMultiLine|text"
-            android:minHeight="70dp"
-            android:text="Statusbesked"
-            android:autofillHints="Statusbesked"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_profile_new_email"
-            app:layout_constraintBottom_toTopOf="@id/edit_profile_password_layout"
-
+            android:layout_marginTop="32dp"
+            android:text="@string/sign_out"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="14sp"
+            android:textAllCaps="true"
             />
 
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edit_profile_password_layout"
-            android:layout_height="wrap_content"
+            android:src="@drawable/hotspot_logo" />
+
+        <TextView
+            android:id="@+id/tv_delete_account"
             android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
-            app:passwordToggleEnabled="true"
-            android:theme="@style/Theme.HotSpot"
-            app:counterTextColor="@color/black"
-            app:boxStrokeColor="@color/teal_200"
-            app:hintTextColor="@color/black"
-
-
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_profile_BioText"
-            app:layout_constraintBottom_toTopOf="@id/edit_profile_saveChange_btn"
-
-
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_profile_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="password"
-                android:background="@drawable/edittext_background1"
-                android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
-                android:ems="10"
-                android:fontFamily="@font/poppins_light"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:paddingTop="30dp"
-
-
-
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-        <Button
-            android:id="@+id/edit_profile_saveChange_btn"
-            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:width="200dp"
-            android:backgroundTint="@color/orange"
-            android:text="Godkend Ændring"
-            android:textSize="18sp"
-
-            android:layout_marginBottom="50dp"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_profile_password_layout"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-
+            android:layout_marginBottom="8dp"
+            android:text="@string/delete_account"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="14sp"
+            android:textAllCaps="true"
             />
 
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>
+</LinearLayout>
