@@ -5,9 +5,6 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
-import com.example.hotspot.databinding.ActivityAfterLoginBinding
-import com.example.hotspot.databinding.FragmentFavoritesBinding
-import com.example.hotspot.databinding.FragmentListeViewBinding
 import com.example.hotspot.model.User
 import com.example.hotspot.other.UtilView
 import com.google.firebase.firestore.ktx.firestore
@@ -15,11 +12,11 @@ import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.xwray.groupie.ViewHolder
 import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.favorite_item.view.*
-import kotlinx.android.synthetic.main.fragment_favorites.*
+import androidx.recyclerview.widget.RecyclerView
+import com.example.hotspot.databinding.FragmentFavoritesBinding
 
 
 class Favorites : Fragment() {
@@ -43,6 +40,7 @@ class Favorites : Fragment() {
         fetchUsers()
     }
 
+    /* TODO: Currently testing with fetchUsers() --> should be changed so it fetches favorite hotspots */
 
     private fun fetchUsers(){
 
