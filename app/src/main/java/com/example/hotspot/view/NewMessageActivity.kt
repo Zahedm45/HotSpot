@@ -34,6 +34,10 @@ class NewMessageActivity : AppCompatActivity() {
         fetchUsers()
     }
 
+    companion object {
+        val USER_KEY = "USER_KEY"
+    }
+
     // we fetch the users from the database
     private fun fetchUsers(){
 
@@ -48,7 +52,9 @@ class NewMessageActivity : AppCompatActivity() {
                     adapter.add(UserItem(user))
                 }
                 adapter.setOnItemClickListener { item, view ->
+                    val userItem = item as UserItem
                     val intent = Intent(view.context, ChatLogActivity::class.java)
+                    intent.putExtra(USER_KEY, userItem.user.name)
                     startActivity(intent)
                     finish()
                 }

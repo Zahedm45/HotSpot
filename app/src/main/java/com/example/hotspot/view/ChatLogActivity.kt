@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hotspot.R
 import com.example.hotspot.model.User
+import com.example.hotspot.view.NewMessageActivity.Companion.USER_KEY
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -16,7 +17,8 @@ class ChatLogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
-        supportActionBar?.title = "chat log"
+        val username = intent.getStringExtra(NewMessageActivity.USER_KEY)
+        supportActionBar?.title = username
 
         val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
         adapter.add(ChatFromItem())
