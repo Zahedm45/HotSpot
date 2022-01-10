@@ -37,5 +37,6 @@ class InfoWindow(val context: Context) : GoogleMap.InfoWindowAdapter {
         setWindowText(marker, window)
         return window
     }
+
 }
 

@@ -16,6 +16,7 @@ import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
@@ -23,6 +24,7 @@ import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
+import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.example.hotspot.view.infoWindow.InfoWindow
 import com.example.hotspot.viewModel.MapsAndHotspotsVM
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -86,6 +88,22 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (Firebase.auth.uid == null) {
+            Log.i(TAG, "not logged in ..")
+
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            requireActivity().finish()
+        }
+        setHasOptionsMenu(true)
+
+    }
+
+
 
 
     private fun requestLocPermissionAndTrackLocation() {
@@ -99,7 +117,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
     }
-
 
 
 
@@ -134,27 +151,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (Firebase.auth.uid == null) {
-            Log.i(TAG, "not logged in ..")
-
-            val intent = Intent(requireActivity(), LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            requireActivity().finish()
-        }
-        setHasOptionsMenu(true)
-
-
-
-    }
-
-
-
-
-
 
 
     private fun sendCommandToService(action: String) =
@@ -183,21 +179,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
             }
         })
-
-
-
-
-//        TrackingService.lastLocation.observe(viewLifecycleOwner, Observer {
-//            if(it.last().isNotEmpty()) {
-////                val i = it.last().last()
-////                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
-//                val latitude =   it.last().last()?.latitude
-//                val longitude =   it.last().last()?.longitude
-//                val location = LatLng(latitude, longitude)
-//                updateMarker(location)
-//            }
-//        })
-
 
     }
 
@@ -317,6 +298,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     }
 
                     it.setInfoWindowAdapter(InfoWindow(requireContext()))
+                    setOnClickListener(it)
+
 
                 }
             }
@@ -327,6 +310,17 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+
+
+    private fun setOnClickListener(googleMap: GoogleMap) {
+
+        googleMap.setOnInfoWindowClickListener {
+
+
+            view?.let { it1 -> Navigation.findNavController(it1).navigate(R.id.beforeCheckIn) }
+
+        }
+    }
 
 
 
