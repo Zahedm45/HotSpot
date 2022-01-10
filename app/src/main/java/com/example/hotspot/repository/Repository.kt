@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.graphics.Bitmap
 import android.util.Log
+import com.example.hotspot.model.Message
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
 import com.google.android.gms.tasks.Tasks.await
@@ -375,12 +376,95 @@ class Repository {
 
     }
 
+    fun addProfileToFirebase(
+        user: User,
+        onSuccess: (() -> Unit),
+        onFailure: ((msg: String) -> Unit)
+
+    ) {
+        val fbUser = Firebase.auth.currentUser
+
+        if (fbUser == null) {
+            // something went wrong
+            Log.w(ContentValues.TAG, "User not found")
+            return
+        }
+
+
+        val bitmap = user.bitmapImg
+        user.bitmapImg = null
+
+        val db = Firebase.firestore
+
+        db.collection("users").document(fbUser.uid).set(user)
+            .addOnSuccessListener {
+                if (bitmap != null) {
+                    addImageToFirebase(bitmap, {onSuccess()}, { msg -> onFailure(msg) })
+                }
+            }
+
+            .addOnFailureListener {e ->
+                fbUser.delete()
+                Log.w(ContentValues.TAG, "Error adding document", e)
+                onFailure(e.message.toString())
+            }
+
+
+    }
 
 
 
+    private fun addImageToFirebase(bitmap: Bitmap, onSuccess: (() -> Unit), onFailure: ((msg: String) -> Unit) ) {
+        val fbUser = Firebase.auth.currentUser
+
+
+        if (fbUser == null) {
+            Log.i(TAG, "User is not signed in.")
+            return
+        }
+
+        val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
+
+        if (ref == null) {
+            Log.i(TAG, "Collection path not found.")
+            return
+
+        }
+
+        val bytArr = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytArr)
+        val data = bytArr.toByteArray()
+
+
+        ref.putBytes(data)
+            .addOnSuccessListener {
+                onSuccess()
+            }
+
+            .addOnFailureListener {
+                fbUser.delete()
+                onFailure(it.message.toString())
+
+            }
+
+    }
 
 
 
+    fun addMessageToFirebase(
+        message: Message,
+    ) {
+        val fbUser = Firebase.auth.currentUser
+        val db = Firebase.firestore
 
+        if (message == null) {
+            // something went wrong
+            Log.w(ContentValues.TAG, "User not found")
+            return
+        }
 
+        if (fbUser != null) {
+            db.collection("messages").document(fbUser.uid).set(message)
+        }
+    }
 }
