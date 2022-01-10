@@ -241,7 +241,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 val location = LatLng(lat, lng)
                 googleMap?.let {
 
-                    it.addMarker(
+                    val marker = it.addMarker(
                         MarkerOptions()
                             .position(location)
                             .title(name)
@@ -252,8 +252,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                         this.showInfoWindow()
                     }
 
-                    it.setInfoWindowAdapter(InfoWindow(requireContext()))
-                    setOnClickListener(it, crrHotSpot)
+
+
+                     it.setInfoWindowAdapter(InfoWindow(requireContext()))
+
+
+                    if (crrHotSpot.hotSpotName == "No Stress Bar") {
+                        setOnClickListener(it, crrHotSpot)
+                    }
+
 
 
                 }

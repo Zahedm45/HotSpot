@@ -106,7 +106,7 @@
         <action
             android:id="@+id/action_mapsFragment_to_beforeCheckIn"
             app:destination="@id/beforeCheckIn" />
-        <argument android:name="googleMape" />
+
     </fragment>
 
 
