@@ -50,8 +50,8 @@ class BeforeCheckIn : Fragment() {
 
         binding.beforeCheckInEventLocationName.text = args.hotSpot.hotSpotName
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
-
         binding.beforeCheckInDescriptionTv.text = getAddress()
+        binding.beforeCheckInRatingBar.rating = args.hotSpot.overallRating!!.toFloat()
 
 
     }
