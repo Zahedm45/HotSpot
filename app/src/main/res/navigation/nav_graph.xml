@@ -26,7 +26,10 @@
         <action
             android:id="@+id/action_beforeCheckIn_to_afterCheckIn"
             app:destination="@id/afterCheckIn" />
-        <argument android:name="marker" />
+        <argument
+            android:name="hotSpot"
+            app:argType="com.example.hotspot.model.HotSpot"
+            />
     </fragment>
     <fragment
         android:id="@+id/chat"

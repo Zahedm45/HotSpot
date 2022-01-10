@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
@@ -252,7 +253,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     }
 
                     it.setInfoWindowAdapter(InfoWindow(requireContext()))
-                    //setOnClickListener(it)
+                    setOnClickListener(it, crrHotSpot)
 
 
                 }
@@ -270,8 +271,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         googleMap.setOnInfoWindowClickListener {
 
-           // val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(hotSpot)
-            view?.let { view -> Navigation.findNavController(view).navigate(R.id.action_mapsFragment_to_beforeCheckIn) }
+            val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(hotSpot)
+            view?.findNavController()?.navigate(action)
+           // view?.let { view -> Navigation.findNavController(view).navigate(R.id.action_mapsFragment_to_beforeCheckIn) }
 
         }
     }
