@@ -9,6 +9,4 @@ data class User(
     var bio: String? = null,
     val gender: String,
     var bitmapImg: Bitmap? = null
-) {
-    constructor(): this()
-}
+)

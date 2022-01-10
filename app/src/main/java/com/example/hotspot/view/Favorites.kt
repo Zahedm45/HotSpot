@@ -27,14 +27,14 @@ class Favorites : Fragment() {
     private var param1: String? = null
     private var param2: String? = null */
 
-    //private lateinit var binding: FragmentFavoritesBinding
+    private lateinit var binding: FragmentFavoritesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
-        //binding = FragmentFavoritesBinding.inflate(inflater,container, false)
+        binding = FragmentFavoritesBinding.inflate(inflater,container, false)
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My favorites"
         return view
     }
@@ -43,7 +43,6 @@ class Favorites : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        //binding = FragmentFavoritesBinding.inflate(layoutInflater)
         fetchUsers()
     }
 
@@ -60,7 +59,7 @@ class Favorites : Fragment() {
                 users.forEach{user->
                     adapter.add(UserItem(user))
                 }
-               RVfavorites.adapter = adapter
+               binding.RVfavorites.adapter = adapter
             }
     }
 
