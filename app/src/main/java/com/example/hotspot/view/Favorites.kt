@@ -5,7 +5,12 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
+import com.example.hotspot.model.User
 import com.example.hotspot.other.UtilView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
+import com.google.firebase.ktx.Firebase
+
 
 class Favorites : Fragment() {
     /* Dont know what these are for?
@@ -30,8 +35,26 @@ class Favorites : Fragment() {
 
     }
 
+    private fun fetchUsers(){
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        val db = Firebase.firestore
+        val userRef = db.collection("users")
+
+        userRef.get()
+            .addOnSuccessListener{
+                val users = it.toObjects<User>()
+                val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
+                users.forEach{user->
+                    adapter.add(UserItem(user))
+                }
+                binding.RVfavorites.adapter = adapter
+            }
+    }
+}
+
+
+
+override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.nav_top_menu, menu)
 
