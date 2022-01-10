@@ -1,28 +1,37 @@
 package com.example.hotspot.view
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
-import android.location.Location
+import android.graphics.PorterDuff
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Button
+import android.widget.ProgressBar
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
+import com.example.hotspot.model.HotSpot
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
+import com.example.hotspot.view.infoWindow.InfoWindow
+import com.example.hotspot.viewModel.MapsAndHotspotsVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+
 
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -35,6 +44,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding: FragmentMaps4Binding
 
     private var marker: Marker? = null
+    private var circleAroundPos: Circle? = null
+    private var circleAroundPos2: Circle? = null
+    private var googleMap: GoogleMap? = null
+    private var mapFragment: SupportMapFragment? = null
+    lateinit var progressBar: ProgressBar
 
 
 
@@ -46,7 +60,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_maps4, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_maps4, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,15 +71,17 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         requestLocPermissionAndTrackLocation()
 
+        addProgressBar()
 
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
 
             if (location != null && googleMap != null) {
                 moveCamara(12f)
-
             }
-
         }
+
+
+
     }
 
 
@@ -81,6 +99,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
     }
+
 
 
 
@@ -128,6 +147,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
         setHasOptionsMenu(true)
 
+
+
     }
 
 
@@ -152,14 +173,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         MapService.lastLocation.observe(viewLifecycleOwner, Observer { it ->
             if(it != null) {
-//                val i = it.last().last()
-//                Log.i(TAG, "location is 1 ${i.latitude} and ${i.longitude}")
                 val latitude =   it.latitude
                 val longitude =   it.longitude
                 location = LatLng(latitude, longitude)
 
                 location?.let {
-                    updateMarker(it)
+                    updateBlueDot(it)
                 }
 
             }
@@ -186,33 +205,25 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private var circleAroundPos: Circle? = null
-    private var circleAroundPos2: Circle? = null
-    private var googleMap: GoogleMap? = null
 
 
 
-    // private var markers: ArrayList<Marker> = ArrayList()
+
+
 
     @SuppressLint("MissingPermission")
-    private fun updateMarker(location: LatLng) {
+    private fun updateBlueDot(location: LatLng) {
 
-        //marker?.remove()
         circleAroundPos?.remove()
         circleAroundPos2?.remove()
 
+        if (mapFragment == null) {
+            mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        }
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+
         mapFragment?.getMapAsync {
-         //   marker = it.addMarker(MarkerOptions().position(location).title("Your current location"))
-            //it.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
             googleMap = it
-
-
-/*            it.setMaxZoomPreference(14.0f)
-            it.setMinZoomPreference(6.0f)*/
-
-
 
 /*
             circleAroundPos2 = it.addCircle(
@@ -239,6 +250,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             it.isMyLocationEnabled = true
             it.uiSettings.isMyLocationButtonEnabled = false
             if(!isMakerShowing) {
+                MapsAndHotspotsVM.showHotSpots { hotSpots -> onSuccess(hotSpots) }
                 moveCamara(12f)
                 isMakerShowing = true
             }
@@ -273,6 +285,71 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun moveCamara(zoom: Float) {
         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, zoom))
     }
+
+
+
+
+
+
+
+
+    private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
+
+        hotSpots.forEach { crrHotSpot ->
+            val lat = crrHotSpot.address?.latitude
+            val lng = crrHotSpot.address?.longitude
+            val name = crrHotSpot.hotSpotName.toString()
+            val rating = crrHotSpot.overallRating
+
+            if (lat != null && lng != null) {
+                val location = LatLng(lat, lng)
+                googleMap?.let {
+
+                    it.addMarker(
+                        MarkerOptions()
+                            .position(location)
+                            .title(name)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))
+                            .snippet("Rating: $rating")
+                    )?.apply {
+                        Log.i(TAG, "Tss ${this.id}")
+                        this.showInfoWindow()
+                    }
+
+                    it.setInfoWindowAdapter(InfoWindow(requireContext()))
+
+                }
+            }
+        }
+
+        clearProgressBar()
+    }
+
+
+
+
+
+
+
+
+
+
+    private fun addProgressBar() {
+        progressBar = binding.fragmentMapsProgressBar
+        progressBar.indeterminateDrawable
+            .setColorFilter(ContextCompat.getColor(requireContext(), R.color.orange), PorterDuff.Mode.SRC_IN )
+//        requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+//            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+
+    }
+
+
+    private fun clearProgressBar() {
+        progressBar.visibility = View.GONE
+       // requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        binding.fragmentMapsLoadingImg.isVisible = false
+    }
+
 
 
 
