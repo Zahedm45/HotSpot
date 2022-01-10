@@ -31,7 +31,7 @@ class BeforeCheckIn : Fragment() {
         binding = BeforeCheckInBinding.bind(view)
 
 
-        view.findViewById<Button>(R.id.checkInButton1).setOnClickListener {
+        view.findViewById<Button>(R.id.before_check_in_check_in_btn).setOnClickListener {
 
             Navigation.findNavController(view).navigate(R.id.afterCheckIn)
         }
@@ -42,7 +42,7 @@ class BeforeCheckIn : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.eventLocationName.text = args.hotSpot.hotSpotName
+        binding.beforeCheckInEventLocationName.text = args.hotSpot.hotSpotName
 
 
     }
