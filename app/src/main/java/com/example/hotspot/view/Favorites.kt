@@ -8,9 +8,9 @@ import com.example.hotspot.R
 import com.example.hotspot.other.UtilView
 
 class Favorites : Fragment() {
-    // TODO: Rename and change types of parameters
+    /* Dont know what these are for?
     private var param1: String? = null
-    private var param2: String? = null
+    private var param2: String? = null */
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -18,21 +18,17 @@ class Favorites : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Favorites"
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My favorites"
         return view
     }
-
-
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-    }
 
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
