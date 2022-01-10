@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/border_for_info_window"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="25dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,6 +29,7 @@
             android:id="@+id/info_window_snippet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:ellipsize="end"
             android:maxLines="10"
             android:textColor="#000"
@@ -36,15 +38,15 @@
         <ImageButton
             android:id="@+id/info_window_imgButton"
             style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
             android:alpha="0.9"
-            android:backgroundTint="#858585"
-            android:clickable="true"
+            android:backgroundTint="@color/soft_cyan"
             android:elevation="30dp"
             android:scaleType="fitCenter"
-            android:src="@android:drawable/btn_star_big_on" />
+            android:src="@android:drawable/btn_star_big_on"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
 
 
