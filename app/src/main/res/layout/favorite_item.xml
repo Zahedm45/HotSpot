@@ -8,7 +8,8 @@
     android:layout_marginStart="15dp"
     android:layout_marginTop="15dp"
     android:layout_marginEnd="15dp"
-    android:clickable="true">
+    android:clickable="true"
+    android:focusable="true">
 
 
     <ImageView
@@ -48,17 +49,13 @@
         android:layout_marginStart ="150dp"
         tools:text="Location" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:tint="@android:color/white"
-        app:backgroundTint="@color/white"
-        app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="58dp"
+        android:layout_height="54dp"
+        android:layout_gravity="bottom|end"
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_delete_outline_24" />
 
 
 </androidx.cardview.widget.CardView>
