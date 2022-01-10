@@ -270,8 +270,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         googleMap.setOnInfoWindowClickListener {
 
-
-            view?.let { it1 -> Navigation.findNavController(it1).navigate(R.id.beforeCheckIn) }
+            view?.let { view -> Navigation.findNavController(view).navigate(R.id.action_mapsFragment_to_beforeCheckIn) }
 
         }
     }

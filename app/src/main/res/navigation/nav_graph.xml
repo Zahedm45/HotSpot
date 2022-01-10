@@ -98,7 +98,12 @@
         android:id="@+id/mapsFragment"
         android:name="com.example.hotspot.view.MapsFragment"
         android:label="fragment_maps4"
-        tools:layout="@layout/fragment_maps4" />
+        tools:layout="@layout/fragment_maps4" >
+        <action
+            android:id="@+id/action_mapsFragment_to_beforeCheckIn"
+            app:destination="@id/beforeCheckIn" />
+        <argument android:name="googleMape" />
+    </fragment>
 
 
 
