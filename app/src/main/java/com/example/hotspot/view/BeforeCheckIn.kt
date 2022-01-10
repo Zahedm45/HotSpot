@@ -1,14 +1,10 @@
 package com.example.hotspot.view
 
-
-import android.content.ContentValues.TAG
-import android.graphics.Color
+import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,18 +33,18 @@ class BeforeCheckIn : Fragment() {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.before_check_in, container, false)
-        binding = BeforeCheckInBinding.bind(view)
 
         view.findViewById<Button>(R.id.before_check_in_check_in_btn).setOnClickListener {
-
             Navigation.findNavController(view).navigate(R.id.afterCheckIn)
         }
         return view
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = BeforeCheckInBinding.bind(view)
 
 
         val checkedIn = args.hotSpot.checkedIn?.size
@@ -57,20 +53,11 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
         binding.beforeCheckInDescriptionTv.text = getAddress()
         binding.beforeCheckInRatingBar.rating = args.hotSpot.overallRating!!.toFloat()
+        binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
-        binding.beforeCheckInReviews.paintFlags = binding.beforeCheckInReviews.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-
-        binding.beforeCheckInReviews.setOnClickListener {
-            Log.i(TAG, "Helloel..")
-        }
-
-//        binding.beforeCheckInReviews.setMovementMethod(LinkMovementMethod.getInstance())
-//
-//        binding.beforeCheckInReviews.setHighlightColor(Color.TRANSPARENT)
 
 
     }
-
 
 
 
@@ -93,11 +80,11 @@ class BeforeCheckIn : Fragment() {
 
         // val address = realAddress.get(0).getAddressLine(0)
 
-        val roadName = realAddress.get(0).thoroughfare
-        val doorNum = realAddress.get(0).subThoroughfare
-        val floor = realAddress.get(0).featureName
-        val town = realAddress.get(0).subLocality
-        val postalCode = realAddress.get(0).postalCode
+        val roadName = realAddress[0].thoroughfare
+        val doorNum = realAddress[0].subThoroughfare
+        val floor = realAddress[0].featureName
+        val town = realAddress[0].subLocality
+        val postalCode = realAddress[0].postalCode
         val country = realAddress.get(0).countryName
 
 
