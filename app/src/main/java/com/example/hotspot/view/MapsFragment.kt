@@ -294,6 +294,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
     private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
+        clearProgressBar()
 
         hotSpots.forEach { crrHotSpot ->
             val lat = crrHotSpot.address?.latitude
@@ -322,7 +323,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
         }
 
-        clearProgressBar()
     }
 
 
