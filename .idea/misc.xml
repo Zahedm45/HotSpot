@@ -36,6 +36,7 @@
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navigation.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/circle_for_profile_picture.xml" value="0.31614583333333335" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/edittext_background1.xml" value="0.31614583333333335" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21796875" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/orange_button.xml" value="0.1515625" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/add_photo.xml" value="0.31614583333333335" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/background_hotspot.xml" value="0.2786458333333333" />
@@ -61,8 +62,13 @@
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/home.xml" value="0.29333333333333333" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_baseline_crop_portrait_24.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_baseline_map_24.xml" value="0.283984375" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_launcher_background.xml" value="0.283984375" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_round_my_location_24.xml" value="0.283984375" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_twotone_message_24.xml" value="0.283984375" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_twotone_phone_android_24.xml" value="0.283984375" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/map_nav_bottom.xml" value="0.29333333333333333" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/message.xml" value="0.21796875" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/person.xml" value="0.21796875" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/phone_vector.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/round_btn.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/vector_add.xml" value="0.25390625" />
@@ -107,6 +113,8 @@
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_profile_text.xml" value="0.67" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navigation.xml" value="0.1" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/menu/nav_top_menu.xml" value="0.22604166666666667" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21796875" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.21796875" />
         <entry key="app/src/main/res/drawable-v24/edittext_background1.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_remove_red_eye_24.xml" value="0.40208333333333335" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.3921875" />

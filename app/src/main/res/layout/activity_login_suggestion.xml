@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_filled"
-        android:drawableStart="@drawable/phone_vector"
+        android:drawableStart="@drawable/vector_phone"
         android:ems="8"
         android:fontFamily="@font/poppins_light"
         android:padding="16dp"
