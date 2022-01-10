@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:fillViewport="true"
     >
 
 
@@ -26,10 +27,13 @@
             android:layout_height="200dp"
             android:layout_alignParentBottom="true"
             android:src="@drawable/dancing_pic_with_shadow"
+            app:layout_constraintVertical_bias=".05"
+
             app:layout_constraintBottom_toTopOf="@+id/before_check_in_event_location_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
 
 
             tools:ignore="SpeakableTextPresentCheck" />
@@ -144,13 +148,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/before_check_in_description_tv"
-            app:layout_constraintBottom_toTopOf="@+id/before_check_in_check_in_btn"
-
+            app:layout_constraintBottom_toTopOf="@+id/before_check_in_reviews"
 
 
             />
 
 
+
+        <TextView
+            android:id="@+id/before_check_in_reviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reviews"
+            android:stateListAnimator="@null"
+            android:paddingBottom="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/before_check_in_rating_bar"
+            app:layout_constraintBottom_toTopOf="@+id/before_check_in_check_in_btn"
+
+            />
 
 
 
@@ -175,7 +196,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/before_check_in_rating_bar"
+            app:layout_constraintTop_toBottomOf="@+id/before_check_in_reviews"
 
 
             />

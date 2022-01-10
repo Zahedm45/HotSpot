@@ -1,9 +1,14 @@
 package com.example.hotspot.view
 
 
+import android.content.ContentValues.TAG
+import android.graphics.Color
+import android.graphics.Paint
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +57,16 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
         binding.beforeCheckInDescriptionTv.text = getAddress()
         binding.beforeCheckInRatingBar.rating = args.hotSpot.overallRating!!.toFloat()
+
+        binding.beforeCheckInReviews.paintFlags = binding.beforeCheckInReviews.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+
+        binding.beforeCheckInReviews.setOnClickListener {
+            Log.i(TAG, "Helloel..")
+        }
+
+//        binding.beforeCheckInReviews.setMovementMethod(LinkMovementMethod.getInstance())
+//
+//        binding.beforeCheckInReviews.setHighlightColor(Color.TRANSPARENT)
 
 
     }
