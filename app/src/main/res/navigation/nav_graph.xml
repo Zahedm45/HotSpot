@@ -26,6 +26,7 @@
         <action
             android:id="@+id/action_beforeCheckIn_to_afterCheckIn"
             app:destination="@id/afterCheckIn" />
+        <argument android:name="marker" />
     </fragment>
     <fragment
         android:id="@+id/chat"

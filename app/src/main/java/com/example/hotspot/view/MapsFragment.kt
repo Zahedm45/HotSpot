@@ -252,7 +252,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                     }
 
                     it.setInfoWindowAdapter(InfoWindow(requireContext()))
-                    setOnClickListener(it)
+                    //setOnClickListener(it)
 
 
                 }
@@ -266,10 +266,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private fun setOnClickListener(googleMap: GoogleMap) {
+    private fun setOnClickListener( googleMap: GoogleMap, hotSpot: HotSpot) {
 
         googleMap.setOnInfoWindowClickListener {
 
+           // val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(hotSpot)
             view?.let { view -> Navigation.findNavController(view).navigate(R.id.action_mapsFragment_to_beforeCheckIn) }
 
         }
