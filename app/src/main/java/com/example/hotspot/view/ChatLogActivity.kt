@@ -17,6 +17,7 @@ class ChatLogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 
+        //Passing an object from one activity to another - in this case we are passing the username
         val username = intent.getStringExtra(NewMessageActivity.USER_KEY)
         supportActionBar?.title = username
 
