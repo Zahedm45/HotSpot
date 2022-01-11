@@ -1,12 +1,12 @@
 package com.example.hotspot.model
 
 class Address(
-    streetName: String? = null,
-    doorNumber: Int? = null,
-    floor: String? = null,
-    postalCode: String? = null,
-    town: String? = null,
-    country: String = "Denmark",
+    var streetName: String? = null,
+    var doorNumber: Int? = null,
+    var floor: String? = null,
+    var postalCode: String? = null,
+    var town: String? = null,
+    var country: String = "Denmark",
 
 ) {
 }

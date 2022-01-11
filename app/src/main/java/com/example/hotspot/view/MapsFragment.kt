@@ -98,6 +98,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
         setHasOptionsMenu(true)
 
+
+
     }
 
 
