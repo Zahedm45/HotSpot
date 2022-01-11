@@ -60,38 +60,65 @@ class BeforeCheckIn : Fragment() {
 
         CoroutineScope(IO).launch {
             getAddress()
+
         }
 
 
-
     }
-
-
-
-
 
 
     private suspend fun getAddress() {
 
         val lat = args.hotSpot.address?.latitude
         val lng = args.hotSpot.address?.longitude
-      //  val realAddress: List<Address>
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
 
-        if (lat != null && lng != null) {
-            geocoder.getFromLocation(lat, lng, 1).apply {
 
-                val roadName = this[0].thoroughfare
-                val doorNum = this[0].subThoroughfare
-                val floor = this[0].featureName
-                val town = this[0].subLocality
-                val postalCode = this[0].postalCode
-                val country = this[0].countryName
-                val address = "$roadName $doorNum, $floor \n$postalCode $town \n$country"
-                setInMainTread(address)
+        lat?.let { lng?.let {
+
+            geocoder.let {
+
+                it.getFromLocation(lat, lng, 1)?.let { addr ->
+
+                    val roadName = addr[0].thoroughfare
+                    val doorNum = addr[0].subThoroughfare
+                    val floor = addr[0].featureName
+                    val town = addr[0].subLocality
+                    val postalCode = addr[0].postalCode
+                    val country = addr[0].countryName
+                    val address = "$roadName $doorNum, $floor \n$postalCode $town \n$country"
+                    setInMainTread(address)
+                }
             }
+        } }
 
-        }
+
+
+
+
+/*        run {
+            lat ?: return@run null
+            lng ?: return@run null
+            return@run lat + lng
+        } ?: run {
+
+            geocoder.let {
+
+                it.getFromLocation(lat, lng, 1)?.let { addr ->
+
+                    val roadName = addr[0].thoroughfare
+                    val doorNum = addr[0].subThoroughfare
+                    val floor = addr[0].featureName
+                    val town = addr[0].subLocality
+                    val postalCode = addr[0].postalCode
+                    val country = addr[0].countryName
+                    val address = "$roadName $doorNum, $floor \n$postalCode $town \n$country"
+                    setInMainTread(address)
+                }
+            }
+        }*/
+
+
 
         // val address = realAddress.get(0).getAddressLine(0)
     }
