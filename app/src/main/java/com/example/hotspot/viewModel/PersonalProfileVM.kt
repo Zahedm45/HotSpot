@@ -54,9 +54,9 @@ class PersonalProfileVM(
                 emailAddress = email, gender = gender, userName = userName, bio = bio)
 
             binding.fragmentPersonalProfilePersonName.text = userProfile.name
-            binding.fragmentPersonalProfileAge.text = "${userProfile.age} år"
+            binding.fragmentPersonalProfileAge.text = "${userProfile.age}"
             binding.fragmentPersonalProfileBio.text = userProfile.bio
-            binding.fragmentPersonalProfileEmailTv.text = "Email: ${userProfile.emailAddress}"
+            binding.fragmentPersonalProfileEmailTv.text = "${userProfile.emailAddress}"
 
 
             if (userProfile.bitmapImg != null) {

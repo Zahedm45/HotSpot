@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentCreateProfileProfileTextBinding
@@ -36,6 +37,11 @@ class FragmentProfileText : Fragment() {
             viewModel.setProfileText(binding.firstNameText.text.toString())
             findNavController().navigate(R.id.action_fragmentProfileText_to_createProfileUploadImageFragment)
         }
+
+        viewModel.getProfileText().observe(viewLifecycleOwner,
+            Observer {
+                binding.firstNameText.setText(it.toString())
+            })
 
         binding.firstNameText.addTextChangedListener {
             if(it.toString().isNotEmpty()){
