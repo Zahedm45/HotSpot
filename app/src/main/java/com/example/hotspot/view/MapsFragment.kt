@@ -246,17 +246,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
         }
 
-
         setOnClickListener(hotSpots)
-
 
         CoroutineScope(IO).launch {
             delay(1000)
-
             CoroutineScope(Main).launch {
                 clearProgressBar()
             }
-
         }
 
 
@@ -269,13 +265,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun setOnClickListener(hotSpotsArr: ArrayList<HotSpot>) {
 
         googleMap?.setOnInfoWindowClickListener { marker ->
-
             var hotSpot: HotSpot? = null
             val address = GeoPoint(marker.position.latitude, marker.position.longitude)
-
-            var counter = 0
-
-
 
 // Since it is not possible to break a forEach loop in Kotlin, we need to add another nesting lambda
             run loop@{
@@ -284,12 +275,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                         hotSpot = it
                         return@loop
                     }
-                    Log.i(TAG, "NNN $counter")
-                    counter++
+
                 }
             }
-
-
 
 
 
