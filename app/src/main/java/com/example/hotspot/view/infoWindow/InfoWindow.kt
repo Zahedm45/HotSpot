@@ -26,6 +26,7 @@ class InfoWindow(val context: Context) : GoogleMap.InfoWindowAdapter {
         tvTitle.text = marker.title
         tvSnippet.text = marker.snippet
 
+
     }
 
     override fun getInfoContents(marker: Marker): View {
@@ -37,5 +38,6 @@ class InfoWindow(val context: Context) : GoogleMap.InfoWindowAdapter {
         setWindowText(marker, window)
         return window
     }
+
 }
 
