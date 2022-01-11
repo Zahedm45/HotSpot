@@ -27,6 +27,8 @@ class FragmentAge : Fragment() {
     private var cmonth: Int = 0
     private var cyear: Int = 0
 
+    private var isContinueClickable = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +37,7 @@ class FragmentAge : Fragment() {
 
 
         binding.continueButton.setOnClickListener{
+            if(!isContinueClickable) return@setOnClickListener
             findNavController().navigate(R.id.action_createProfileAgeFragment_to_createProfileGenderFragment)
         }
 
@@ -57,10 +60,13 @@ class FragmentAge : Fragment() {
             binding.dateButton.text = it.toString()
             if(it.toString().isNotEmpty()){
                 ButtonAnimations.fadeIn(binding.continueButton)
+                isContinueClickable = true
+                binding.dateButton.setText(it.toString())
                 Log.d("Empty", "Empty")
             }
             else{
                 ButtonAnimations.fadeOut(binding.continueButton)
+                isContinueClickable = false
                 Log.d("not", "not")
             }
         })

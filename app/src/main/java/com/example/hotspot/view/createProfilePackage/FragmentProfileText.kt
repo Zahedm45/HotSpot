@@ -20,6 +20,8 @@ class FragmentProfileText : Fragment() {
     private var _binding: FragmentCreateProfileProfileTextBinding? = null
     private val binding get() = _binding!!
 
+    private var isContinueClickable = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +32,7 @@ class FragmentProfileText : Fragment() {
 
 
         binding.continueButton.setOnClickListener {
+            if(!isContinueClickable) return@setOnClickListener
             viewModel.setProfileText(binding.firstNameText.text.toString())
             findNavController().navigate(R.id.action_fragmentProfileText_to_createProfileUploadImageFragment)
         }
@@ -37,10 +40,12 @@ class FragmentProfileText : Fragment() {
         binding.firstNameText.addTextChangedListener {
             if(it.toString().isNotEmpty()){
                 ButtonAnimations.fadeIn(binding.continueButton)
+                isContinueClickable = true
                 Log.d("Empty", "Empty")
             }
             else{
                 ButtonAnimations.fadeOut(binding.continueButton)
+                isContinueClickable = false
                 Log.d("not", "not")
             }
         }

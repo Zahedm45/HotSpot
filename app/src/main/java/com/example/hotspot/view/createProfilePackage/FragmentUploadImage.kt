@@ -28,6 +28,8 @@ class FragmentUploadImage : Fragment() {
     private val pickImage = 100
     private var imageUri: Uri? = null
 
+    private var isSubmitClickable = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +42,7 @@ class FragmentUploadImage : Fragment() {
 
         binding.progressBarIndeterminate.visibility = View.GONE
         binding.continueButton.setOnClickListener {
+            if(!isSubmitClickable) return@setOnClickListener
             binding.progressBar.visibility = View.GONE
             binding.progressBarIndeterminate.visibility = View.VISIBLE
             viewModel.createNewProfile( { ->
@@ -75,10 +78,12 @@ class FragmentUploadImage : Fragment() {
 
             if(it.toString().isNotEmpty()){
                 ButtonAnimations.fadeIn(binding.continueButton)
+                isSubmitClickable = true
                 Log.d("Empty", "Empty")
             }
             else{
                 ButtonAnimations.fadeOut(binding.continueButton)
+                isSubmitClickable = false
                 Log.d("not", "not")
             }
         })
