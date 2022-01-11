@@ -2,8 +2,6 @@ package com.example.hotspot.view
 
 import android.annotation.SuppressLint
 import android.graphics.Paint
-import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,10 +12,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -59,20 +53,22 @@ class BeforeCheckIn : Fragment() {
 
 
 
+        val streetName = args.hotSpot.address?.streetName
+        val doorNum = args.hotSpot.address?.doorNumber
+        val floor = args.hotSpot.address?.floor
+        val town = args.hotSpot.address?.town
+        val postalCode = args.hotSpot.address?.postalCode
+        val country = args.hotSpot.address?.country
+        val address = "$streetName $doorNum, $floor \n$postalCode $town \n$country"
 
+        binding.beforeCheckInDescriptionTv.text = address
 
-
-//        CoroutineScope(IO).launch {
-//            getAddress()
-//
-//        }
 
 
     }
 
 
-/*
-    private suspend fun getAddress() {
+  /*  private suspend fun getAddress() {
 
         val lat = args.hotSpot.geoPoint?.latitude
         val lng = args.hotSpot.geoPoint?.longitude
@@ -136,7 +132,6 @@ class BeforeCheckIn : Fragment() {
         }
     }
 */
-
 
 }
 
