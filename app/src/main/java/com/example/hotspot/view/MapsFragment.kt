@@ -16,6 +16,7 @@ import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
+import com.example.hotspot.model.SubClassForHotspot
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
@@ -97,8 +98,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             requireActivity().finish()
         }
         setHasOptionsMenu(true)
-
-
+        addHotSpotsInDB()
 
     }
 
@@ -340,6 +340,14 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+
+    private fun addHotSpotsInDB() {
+        SubClassForHotspot.defineRH("No Stress Bar", 55.667, 12.5842, requireContext())
+        SubClassForHotspot.defineRH("Muck Bar", 55.7143, 12.5595, requireContext())
+        SubClassForHotspot.defineRH("Sjus Bar", 55.6971, 55.6971, requireContext())
+        SubClassForHotspot.defineRH("Cucaracha Bar", 55.67594, 12.566846, requireContext())
+
+    }
 
 
 

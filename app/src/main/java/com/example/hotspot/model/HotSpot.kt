@@ -54,7 +54,7 @@ data class HotSpot(
 }
 
 
-class subClassForHotspot() {
+class SubClassForHotspot() {
 
     companion object {
 
