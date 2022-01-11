@@ -7,13 +7,13 @@
     android:background="#f7f7f7"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".view.createProfilePackage.FragmentGender">
+    tools:context=".view.createProfilePackage.FragmentEmail">
 
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="?android:attr/progressBarStyleHorizontal"
-        android:progress="66"
+        android:progress="48"
         />
     <TextView
         android:layout_width="match_parent"
@@ -21,43 +21,47 @@
 
         android:fontFamily="@font/poppins_semibold"
         android:paddingTop="10dp"
-        android:text="@string/are_you_a"
+        android:text="@string/my_email_address_n_is"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp" />
+    <EditText
+        android:id="@+id/tvEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email"
+        android:fontFamily="@font/poppins_light"
+        android:drawableStart="@drawable/vector_email"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:drawablePadding="8dp"
+        android:textColor="#000"
+        android:layout_marginHorizontal="30dp"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:paddingTop="10dp"
-        android:text="@string/your_age_will_be_shown_to_n_other_users_in_a_hotspot"
+        android:text="@string/lost_account"
         android:textAlignment="center"
         android:textColor="#c5c5c5"
         android:textSize="12sp"
         android:layout_marginHorizontal="30dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/manButton"
+        android:id="@+id/continueButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:background="@drawable/custom_button"
         android:textColor="#f7f7f7"
-        android:text="@string/man"
-        android:textAllCaps="false"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/womanButton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/custom_button_reverse"
-        android:textColor="#f7f7f7"
-        android:text="@string/woman"
+        android:text="@string/continue_button"
+        android:alpha="0.1"
         android:textAllCaps="false"
         />
     <ImageView
@@ -67,7 +71,6 @@
         android:layout_marginTop="20dp"
 
         android:src="@drawable/hotspot_logo" />
-
 
 
 

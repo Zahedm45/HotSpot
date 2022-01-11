@@ -24,8 +24,8 @@
         android:label="create_profile_age_fragment"
         tools:layout="@layout/fragment_create_profile_age" >
         <action
-            android:id="@+id/action_createProfileAgeFragment_to_createProfileGenderFragment"
-            app:destination="@id/createProfileGenderFragment"
+            android:id="@+id/action_createProfileAgeFragment_to_fragmentEmail"
+            app:destination="@id/fragmentEmail"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
@@ -61,5 +61,14 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentEmail"
+        android:name="com.example.hotspot.view.createProfilePackage.FragmentEmail"
+        android:label="fragment_create_profile_email"
+        tools:layout="@layout/fragment_create_profile_email" >
+        <action
+            android:id="@+id/action_fragmentEmail_to_createProfileGenderFragment"
+            app:destination="@id/createProfileGenderFragment" />
     </fragment>
 </navigation>

@@ -76,6 +76,9 @@
     <string name="upload_a_photo">Upload a photo</string>
     <string name="you_need_one_photo_n_in_order_to_participate_in_hotspots">You need one photo \n in order to participate in HotSpots</string>
     <string name="create_account">Create account</string>
+    <string name="my_email_address_n_is">My email address \n is</string>
+    <string name="email">Email</string>
+    <string name="lost_account">We will use your email in case your account is lost.</string>
 
 
 </resources>
