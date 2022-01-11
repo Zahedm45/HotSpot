@@ -17,6 +17,7 @@
 
 
 
+
         <ImageButton
             android:id="@+id/after_check_in_party_img"
             android:layout_width="match_parent"
@@ -74,7 +75,6 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toBottomOf="@+id/after_check_in_hot_spot_name" />
 
 
@@ -103,6 +103,7 @@
             android:textColor="@android:color/white"
             android:textSize="13dp"
             app:cornerRadius="28dp"
+            android:layout_marginTop="10dp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,29 +112,26 @@
             tools:layout_editor_absoluteX="255dp" />
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
 
-<!--
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="29dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="28dp"
-            android:src="@drawable/img"
-            app:layout_constraintEnd_toStartOf="@+id/switch1"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/button5" />
+            app:layout_constraintBottom_toBottomOf="@+id/after_check_in_checked_in"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="29dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/img_1"
-            app:layout_constraintEnd_toStartOf="@+id/switch2"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />-->
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
