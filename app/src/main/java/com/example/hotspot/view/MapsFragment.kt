@@ -266,23 +266,35 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private fun setOnClickListener( hotSpots: ArrayList<HotSpot>) {
+    private fun setOnClickListener(hotSpotsArr: ArrayList<HotSpot>) {
 
         googleMap?.setOnInfoWindowClickListener { marker ->
 
             var hotSpot: HotSpot? = null
             val address = GeoPoint(marker.position.latitude, marker.position.longitude)
 
-            hotSpots.forEach {
-                if (it.hotSpotName == marker.title && it.address == address) {
-                    hotSpot = it
-                    return@forEach
+            var counter = 0
+
+
+
+// Since it is not possible to break a forEach loop in Kotlin, we need to add another nesting lambda
+            run loop@{
+                hotSpotsArr.forEach {
+                    if (it.hotSpotName == marker.title && it.address == address) {
+                        hotSpot = it
+                        return@loop
+                    }
+                    Log.i(TAG, "NNN $counter")
+                    counter++
                 }
             }
 
 
-            if (hotSpot != null) {
-                val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(hotSpot!!)
+
+
+
+            hotSpot?.let {
+                val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(it)
                 view?.findNavController()?.navigate(action)
             }
 
