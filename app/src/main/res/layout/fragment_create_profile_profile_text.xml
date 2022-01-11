@@ -22,7 +22,7 @@
 
             android:fontFamily="@font/poppins_semibold"
             android:paddingTop="10dp"
-            android:text="Show HotSpot\n who you are!"
+            android:text="@string/show_hotspot_n_who_you_are"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="24sp" />
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Profile text..."
+            android:hint="@string/profile_text"
             android:fontFamily="@font/poppins_light"
             android:textColor="#000"
             android:layout_marginHorizontal="30dp"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
 
             android:paddingTop="10dp"
-            android:text="Everyone on HotSpot is required to\n write a sentence or two about themselves."
+            android:text="@string/everyone_on_hotspot_is_required_to_n_write_a_sentence_or_two_about_themselves"
             android:textAlignment="center"
             android:textColor="#c5c5c5"
             android:textSize="12sp"
@@ -57,7 +57,7 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/custom_button"
             android:textColor="#f7f7f7"
-            android:text="Continue"
+            android:text="@string/continue_button"
             android:alpha="0.1"
             android:textAllCaps="false"
             />

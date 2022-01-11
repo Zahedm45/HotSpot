@@ -22,7 +22,7 @@
 
         android:fontFamily="@font/poppins_semibold"
         android:paddingTop="10dp"
-        android:text="How old \n are you?"
+        android:text="@string/how_old_n_are_you"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp" />
@@ -31,7 +31,7 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         style="?android:spinnerStyle"
-        android:text="Enter date"
+        android:text="@string/enter_date"
         android:textColor="#80000000"
         android:layout_gravity="center_horizontal"
         android:fontFamily="@font/poppins_semibold"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
 
         android:paddingTop="10dp"
-        android:text="Your age will be shown to \n other users in a HotSpot"
+        android:text="@string/your_age_shown"
         android:textAlignment="center"
         android:textColor="#c5c5c5"
         android:textSize="12sp"
@@ -56,7 +56,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/custom_button"
         android:textColor="#f7f7f7"
-        android:text="Continue"
+        android:text="@string/continue_button"
         android:alpha="0.1"
         android:textAllCaps="false"
         />

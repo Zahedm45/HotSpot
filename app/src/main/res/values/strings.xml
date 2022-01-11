@@ -59,6 +59,23 @@
     <string name="delete_account">Delete account</string>
     <string name="Done">Done</string>
     <string name="checkInEng">Check in</string>
+    <string name="are_you_a">Are you a...</string>
+    <string name="your_age_will_be_shown_to_n_other_users_in_a_hotspot">Your age will be shown to \n other users in a HotSpot</string>
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
+    <string name="how_old_n_are_you">How old \n are you?</string>
+    <string name="enter_date">Enter date</string>
+    <string name="your_age_shown">Your age will be shown to \n other users in a HotSpot</string>
+    <string name="continue_button">Continue</string>
+    <string name="tell_us_your_nfirst_name">Tell us your \nfirst name!</string>
+    <string name="first_name">First name..</string>
+    <string name="this_name_will_be_shown_to_other_users_n_at_your_hotspot">This name will be shown to other users\n at your Hotspot</string>
+    <string name="show_hotspot_n_who_you_are">Show HotSpot\n who you are!</string>
+    <string name="profile_text">Profile text...</string>
+    <string name="everyone_on_hotspot_is_required_to_n_write_a_sentence_or_two_about_themselves">Everyone on HotSpot is required to\n write a sentence or two about themselves.</string>
+    <string name="upload_a_photo">Upload a photo</string>
+    <string name="you_need_one_photo_n_in_order_to_participate_in_hotspots">You need one photo \n in order to participate in HotSpots</string>
+    <string name="create_account">Create account</string>
 
 
 </resources>

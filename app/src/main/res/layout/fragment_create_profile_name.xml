@@ -22,7 +22,7 @@
 
         android:fontFamily="@font/poppins_semibold"
         android:paddingTop="10dp"
-        android:text="Tell us your \nfirst name!"
+        android:text="@string/tell_us_your_nfirst_name"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp" />
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="First name.."
+        android:hint="@string/first_name"
         android:fontFamily="@font/poppins_light"
         android:textColor="#000"
         android:layout_marginHorizontal="30dp"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
 
         android:paddingTop="10dp"
-        android:text="This name will be shown to other users\n at your Hotspot"
+        android:text="@string/this_name_will_be_shown_to_other_users_n_at_your_hotspot"
         android:textAlignment="center"
         android:textColor="#c5c5c5"
         android:textSize="12sp"
@@ -57,7 +57,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/custom_button"
         android:textColor="#f7f7f7"
-        android:text="Continue"
+        android:text="@string/continue_button"
         android:alpha="0.1"
         android:textAllCaps="false"
         />
