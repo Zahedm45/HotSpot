@@ -6,16 +6,19 @@ import com.google.firebase.firestore.GeoPoint
 
 data class HotSpot(
     val hotSpotName: String? = null,
-    val address: GeoPoint? = null,
+    val address: Address? = null,
+    val geoPoint: GeoPoint? = null,
     val overallRating: Double? = null,
     val checkedIn: ArrayList<String>? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         TODO("address"),
+        TODO("geoPoint"),
         parcel.readValue(Double::class.java.classLoader) as? Double,
         TODO("checkedIn")
-    )
+    ) {
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(hotSpotName)
@@ -35,6 +38,7 @@ data class HotSpot(
             return arrayOfNulls(size)
         }
     }
+
 
 }
 
