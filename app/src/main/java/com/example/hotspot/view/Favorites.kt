@@ -2,12 +2,14 @@ package com.example.hotspot.view
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentFavoritesBinding
 import com.example.hotspot.model.HotSpot
-import com.example.hotspot.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -20,7 +22,9 @@ import kotlinx.android.synthetic.main.favorite_item.view.*
 
 class Favorites : Fragment() {
 
+    lateinit var navController: NavController
     private lateinit var binding: FragmentFavoritesBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +39,7 @@ class Favorites : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        fetchHotspots()
+        fetchFavoriteHotspots()
 
     }
 
@@ -43,30 +47,15 @@ class Favorites : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavoritesBinding.bind(view)
+        //navController = Navigation.findNavController(view)
+        //view.findViewById<Button>(R.id.deleteButton).setOnClickListener(this)
 
 
 
     }
 
-    /* TODO: Currently testing with fetchUsers() --> should be changed so it fetches favorite hotspots */
 
-    /*private fun fetchUsers(){
-
-        val db = Firebase.firestore
-        val userRef = db.collection("users")
-
-        userRef.get()
-            .addOnSuccessListener{
-                val users = it.toObjects<User>()
-                val adapter = GroupAdapter<GroupieViewHolder>()
-                users.forEach{user->
-                    adapter.add(UserItem(user))
-                }
-               binding.RVfavorites.adapter = adapter
-            }
-    }*/
-
-    private fun fetchHotspots(){
+    private fun fetchFavoriteHotspots(){
         val db = Firebase.firestore
         val userRef = db.collection("hotSpots")
 
@@ -86,29 +75,19 @@ class Favorites : Fragment() {
             viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
             position: Int
         ) {
+
+            viewHolder.itemView.deleteButton.setOnClickListener{
+                // TODO: should delete item from list of favorite hotspots
+            }
             viewHolder.itemView.hotspot_name.text = hotspot.hotSpotName
+            viewHolder.itemView.messageContent.text = hotspot.overallRating.toString()
         }
+
 
         override fun getLayout(): Int {
             return R.layout.favorite_item
         }
     }
-
-    /*class UserItem(val user: User): Item() {
-
-
-        override fun bind(
-            viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
-            position: Int
-        ) {
-
-            viewHolder.itemView.hotspot_name.text = user.name
-        }
-
-        override fun getLayout(): Int {
-            return R.layout.favorite_item
-        }
-    } */
 
 
 }
