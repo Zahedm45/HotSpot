@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentFavoritesBinding
+import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -34,7 +35,7 @@ class Favorites : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        fetchUsers()
+        fetchHotspots()
 
     }
 
@@ -49,7 +50,7 @@ class Favorites : Fragment() {
 
     /* TODO: Currently testing with fetchUsers() --> should be changed so it fetches favorite hotspots */
 
-    private fun fetchUsers(){
+    /*private fun fetchUsers(){
 
         val db = Firebase.firestore
         val userRef = db.collection("users")
@@ -63,10 +64,37 @@ class Favorites : Fragment() {
                 }
                binding.RVfavorites.adapter = adapter
             }
+    }*/
+
+    private fun fetchHotspots(){
+        val db = Firebase.firestore
+        val userRef = db.collection("hotSpots")
+
+        userRef.get()
+            .addOnSuccessListener {
+                val hotspots = it.toObjects<HotSpot>()
+                val adapter = GroupAdapter<GroupieViewHolder>()
+                hotspots.forEach{hotSpot ->
+                adapter.add(HotSpotItem(hotSpot))
+                }
+                binding.RVfavorites.adapter = adapter
+            }
     }
 
+    class HotSpotItem(val hotspot: HotSpot): Item() {
+        override fun bind(
+            viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
+            position: Int
+        ) {
+            viewHolder.itemView.hotspot_name.text = hotspot.hotSpotName
+        }
 
-    class UserItem(val user: User): Item() {
+        override fun getLayout(): Int {
+            return R.layout.favorite_item
+        }
+    }
+
+    /*class UserItem(val user: User): Item() {
 
 
         override fun bind(
@@ -80,7 +108,7 @@ class Favorites : Fragment() {
         override fun getLayout(): Int {
             return R.layout.favorite_item
         }
-    }
+    } */
 
 
 }
