@@ -5,11 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hotspot.R
+import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
 import com.example.hotspot.view.NewMessageActivity.Companion.USER_KEY
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -24,9 +29,14 @@ class ChatLogActivity : AppCompatActivity() {
         val TAG = "Chatlog"
     }
 
+    val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
+
+        recyclerview_chatlog.adapter = adapter
 
         //Passing an object from one activity to another - in this case we are passing the username
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
@@ -34,7 +44,6 @@ class ChatLogActivity : AppCompatActivity() {
             supportActionBar?.title = user.name
         }
 
-        val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
         adapter.add(ChatFromItem("From Message"))
         adapter.add(ChatToItem("To Message"))
 
@@ -48,8 +57,6 @@ class ChatLogActivity : AppCompatActivity() {
 
 
     }
-
-    class ChatMessage(val id: String, val text: String, val fromId: String, val toId: String, val timestamp: Long)
 
     // this is how we actually send a message to firebase
     private fun performSendMessage() {
@@ -70,7 +77,40 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages() {
+        val ref = FirebaseDatabase.getInstance().getReference("/messages")
 
+        ref.addChildEventListener(object: ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val chatMessage = p0.getValue(ChatMessage::class.java)
+
+                if (chatMessage != null) {
+                    Log.d(TAG, chatMessage.text)
+
+                    if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
+                        adapter.add(ChatFromItem(chatMessage.text))
+                    } else {
+                        adapter.add(ChatToItem(chatMessage.text))
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+
+            }
+
+        })
     }
 }
 
