@@ -75,7 +75,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         addProgressBar()
 
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
-
+           // addHotSpotsInDB()
             if (location != null && googleMap != null) {
                 moveCamara(12f)
             }
@@ -98,7 +98,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             requireActivity().finish()
         }
         setHasOptionsMenu(true)
-//        addHotSpotsInDB()
+
 
     }
 
@@ -250,6 +250,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         setOnClickListener(hotSpots)
 
+
         CoroutineScope(IO).launch {
             delay(1000)
             CoroutineScope(Main).launch {
@@ -280,7 +281,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
                 }
             }
-
 
 
             hotSpot?.let {
@@ -344,7 +344,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun addHotSpotsInDB() {
         SubClassForHotspot.defineRH("No Stress Bar", 55.667, 12.5842, requireContext())
         SubClassForHotspot.defineRH("Muck Bar", 55.7143, 12.5595, requireContext())
-        SubClassForHotspot.defineRH("Sjus Bar", 55.6971, 55.6971, requireContext())
+        SubClassForHotspot.defineRH("Sjus Bar", 55.6622,12.5285, requireContext())
         SubClassForHotspot.defineRH("Cucaracha Bar", 55.67594, 12.566846, requireContext())
 
     }

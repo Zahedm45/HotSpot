@@ -73,13 +73,15 @@ class SubClassForHotspot() {
             }
 
 
+            val randomNum = ThreadLocalRandom.current().nextDouble(3.0, 5.0).toFloat()
+            val randomTwoDig = Math.round(randomNum * 10.0) / 10.0
 
 
             val hotSpot = HotSpot().apply {
                 hotSpotName = name
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
-                overallRating = ThreadLocalRandom.current().nextDouble(3.0, 5.0)
+                overallRating = randomTwoDig
 
             }
 
