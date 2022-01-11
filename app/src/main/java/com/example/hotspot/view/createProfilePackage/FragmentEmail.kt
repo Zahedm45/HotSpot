@@ -11,15 +11,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.FragmentCreateProfileNameBinding
+import com.example.hotspot.databinding.FragmentCreateProfileEmailBinding
 import com.example.hotspot.other.ButtonAnimations
 
-class FragmentProfileName : Fragment() {
+class FragmentEmail : Fragment() {
 
 
     private val viewModel: SharedViewModelCreateProfile by activityViewModels()
 
-    private var _binding: FragmentCreateProfileNameBinding? = null
+    private var _binding: FragmentCreateProfileEmailBinding? = null
     private val binding get() = _binding!!
 
     private var isContinueClickable = false
@@ -28,7 +28,7 @@ class FragmentProfileName : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCreateProfileNameBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateProfileEmailBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -39,16 +39,16 @@ class FragmentProfileName : Fragment() {
 
         binding.continueButton.setOnClickListener{
             if(!isContinueClickable) return@setOnClickListener
-            viewModel.setName(binding.firstNameText.text.toString())
-            findNavController().navigate(R.id.action_createProfileName_to_createProfileAgeFragment)
+            viewModel.setEmail(binding.tvEmail.text.toString())
+            findNavController().navigate(R.id.action_fragmentEmail_to_createProfileGenderFragment)
         }
 
-        viewModel.getFirstName().observe(viewLifecycleOwner,
+        viewModel.getEmail().observe(viewLifecycleOwner,
             Observer {
-                binding.firstNameText.setText(it.toString())
+                binding.tvEmail.setText(it.toString())
             })
 
-        binding.firstNameText.addTextChangedListener {
+        binding.tvEmail.addTextChangedListener {
             if(it.toString().isNotEmpty()){
                 ButtonAnimations.fadeIn(binding.continueButton)
                 isContinueClickable = true

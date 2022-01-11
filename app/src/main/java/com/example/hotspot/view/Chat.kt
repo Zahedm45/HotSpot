@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.hotspot.R
-import com.example.hotspot.databinding.CreateProfileAgeFragmentBinding
+
 import com.example.hotspot.databinding.FragmentChatBinding
 
 class Chat : Fragment() {

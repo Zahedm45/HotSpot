@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f7f7f7"
@@ -14,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="?android:attr/progressBarStyleHorizontal"
-        android:progress="60"
+        android:progress="66"
         />
     <TextView
         android:layout_width="match_parent"
@@ -22,7 +21,7 @@
 
         android:fontFamily="@font/poppins_semibold"
         android:paddingTop="10dp"
-        android:text="Are you a..."
+        android:text="@string/are_you_a"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp" />
@@ -32,7 +31,7 @@
         android:layout_height="wrap_content"
 
         android:paddingTop="10dp"
-        android:text="Your age will be shown to \n other users in a HotSpot"
+        android:text="@string/your_age_will_be_shown_to_n_other_users_in_a_hotspot"
         android:textAlignment="center"
         android:textColor="#c5c5c5"
         android:textSize="12sp"
@@ -46,7 +45,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/custom_button"
         android:textColor="#f7f7f7"
-        android:text="Man"
+        android:text="@string/man"
         android:textAllCaps="false"
         />
 
@@ -56,9 +55,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
-        android:background="@drawable/custom_button"
+        android:background="@drawable/custom_button_reverse"
         android:textColor="#f7f7f7"
-        android:text="Woman"
+        android:text="@string/woman"
         android:textAllCaps="false"
         />
     <ImageView

@@ -8,13 +8,13 @@
     android:background="#f7f7f7"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".view.createProfilePackage.FragmentAge">
+    tools:context=".view.createProfilePackage.FragmentProfileName">
 
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="?android:attr/progressBarStyleHorizontal"
-        android:progress="40"
+        android:progress="16"
         />
     <TextView
         android:layout_width="match_parent"
@@ -22,19 +22,20 @@
 
         android:fontFamily="@font/poppins_semibold"
         android:paddingTop="10dp"
-        android:text="How old \n are you?"
+        android:text="@string/tell_us_your_nfirst_name"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp" />
-    <Button
-        android:id="@+id/dateButton"
-        android:layout_width="130dp"
+    <EditText
+        android:id="@+id/firstNameText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="?android:spinnerStyle"
-        android:text="Enter date"
-        android:textColor="#80000000"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/poppins_semibold"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/first_name"
+        android:fontFamily="@font/poppins_light"
+        android:textColor="#000"
+        android:layout_marginHorizontal="30dp"
         />
 
     <TextView
@@ -42,7 +43,7 @@
         android:layout_height="wrap_content"
 
         android:paddingTop="10dp"
-        android:text="Your age will be shown to \n other users in a HotSpot"
+        android:text="@string/this_name_will_be_shown_to_other_users_n_at_your_hotspot"
         android:textAlignment="center"
         android:textColor="#c5c5c5"
         android:textSize="12sp"
@@ -56,7 +57,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/custom_button"
         android:textColor="#f7f7f7"
-        android:text="Continue"
+        android:text="@string/continue_button"
         android:alpha="0.1"
         android:textAllCaps="false"
         />
@@ -67,7 +68,6 @@
         android:layout_marginTop="20dp"
 
         android:src="@drawable/hotspot_logo" />
-
 
 
 

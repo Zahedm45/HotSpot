@@ -2,19 +2,18 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f7f7f7"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".view.createProfilePackage.FragmentProfileName">
+    tools:context=".view.createProfilePackage.FragmentEmail">
 
     <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="?android:attr/progressBarStyleHorizontal"
-        android:progress="20"
+        android:progress="48"
         />
     <TextView
         android:layout_width="match_parent"
@@ -22,18 +21,22 @@
 
         android:fontFamily="@font/poppins_semibold"
         android:paddingTop="10dp"
-        android:text="Tell us your \nfirst name!"
+        android:text="@string/my_email_address_n_is"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp" />
     <EditText
-        android:id="@+id/firstNameText"
+        android:id="@+id/tvEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="First name.."
+        android:inputType="textEmailAddress"
+        android:hint="@string/email"
         android:fontFamily="@font/poppins_light"
+        android:drawableStart="@drawable/vector_email"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:drawablePadding="8dp"
         android:textColor="#000"
         android:layout_marginHorizontal="30dp"
         />
@@ -43,7 +46,7 @@
         android:layout_height="wrap_content"
 
         android:paddingTop="10dp"
-        android:text="This name will be shown to other users\n at your Hotspot"
+        android:text="@string/lost_account"
         android:textAlignment="center"
         android:textColor="#c5c5c5"
         android:textSize="12sp"
@@ -57,7 +60,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/custom_button"
         android:textColor="#f7f7f7"
-        android:text="Continue"
+        android:text="@string/continue_button"
         android:alpha="0.1"
         android:textAllCaps="false"
         />

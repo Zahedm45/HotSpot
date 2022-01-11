@@ -54,8 +54,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:ccp_countryPreference="dk"
+                app:ccp_defaultPhoneCode="45"
                 app:layout_constraintStart_toStartOf="parent"
-                app:ccp_autoDetectCountry="true"
                  />
 
             <EditText

@@ -21,6 +21,7 @@ class SharedViewModelCreateProfile : ViewModel() {
     private val _yearOfBirth = MutableLiveData<Int>()
     private val _gender = MutableLiveData<String>()
     private val _image = MutableLiveData<Bitmap>()
+    private val _email = MutableLiveData<String>()
 
     //Getters BEGIN
     fun getFirstName() : LiveData<String> {
@@ -52,6 +53,10 @@ class SharedViewModelCreateProfile : ViewModel() {
 
     fun getImage() : LiveData<Bitmap> {
         return _image
+    }
+
+    fun getEmail() : LiveData<String>{
+        return _email
     }
     // Getters END
 
@@ -87,6 +92,10 @@ class SharedViewModelCreateProfile : ViewModel() {
 
     fun setImageUri(bitMap : Bitmap){
         _image.value = bitMap
+    }
+
+    fun setEmail(email : String){
+        _email.value = email
     }
 
     // Setters END
@@ -142,7 +151,7 @@ class SharedViewModelCreateProfile : ViewModel() {
     private fun verifyInput( onFailure: (message: String) -> Unit): com.example.hotspot.model.User? {
 
         val name = this._firstName.value.toString()
-        val email = "example@email.com"
+        val email = this._email.value.toString()
         val age = this._dayOfBirth.value
         val gender = this._gender.value.toString()
         val bio = this._profileText.value.toString()

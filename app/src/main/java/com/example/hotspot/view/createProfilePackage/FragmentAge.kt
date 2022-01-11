@@ -10,13 +10,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.CreateProfileAgeFragmentBinding
+import com.example.hotspot.databinding.FragmentCreateProfileAgeBinding
 import com.example.hotspot.other.ButtonAnimations
 import java.util.*
 
 class FragmentAge : Fragment() {
 
-    private var _binding: CreateProfileAgeFragmentBinding? = null
+    private var _binding: FragmentCreateProfileAgeBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var datePicker: DatePickerDialog
@@ -27,15 +27,18 @@ class FragmentAge : Fragment() {
     private var cmonth: Int = 0
     private var cyear: Int = 0
 
+    private var isContinueClickable = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = CreateProfileAgeFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateProfileAgeBinding.inflate(inflater, container, false)
 
 
         binding.continueButton.setOnClickListener{
-            findNavController().navigate(R.id.action_createProfileAgeFragment_to_createProfileGenderFragment)
+            if(!isContinueClickable) return@setOnClickListener
+            findNavController().navigate(R.id.action_createProfileAgeFragment_to_fragmentEmail)
         }
 
 
@@ -57,10 +60,13 @@ class FragmentAge : Fragment() {
             binding.dateButton.text = it.toString()
             if(it.toString().isNotEmpty()){
                 ButtonAnimations.fadeIn(binding.continueButton)
+                isContinueClickable = true
+                binding.dateButton.setText(it.toString())
                 Log.d("Empty", "Empty")
             }
             else{
                 ButtonAnimations.fadeOut(binding.continueButton)
+                isContinueClickable = false
                 Log.d("not", "not")
             }
         })
