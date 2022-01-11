@@ -6,8 +6,6 @@ import android.location.Geocoder
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -66,7 +64,7 @@ class SubClassForHotspot() {
 
                 it.getFromLocation(latitude, longitude, 1)?.let { addr ->
                     address.streetName = addr[0].thoroughfare
-                    address.doorNumber = addr[0].subThoroughfare.toInt()
+                    address.doorNumber = addr[0].subThoroughfare
                     address.floor = addr[0].featureName
                     address.town = addr[0].subLocality
                     address.postalCode = addr[0].postalCode

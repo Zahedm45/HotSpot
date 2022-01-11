@@ -58,20 +58,24 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
 
-        CoroutineScope(IO).launch {
-            getAddress()
 
-        }
+
+
+
+//        CoroutineScope(IO).launch {
+//            getAddress()
+//
+//        }
 
 
     }
 
 
+/*
     private suspend fun getAddress() {
 
-/*
-        val lat = args.hotSpot.address?.latitude
-        val lng = args.hotSpot.address?.longitude
+        val lat = args.hotSpot.geoPoint?.latitude
+        val lng = args.hotSpot.geoPoint?.longitude
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
 
 
@@ -93,12 +97,11 @@ class BeforeCheckIn : Fragment() {
             }
         } }
 
-*/
 
 
 
 
-/*        run {
+        run {
             lat ?: return@run null
             lng ?: return@run null
             return@run lat + lng
@@ -118,7 +121,7 @@ class BeforeCheckIn : Fragment() {
                     setInMainTread(address)
                 }
             }
-        }*/
+        }
 
 
 
@@ -132,6 +135,7 @@ class BeforeCheckIn : Fragment() {
             binding.beforeCheckInDescriptionTv.text = address
         }
     }
+*/
 
 
 }

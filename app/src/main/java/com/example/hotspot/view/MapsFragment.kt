@@ -98,7 +98,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             requireActivity().finish()
         }
         setHasOptionsMenu(true)
-        addHotSpotsInDB()
+//        addHotSpotsInDB()
 
     }
 
@@ -222,10 +222,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
 
-/*
         hotSpots.forEach { crrHotSpot ->
-            val lat = crrHotSpot.address?.latitude
-            val lng = crrHotSpot.address?.longitude
+            val lat = crrHotSpot.geoPoint?.latitude
+            val lng = crrHotSpot.geoPoint?.longitude
             val name = crrHotSpot.hotSpotName.toString()
             val rating = crrHotSpot.overallRating
 
@@ -257,7 +256,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 clearProgressBar()
             }
         }
-*/
 
 
     }
@@ -268,14 +266,14 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun setOnClickListener(hotSpotsArr: ArrayList<HotSpot>) {
 
-/*        googleMap?.setOnInfoWindowClickListener { marker ->
+        googleMap?.setOnInfoWindowClickListener { marker ->
             var hotSpot: HotSpot? = null
             val address = GeoPoint(marker.position.latitude, marker.position.longitude)
 
 // Since it is not possible to break a forEach loop in Kotlin, we need to add another nesting lambda
             run loop@{
                 hotSpotsArr.forEach {
-                    if (it.hotSpotName == marker.title && it.address == address) {
+                    if (it.hotSpotName == marker.title && it.geoPoint == address) {
                         hotSpot = it
                         return@loop
                     }
@@ -290,7 +288,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 view?.findNavController()?.navigate(action)
             }
 
-        }*/
+        }
     }
 
 
