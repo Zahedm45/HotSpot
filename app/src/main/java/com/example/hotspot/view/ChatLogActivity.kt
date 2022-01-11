@@ -14,6 +14,9 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -26,7 +29,7 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 class ChatLogActivity : AppCompatActivity() {
 
     companion object {
-        val TAG = "Chatlog"
+        val TAG = "chatlog"
     }
 
     val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
@@ -35,7 +38,7 @@ class ChatLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
-
+        Log.d("test213", "potato")
         recyclerview_chatlog.adapter = adapter
 
         //Passing an object from one activity to another - in this case we are passing the username
@@ -47,9 +50,11 @@ class ChatLogActivity : AppCompatActivity() {
         adapter.add(ChatFromItem("From Message"))
         adapter.add(ChatToItem("To Message"))
 
+
+
         send_button_chatlog.setOnClickListener {
             Log.d(TAG, "Attempt to send message")
-//            performSendMessage()
+            performSendMessage()
         }
 
 
@@ -60,20 +65,24 @@ class ChatLogActivity : AppCompatActivity() {
 
     // this is how we actually send a message to firebase
     private fun performSendMessage() {
-        val text = editText_chatlog.text.toString()
 
-        val fromId = FirebaseAuth.getInstance().uid
-        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
-        val toId = user.uid
-
-        if (fromId == null) return
-
+        val db = Firebase.firestore
         val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
-        val chatMessage = ChatMessage(reference.key!!,text,fromId, toId, System.currentTimeMillis())
-        reference.setValue(chatMessage).addOnSuccessListener {
-            Log.d(TAG,"Saved our chat message: ${reference.key}")
-        }
+        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
 
+        val message = ChatMessage(reference.key!!, send_button_chatlog.text.toString(), FirebaseAuth.getInstance().uid,
+            user?.name, System.currentTimeMillis())
+
+
+
+        db.collection("messages")
+            .add(message)
+            .addOnSuccessListener {
+                Log.d(TAG, "Message sent")
+            }
+            .addOnFailureListener {
+            Log.w(TAG, "Error sending message")
+            }
     }
 
     private fun listenForMessages() {
@@ -81,7 +90,7 @@ class ChatLogActivity : AppCompatActivity() {
 
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val chatMessage = p0.getValue(ChatMessage::class.java)
+                val chatMessage = snapshot.getValue(ChatMessage::class.java)
 
                 if (chatMessage != null) {
                     Log.d(TAG, chatMessage.text)
