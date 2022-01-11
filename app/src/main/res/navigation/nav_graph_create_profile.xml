@@ -9,7 +9,7 @@
         android:id="@+id/createProfileName"
         android:name="com.example.hotspot.view.createProfilePackage.FragmentProfileName"
         android:label="create_profile_name_fragment"
-        tools:layout="@layout/create_profile_name_fragment" >
+        tools:layout="@layout/fragment_create_profile_name" >
         <action
             android:id="@+id/action_createProfileName_to_createProfileAgeFragment"
             app:destination="@id/createProfileAgeFragment"
@@ -22,7 +22,7 @@
         android:id="@+id/createProfileAgeFragment"
         android:name="com.example.hotspot.view.createProfilePackage.FragmentAge"
         android:label="create_profile_age_fragment"
-        tools:layout="@layout/create_profile_age_fragment" >
+        tools:layout="@layout/fragment_create_profile_age" >
         <action
             android:id="@+id/action_createProfileAgeFragment_to_createProfileGenderFragment"
             app:destination="@id/createProfileGenderFragment"
@@ -35,7 +35,7 @@
         android:id="@+id/createProfileGenderFragment"
         android:name="com.example.hotspot.view.createProfilePackage.FragmentGender"
         android:label="create_profile_gender_fragment"
-        tools:layout="@layout/create_profile_gender_fragment" >
+        tools:layout="@layout/fragment_create_profile_gender" >
         <action
             android:id="@+id/action_createProfileGenderFragment_to_fragmentProfileText"
             app:destination="@id/fragmentProfileText"
@@ -53,7 +53,7 @@
         android:id="@+id/fragmentProfileText"
         android:name="com.example.hotspot.view.createProfilePackage.FragmentProfileText"
         android:label="fragment_profile_text"
-        tools:layout="@layout/fragment_profile_text" >
+        tools:layout="@layout/fragment_create_profile_profile_text" >
         <action
             android:id="@+id/action_fragmentProfileText_to_createProfileUploadImageFragment"
             app:destination="@id/createProfileUploadImageFragment"

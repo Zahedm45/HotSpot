@@ -10,13 +10,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.CreateProfileAgeFragmentBinding
+import com.example.hotspot.databinding.FragmentCreateProfileAgeBinding
 import com.example.hotspot.other.ButtonAnimations
 import java.util.*
 
 class FragmentAge : Fragment() {
 
-    private var _binding: CreateProfileAgeFragmentBinding? = null
+    private var _binding: FragmentCreateProfileAgeBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var datePicker: DatePickerDialog
@@ -31,7 +31,7 @@ class FragmentAge : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = CreateProfileAgeFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateProfileAgeBinding.inflate(inflater, container, false)
 
 
         binding.continueButton.setOnClickListener{

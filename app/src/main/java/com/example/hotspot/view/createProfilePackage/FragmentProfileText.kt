@@ -10,15 +10,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.CreateProfileGenderFragmentBinding
-import com.example.hotspot.databinding.FragmentProfileTextBinding
+import com.example.hotspot.databinding.FragmentCreateProfileProfileTextBinding
 import com.example.hotspot.other.ButtonAnimations
 
 
 class FragmentProfileText : Fragment() {
     private val viewModel: SharedViewModelCreateProfile by activityViewModels()
 
-    private var _binding: FragmentProfileTextBinding? = null
+    private var _binding: FragmentCreateProfileProfileTextBinding? = null
     private val binding get() = _binding!!
 
 
@@ -27,7 +26,7 @@ class FragmentProfileText : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentProfileTextBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateProfileProfileTextBinding.inflate(inflater, container, false)
 
 
         binding.continueButton.setOnClickListener {

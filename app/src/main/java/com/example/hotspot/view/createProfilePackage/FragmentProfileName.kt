@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.CreateProfileNameFragmentBinding
+import com.example.hotspot.databinding.FragmentCreateProfileNameBinding
 import com.example.hotspot.other.ButtonAnimations
 
 class FragmentProfileName : Fragment() {
@@ -19,14 +19,14 @@ class FragmentProfileName : Fragment() {
 
     private val viewModel: SharedViewModelCreateProfile by activityViewModels()
 
-    private var _binding: CreateProfileNameFragmentBinding? = null
+    private var _binding: FragmentCreateProfileNameBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = CreateProfileNameFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentCreateProfileNameBinding.inflate(inflater, container, false)
 
         return binding.root
     }
