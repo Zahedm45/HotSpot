@@ -344,8 +344,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun addHotSpotsInDB() {
         SubClassForHotspot.defineRH("No Stress Bar", 55.667, 12.5842, requireContext())
         SubClassForHotspot.defineRH("Muck Bar", 55.7143, 12.5595, requireContext())
-        SubClassForHotspot.defineRH("Sjus Bar", 55.6622,12.5285, requireContext())
+        SubClassForHotspot.defineRH("Sjus Bar", 55.6699,12.5350, requireContext())
         SubClassForHotspot.defineRH("Cucaracha Bar", 55.67594, 12.566846, requireContext())
+
+
+
+        SubClassForHotspot.defineRH("Jaded Stout Bar", 55.6870, 12.5286, requireContext())
+        SubClassForHotspot.defineRH("Rusty Outlaw Bar", 55.7001, 12.5326, requireContext())
+        SubClassForHotspot.defineRH("Wandering Monk Ale House", 55.7089, 12.5660, requireContext())
+        SubClassForHotspot.defineRH("Secret Lady Bar and Grill", 55.6853, 12.5854, requireContext())
 
     }
 

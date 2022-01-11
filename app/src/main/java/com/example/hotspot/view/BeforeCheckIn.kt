@@ -43,95 +43,60 @@ class BeforeCheckIn : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = BeforeCheckInBinding.bind(view)
 
+        setAllInfo()
 
-        val checkedIn = args.hotSpot.checkedIn?.size
 
+    }
+
+
+
+
+
+
+    private fun setAllInfo() {
         binding.beforeCheckInEventLocationName.text = args.hotSpot.hotSpotName
+        var checkedIn = args.hotSpot.checkedIn?.size
+
+        if (checkedIn == null) {
+            checkedIn = 0
+        }
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
         binding.beforeCheckInRatingBar.rating = args.hotSpot.overallRating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-
-
-
-        val streetName = args.hotSpot.address?.streetName
-        val doorNum = args.hotSpot.address?.doorNumber
-        val floor = args.hotSpot.address?.floor
-        val town = args.hotSpot.address?.town
-        val postalCode = args.hotSpot.address?.postalCode
-        val country = args.hotSpot.address?.country
-        val address = "$streetName $doorNum, $floor \n$postalCode $town \n$country"
-
-        binding.beforeCheckInDescriptionTv.text = address
-
-
-
+        binding.beforeCheckInDescriptionTv.text = getAddress()
     }
 
 
-  /*  private suspend fun getAddress() {
-
-        val lat = args.hotSpot.geoPoint?.latitude
-        val lng = args.hotSpot.geoPoint?.longitude
-        val geocoder = Geocoder(requireContext(), Locale.getDefault())
-
-
-        lat?.let { lng?.let {
-
-            geocoder.let {
-
-                it.getFromLocation(lat, lng, 1)?.let { addr ->
-
-                    val roadName = addr[0].thoroughfare
-                    val doorNum = addr[0].subThoroughfare
-                    val floor = addr[0].featureName
-                    val town = addr[0].subLocality
-                    val postalCode = addr[0].postalCode
-                    val country = addr[0].countryName
-                    val address = "$roadName $doorNum, $floor \n$postalCode $town \n$country"
-                    setInMainTread(address)
-                }
-            }
-        } }
 
 
 
 
+    private fun getAddress(): String {
 
-        run {
-            lat ?: return@run null
-            lng ?: return@run null
-            return@run lat + lng
-        } ?: run {
+        val streetName = checkIfNull(args.hotSpot.address?.streetName)
+        val doorNum = checkIfNull(args.hotSpot.address?.doorNumber)
+        val floor = checkIfNull(args.hotSpot.address?.floor)
+        val town = checkIfNull(args.hotSpot.address?.town)
+        val postalCode = checkIfNull(args.hotSpot.address?.postalCode)
+        val country = checkIfNull(args.hotSpot.address?.country)
 
-            geocoder.let {
+//        if (floor == doorNum && floor >) {
+//            return "$streetName $doorNum \n$postalCode $town \n$country"
+//        }
+        return "$streetName $doorNum, $floor \n$postalCode $town \n$country"
+    }
 
-                it.getFromLocation(lat, lng, 1)?.let { addr ->
 
-                    val roadName = addr[0].thoroughfare
-                    val doorNum = addr[0].subThoroughfare
-                    val floor = addr[0].featureName
-                    val town = addr[0].subLocality
-                    val postalCode = addr[0].postalCode
-                    val country = addr[0].countryName
-                    val address = "$roadName $doorNum, $floor \n$postalCode $town \n$country"
-                    setInMainTread(address)
-                }
-            }
+
+    private fun checkIfNull(str: String?): String {
+        if (str == "null" || str == null || str == "Vej uden navn") {
+           return ""
         }
 
-
-
-        // val address = realAddress.get(0).getAddressLine(0)
+        return str
     }
 
 
-    private suspend fun setInMainTread(address: String) {
-
-        CoroutineScope(Main).launch {
-            binding.beforeCheckInDescriptionTv.text = address
-        }
-    }
-*/
 
 }
 
