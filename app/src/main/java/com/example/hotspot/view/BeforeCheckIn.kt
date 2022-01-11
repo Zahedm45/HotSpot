@@ -14,6 +14,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -31,7 +35,6 @@ class BeforeCheckIn : Fragment() {
 
     ): View? {
 
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.before_check_in, container, false)
 
         view.findViewById<Button>(R.id.before_check_in_check_in_btn).setOnClickListener {
@@ -51,9 +54,13 @@ class BeforeCheckIn : Fragment() {
 
         binding.beforeCheckInEventLocationName.text = args.hotSpot.hotSpotName
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
-        binding.beforeCheckInDescriptionTv.text = getAddress()
         binding.beforeCheckInRatingBar.rating = args.hotSpot.overallRating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+
+
+        CoroutineScope(IO).launch {
+            getAddress()
+        }
 
 
 
@@ -64,7 +71,7 @@ class BeforeCheckIn : Fragment() {
 
 
 
-    private fun getAddress(): String {
+    private suspend fun getAddress() {
 
         val lat = args.hotSpot.address?.latitude
         val lng = args.hotSpot.address?.longitude
@@ -80,20 +87,39 @@ class BeforeCheckIn : Fragment() {
                 val town = this[0].subLocality
                 val postalCode = this[0].postalCode
                 val country = this[0].countryName
-                return "$roadName $doorNum, $floor \n$postalCode $town \n$country"
+                val address = "$roadName $doorNum, $floor \n$postalCode $town \n$country"
+                setInMainTread(address)
             }
 
-        } else {
-            return "Address not found"
         }
 
         // val address = realAddress.get(0).getAddressLine(0)
+    }
 
 
+    private suspend fun setInMainTread(address: String) {
 
-
-
+        CoroutineScope(Main).launch {
+            binding.beforeCheckInDescriptionTv.text = address
+        }
     }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

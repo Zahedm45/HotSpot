@@ -252,10 +252,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
         CoroutineScope(IO).launch {
-            delay(1500)
+            delay(1000)
+
             CoroutineScope(Main).launch {
                 clearProgressBar()
             }
+
         }
 
 
