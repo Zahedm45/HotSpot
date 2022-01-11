@@ -26,7 +26,7 @@ class AfterLoginActivity: AppCompatActivity() {
         setContentView(R.layout.activity_after_login)
 
 //        navigateToMapFragment(intent)
-
+        supportActionBar?.hide()
         val btn = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navCont = findNavController(R.id.nav_host_fragment)
         btn.setupWithNavController(navCont)
