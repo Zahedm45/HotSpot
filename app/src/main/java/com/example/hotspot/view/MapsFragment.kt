@@ -47,8 +47,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding: FragmentMaps4Binding
     private var googleMap: GoogleMap? = null
     private var mapFragment: SupportMapFragment? = null
-    lateinit var progressBar: ProgressBar
-    var location: LatLng? = null
+    private lateinit var progressBar: ProgressBar
+    private var location: LatLng? = null
 
 
 
@@ -238,7 +238,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             .snippet("Rating: $rating")
 
                     )?.apply {
-                        Log.i(TAG, "Tss ${this.id}")
                         this.showInfoWindow()
                     }
 
