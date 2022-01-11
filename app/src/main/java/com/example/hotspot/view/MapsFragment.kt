@@ -222,6 +222,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
 
+/*
         hotSpots.forEach { crrHotSpot ->
             val lat = crrHotSpot.address?.latitude
             val lng = crrHotSpot.address?.longitude
@@ -256,6 +257,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 clearProgressBar()
             }
         }
+*/
 
 
     }
@@ -266,7 +268,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private fun setOnClickListener(hotSpotsArr: ArrayList<HotSpot>) {
 
-        googleMap?.setOnInfoWindowClickListener { marker ->
+/*        googleMap?.setOnInfoWindowClickListener { marker ->
             var hotSpot: HotSpot? = null
             val address = GeoPoint(marker.position.latitude, marker.position.longitude)
 
@@ -288,7 +290,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 view?.findNavController()?.navigate(action)
             }
 
-        }
+        }*/
     }
 
 

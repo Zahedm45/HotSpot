@@ -69,6 +69,7 @@ class BeforeCheckIn : Fragment() {
 
     private suspend fun getAddress() {
 
+/*
         val lat = args.hotSpot.address?.latitude
         val lng = args.hotSpot.address?.longitude
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
@@ -92,6 +93,7 @@ class BeforeCheckIn : Fragment() {
             }
         } }
 
+*/
 
 
 

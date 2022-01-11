@@ -66,7 +66,7 @@ class SubClassForHotspot() {
 
                 it.getFromLocation(latitude, longitude, 1)?.let { addr ->
                     address.streetName = addr[0].thoroughfare
-                    address.streetName = addr[0].subThoroughfare
+                    address.doorNumber = addr[0].subThoroughfare.toInt()
                     address.floor = addr[0].featureName
                     address.town = addr[0].subLocality
                     address.postalCode = addr[0].postalCode
