@@ -347,8 +347,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         SubClassForHotspot.defineRH("Sjus Bar", 55.6699,12.5350, requireContext())
         SubClassForHotspot.defineRH("Cucaracha Bar", 55.67594, 12.566846, requireContext())
 
-
-
         SubClassForHotspot.defineRH("Jaded Stout Bar", 55.6870, 12.5286, requireContext())
         SubClassForHotspot.defineRH("Rusty Outlaw Bar", 55.7001, 12.5326, requireContext())
         SubClassForHotspot.defineRH("Wandering Monk Ale House", 55.7089, 12.5660, requireContext())

@@ -22,10 +22,10 @@ data class HotSpot(
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        TODO("address"),
-        TODO("geoPoint"),
+        parcel.readValue(Address::class.java.classLoader) as? Address,
+        parcel.readValue(GeoPoint::class.java.classLoader) as? GeoPoint,
         parcel.readValue(Double::class.java.classLoader) as? Double,
-        TODO("checkedIn")
+        parcel.readValue(String::class.java.classLoader) as? ArrayList<String>
     ) {
     }
 
@@ -72,6 +72,9 @@ class SubClassForHotspot() {
                 }
             }
 
+            if (address.floor == address.doorNumber) {
+                address.floor = "ground floor"
+            }
 
             val randomNum = ThreadLocalRandom.current().nextDouble(3.0, 5.0).toFloat()
             val randomTwoDig = Math.round(randomNum * 10.0) / 10.0
@@ -82,10 +85,7 @@ class SubClassForHotspot() {
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
                 overallRating = randomTwoDig
-
             }
-
-
 
 
 
