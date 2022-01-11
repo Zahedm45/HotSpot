@@ -136,10 +136,10 @@ class MapService : LifecycleService() {
 
 
     val locationCallback = object : LocationCallback() {
-        override fun onLocationResult(result: LocationResult?) {
-            super.onLocationResult(result)
+        override fun onLocationResult(p0: LocationResult) {
+            super.onLocationResult(p0)
 
-            result?.lastLocation?.let {
+            p0.lastLocation.let {
                 addLastLocation(it)
             }
 
