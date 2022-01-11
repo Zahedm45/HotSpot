@@ -46,6 +46,9 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
 
     private lateinit var phoneNumber: String
 
+    private var isSubmitClickable = false
+    private var isContinueClickable = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhoneAuthBinding.inflate(layoutInflater)
@@ -102,15 +105,17 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         }
 
         binding.phoneAuthContinueButton.setOnClickListener{
-            if(binding.phoneNumberEditText.text.isEmpty()){
-                Toast.makeText(this,"Please enter a phone number.",Toast.LENGTH_LONG).show()
-                return@setOnClickListener
+            if(!isContinueClickable){
+                                return@setOnClickListener
             }
             phoneNumber = binding.ccp.fullNumberWithPlus
             startPhoneNumberVerification(phoneNumber)
         }
 
         binding.submitButton.setOnClickListener{
+            if(!isSubmitClickable){
+                return@setOnClickListener
+            }
             verifyPhoneNumberWithCode(verifyID, binding.verifyCodeTextEdit.text.toString().trim())
         }
 
@@ -206,10 +211,12 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
             if(!it){
                 binding.phoneNumberEditText.setTextColor(RED)
                 ButtonAnimations.fadeOut(binding.phoneAuthContinueButton)
+                isContinueClickable = false
             }
             else if(it){
                 ButtonAnimations.fadeIn(binding.phoneAuthContinueButton)
                 binding.phoneNumberEditText.setTextColor(BLACK)
+                isContinueClickable = true
             }
         }
     }
@@ -227,10 +234,12 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                 if (s.length == 6) {
                     ButtonAnimations.fadeIn(binding.submitButton)
                     binding.verifyCodeTextEdit.setTextColor(BLACK)
+                    isSubmitClickable = true
                 }
                 else {
                     binding.verifyCodeTextEdit.setTextColor(RED)
                     ButtonAnimations.fadeOut(binding.submitButton)
+                    isSubmitClickable = false
                 }
             }
         }
