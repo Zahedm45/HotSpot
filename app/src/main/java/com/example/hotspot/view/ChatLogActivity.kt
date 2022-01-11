@@ -8,6 +8,7 @@ import com.example.hotspot.R
 import com.example.hotspot.model.User
 import com.example.hotspot.view.NewMessageActivity.Companion.USER_KEY
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -48,20 +49,32 @@ class ChatLogActivity : AppCompatActivity() {
 
     }
 
-    class chatMessage(val text: String)
+    class ChatMessage(val id: String, val text: String, val fromId: String, val toId: String, val timestamp: Long)
 
     // this is how we actually send a message to firebase
-    private fun performSendMessage(){
+    private fun performSendMessage() {
         val text = editText_chatlog.text.toString()
 
+        val fromId = FirebaseAuth.getInstance().uid
+        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        val toId = user.uid
+
+        if (fromId == null) return
+
         val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
-        val chatMessage = chatMessage(text)
+        val chatMessage = ChatMessage(reference.key!!,text,fromId, toId, System.currentTimeMillis())
         reference.setValue(chatMessage).addOnSuccessListener {
             Log.d(TAG,"Saved our chat message: ${reference.key}")
         }
 
     }
+
+    private fun listenForMessages() {
+
+    }
 }
+
+
 
 class ChatFromItem(val text: String): Item() {
     override fun bind(viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder, position: Int) {
