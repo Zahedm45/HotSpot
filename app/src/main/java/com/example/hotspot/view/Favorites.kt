@@ -2,7 +2,6 @@ package com.example.hotspot.view
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -47,8 +46,7 @@ class Favorites : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavoritesBinding.bind(view)
-        //navController = Navigation.findNavController(view)
-        //view.findViewById<Button>(R.id.deleteButton).setOnClickListener(this)
+        navController = Navigation.findNavController(view)
 
 
 
@@ -76,8 +74,9 @@ class Favorites : Fragment() {
             position: Int
         ) {
 
+
             viewHolder.itemView.deleteButton.setOnClickListener{
-                // TODO: should delete item from list of favorite hotspots
+                // TODO: should delete item from list of favorite hotspots + update the database
             }
             viewHolder.itemView.hotspot_name.text = hotspot.hotSpotName
             viewHolder.itemView.messageContent.text = hotspot.overallRating.toString()

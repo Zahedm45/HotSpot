@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_favorites_to_beforeCheckIn"
             app:destination="@id/beforeCheckIn" />
+        <action
+            android:id="@+id/action_favorites_to_personalProfile"
+            app:destination="@id/personalProfile" />
     </fragment>
 
 
