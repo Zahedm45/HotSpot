@@ -46,6 +46,21 @@ class BeforeCheckIn : Fragment() {
         setAllInfo()
 
 
+
+        binding.beforeCheckInFavoriteBtnWhite.setOnClickListener {
+            binding.beforeCheckInFavoriteBtnWhite.visibility = View.GONE
+            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
+
+        }
+
+
+        binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
+            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
+            binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
+
+        }
+
+
     }
 
 

@@ -27,32 +27,97 @@
             android:src="@drawable/dancing_pic_with_shadow"
             app:layout_constraintVertical_bias=".0"
 
-            app:layout_constraintBottom_toTopOf="@+id/before_check_in_event_location_name"
+            app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_hotspot_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/before_check_in_event_location_name"
+        <LinearLayout
+            android:id="@+id/linear_layout_for_hotspot_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="@string/locationName"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginTop="1dp"
-            android:padding="10dp"
+            android:orientation="horizontal"
+            android:weightSum="10"
+
 
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/before_check_in_party_img"
             app:layout_constraintBottom_toTopOf="@+id/before_check_in_checked_in"
-            />
+            >
+
+            <TextView
+                android:id="@+id/before_check_in_event_location_name"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="9.5"
+                android:text="@string/hotSpotName"
+
+                android:layout_alignParentBottom="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:layout_marginTop="1dp"
+                android:padding="10dp"
+                />
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/heart_constraint_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                >
+
+
+
+                <ImageButton
+                    android:id="@+id/before_check_in_favorite_btn_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/large_icon_favorite_white"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/before_check_in_favorite_btn_theme_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/large_icon_favorite"
+                    android:visibility="invisible"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+        </LinearLayout>
 
 
 
@@ -74,7 +139,7 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/before_check_in_event_location_name"
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_hotspot_name"
             app:layout_constraintBottom_toTopOf="@+id/before_check_in_description_tv"
 
             android:text="TextView" />
@@ -187,6 +252,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/before_check_in_reviews"
             />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

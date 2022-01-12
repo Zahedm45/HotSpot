@@ -42,7 +42,7 @@
     <string name="amntOfPeople">7 Indtjekninger</string>
     <string name="address"> 50m  - København</string>
     <string name="description">beskrivelse</string>
-    <string name="locationName">Kassen</string>
+    <string name="hotSpotName">Kassen</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
