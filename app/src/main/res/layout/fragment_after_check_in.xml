@@ -3,18 +3,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:fillViewport="true"
-    >
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".view.AfterCheckIn"
-        >
-
+        tools:context=".view.AfterCheckIn">
 
 
         <ImageView
@@ -41,22 +38,17 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
 
+            android:layout_marginBottom="20dp"
             android:background="@drawable/custom_button"
             android:clickable="false"
             android:text="Checked in"
             android:textColor="@android:color/white"
             android:textSize="13dp"
             app:cornerRadius="28dp"
-            android:layout_marginBottom="20dp"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/after_check_in_party_img"
-            />
-
-
-
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <LinearLayout
@@ -65,10 +57,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
 
+            app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_different_options"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/after_check_in_party_img"
-            app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_different_options"
 
             >
 
@@ -83,33 +75,27 @@
                 android:text="The New Bar "
                 android:textColor="@color/black"
                 android:textSize="26sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
 
             <ImageButton
                 android:id="@+id/after_check_in_favorite_btn_white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/large_icon_favorite_white"
-                android:background="@color/white"
                 android:layout_gravity="center"
-                />
+                android:background="@color/white"
+                android:src="@drawable/large_icon_favorite_white" />
 
 
             <ImageButton
                 android:id="@+id/after_check_in_favorite_btn_theme_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/large_icon_favorite"
-                android:background="@color/white"
                 android:layout_gravity="center"
-                android:visibility="invisible"
-                />
+                android:background="@color/white"
+                android:src="@drawable/large_icon_favorite"
+                android:visibility="invisible" />
         </LinearLayout>
-
-
-
 
 
         <LinearLayout
@@ -121,43 +107,34 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_name_favorite"
-            >
-
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_name_favorite">
 
 
             <ImageView
                 android:id="@+id/after_check_in_person"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/persons2"
                 android:layout_marginStart="10dp"
+                android:src="@drawable/persons2"
 
                 />
-
-
-
-
 
 
             <TextView
                 android:id="@+id/after_check_in_checked_in"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
                 android:fontFamily="@font/poppins_light"
+                android:gravity="center"
+                android:paddingTop="8dp"
                 android:text="10"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginStart="8dp"
-                android:paddingTop="8dp"
 
 
                 />
-
-
-
 
 
             <com.google.android.material.chip.Chip
@@ -165,9 +142,9 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Men"
                 android:layout_marginStart="20dp"
                 android:gravity="center"
+                android:text="Men"
 
 
                 />
@@ -178,13 +155,11 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Women"
                 android:layout_marginStart="10dp"
                 android:gravity="center"
+                android:text="Women"
 
                 />
-
-
 
 
             <com.google.android.material.chip.Chip
@@ -192,9 +167,9 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seeking"
                 android:layout_marginStart="10dp"
                 android:gravity="center"
+                android:text="Seeking"
 
 
                 />
@@ -202,33 +177,22 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/after_checked_in_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
 
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_different_options"
             tools:listitem="@layout/after_checked_in_recycler_view_item"
 
-
-
- />
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
-
 </ScrollView>
-
-
-
-
-
-
 
 
     <!--        <androidx.constraintlayout.widget.ConstraintLayout
@@ -261,40 +225,37 @@
             </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-
-
-
-<!--
-<com.google.android.material.textfield.TextInputLayout
-android:id="@+id/typesFilterContainer"
-style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-android:layout_width="wrap_content"
-android:layout_height="30dp"
-android:background="@color/gray"
-app:boxBackgroundColor="@color/blue"
-app:boxCornerRadiusBottomEnd="20dp"
-app:boxCornerRadiusBottomStart="20dp"
-app:boxCornerRadiusTopEnd="20dp"
-app:boxCornerRadiusTopStart="20dp"
-app:boxStrokeWidth="0dp"
-app:boxStrokeWidthFocused="0dp"
-android:layout_gravity="center"
-
-
-    >
-
-<AutoCompleteTextView
-    android:id="@+id/typesFilter"
+    <!--
+    <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/typesFilterContainer"
+    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@null"
+    android:layout_height="30dp"
+    android:background="@color/gray"
+    app:boxBackgroundColor="@color/blue"
+    app:boxCornerRadiusBottomEnd="20dp"
+    app:boxCornerRadiusBottomStart="20dp"
+    app:boxCornerRadiusTopEnd="20dp"
+    app:boxCornerRadiusTopStart="20dp"
+    app:boxStrokeWidth="0dp"
+    app:boxStrokeWidthFocused="0dp"
+    android:layout_gravity="center"
 
-    android:ellipsize="end"
-    android:inputType="none"
-    android:maxLines="1"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:singleLine="true"
-    android:textAlignment="center"
-    tools:ignore="LabelFor" />
-</com.google.android.material.textfield.TextInputLayout>-->
+
+        >
+
+    <AutoCompleteTextView
+        android:id="@+id/typesFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+
+        android:ellipsize="end"
+        android:inputType="none"
+        android:maxLines="1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:singleLine="true"
+        android:textAlignment="center"
+        tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>-->

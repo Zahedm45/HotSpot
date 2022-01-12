@@ -1,6 +1,8 @@
 package com.example.hotspot.view
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import com.example.hotspot.model.User
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
+import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 class AfterCheckIn : Fragment() {
 
@@ -46,6 +49,11 @@ class AfterCheckIn : Fragment() {
 
         val adapter = GroupAdapter<GroupieViewHolder>()
 
+        adapter.add(UserItem("user"))
+
+        binding.afterCheckedInRecyclerView.adapter = adapter
+
+
 
 
 
@@ -59,15 +67,18 @@ class AfterCheckIn : Fragment() {
 
 
 
-class UserItem(val user: User): Item() {
+class UserItem(val user: String): Item() {
 
     override fun bind(
         viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
         position: Int
     ) {
+        Log.i(TAG, "User is called..")
 
-        viewHolder.itemView.after_checked_in_person_item_user_name.text = "hello"
+        viewHolder.itemView.after_checked_in_person_item_user_name.text = user
     }
+
+
 
     override fun getLayout(): Int {
         return R.layout.after_checked_in_recycler_view_item

@@ -6,6 +6,8 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id("androidx.navigation.safeargs.kotlin")
+    id 'kotlin-android-extensions'
+
 
 }
 
@@ -85,6 +87,11 @@ dependencies {
     //Groupie
     implementation 'com.xwray:groupie:2.9.0'
     implementation 'com.xwray:groupie-kotlin-android-extensions:2.9.0'
+
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
 
 
