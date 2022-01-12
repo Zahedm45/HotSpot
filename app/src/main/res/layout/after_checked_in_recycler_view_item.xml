@@ -1,117 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
+    android:id="@+id/cardView_favorites"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="70dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginTop="15dp"
+    app:cardElevation="0dp"
+
+    android:layout_marginEnd="15dp"
+    android:elevation="100dp"
+    app:cardBackgroundColor="@color/gray"
+    app:cardCornerRadius="40dp">
 
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
 
-
-
-
-
-
-        android:id="@+id/cardView_favorites"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        android:layout_marginEnd="15dp"
-        android:elevation="100dp"
-        app:cardBackgroundColor="@color/gray"
-        app:cardCornerRadius="40dp">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/after_checked_in_person_item_user_pic"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:elevation="20dp"
+            tools:src="@drawable/shutterstock" />
 
 
         <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/after_checked_in_item_user_pic"
-                android:layout_width="50dp"
+            <TextView
+                android:id="@+id/after_checked_in_person_item_user_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:elevation="20dp"
-                tools:src="@drawable/shutterstock" />
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:text="Hotspot name"
+
+                />
 
 
             <LinearLayout
-                android:layout_marginStart="10dp"
-                android:layout_width="280dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
 
                 <TextView
-                    android:id="@+id/hotspot_name"
-                    android:layout_width="match_parent"
+                    android:id="@+id/after_checked_in_person_item_user_age"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    tools:text="Hotspot name"
-                    android:layout_marginTop="8dp"
-
-                    />
+                    android:layout_marginEnd="10dp"
+                    tools:text="Age: 22" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/after_checked_in_person_item_user_gender"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
+                    android:layout_marginEnd="10dp"
+                    tools:text="Gender: Men" />
 
 
-                    <TextView
-                        android:id="@+id/messageContent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        tools:text="Age: 22" />
-
-
-                    <TextView
-                        android:id="@+id/location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        tools:text="Gender: Men"
-                        />
-
-
-
-                    <TextView
-                        android:id="@+id/locationddd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        tools:text="Seeking: Yes"
-                        />
-
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/after_checked_in_person_item_user_seeking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    tools:text="Seeking: Yes" />
 
 
             </LinearLayout>
 
-
         </LinearLayout>
 
+    </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
 
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>
 
 
     <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
