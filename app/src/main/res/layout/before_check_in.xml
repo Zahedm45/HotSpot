@@ -19,7 +19,7 @@
         >
 
 
-        <ImageButton
+        <ImageView
             android:id="@+id/before_check_in_party_img"
             android:layout_width="match_parent"
             android:layout_height="230dp"

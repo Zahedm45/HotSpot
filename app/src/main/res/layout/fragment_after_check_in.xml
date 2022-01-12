@@ -17,7 +17,7 @@
 
 
 
-        <ImageButton
+        <ImageView
             android:id="@+id/after_check_in_party_img"
             android:layout_width="match_parent"
             android:layout_height="230dp"
@@ -54,15 +54,21 @@
             app:layout_constraintBottom_toBottomOf="@+id/after_check_in_party_img"
             />
 
+
+
+
+
+
         <LinearLayout
+            android:id="@+id/linear_layout_for_name_favorite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linear_layout_for_name_favorite"
             android:orientation="horizontal"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/after_check_in_party_img"
+            app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_different_options"
 
             >
 
@@ -82,7 +88,7 @@
 
 
             <ImageButton
-                android:id="@+id/imageButton3333"
+                android:id="@+id/after_check_in_favorite_btn_white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/large_icon_favorite_white"
@@ -92,7 +98,7 @@
 
 
             <ImageButton
-                android:id="@+id/imageButton333"
+                android:id="@+id/after_check_in_favorite_btn_theme_color"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/large_icon_favorite"
@@ -100,8 +106,6 @@
                 android:layout_gravity="center"
                 android:visibility="invisible"
                 />
-
-
         </LinearLayout>
 
 
@@ -109,14 +113,15 @@
 
 
         <LinearLayout
+            android:id="@+id/linear_layout_for_different_options"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
 
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_name_favorite"
-
             >
 
 
@@ -156,7 +161,7 @@
 
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip13"
+                android:id="@+id/after_check_in_men"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -169,7 +174,7 @@
 
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip133"
+                android:id="@+id/after_check_in_women"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -183,7 +188,7 @@
 
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip1333"
+                android:id="@+id/after_check_in_seeking"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
