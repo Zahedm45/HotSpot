@@ -8,6 +8,7 @@ import com.example.hotspot.model.Message
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
 import com.google.android.gms.tasks.Tasks.await
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -71,6 +72,9 @@ class Repository {
 
         ) {
             val fbUser = Firebase.auth.currentUser
+
+            user.uid = FirebaseAuth.getInstance().uid
+            Log.d(TAG,"uid from user working")
 
             if (fbUser == null) {
                 // something went wrong
