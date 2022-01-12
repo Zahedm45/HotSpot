@@ -16,13 +16,15 @@
         >
 
 
+
+
         <ImageButton
             android:id="@+id/after_check_in_party_img"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_alignParentBottom="true"
             android:src="@drawable/dancing_pic"
-            app:layout_constraintBottom_toTopOf="@+id/after_check_in_hot_spot_name"
+            app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_name_favorite"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -42,7 +44,7 @@
 
             android:background="@drawable/custom_button"
             android:clickable="false"
-            android:text="@string/checkedIn"
+            android:text="Checked in"
             android:textColor="@android:color/white"
             android:textSize="13dp"
             app:cornerRadius="28dp"
@@ -53,128 +55,131 @@
             app:layout_constraintBottom_toBottomOf="@+id/after_check_in_party_img"
             />
 
-
-
-
-
-
-
-        <TextView
-            android:id="@+id/after_check_in_hot_spot_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="1dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:padding="10dp"
-            android:text="The New Bar"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
+            android:id="@+id/linear_layout_for_name_favorite"
+            android:orientation="horizontal"
 
-
-            app:layout_constraintBottom_toTopOf="@+id/after_check_in_checked_in_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/after_check_in_party_img" />
+            app:layout_constraintTop_toBottomOf="@+id/after_check_in_party_img"
+
+            >
+
+            <TextView
+                android:id="@+id/after_check_in_hot_spot_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:padding="10dp"
+                android:text="The New Bar "
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"
+
+                />
+
+
+            <ImageButton
+                android:id="@+id/imageButton333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vector_favorite_gradient"
+                android:background="@color/white"
+                android:layout_gravity="center"
+
+                />
+        </LinearLayout>
 
 
 
-        <TextView
-            android:id="@+id/after_check_in_checked_in"
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_light"
-            android:lineSpacingExtra="5dp"
-            android:paddingStart="58dp"
-            android:paddingTop="7dp"
-            android:paddingEnd="10dp"
-            android:text="10"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="30dp"
-
+            android:orientation="horizontal"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/after_check_in_hot_spot_name" />
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_name_favorite"
 
-
-        <ImageView
-            android:id="@+id/after_check_in_person"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/persons2"
-            app:layout_constraintBottom_toBottomOf="@+id/after_check_in_checked_in"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/after_check_in_checked_in" />
+            >
 
 
 
+            <ImageView
+                android:id="@+id/after_check_in_person"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/persons2"
+                android:layout_marginStart="10dp"
+
+                />
 
 
 
 
 
 
+            <TextView
+                android:id="@+id/after_check_in_checked_in"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_light"
+                android:text="10"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginStart="8dp"
+                android:paddingTop="8dp"
 
 
-<!--        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="597dp">
+                />
 
 
-            &lt;!&ndash;        <ImageView
-            android:id="@+id/after_check_in_man_symbol"
-            android:layout_width="29dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="28dp"
-            android:src="@drawable/img"
-            app:layout_constraintHorizontal_bias="1.0"
-            />
-
-        <ImageView
-            android:id="@+id/after_check_in_women_symbol"
-            android:layout_width="29dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/img_1"
-            app:layout_constraintHorizontal_bias="1.0"
-             />&ndash;&gt;
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip13"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Men"
+                app:layout_constraintEnd_toStartOf="@+id/chip133"
+                app:layout_constraintStart_toEndOf="@+id/after_check_in_person"
+                app:layout_constraintTop_toTopOf="@+id/after_check_in_checked_in"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
 
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip13"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/chip_text"
-            app:layout_constraintEnd_toEndOf="@+id/after_check_in_checked_in"
-            app:layout_constraintHorizontal_bias="0.277"
-            app:layout_constraintStart_toEndOf="@+id/after_check_in_person"
-            app:layout_constraintTop_toTopOf="@+id/after_check_in_checked_in" />
+                />
 
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip133"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/chip_text"
-            app:layout_constraintEnd_toEndOf="@+id/after_check_in_checked_in"
-            app:layout_constraintHorizontal_bias="0.669"
-            app:layout_constraintStart_toEndOf="@+id/after_check_in_person"
-            app:layout_constraintTop_toTopOf="@+id/after_check_in_checked_in" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip133"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Women"
+                app:layout_constraintEnd_toEndOf="@+id/after_check_in_checked_in"
+                app:layout_constraintTop_toTopOf="@+id/after_check_in_checked_in"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+
+
+                />
+
+
+
+
+        </LinearLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -190,4 +195,35 @@
 
 
 
+
+
+
+    <!--        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="597dp">
+
+
+                &lt;!&ndash;        <ImageView
+                android:id="@+id/after_check_in_man_symbol"
+                android:layout_width="29dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="28dp"
+                android:src="@drawable/img"
+                app:layout_constraintHorizontal_bias="1.0"
+                />
+
+            <ImageView
+                android:id="@+id/after_check_in_women_symbol"
+                android:layout_width="29dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/img_1"
+                app:layout_constraintHorizontal_bias="1.0"
+                 />&ndash;&gt;
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
