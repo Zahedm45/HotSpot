@@ -50,8 +50,23 @@ class AfterCheckIn : Fragment() {
         val adapter = GroupAdapter<GroupieViewHolder>()
 
         adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+        adapter.add(UserItem("user"))
+
 
         binding.afterCheckedInRecyclerView.adapter = adapter
+        binding.afterCheckedInRecyclerView.suppressLayout(true)
 
 
 
@@ -73,6 +88,8 @@ class UserItem(val user: String): Item() {
         viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
         position: Int
     ) {
+
+        viewHolder.itemView.after_checked_in_person_item_user_name.text = user
 
 /*        viewHolder.itemView.after_checked_in_person_item_user_name.text = user
         viewHolder.itemView.after_checked_in_person_item_user_age.text = "33"*/

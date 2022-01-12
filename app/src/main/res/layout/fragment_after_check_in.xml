@@ -3,6 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -20,15 +21,16 @@
             android:layout_height="230dp"
             android:layout_alignParentBottom="true"
             android:src="@drawable/dancing_pic"
-            app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_name_favorite"
+            app:layout_constraintVertical_bias=".0"
+            tools:ignore="SpeakableTextPresentCheck"
 
+
+            app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_name_favorite"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".0"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:ignore="SpeakableTextPresentCheck" />
+
+            />
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -171,40 +173,22 @@
                 android:gravity="center"
                 android:text="Seeking"
 
-
                 />
 
         </LinearLayout>
 
-<!--
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/after_checked_in_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_different_options"
-            tools:listitem="@layout/after_checked_in_recycler_view_item"
-
-            />
-
--->
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/after_checked_in_recycler_view"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            tools:listitem="@layout/after_checked_in_recycler_view_item"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_different_options"
-
-
+            app:layout_constraintBottom_toBottomOf="parent"
 
             />
 
@@ -214,68 +198,3 @@
 
 </ScrollView>
 
-
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:layout_editor_absoluteY="597dp">
-
-
-                &lt;!&ndash;        <ImageView
-                android:id="@+id/after_check_in_man_symbol"
-                android:layout_width="29dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="28dp"
-                android:src="@drawable/img"
-                app:layout_constraintHorizontal_bias="1.0"
-                />
-
-            <ImageView
-                android:id="@+id/after_check_in_women_symbol"
-                android:layout_width="29dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/img_1"
-                app:layout_constraintHorizontal_bias="1.0"
-                 />&ndash;&gt;
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-    <!--
-    <com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/typesFilterContainer"
-    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-    android:layout_width="wrap_content"
-    android:layout_height="30dp"
-    android:background="@color/gray"
-    app:boxBackgroundColor="@color/blue"
-    app:boxCornerRadiusBottomEnd="20dp"
-    app:boxCornerRadiusBottomStart="20dp"
-    app:boxCornerRadiusTopEnd="20dp"
-    app:boxCornerRadiusTopStart="20dp"
-    app:boxStrokeWidth="0dp"
-    app:boxStrokeWidthFocused="0dp"
-    android:layout_gravity="center"
-
-
-        >
-
-    <AutoCompleteTextView
-        android:id="@+id/typesFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-
-        android:ellipsize="end"
-        android:inputType="none"
-        android:maxLines="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:singleLine="true"
-        android:textAlignment="center"
-        tools:ignore="LabelFor" />
-    </com.google.android.material.textfield.TextInputLayout>-->
