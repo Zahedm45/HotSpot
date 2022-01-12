@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
 import com.example.hotspot.databinding.FragmentAfterCheckInBinding
+import com.example.hotspot.model.User
+import com.xwray.groupie.GroupieViewHolder
+import com.xwray.groupie.kotlinandroidextensions.Item
 
 class AfterCheckIn : Fragment() {
 
@@ -50,3 +53,22 @@ class AfterCheckIn : Fragment() {
     }
 
 }
+
+
+
+
+
+class UserItem(val user: User): Item() {
+
+    override fun bind(
+        viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
+        position: Int
+    ) {
+        viewHolder.itemView.
+    }
+
+    override fun getLayout(): Int {
+        return R.layo
+    }
+}
+
