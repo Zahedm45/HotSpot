@@ -68,10 +68,15 @@ class ChatLogActivity : AppCompatActivity() {
 
         val db = Firebase.firestore
         val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
-        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
 
-        val message = ChatMessage(reference.key!!, editText_chatlog.text.toString(), FirebaseAuth.getInstance().uid,
-            user?.uid, System.currentTimeMillis())
+        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        val text = editText_chatlog.text.toString()
+        val fromid = FirebaseAuth.getInstance().uid
+        val toid = user?.uid
+        val timestamp = System.currentTimeMillis()
+
+        val message = ChatMessage(reference.key!!, text, fromid,
+            toid, timestamp)
 
 
 
