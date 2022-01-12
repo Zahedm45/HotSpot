@@ -17,7 +17,6 @@
 
 
 
-
         <ImageButton
             android:id="@+id/after_check_in_party_img"
             android:layout_width="match_parent"
@@ -79,7 +78,6 @@
                 android:textColor="@color/black"
                 android:textSize="26sp"
                 android:textStyle="bold"
-
                 />
 
 
@@ -87,7 +85,7 @@
                 android:id="@+id/imageButton333"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/vector_favorite_gradient"
+                android:src="@drawable/large_icon_favorite"
                 android:background="@color/white"
                 android:layout_gravity="center"
 
