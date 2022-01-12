@@ -34,7 +34,7 @@
             />
 
 
-        <androidx.appcompat.widget.AppCompatButton
+<!--        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/after_check_in_checked_in_btn"
             android:layout_width="156dp"
             android:layout_height="38dp"
@@ -51,8 +51,22 @@
 
             app:layout_constraintBottom_toBottomOf="@+id/after_check_in_party_img"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />-->
 
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="10dp"
+            android:text="Interested"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+
+
+            app:layout_constraintBottom_toBottomOf="@+id/after_check_in_party_img"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <LinearLayout
             android:id="@+id/linear_layout_for_name_favorite"
@@ -216,6 +230,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
 
             />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
