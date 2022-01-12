@@ -1,5 +1,6 @@
 package com.example.hotspot.view
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentAfterCheckInBinding
 import com.example.hotspot.model.User
@@ -14,6 +16,11 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
+import android.widget.Toast
+
+import android.view.MotionEvent
+import android.view.View.OnTouchListener
+
 
 class AfterCheckIn : Fragment() {
 
@@ -67,6 +74,7 @@ class AfterCheckIn : Fragment() {
 
         binding.afterCheckedInRecyclerView.adapter = adapter
         binding.afterCheckedInRecyclerView.suppressLayout(true)
+       // binding.afterCheckInScrollView.canScrollVertically(0)
 
 
 
@@ -74,6 +82,36 @@ class AfterCheckIn : Fragment() {
 
 
 
+
+        binding.afterCheckInScrollView.viewTreeObserver.addOnScrollChangedListener( ViewTreeObserver.OnScrollChangedListener {
+            val scX = binding.afterCheckInScrollView.scrollX
+            val scY = binding.afterCheckInScrollView.scrollY
+
+            if(scX == 0 && scY >= 655f) {
+                disableScrollingUpperPart()
+                binding.afterCheckedInRecyclerView.suppressLayout(false)
+                Log.i(TAG, "Scroll Scroll x  ${scX} y $scY")
+            }
+
+            Log.i(TAG, "Scroll ${scX} y $scY")
+
+        })
+
+
+
+
+
+
+    }
+
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun disableScrollingUpperPart() {
+        val scrollview = binding.afterCheckInScrollView
+        scrollview.setOnTouchListener(OnTouchListener { v, event ->
+            true
+        })
     }
 
 }
@@ -102,4 +140,11 @@ class UserItem(val user: String): Item() {
         return R.layout.after_checked_in_recycler_view_item
     }
 }
+
+
+
+
+
+
+
 
