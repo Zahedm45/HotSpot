@@ -73,9 +73,9 @@ class UserItem(val user: String): Item() {
         viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
         position: Int
     ) {
-        Log.i(TAG, "User is called..")
 
         viewHolder.itemView.after_checked_in_person_item_user_name.text = user
+        viewHolder.itemView.after_checked_in_person_item_user_age.setText("33")
     }
 
 
