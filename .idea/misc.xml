@@ -137,13 +137,16 @@
         <entry key="app/src/main/res/layout/fragment_create_profile.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_edit_profile2.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layout/fragment_home_map.xml" value="0.22760416666666666" />
+        <entry key="app/src/main/res/layout/fragment_liste_view.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_log_in_or_create_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_message_overview.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_personal_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/info_window.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/user_ee.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/nav_top_menu.xml" value="0.37604166666666666" />
       </map>

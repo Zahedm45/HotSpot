@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
 
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
     android:id="@+id/cardView_favorites"
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:layout_marginStart="15dp"
     android:layout_marginTop="15dp"
-    app:cardElevation="0dp"
-
     android:layout_marginEnd="15dp"
     android:elevation="100dp"
     app:cardBackgroundColor="@color/gray"
-    app:cardCornerRadius="40dp">
+    app:cardCornerRadius="40dp"
+    app:cardElevation="0dp">
 
 
     <LinearLayout
@@ -31,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:elevation="20dp"
-            tools:src="@drawable/shutterstock" />
+            android:src="@drawable/round_profile_pic" />
 
 
         <LinearLayout
@@ -46,9 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="Hotspot name"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                tools:text="Hotspot name"
 
                 />
 
@@ -65,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    tools:text="Age: 22" />
+                    android:text="Age: 22" />
 
 
                 <TextView
@@ -73,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    tools:text="Gender: Men" />
+                    android:text="Gender: Men" />
 
 
                 <TextView
@@ -81,27 +77,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    tools:text="Seeking: Yes" />
-
+                    android:text="Seeking: Yes" />
 
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>
 
-
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:tint="@android:color/white"
-            app:backgroundTint="@color/white"
-     />-->

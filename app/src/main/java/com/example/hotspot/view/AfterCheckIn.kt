@@ -74,8 +74,9 @@ class UserItem(val user: String): Item() {
         position: Int
     ) {
 
-        viewHolder.itemView.after_checked_in_person_item_user_name.text = user
-        viewHolder.itemView.after_checked_in_person_item_user_age.setText("33")
+/*        viewHolder.itemView.after_checked_in_person_item_user_name.text = user
+        viewHolder.itemView.after_checked_in_person_item_user_age.text = "33"*/
+       // viewHolder.itemView.after_checked_in_person_item_user_pic.setImageResource(R.drawable.persons2)
     }
 
 
