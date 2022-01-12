@@ -63,6 +63,12 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
         binding.beforeCheckInRatingBar.rating = args.hotSpot.overallRating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+
+      //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+        // binding.beforeCheckInReviews.paintFlags =  Paint.UNDERLINE_TEXT_FLAG or binding.beforeCheckInReviews.paintFlags
+        //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+
+
         binding.beforeCheckInDescriptionTv.text = getAddress()
     }
 
