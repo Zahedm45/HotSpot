@@ -73,8 +73,8 @@ class Repository {
         ) {
             val fbUser = Firebase.auth.currentUser
 
-            user.uid = FirebaseAuth.getInstance().uid
-            Log.d(TAG,"uid from user working")
+            //user.uid = FirebaseAuth.getInstance().uid
+            //Log.d(TAG,"uid from user working")
 
             if (fbUser == null) {
                 // something went wrong

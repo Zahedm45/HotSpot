@@ -142,7 +142,7 @@ class SharedViewModelCreateProfile : ViewModel() {
 
     private fun verifyInput( onFailure: (message: String) -> Unit): com.example.hotspot.model.User? {
 
-        val uid = null
+
         val name = this._firstName.value.toString()
         val email = "example@email.com"
         val age = this._dayOfBirth.value
@@ -150,10 +150,6 @@ class SharedViewModelCreateProfile : ViewModel() {
         val bio = this._profileText.value.toString()
         val bitMap = this._image.value
 
-        if (uid == null) {
-            onFailure("Id does not exist")
-            return null
-        }
 
         if (bitMap == null) {
             onFailure("It seems you forgot to upload an image.")
@@ -183,7 +179,7 @@ class SharedViewModelCreateProfile : ViewModel() {
         }
 
         return com.example.hotspot.model.User(
-            uid = uid,
+            uid = FirebaseAuth.getInstance().uid,
             name = name,
             age = age,
             emailAddress = email,
