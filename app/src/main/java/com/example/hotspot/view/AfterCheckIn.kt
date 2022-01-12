@@ -56,20 +56,20 @@ class AfterCheckIn : Fragment() {
 
         val adapter = GroupAdapter<GroupieViewHolder>()
 
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
-        adapter.add(UserItem("user"))
+        adapter.add(UserItem("User Name1"))
+        adapter.add(UserItem("User Name2"))
+        adapter.add(UserItem("User Name3"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
 
 
         binding.afterCheckedInRecyclerView.adapter = adapter
@@ -95,11 +95,6 @@ class AfterCheckIn : Fragment() {
             Log.i(TAG, "Scroll ${scX} y $scY")
 
         })*/
-
-
-
-
-
 
     }
 
@@ -127,6 +122,11 @@ class UserItem(val user: String): Item() {
     ) {
 
         viewHolder.itemView.after_checked_in_person_item_user_name.text = user
+
+        viewHolder.itemView.setOnClickListener {
+
+            Log.i(TAG, "Click listener $user")
+        }
 
 /*        viewHolder.itemView.after_checked_in_person_item_user_name.text = user
         viewHolder.itemView.after_checked_in_person_item_user_age.text = "33"*/
