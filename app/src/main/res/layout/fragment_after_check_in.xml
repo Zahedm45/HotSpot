@@ -151,9 +151,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Men"
-                app:layout_constraintEnd_toStartOf="@+id/chip133"
-                app:layout_constraintStart_toEndOf="@+id/after_check_in_person"
-                app:layout_constraintTop_toTopOf="@+id/after_check_in_checked_in"
                 android:layout_marginStart="20dp"
                 android:gravity="center"
 
@@ -167,16 +164,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Women"
-                app:layout_constraintEnd_toEndOf="@+id/after_check_in_checked_in"
-                app:layout_constraintTop_toTopOf="@+id/after_check_in_checked_in"
                 android:layout_marginStart="10dp"
                 android:gravity="center"
-
 
                 />
 
 
 
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip1333"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seeking"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
+
+
+                />
 
         </LinearLayout>
 
@@ -227,3 +233,41 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>-->
 
+
+
+
+
+<!--
+<com.google.android.material.textfield.TextInputLayout
+android:id="@+id/typesFilterContainer"
+style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+android:layout_width="wrap_content"
+android:layout_height="30dp"
+android:background="@color/gray"
+app:boxBackgroundColor="@color/blue"
+app:boxCornerRadiusBottomEnd="20dp"
+app:boxCornerRadiusBottomStart="20dp"
+app:boxCornerRadiusTopEnd="20dp"
+app:boxCornerRadiusTopStart="20dp"
+app:boxStrokeWidth="0dp"
+app:boxStrokeWidthFocused="0dp"
+android:layout_gravity="center"
+
+
+    >
+
+<AutoCompleteTextView
+    android:id="@+id/typesFilter"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@null"
+
+    android:ellipsize="end"
+    android:inputType="none"
+    android:maxLines="1"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:singleLine="true"
+    android:textAlignment="center"
+    tools:ignore="LabelFor" />
+</com.google.android.material.textfield.TextInputLayout>-->
