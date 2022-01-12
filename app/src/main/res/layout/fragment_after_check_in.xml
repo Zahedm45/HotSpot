@@ -82,14 +82,26 @@
 
 
             <ImageButton
+                android:id="@+id/imageButton3333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/large_icon_favorite_white"
+                android:background="@color/white"
+                android:layout_gravity="center"
+                />
+
+
+            <ImageButton
                 android:id="@+id/imageButton333"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/large_icon_favorite"
                 android:background="@color/white"
                 android:layout_gravity="center"
-
+                android:visibility="invisible"
                 />
+
+
         </LinearLayout>
 
 
