@@ -5,7 +5,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -60,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
+            android:weightSum="10"
             app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_different_options"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,10 +69,11 @@
 
             <TextView
                 android:id="@+id/after_check_in_hot_spot_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="1dp"
+                android:layout_weight="9.5"
                 android:fontFamily="@font/poppins_semibold"
                 android:padding="10dp"
                 android:text="The New Bar "
@@ -82,23 +82,47 @@
                 android:textStyle="bold" />
 
 
-            <ImageButton
-                android:id="@+id/after_check_in_favorite_btn_white"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/heart_constraint_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@color/white"
-                android:src="@drawable/large_icon_favorite_white" />
+                >
 
 
-            <ImageButton
-                android:id="@+id/after_check_in_favorite_btn_theme_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:src="@drawable/large_icon_favorite"
-                android:visibility="invisible" />
+
+                <ImageButton
+                    android:id="@+id/after_check_in_favorite_btn_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/large_icon_favorite_white"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/after_check_in_favorite_btn_theme_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/large_icon_favorite"
+                    android:visibility="invisible"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
 
@@ -191,13 +215,8 @@
             app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_different_options"
             app:layout_constraintBottom_toBottomOf="parent"
 
-
-
             />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </ScrollView>
 

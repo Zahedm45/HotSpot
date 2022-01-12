@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +6,6 @@
     android:layout_width="match_parent"
     android:fillViewport="true"
     >
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,9 +37,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="10"
-
-
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/before_check_in_party_img"
@@ -76,7 +70,6 @@
                 >
 
 
-
                 <ImageButton
                     android:id="@+id/before_check_in_favorite_btn_white"
                     android:layout_width="wrap_content"
@@ -107,15 +100,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     />
-
-
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
         </LinearLayout>
 
@@ -141,8 +126,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_hotspot_name"
             app:layout_constraintBottom_toTopOf="@+id/before_check_in_description_tv"
-
-            android:text="TextView" />
+            android:text="0" />
 
 
         <ImageView
@@ -229,12 +213,8 @@
 
 
 
-
-
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/before_check_in_check_in_btn"
-
             android:layout_width="141dp"
             android:layout_height="60dp"
             android:layout_alignParentEnd="true"
@@ -255,9 +235,7 @@
 
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </ScrollView>
