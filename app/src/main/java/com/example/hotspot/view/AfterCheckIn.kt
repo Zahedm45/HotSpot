@@ -74,7 +74,6 @@ class AfterCheckIn : Fragment() {
 
         binding.afterCheckedInRecyclerView.adapter = adapter
         binding.afterCheckedInRecyclerView.suppressLayout(true)
-       // binding.afterCheckInScrollView.canScrollVertically(0)
 
 
 
@@ -83,7 +82,7 @@ class AfterCheckIn : Fragment() {
 
 
 
-        binding.afterCheckInScrollView.viewTreeObserver.addOnScrollChangedListener( ViewTreeObserver.OnScrollChangedListener {
+/*        binding.afterCheckInScrollView.viewTreeObserver.addOnScrollChangedListener( ViewTreeObserver.OnScrollChangedListener {
             val scX = binding.afterCheckInScrollView.scrollX
             val scY = binding.afterCheckInScrollView.scrollY
 
@@ -95,7 +94,7 @@ class AfterCheckIn : Fragment() {
 
             Log.i(TAG, "Scroll ${scX} y $scY")
 
-        })
+        })*/
 
 
 
