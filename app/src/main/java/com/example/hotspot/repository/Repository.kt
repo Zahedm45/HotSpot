@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.getField
@@ -181,13 +182,13 @@ class Repository {
         }
 
 
-        fun getUserProfile(onDataChange: (snapshot: DocumentSnapshot) -> Unit) {
+        fun getUserProfile(onDataChange: (snapshot: DocumentSnapshot) -> Unit) : ListenerRegistration? {
 
             val fbUser = Firebase.auth.currentUser
 
             if (fbUser == null) {
                 Log.i(TAG, "User is not logged in..")
-                return
+                return null
             }
 
 
@@ -195,7 +196,7 @@ class Repository {
             val docRef = db.collection("users").document(fbUser.uid)
 
 
-            docRef.addSnapshotListener { snapshot, e ->
+            val registration = docRef.addSnapshotListener { snapshot, e ->
 
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
@@ -212,6 +213,7 @@ class Repository {
                 }
             }
 
+            return registration
         }
 
 

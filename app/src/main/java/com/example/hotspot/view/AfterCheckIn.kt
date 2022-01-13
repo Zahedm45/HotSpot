@@ -15,6 +15,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 import androidx.navigation.fragment.navArgs
+import com.example.hotspot.model.User
 
 
 class AfterCheckIn : Fragment() {
@@ -44,6 +45,7 @@ class AfterCheckIn : Fragment() {
 
 
         val adapter = GroupAdapter<GroupieViewHolder>()
+/*
         adapter.add(UserItem("User Name1"))
         adapter.add(UserItem("User Name2"))
         adapter.add(UserItem("User Name3"))
@@ -57,7 +59,11 @@ class AfterCheckIn : Fragment() {
         adapter.add(UserItem("User Name"))
         adapter.add(UserItem("User Name"))
         adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))*/
+
+
+
+//        adapter.add(UserItem(args.hotSpot))
         binding.afterCheckedInRecyclerView.adapter = adapter
         binding.afterCheckedInRecyclerView.suppressLayout(true)
 
@@ -107,14 +113,14 @@ class AfterCheckIn : Fragment() {
 
 
 
-class UserItem(val user: String): Item() {
+class UserItem(val user: User): Item() {
 
     override fun bind(
         viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
         position: Int
     ) {
 
-        viewHolder.itemView.after_checked_in_person_item_user_name.text = user
+        viewHolder.itemView.after_checked_in_person_item_user_name.text = user.name
 
         viewHolder.itemView.setOnClickListener {
 

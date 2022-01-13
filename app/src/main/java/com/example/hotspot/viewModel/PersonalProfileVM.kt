@@ -6,6 +6,7 @@ import com.example.hotspot.repository.Repository
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import com.example.hotspot.model.UserProfile
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.ListenerRegistration
 
 class PersonalProfileVM(
     ) {
@@ -13,6 +14,8 @@ class PersonalProfileVM(
 
     companion object {
 
+
+        var getUserProfileReg: ListenerRegistration? = null
         private lateinit var binding: FragmentPersonalProfileBinding
         private val repository = Repository
         var userPic: Bitmap? = null
@@ -29,7 +32,7 @@ class PersonalProfileVM(
                 binding.fragmentPersonalProfilePicture.setImageBitmap(userPic)
             }
 
-            repository.getUserProfile { snapshot -> updateProfileUI(snapshot) }
+            getUserProfileReg = repository.getUserProfile { snapshot -> updateProfileUI(snapshot) }
         }
 
 
