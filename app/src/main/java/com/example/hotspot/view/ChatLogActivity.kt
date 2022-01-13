@@ -33,7 +33,8 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     val adapter = GroupAdapter<GroupieViewHolder>() //vid 6 - 22:15
-
+    val db = Firebase.firestore
+    val currentUserId = FirebaseAuth.getInstance().uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,7 @@ class ChatLogActivity : AppCompatActivity() {
         }
 
 
+
         listenForMessages()
 
         send_button_chatlog.setOnClickListener {
@@ -59,9 +61,26 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenForMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+        //val ref = FirebaseDatabase.getInstance().getReference("/messages")
+        val ref = db.collection("messages")
 
-        ref.addChildEventListener(object: ChildEventListener {
+            ref.whereEqualTo("id","temp")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    if (document.data["fromId"] == currentUserId) {
+                        adapter.add(ChatToItem(document.data["text"].toString()))
+                    }
+                    else { adapter.add(ChatFromItem(document.data["text"].toString())) }
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
+
+
+        /*ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
 
@@ -92,7 +111,7 @@ class ChatLogActivity : AppCompatActivity() {
 
             }
 
-        })
+        })*/
     }
 
     // this is how we actually send a message to firebase
