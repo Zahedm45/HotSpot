@@ -1,6 +1,9 @@
 package com.example.hotspot.view
 
+import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -8,13 +11,11 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentFavoritesBinding
-import com.example.hotspot.model.Address
 import com.example.hotspot.model.HotSpot
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -22,8 +23,8 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.favorite_item.view.*
 
 
-
 class Favorites : Fragment() {
+
 
     lateinit var navController: NavController
     private lateinit var binding: FragmentFavoritesBinding
@@ -71,6 +72,14 @@ class Favorites : Fragment() {
                     resolveHotspotRef((hotSpot.get("hotspot") as DocumentReference).id, adapter)
                 }
                 binding.RVfavorites.adapter = adapter
+                adapter.setOnItemClickListener{ item, view ->
+                   val
+                   val intent = Intent(context,LoginActivity::class.java)
+                   startActivity(intent)
+                    Log.d(TAG,"123")
+                }
+
+
             }
     }
     private fun resolveHotspotRef(ref : String, adapter: GroupAdapter<GroupieViewHolder>){
@@ -93,7 +102,6 @@ class Favorites : Fragment() {
             viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
             position: Int
         ) {
-
 
             viewHolder.itemView.deleteButton.setOnClickListener{
                 // TODO: should delete item from list of favorite hotspots + update the database

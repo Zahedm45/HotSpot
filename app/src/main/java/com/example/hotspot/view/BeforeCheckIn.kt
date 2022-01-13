@@ -57,8 +57,6 @@ class BeforeCheckIn : Fragment() {
 
 
 
-
-
     private fun setAllInfo() {
         binding.beforeCheckInEventLocationName.text = args.hotSpot.name
         var checkedIn = args.hotSpot.checkedIn?.size

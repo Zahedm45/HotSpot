@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_favorites_to_personalProfile"
             app:destination="@id/personalProfile" />
+        <argument
+            android:name="hotspot"
+            app:argType="com.example.hotspot.model.HotSpot" />
     </fragment>
 
 
