@@ -39,16 +39,21 @@ class PersonalProfileVM(
 
         private fun updateProfileUI(snapshot: DocumentSnapshot) {
 
-
+            var dayOfBirth = 14
+            var monthOfBirth = 11
+            var yearOfBirth = 2000
             val name = snapshot.get("name").toString()
             val email = snapshot.get("emailAddress").toString()
             val gender = snapshot.get("gender").toString()
             val userName = snapshot.get("userName").toString()
             val bio = snapshot.get("bio").toString()
             val password = snapshot.get("password").toString()
-            val dayOfBirth = snapshot.get("day").toString().toInt()
-            val monthOfBirth = snapshot.get("month").toString().toInt()
-            val yearOfBirth = snapshot.get("year").toString().toInt()
+
+            if(snapshot.get("month") != null) {
+                dayOfBirth = snapshot.get("day").toString().toInt()
+                monthOfBirth = snapshot.get("month").toString().toInt()
+                yearOfBirth = snapshot.get("year").toString().toInt()
+            }
             val age = UtilCalculations.getAge(yearOfBirth, monthOfBirth, dayOfBirth)
 
 
