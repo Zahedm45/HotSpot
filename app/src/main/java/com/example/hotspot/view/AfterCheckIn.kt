@@ -75,8 +75,13 @@ class AfterCheckIn : Fragment() {
 
     private fun setHotSpotInfo() {
         binding.afterCheckInHotSpotName.text = args.hotSpot.hotSpotName
-        binding.afterCheckInCheckedIn.text = args.hotSpot.checkedIn?.size.toString()
+        val checkedInSize = args.hotSpot.checkedIn?.size
+        if (checkedInSize != null) {
+            binding.afterCheckInCheckedIn.text = checkedInSize.toString()
 
+        } else {
+            binding.afterCheckInCheckedIn.text = "0"
+        }
     }
 
 
