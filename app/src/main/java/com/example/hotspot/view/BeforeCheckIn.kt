@@ -7,12 +7,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
-import java.util.*
+import com.example.hotspot.viewModel.BeforeCheckInVM
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 
@@ -30,38 +36,23 @@ class BeforeCheckIn : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.before_check_in, container, false)
-
-        view.findViewById<Button>(R.id.before_check_in_check_in_btn).setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.afterCheckIn)
-        }
         return view
     }
 
 
-    @SuppressLint("SetTextI18n")
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BeforeCheckInBinding.bind(view)
 
         setAllInfo()
-
-
-
-        binding.beforeCheckInFavoriteBtnWhite.setOnClickListener {
-            binding.beforeCheckInFavoriteBtnWhite.visibility = View.GONE
-            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
-
-        }
-
-
-        binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
-            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
-            binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
-
-        }
-
+        heartButton()
+        checkInBtn(view)
 
     }
+
+
 
 
 
@@ -69,14 +60,14 @@ class BeforeCheckIn : Fragment() {
 
 
     private fun setAllInfo() {
-        binding.beforeCheckInEventLocationName.text = args.hotSpot.hotSpotName
+        binding.beforeCheckInEventLocationName.text = args.hotSpot.name
         var checkedIn = args.hotSpot.checkedIn?.size
 
         if (checkedIn == null) {
             checkedIn = 0
         }
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
-        binding.beforeCheckInRatingBar.rating = args.hotSpot.overallRating!!.toFloat()
+        binding.beforeCheckInRatingBar.rating = args.hotSpot.rating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
@@ -115,6 +106,54 @@ class BeforeCheckIn : Fragment() {
         }
 
         return str
+    }
+
+
+
+
+    private fun heartButton() {
+        binding.beforeCheckInFavoriteBtnWhite.setOnClickListener {
+            binding.beforeCheckInFavoriteBtnWhite.visibility = View.GONE
+            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
+        }
+
+        binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
+            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
+            binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
+
+        }
+    }
+
+
+    @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
+    private fun checkInBtn(view: View) {
+        binding.beforeCheckInCheckInBtn.setOnClickListener {
+            val userId = Firebase.auth.uid
+            userId?.let {
+                BeforeCheckInVM.setCheckedIn(args.hotSpot, it, null)
+            }
+
+
+            CoroutineScope(IO).launch {
+                val drawable = resources.getDrawable(R.drawable.custom_button_click_effect)
+                binding.beforeCheckInCheckInBtn.background = drawable
+
+                delay(100)
+                CoroutineScope(Main).launch {
+
+                    val drawable2 = resources.getDrawable(R.drawable.custom_button)
+                    binding.beforeCheckInCheckInBtn.background = drawable2
+
+
+                    val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
+                    view.findNavController().navigate(action)
+
+
+                   // Navigation.findNavController(view).navigate(R.id.afterCheckIn)
+                }
+            }
+        }
+
     }
 
 

@@ -12,15 +12,21 @@ import com.google.firebase.ktx.Firebase
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.collections.ArrayList
+import com.google.firebase.database.FirebaseDatabase
+
+
+
 
 data class HotSpot(
-    var hotSpotName: String? = null,
+    var id: String? = null,
+    var name: String? = null,
     var address: Address? = null,
     var geoPoint: GeoPoint? = null,
-    var overallRating: Double? = null,
+    var rating: Double? = null,
     var checkedIn: ArrayList<String>? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readValue(Address::class.java.classLoader) as? Address,
         parcel.readValue(GeoPoint::class.java.classLoader) as? GeoPoint,
@@ -30,8 +36,8 @@ data class HotSpot(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(hotSpotName)
-        parcel.writeValue(overallRating)
+        parcel.writeString(name)
+        parcel.writeValue(rating)
     }
 
     override fun describeContents(): Int {
@@ -79,21 +85,36 @@ class SubClassForHotspot() {
             val randomNum = ThreadLocalRandom.current().nextDouble(3.0, 5.0).toFloat()
             val randomTwoDig = Math.round(randomNum * 10.0) / 10.0
 
+            val db = Firebase.firestore
+
+            val checkedIn2: ArrayList<String> = ArrayList()
+            checkedIn2.add("lædlkjlæd fsdoielæe")
+            checkedIn2.add("ldældæel3ooieioeri33")
 
             val hotSpot = HotSpot().apply {
-                hotSpotName = name
+                val ref = FirebaseDatabase.getInstance().reference
+                val uniqueId: String? = ref.push().key
+                id = uniqueId
+                this.name = name
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
-                overallRating = randomTwoDig
+                rating = randomTwoDig
+                checkedIn = checkedIn2
+            }
+
+
+            hotSpot.id?.let {
+                db.collection("hotSpots").document(it).set(hotSpot)
+                    .addOnSuccessListener {
+                        Log.i(TAG, "Successfully random Hotspots created")
+                    }
             }
 
 
 
-            val db = Firebase.firestore
-            db.collection("hotSpots").add(hotSpot)
-                .addOnSuccessListener {
-                    Log.i(TAG, "Successfully random Hotspots created")
-                }
+
+
+
 
         }
 

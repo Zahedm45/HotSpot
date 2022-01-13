@@ -74,14 +74,45 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         addProgressBar()
 
-        binding.fragmentMapsMyLocationBtn.setOnClickListener {
+        myLocationBtn(view)
+
+/*        binding.fragmentMapsMyLocationBtn.setOnClickListener {
            // addHotSpotsInDB()
             if (location != null && googleMap != null) {
                 moveCamara(12f)
             }
+        }*/
+
+    }
+
+
+
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun myLocationBtn(view: View) {
+        binding.fragmentMapsMyLocationBtn.setOnClickListener {
+          //  addHotSpotsInDB()
+
+            CoroutineScope(IO).launch {
+                val drawable = resources.getDrawable(R.drawable.button_effect_my_location)
+                binding.fragmentMapsMyLocationBtn.background = drawable
+
+                delay(100)
+                CoroutineScope(Main).launch {
+                    val drawable2 = resources.getDrawable(R.drawable.round_btn)
+                    binding.fragmentMapsMyLocationBtn.background = drawable2
+
+                    if (location != null && googleMap != null) {
+                        moveCamara(12f)
+                    }
+                }
+            }
         }
 
     }
+
+
+
 
 
 
@@ -224,8 +255,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         hotSpots.forEach { crrHotSpot ->
             val lat = crrHotSpot.geoPoint?.latitude
             val lng = crrHotSpot.geoPoint?.longitude
-            val name = crrHotSpot.hotSpotName.toString()
-            val rating = crrHotSpot.overallRating
+            val name = crrHotSpot.name.toString()
+            val rating = crrHotSpot.rating
 
             if (lat != null && lng != null) {
                 val location = LatLng(lat, lng)
@@ -273,7 +304,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 // Since it is not possible to break a forEach loop in Kotlin, we need to add another nesting lambda
             run loop@{
                 hotSpotsArr.forEach {
-                    if (it.hotSpotName == marker.title && it.geoPoint == address) {
+                    if (it.name == marker.title && it.geoPoint == address) {
                         hotSpot = it
                         return@loop
                     }
