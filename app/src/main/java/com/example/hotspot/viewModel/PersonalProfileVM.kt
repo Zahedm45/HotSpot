@@ -46,16 +46,16 @@ class PersonalProfileVM(
             val userName = snapshot.get("userName").toString()
             val bio = snapshot.get("bio").toString()
             val password = snapshot.get("password").toString()
-            val dayOfBirth = snapshot.get("day")
-            val monthOfBirth = snapshot.get("month")
-            val yearOfBirth = snapshot.get("year")
+            val dayOfBirth = snapshot.get("day").toString().toInt()
+            val monthOfBirth = snapshot.get("month").toString().toInt()
+            val yearOfBirth = snapshot.get("year").toString().toInt()
             val age = UtilCalculations.getAge(yearOfBirth, monthOfBirth, dayOfBirth)
 
 
 
 
             userProfile = UserProfile(name = name, age = age, password = password,
-                emailAddress = email, gender = gender, userName = userName, bio = bio)
+                emailAddress = email, gender = gender, userName = userName, bio = bio, day = dayOfBirth, month = monthOfBirth, year = yearOfBirth)
 
             binding.fragmentPersonalProfilePersonName.text = userProfile.name
             binding.fragmentPersonalProfileAge.text = "${userProfile.age}"

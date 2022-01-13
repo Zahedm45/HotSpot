@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
 import com.example.hotspot.other.UtilView
@@ -61,6 +62,7 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         binding.tvDone.setOnClickListener {
            // Log.i(TAG, "Clicked...")
             editProfileVM.updateUserProfile(bitmap)
+            findNavController().navigate(R.id.action_editProfile_to_personalProfile)
         }
         setGradientColor()
 
