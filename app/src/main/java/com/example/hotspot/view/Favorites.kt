@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentFavoritesBinding
 import com.example.hotspot.model.HotSpot
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -55,9 +56,12 @@ class Favorites : Fragment() {
 
     private fun fetchFavoriteHotspots(){
         val db = Firebase.firestore
-        val userRef = db.collection("hotSpots")
+        val fbUser = Firebase.auth.uid.toString()
+        val favoriteHotspotRef = db
+            .collection("users").document(fbUser)
+            .collection("favoriteHotspots")
 
-        userRef.get()
+        favoriteHotspotRef.get()
             .addOnSuccessListener {
                 val hotspots = it.toObjects<HotSpot>()
                 val adapter = GroupAdapter<GroupieViewHolder>()
