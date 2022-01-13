@@ -43,6 +43,7 @@ class FragmentUploadImage : Fragment() {
         binding.progressBarIndeterminate.visibility = View.GONE
         binding.continueButton.setOnClickListener {
             if(!isSubmitClickable) return@setOnClickListener
+            ButtonAnimations.clickButton(binding.continueButton)
             binding.progressBar.visibility = View.GONE
             binding.progressBarIndeterminate.visibility = View.VISIBLE
             viewModel.createNewProfile( { ->

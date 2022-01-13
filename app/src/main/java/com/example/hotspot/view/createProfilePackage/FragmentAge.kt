@@ -38,6 +38,7 @@ class FragmentAge : Fragment() {
 
         binding.continueButton.setOnClickListener{
             if(!isContinueClickable) return@setOnClickListener
+            ButtonAnimations.clickButton(binding.continueButton)
             findNavController().navigate(R.id.action_createProfileAgeFragment_to_fragmentEmail)
         }
 

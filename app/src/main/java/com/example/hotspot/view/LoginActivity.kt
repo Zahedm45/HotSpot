@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.activityLoginLoginBtn.setOnClickListener {
+            ButtonAnimations.clickButton(binding.activityLoginLoginBtn)
             startPhoneAuthentication()
         }
 

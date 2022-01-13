@@ -108,6 +108,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
             if(!isContinueClickable){
                                 return@setOnClickListener
             }
+            ButtonAnimations.clickButton(binding.phoneAuthContinueButton)
             phoneNumber = binding.ccp.fullNumberWithPlus
             startPhoneNumberVerification(phoneNumber)
         }
@@ -116,6 +117,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
             if(!isSubmitClickable){
                 return@setOnClickListener
             }
+            ButtonAnimations.clickButton(binding.submitButton)
             verifyPhoneNumberWithCode(verifyID, binding.verifyCodeTextEdit.text.toString().trim())
         }
 
