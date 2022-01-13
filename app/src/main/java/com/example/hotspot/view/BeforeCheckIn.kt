@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
@@ -136,7 +137,12 @@ class BeforeCheckIn : Fragment() {
                     val drawable2 = resources.getDrawable(R.drawable.custom_button)
                     binding.beforeCheckInCheckInBtn.background = drawable2
 
-                    Navigation.findNavController(view).navigate(R.id.afterCheckIn)
+
+                    val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
+                    view.findNavController().navigate(action)
+
+
+                   // Navigation.findNavController(view).navigate(R.id.afterCheckIn)
                 }
             }
         }

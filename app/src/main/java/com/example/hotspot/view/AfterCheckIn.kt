@@ -20,18 +20,20 @@ import android.widget.Toast
 
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
+import androidx.navigation.fragment.navArgs
 
 
 class AfterCheckIn : Fragment() {
 
     private lateinit var binding: FragmentAfterCheckInBinding
+    private val args: AfterCheckInArgs by navArgs()
+
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_after_check_in, container, false)
     }
 
@@ -39,6 +41,11 @@ class AfterCheckIn : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfterCheckInBinding.bind(view)
+
+        binding.afterCheckInHotSpotName.text = args.hotSpot.hotSpotName
+        binding.afterCheckInCheckedIn.text = args.hotSpot.checkedIn?.size.toString()
+
+
 
 
         binding.afterCheckInFavoriteBtnWhite.setOnClickListener {
