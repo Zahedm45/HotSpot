@@ -39,7 +39,7 @@ class PersonalProfileVM(
 
 
 
-        private fun updateProfileUI(snapshot: DocumentSnapshot) {
+         fun updateProfileUI(snapshot: DocumentSnapshot) {
 
 
             val name = snapshot.get("name").toString()

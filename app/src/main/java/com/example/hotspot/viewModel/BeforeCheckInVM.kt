@@ -24,6 +24,8 @@ class BeforeCheckInVM {
                     }
                 }
         }
+
+
     }
 
 

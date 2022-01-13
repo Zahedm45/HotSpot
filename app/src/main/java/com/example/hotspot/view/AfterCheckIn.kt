@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
+import com.example.hotspot.viewModel.PersonalProfileVM
 
 
 class AfterCheckIn : Fragment() {
@@ -61,9 +62,19 @@ class AfterCheckIn : Fragment() {
         adapter.add(UserItem("User Name"))
         adapter.add(UserItem("User Name"))*/
 
+        val user = User()
+        PersonalProfileVM.userProfile.let {
+            user.name = it.name
+            user.bitmapImg = it.bitmapImg
+            user.age = it.age
+            user.gender = it.gender
+
+            adapter.add(UserItem(user))
+        }
 
 
-//        adapter.add(UserItem(args.hotSpot))
+
+
         binding.afterCheckedInRecyclerView.adapter = adapter
         binding.afterCheckedInRecyclerView.suppressLayout(true)
 
