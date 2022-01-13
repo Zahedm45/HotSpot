@@ -12,6 +12,7 @@ import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
@@ -74,14 +75,44 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         addProgressBar()
 
-        binding.fragmentMapsMyLocationBtn.setOnClickListener {
+        myLocationBtn(view)
+
+/*        binding.fragmentMapsMyLocationBtn.setOnClickListener {
            // addHotSpotsInDB()
             if (location != null && googleMap != null) {
                 moveCamara(12f)
             }
+        }*/
+
+    }
+
+
+
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun myLocationBtn(view: View) {
+        binding.fragmentMapsMyLocationBtn.setOnClickListener {
+
+            CoroutineScope(IO).launch {
+                val drawable = resources.getDrawable(R.drawable.button_effect_my_location)
+                binding.fragmentMapsMyLocationBtn.background = drawable
+
+                delay(100)
+                CoroutineScope(Main).launch {
+                    val drawable2 = resources.getDrawable(R.drawable.round_btn)
+                    binding.fragmentMapsMyLocationBtn.background = drawable2
+
+                    if (location != null && googleMap != null) {
+                        moveCamara(12f)
+                    }
+                }
+            }
         }
 
     }
+
+
+
 
 
 
