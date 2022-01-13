@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentAfterCheckInBinding
 import com.xwray.groupie.GroupAdapter
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
+import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.PersonalProfileVM
 
@@ -24,6 +26,10 @@ class AfterCheckIn : Fragment() {
 
     private lateinit var binding: FragmentAfterCheckInBinding
     private val args: AfterCheckInArgs by navArgs()
+
+    val adapter = GroupAdapter<GroupieViewHolder>()
+    val adapterHelper = ArrayList<User>()
+
 
 
 
@@ -41,12 +47,12 @@ class AfterCheckIn : Fragment() {
 
 
 
+
         setHotSpotInfo()
         heartBtn()
 
 
 
-        val adapter = GroupAdapter<GroupieViewHolder>()
 /*
         adapter.add(UserItem("User Name1"))
         adapter.add(UserItem("User Name2"))
@@ -63,23 +69,22 @@ class AfterCheckIn : Fragment() {
         adapter.add(UserItem("User Name"))
         adapter.add(UserItem("User Name"))*/
 
-        val user = User()
         DataHolder.currentUser?.let {
-            user.name = it.name
-            user.bitmapImg = it.bitmapImg
-            user.age = it.age
-            user.gender = it.gender
-
-            adapter.add(UserItem(user))
+            adapter.add(UserItem(it))
+            adapterHelper.add(it)
         }
 
+        val hoSpot = args.hotSpot
 
+
+        hoSpot.checkedIn?.let {
+            AfterCheckInVM.getCheckedInUserFromDB(it, { user -> onSuccess(user)})
+        }
 
 
 
         binding.afterCheckedInRecyclerView.adapter = adapter
         binding.afterCheckedInRecyclerView.suppressLayout(true)
-
 
     }
 
@@ -113,6 +118,16 @@ class AfterCheckIn : Fragment() {
     }
 
 
+    fun onSuccess(user: User) {
+        val item = UserItem(user)
+
+        if (!adapterHelper.contains(user)) {
+            adapter.add(item)
+        }
+
+
+    }
+
 
 
 
@@ -142,7 +157,6 @@ class UserItem(val user: User): Item() {
 
 
         viewHolder.itemView.setOnClickListener {
-
             Log.i(TAG, "Click listener $user")
         }
     }

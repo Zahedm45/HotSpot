@@ -11,7 +11,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
-import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -132,7 +131,6 @@ class BeforeCheckIn : Fragment() {
             val userId = Firebase.auth.uid
             userId?.let {
                 BeforeCheckInVM.setCheckedIn(args.hotSpot, it, null)
-                AfterCheckInVM.getCheckedInUserFromDB(args.hotSpot.checkedIn!!)
             }
 
 
