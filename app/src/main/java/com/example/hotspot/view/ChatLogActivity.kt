@@ -38,7 +38,7 @@ class ChatLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
-        Log.d("test213", "potato")
+        Log.d(TAG, "Activity is shown on screen")
         recyclerview_chatlog.adapter = adapter
 
         //Passing an object from one activity to another - in this case we are passing the username
@@ -47,20 +47,52 @@ class ChatLogActivity : AppCompatActivity() {
             supportActionBar?.title = user.name
         }
 
-        adapter.add(ChatFromItem("From Message"))
-        adapter.add(ChatToItem("To Message"))
 
-
+        listenForMessages()
 
         send_button_chatlog.setOnClickListener {
             Log.d(TAG, "Attempt to send message")
             performSendMessage()
         }
 
-
         recyclerview_chatlog.adapter = adapter
+    }
 
+    private fun listenForMessages() {
+        val ref = FirebaseDatabase.getInstance().getReference("/messages")
 
+        ref.addChildEventListener(object: ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val chatMessage = snapshot.getValue(ChatMessage::class.java)
+
+                if (chatMessage != null) {
+                    Log.d(TAG, chatMessage.text)
+
+                    if (chatMessage.fromId.equals(FirebaseAuth.getInstance().uid)) {
+                        adapter.add(ChatFromItem(chatMessage.text))
+                    } else {
+                        adapter.add(ChatToItem(chatMessage.text))
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+
+            }
+
+        })
     }
 
     // this is how we actually send a message to firebase
@@ -88,43 +120,6 @@ class ChatLogActivity : AppCompatActivity() {
             .addOnFailureListener {
             Log.w(TAG, "Error sending message")
             }
-    }
-
-    private fun listenForMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
-
-        ref.addChildEventListener(object: ChildEventListener {
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val chatMessage = snapshot.getValue(ChatMessage::class.java)
-
-                if (chatMessage != null) {
-                    Log.d(TAG, chatMessage.text)
-
-                    if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
-                        adapter.add(ChatFromItem(chatMessage.text))
-                    } else {
-                        adapter.add(ChatToItem(chatMessage.text))
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-
-            }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-
-            }
-
-        })
     }
 }
 
