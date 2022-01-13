@@ -91,6 +91,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun myLocationBtn(view: View) {
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
+          //  addHotSpotsInDB()
 
             CoroutineScope(IO).launch {
                 val drawable = resources.getDrawable(R.drawable.button_effect_my_location)

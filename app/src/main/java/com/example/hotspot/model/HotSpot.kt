@@ -12,6 +12,10 @@ import com.google.firebase.ktx.Firebase
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.collections.ArrayList
+import com.google.firebase.database.FirebaseDatabase
+
+
+
 
 data class HotSpot(
     var id: String? = null,
@@ -81,8 +85,13 @@ class SubClassForHotspot() {
             val randomNum = ThreadLocalRandom.current().nextDouble(3.0, 5.0).toFloat()
             val randomTwoDig = Math.round(randomNum * 10.0) / 10.0
 
+            val db = Firebase.firestore
 
             val hotSpot = HotSpot().apply {
+
+                val ref = FirebaseDatabase.getInstance().reference
+                val uniqueId: String? = ref.push().key
+                id = uniqueId
                 this.name = name
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
@@ -90,12 +99,18 @@ class SubClassForHotspot() {
             }
 
 
+            hotSpot.id?.let {
+                db.collection("hotSpots").document(it).set(hotSpot)
+                    .addOnSuccessListener {
+                        Log.i(TAG, "Successfully random Hotspots created")
+                    }
+            }
 
-            val db = Firebase.firestore
-            db.collection("hotSpots").add(hotSpot)
-                .addOnSuccessListener {
-                    Log.i(TAG, "Successfully random Hotspots created")
-                }
+
+
+
+
+
 
         }
 
