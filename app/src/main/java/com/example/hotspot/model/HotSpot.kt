@@ -14,13 +14,15 @@ import java.util.concurrent.ThreadLocalRandom
 import kotlin.collections.ArrayList
 
 data class HotSpot(
-    var hotSpotName: String? = null,
+    var id: String? = null,
+    var name: String? = null,
     var address: Address? = null,
     var geoPoint: GeoPoint? = null,
-    var overallRating: Double? = null,
+    var rating: Double? = null,
     var checkedIn: ArrayList<String>? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readValue(Address::class.java.classLoader) as? Address,
         parcel.readValue(GeoPoint::class.java.classLoader) as? GeoPoint,
@@ -30,8 +32,8 @@ data class HotSpot(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(hotSpotName)
-        parcel.writeValue(overallRating)
+        parcel.writeString(name)
+        parcel.writeValue(rating)
     }
 
     override fun describeContents(): Int {
@@ -81,10 +83,10 @@ class SubClassForHotspot() {
 
 
             val hotSpot = HotSpot().apply {
-                hotSpotName = name
+                this.name = name
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
-                overallRating = randomTwoDig
+                rating = randomTwoDig
             }
 
 

@@ -7,12 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
-import com.example.hotspot.viewModel.BeforeCheckInVM
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -59,14 +57,14 @@ class BeforeCheckIn : Fragment() {
 
 
     private fun setAllInfo() {
-        binding.beforeCheckInEventLocationName.text = args.hotSpot.hotSpotName
+        binding.beforeCheckInEventLocationName.text = args.hotSpot.name
         var checkedIn = args.hotSpot.checkedIn?.size
 
         if (checkedIn == null) {
             checkedIn = 0
         }
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
-        binding.beforeCheckInRatingBar.rating = args.hotSpot.overallRating!!.toFloat()
+        binding.beforeCheckInRatingBar.rating = args.hotSpot.rating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)

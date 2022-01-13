@@ -12,7 +12,6 @@ import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
@@ -255,8 +254,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         hotSpots.forEach { crrHotSpot ->
             val lat = crrHotSpot.geoPoint?.latitude
             val lng = crrHotSpot.geoPoint?.longitude
-            val name = crrHotSpot.hotSpotName.toString()
-            val rating = crrHotSpot.overallRating
+            val name = crrHotSpot.name.toString()
+            val rating = crrHotSpot.rating
 
             if (lat != null && lng != null) {
                 val location = LatLng(lat, lng)
@@ -304,7 +303,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 // Since it is not possible to break a forEach loop in Kotlin, we need to add another nesting lambda
             run loop@{
                 hotSpotsArr.forEach {
-                    if (it.hotSpotName == marker.title && it.geoPoint == address) {
+                    if (it.name == marker.title && it.geoPoint == address) {
                         hotSpot = it
                         return@loop
                     }
