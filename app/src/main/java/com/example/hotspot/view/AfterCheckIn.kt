@@ -42,27 +42,14 @@ class AfterCheckIn : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfterCheckInBinding.bind(view)
 
-        binding.afterCheckInHotSpotName.text = args.hotSpot.hotSpotName
-        binding.afterCheckInCheckedIn.text = args.hotSpot.checkedIn?.size.toString()
 
 
+        setHotSpotInfo()
+        heartBtn()
 
 
-        binding.afterCheckInFavoriteBtnWhite.setOnClickListener {
-            binding.afterCheckInFavoriteBtnWhite.visibility = View.GONE
-            binding.afterCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
-
-        }
-
-
-        binding.afterCheckInFavoriteBtnThemeColor.setOnClickListener {
-            binding.afterCheckInFavoriteBtnThemeColor.visibility = View.GONE
-            binding.afterCheckInFavoriteBtnWhite.visibility = View.VISIBLE
-
-        }
 
         val adapter = GroupAdapter<GroupieViewHolder>()
-
         adapter.add(UserItem("User Name1"))
         adapter.add(UserItem("User Name2"))
         adapter.add(UserItem("User Name3"))
@@ -77,45 +64,45 @@ class AfterCheckIn : Fragment() {
         adapter.add(UserItem("User Name"))
         adapter.add(UserItem("User Name"))
         adapter.add(UserItem("User Name"))
-
-
         binding.afterCheckedInRecyclerView.adapter = adapter
         binding.afterCheckedInRecyclerView.suppressLayout(true)
 
 
-
-
-
-
-
-
-/*        binding.afterCheckInScrollView.viewTreeObserver.addOnScrollChangedListener( ViewTreeObserver.OnScrollChangedListener {
-            val scX = binding.afterCheckInScrollView.scrollX
-            val scY = binding.afterCheckInScrollView.scrollY
-
-            if(scX == 0 && scY >= 655f) {
-                disableScrollingUpperPart()
-                binding.afterCheckedInRecyclerView.suppressLayout(false)
-                Log.i(TAG, "Scroll Scroll x  ${scX} y $scY")
-            }
-
-            Log.i(TAG, "Scroll ${scX} y $scY")
-
-        })*/
-
     }
 
 
 
-    @SuppressLint("ClickableViewAccessibility")
-    private fun disableScrollingUpperPart() {
-        val scrollview = binding.afterCheckInScrollView
-        scrollview.setOnTouchListener(OnTouchListener { v, event ->
-            true
-        })
+
+    private fun setHotSpotInfo() {
+        binding.afterCheckInHotSpotName.text = args.hotSpot.hotSpotName
+        binding.afterCheckInCheckedIn.text = args.hotSpot.checkedIn?.size.toString()
+
     }
+
+
+    private fun heartBtn() {
+        binding.afterCheckInFavoriteBtnWhite.setOnClickListener {
+            binding.afterCheckInFavoriteBtnWhite.visibility = View.GONE
+            binding.afterCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
+
+        }
+
+        binding.afterCheckInFavoriteBtnThemeColor.setOnClickListener {
+            binding.afterCheckInFavoriteBtnThemeColor.visibility = View.GONE
+            binding.afterCheckInFavoriteBtnWhite.visibility = View.VISIBLE
+
+        }
+    }
+
+
+
+
+
 
 }
+
+
+
 
 
 
@@ -134,10 +121,6 @@ class UserItem(val user: String): Item() {
 
             Log.i(TAG, "Click listener $user")
         }
-
-/*        viewHolder.itemView.after_checked_in_person_item_user_name.text = user
-        viewHolder.itemView.after_checked_in_person_item_user_age.text = "33"*/
-       // viewHolder.itemView.after_checked_in_person_item_user_pic.setImageResource(R.drawable.persons2)
     }
 
 
@@ -150,6 +133,33 @@ class UserItem(val user: String): Item() {
 
 
 
+
+
+
+
+
+/*    @SuppressLint("ClickableViewAccessibility")
+    private fun disableScrollingUpperPart() {
+        val scrollview = binding.afterCheckInScrollView
+        scrollview.setOnTouchListener(OnTouchListener { v, event ->
+            true
+        })
+    }*/
+
+
+/*        binding.afterCheckInScrollView.viewTreeObserver.addOnScrollChangedListener( ViewTreeObserver.OnScrollChangedListener {
+            val scX = binding.afterCheckInScrollView.scrollX
+            val scY = binding.afterCheckInScrollView.scrollY
+
+            if(scX == 0 && scY >= 655f) {
+                disableScrollingUpperPart()
+                binding.afterCheckedInRecyclerView.suppressLayout(false)
+                Log.i(TAG, "Scroll Scroll x  ${scX} y $scY")
+            }
+
+            Log.i(TAG, "Scroll ${scX} y $scY")
+
+        })*/
 
 
 
