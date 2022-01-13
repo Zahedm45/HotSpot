@@ -136,8 +136,10 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22760416666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_new_message.xml" value="0.23550724637681159" />
         <entry key="app/src/main/res/layout/after_checked_in_recycler_view_item.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/before_check_in.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/chat_to_row.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/fragment_after_check_in.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/fragment_create_profile.xml" value="0.2796875" />
@@ -154,6 +156,7 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/info_window.xml" value="0.1" />
         <entry key="app/src/main/res/layout/user_ee.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/user_row_new_message.xml" value="0.23550724637681159" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/nav_top_menu.xml" value="0.37604166666666666" />
       </map>

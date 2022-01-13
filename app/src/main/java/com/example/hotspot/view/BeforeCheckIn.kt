@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
+import com.example.hotspot.viewModel.BeforeCheckInVM
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -126,6 +127,7 @@ class BeforeCheckIn : Fragment() {
     @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     private fun checkInBtn(view: View) {
         binding.beforeCheckInCheckInBtn.setOnClickListener {
+           // BeforeCheckInVM.setCheckedIn(args.hotSpot.)
 
             CoroutineScope(IO).launch {
                 val drawable = resources.getDrawable(R.drawable.custom_button_click_effect)
