@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +6,6 @@
     android:layout_width="match_parent"
     android:fillViewport="true"
     >
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,41 +16,93 @@
         >
 
 
-
-        <ImageButton
+        <ImageView
             android:id="@+id/before_check_in_party_img"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="230dp"
             android:layout_alignParentBottom="true"
             android:src="@drawable/dancing_pic_with_shadow"
             app:layout_constraintVertical_bias=".0"
 
-            app:layout_constraintBottom_toTopOf="@+id/before_check_in_event_location_name"
+            app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_hotspot_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/before_check_in_event_location_name"
+        <LinearLayout
+            android:id="@+id/linear_layout_for_hotspot_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="@string/locationName"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginTop="1dp"
-            android:padding="10dp"
-
-
+            android:orientation="horizontal"
+            android:weightSum="10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/before_check_in_party_img"
             app:layout_constraintBottom_toTopOf="@+id/before_check_in_checked_in"
-            />
+            >
+
+            <TextView
+                android:id="@+id/before_check_in_event_location_name"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="9.5"
+                android:text="@string/hotSpotName"
+
+                android:layout_alignParentBottom="true"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:layout_marginTop="1dp"
+                android:padding="10dp"
+                />
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/heart_constraint_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                >
+
+
+                <ImageButton
+                    android:id="@+id/before_check_in_favorite_btn_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/large_icon_favorite_white"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    />
+
+
+                <ImageButton
+                    android:id="@+id/before_check_in_favorite_btn_theme_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/large_icon_favorite"
+                    android:visibility="invisible"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
 
 
@@ -70,15 +119,14 @@
             android:textColor="@color/black"
             android:paddingStart="48dp"
             android:paddingEnd="10dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="14dp"
+            android:paddingTop="7dp"
+
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/before_check_in_event_location_name"
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_hotspot_name"
             app:layout_constraintBottom_toTopOf="@+id/before_check_in_description_tv"
-
-            android:text="TextView" />
+            android:text="0" />
 
 
         <ImageView
@@ -110,6 +158,7 @@
             android:text="@string/address"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:layout_marginTop="8dp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -164,12 +213,8 @@
 
 
 
-
-
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/before_check_in_check_in_btn"
-
             android:layout_width="141dp"
             android:layout_height="60dp"
             android:layout_alignParentEnd="true"
@@ -189,8 +234,8 @@
             />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </ScrollView>

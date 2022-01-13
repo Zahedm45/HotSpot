@@ -2,8 +2,6 @@ package com.example.hotspot.view
 
 import android.annotation.SuppressLint
 import android.graphics.Paint
-import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,10 +12,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -49,21 +43,48 @@ class BeforeCheckIn : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = BeforeCheckInBinding.bind(view)
 
+        setAllInfo()
 
-        val checkedIn = args.hotSpot.checkedIn?.size
 
+
+        binding.beforeCheckInFavoriteBtnWhite.setOnClickListener {
+            binding.beforeCheckInFavoriteBtnWhite.visibility = View.GONE
+            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
+
+        }
+
+
+        binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
+            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
+            binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
+
+        }
+
+
+    }
+
+
+
+
+
+
+    private fun setAllInfo() {
         binding.beforeCheckInEventLocationName.text = args.hotSpot.hotSpotName
+        var checkedIn = args.hotSpot.checkedIn?.size
+
+        if (checkedIn == null) {
+            checkedIn = 0
+        }
         binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn.toString()}"
         binding.beforeCheckInRatingBar.rating = args.hotSpot.overallRating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
-
-        CoroutineScope(IO).launch {
-            getAddress()
-        }
-
+      //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+        // binding.beforeCheckInReviews.paintFlags =  Paint.UNDERLINE_TEXT_FLAG or binding.beforeCheckInReviews.paintFlags
+        //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
 
 
+        binding.beforeCheckInDescriptionTv.text = getAddress()
     }
 
 
@@ -71,38 +92,31 @@ class BeforeCheckIn : Fragment() {
 
 
 
-    private suspend fun getAddress() {
+    private fun getAddress(): String {
 
-        val lat = args.hotSpot.address?.latitude
-        val lng = args.hotSpot.address?.longitude
-      //  val realAddress: List<Address>
-        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        val streetName = checkIfNull(args.hotSpot.address?.streetName)
+        val doorNum = checkIfNull(args.hotSpot.address?.doorNumber)
+        val floor = checkIfNull(args.hotSpot.address?.floor)
+        val town = checkIfNull(args.hotSpot.address?.town)
+        val postalCode = checkIfNull(args.hotSpot.address?.postalCode)
+        val country = checkIfNull(args.hotSpot.address?.country)
 
-        if (lat != null && lng != null) {
-            geocoder.getFromLocation(lat, lng, 1).apply {
-
-                val roadName = this[0].thoroughfare
-                val doorNum = this[0].subThoroughfare
-                val floor = this[0].featureName
-                val town = this[0].subLocality
-                val postalCode = this[0].postalCode
-                val country = this[0].countryName
-                val address = "$roadName $doorNum, $floor \n$postalCode $town \n$country"
-                setInMainTread(address)
-            }
-
-        }
-
-        // val address = realAddress.get(0).getAddressLine(0)
+//        if (floor == doorNum && floor >) {
+//            return "$streetName $doorNum \n$postalCode $town \n$country"
+//        }
+        return "$streetName $doorNum, $floor \n$postalCode $town \n$country"
     }
 
 
-    private suspend fun setInMainTread(address: String) {
 
-        CoroutineScope(Main).launch {
-            binding.beforeCheckInDescriptionTv.text = address
+    private fun checkIfNull(str: String?): String {
+        if (str == "null" || str == null || str == "Vej uden navn") {
+           return ""
         }
+
+        return str
     }
+
 
 
 }

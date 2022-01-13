@@ -16,6 +16,7 @@ import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
+import com.example.hotspot.model.SubClassForHotspot
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
@@ -47,8 +48,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding: FragmentMaps4Binding
     private var googleMap: GoogleMap? = null
     private var mapFragment: SupportMapFragment? = null
-    lateinit var progressBar: ProgressBar
-    var location: LatLng? = null
+    private lateinit var progressBar: ProgressBar
+    private var location: LatLng? = null
 
 
 
@@ -74,7 +75,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         addProgressBar()
 
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
-
+           // addHotSpotsInDB()
             if (location != null && googleMap != null) {
                 moveCamara(12f)
             }
@@ -90,13 +91,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         if (Firebase.auth.uid == null) {
             Log.i(TAG, "not logged in ..")
-
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             requireActivity().finish()
         }
         setHasOptionsMenu(true)
+
 
     }
 
@@ -221,8 +222,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
 
         hotSpots.forEach { crrHotSpot ->
-            val lat = crrHotSpot.address?.latitude
-            val lng = crrHotSpot.address?.longitude
+            val lat = crrHotSpot.geoPoint?.latitude
+            val lng = crrHotSpot.geoPoint?.longitude
             val name = crrHotSpot.hotSpotName.toString()
             val rating = crrHotSpot.overallRating
 
@@ -238,7 +239,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             .snippet("Rating: $rating")
 
                     )?.apply {
-                        Log.i(TAG, "Tss ${this.id}")
                         this.showInfoWindow()
                     }
 
@@ -247,17 +247,14 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             }
         }
 
-
         setOnClickListener(hotSpots)
 
 
         CoroutineScope(IO).launch {
             delay(1000)
-
             CoroutineScope(Main).launch {
                 clearProgressBar()
             }
-
         }
 
 
@@ -267,23 +264,26 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private fun setOnClickListener( hotSpots: ArrayList<HotSpot>) {
+    private fun setOnClickListener(hotSpotsArr: ArrayList<HotSpot>) {
 
         googleMap?.setOnInfoWindowClickListener { marker ->
-
             var hotSpot: HotSpot? = null
             val address = GeoPoint(marker.position.latitude, marker.position.longitude)
 
-            hotSpots.forEach {
-                if (it.hotSpotName == marker.title && it.address == address) {
-                    hotSpot = it
-                    return@forEach
+// Since it is not possible to break a forEach loop in Kotlin, we need to add another nesting lambda
+            run loop@{
+                hotSpotsArr.forEach {
+                    if (it.hotSpotName == marker.title && it.geoPoint == address) {
+                        hotSpot = it
+                        return@loop
+                    }
+
                 }
             }
 
 
-            if (hotSpot != null) {
-                val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(hotSpot!!)
+            hotSpot?.let {
+                val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(it)
                 view?.findNavController()?.navigate(action)
             }
 
@@ -339,6 +339,19 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+
+    private fun addHotSpotsInDB() {
+        SubClassForHotspot.defineRH("No Stress Bar", 55.667, 12.5842, requireContext())
+        SubClassForHotspot.defineRH("Muck Bar", 55.7143, 12.5595, requireContext())
+        SubClassForHotspot.defineRH("Sjus Bar", 55.6699,12.5350, requireContext())
+        SubClassForHotspot.defineRH("Cucaracha Bar", 55.67594, 12.566846, requireContext())
+
+        SubClassForHotspot.defineRH("Jaded Stout Bar", 55.6870, 12.5286, requireContext())
+        SubClassForHotspot.defineRH("Rusty Outlaw Bar", 55.7001, 12.5326, requireContext())
+        SubClassForHotspot.defineRH("Wandering Monk Ale House", 55.7089, 12.5660, requireContext())
+        SubClassForHotspot.defineRH("Secret Lady Bar and Grill", 55.6853, 12.5854, requireContext())
+
+    }
 
 
 

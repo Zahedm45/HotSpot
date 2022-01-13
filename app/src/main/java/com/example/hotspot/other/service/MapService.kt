@@ -136,18 +136,22 @@ class MapService : LifecycleService() {
 
 
     val locationCallback = object : LocationCallback() {
-        override fun onLocationResult(result: LocationResult?) {
-            super.onLocationResult(result)
+        override fun onLocationResult(p0: LocationResult) {
+            super.onLocationResult(p0)
 
-            if (isTracking.value!!) {
-                result?.locations?.let { locations ->
-
-                    for (location in locations) {
-                        addLastLocation(location)
-                    }
-                }
-
+            p0.lastLocation.let {
+                addLastLocation(it)
             }
+
+//            if (isTracking.value!!) {
+//                result?.locations?.let { locations ->
+//
+//                    for (location in locations) {
+//                        addLastLocation(location)
+//                    }
+//                }
+//
+//            }
         }
     }
 
@@ -155,13 +159,25 @@ class MapService : LifecycleService() {
 
 
     private fun addLastLocation(location: Location?) {
+
         location?.let {
             val position = LatLng(location.latitude, location.longitude)
 
-            if (!lastLocation.equals(position)) {
-                lastLocation.postValue(position)
+            position?.let {
+                if (lastLocation.value != position) {
+                    lastLocation.postValue(position)
+                   // lastLocation.value = position
+
+                //    Log.i(TAG, "New location: ${position.latitude}")
+
+
+               //     Log.i(TAG, "New location: ${lastLocation.value?.latitude} and ${lastLocation.value?.longitude}")
+                }
+
             }
-         //   Log.i(TAG, "New location: ${lastLocation.value?.latitude} and ${lastLocation.value?.longitude}")
+
+
+
         }
 
     }
