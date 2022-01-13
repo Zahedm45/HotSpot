@@ -87,8 +87,11 @@ class SubClassForHotspot() {
 
             val db = Firebase.firestore
 
-            val hotSpot = HotSpot().apply {
+            val checkedIn2: ArrayList<String> = ArrayList()
+            checkedIn2.add("lædlkjlæd fsdoielæe")
+            checkedIn2.add("ldældæel3ooieioeri33")
 
+            val hotSpot = HotSpot().apply {
                 val ref = FirebaseDatabase.getInstance().reference
                 val uniqueId: String? = ref.push().key
                 id = uniqueId
@@ -96,6 +99,7 @@ class SubClassForHotspot() {
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
                 rating = randomTwoDig
+                checkedIn = checkedIn2
             }
 
 
