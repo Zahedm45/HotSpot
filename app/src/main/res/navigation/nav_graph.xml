@@ -51,7 +51,8 @@
         tools:layout="@layout/fragment_edit_profile" >
         <action
             android:id="@+id/action_editProfile_to_personalProfile"
-            app:destination="@id/personalProfile" />
+            app:destination="@id/personalProfile"
+            app:enterAnim="@android:anim/fade_in" />
     </fragment>
 
 

@@ -134,7 +134,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
 
     private fun startPhoneNumberVerification(phoneNumber: String){
         binding.progressBar.visibility = View.VISIBLE
-        binding.phoneAuthContinueButton.visibility = View.GONE
+
 
         val options = PhoneAuthOptions.newBuilder(firebaseAuth)
             .setPhoneNumber(phoneNumber)

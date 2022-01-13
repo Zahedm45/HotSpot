@@ -43,6 +43,7 @@
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navi.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navigation.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/orange_button.xml" value="0.1515625" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/background_hotspot.xml" value="0.287962962962963" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/button_empty.xml" value="0.1515625" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/button_filled.xml" value="0.1953125" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/button_layered.xml" value="0.1515625" />
@@ -51,6 +52,7 @@
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/map_nav_bottom.xml" value="0.29333333333333333" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_after_login.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_create_profile.xml" value="0.22604166666666667" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_create_profile_v2.xml" value="0.27685185185185185" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_loading_page.xml" value="0.25" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_login.xml" value="0.20885416666666667" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_login_suggestion.xml" value="0.5" />

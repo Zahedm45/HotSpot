@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,8 +18,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.other.UtilView
 import com.example.hotspot.viewModel.EditProfileVM
+import java.util.*
+import kotlin.concurrent.timerTask
 
 class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
@@ -61,6 +65,11 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
         binding.tvDone.setOnClickListener {
            // Log.i(TAG, "Clicked...")
+                ButtonAnimations.clickText(binding.tvDone)
+            Timer().schedule(timerTask{
+
+            }, 2000)
+
             editProfileVM.updateUserProfile(bitmap)
             findNavController().navigate(R.id.action_editProfile_to_personalProfile)
         }
