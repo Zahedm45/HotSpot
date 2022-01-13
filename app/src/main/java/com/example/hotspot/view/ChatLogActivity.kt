@@ -99,7 +99,8 @@ class ChatLogActivity : AppCompatActivity() {
     private fun performSendMessage() {
 
         val db = Firebase.firestore
-        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+        //val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+        //Log.d(TAG, "")
 
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val text = editText_chatlog.text.toString()
@@ -107,13 +108,22 @@ class ChatLogActivity : AppCompatActivity() {
         val toid = user?.uid
         val timestamp = System.currentTimeMillis()
 
-        val message = ChatMessage(reference.key!!, text, fromid,
+        val message = ChatMessage("temp", text, fromid,
             toid, timestamp)
 
 
-
-        db.collection("messages")
+        /*db.collection("messages").document(fromid!!).collection(toid!!)
             .add(message)
+            .addOnSuccessListener {
+                Log.d(TAG, "Message sent")
+            }
+            .addOnFailureListener {
+                Log.w(TAG, "Error sending message")
+            }*/
+
+
+        db.collection("messages").document(timestamp.toString()).set(message)
+            //.add(message)
             .addOnSuccessListener {
                 Log.d(TAG, "Message sent")
             }
