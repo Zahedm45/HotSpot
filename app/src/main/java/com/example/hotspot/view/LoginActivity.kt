@@ -3,8 +3,10 @@ package com.example.hotspot.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLoginSuggestionBinding
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.view.phoneAuthentification.ActivityPhoneAuthentification
 
 
@@ -25,6 +27,8 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         binding.activityLoginCreateProfileBtn.setOnClickListener {
+
+            ButtonAnimations.clickButton(binding.activityLoginCreateProfileBtn)
             startPhoneAuthentication()
         }
 

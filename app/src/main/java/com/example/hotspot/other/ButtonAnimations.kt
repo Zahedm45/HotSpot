@@ -18,4 +18,20 @@ object ButtonAnimations {
             this.alpha(0.1f)
         }.start()
     }
+
+    fun clickButton(button : AppCompatButton){
+        button.animate().apply {
+            duration = 55
+            this.scaleXBy(-0.1f)
+            this.scaleYBy(-0.1f)
+            this.alpha(0.5f)
+        }.withEndAction {
+            button.animate().apply {
+                duration = 55
+                this.scaleXBy(0.1f)
+                this.scaleYBy(0.1f)
+                this.alpha(1f)
+            }
+        }.start()
+    }
 }
