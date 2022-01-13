@@ -7,12 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
-import java.util.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 
@@ -30,38 +33,23 @@ class BeforeCheckIn : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.before_check_in, container, false)
-
-        view.findViewById<Button>(R.id.before_check_in_check_in_btn).setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.afterCheckIn)
-        }
         return view
     }
 
 
-    @SuppressLint("SetTextI18n")
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BeforeCheckInBinding.bind(view)
 
         setAllInfo()
-
-
-
-        binding.beforeCheckInFavoriteBtnWhite.setOnClickListener {
-            binding.beforeCheckInFavoriteBtnWhite.visibility = View.GONE
-            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
-
-        }
-
-
-        binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
-            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
-            binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
-
-        }
-
+        heartButton()
+        checkInBtn(view)
 
     }
+
+
 
 
 
@@ -115,6 +103,44 @@ class BeforeCheckIn : Fragment() {
         }
 
         return str
+    }
+
+
+
+
+    private fun heartButton() {
+        binding.beforeCheckInFavoriteBtnWhite.setOnClickListener {
+            binding.beforeCheckInFavoriteBtnWhite.visibility = View.GONE
+            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
+        }
+
+        binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
+            binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
+            binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
+
+        }
+    }
+
+
+    @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
+    private fun checkInBtn(view: View) {
+        binding.beforeCheckInCheckInBtn.setOnClickListener {
+
+            CoroutineScope(IO).launch {
+                val drawable = resources.getDrawable(R.drawable.custom_button_click_effect)
+                binding.beforeCheckInCheckInBtn.background = drawable
+
+                delay(100)
+                CoroutineScope(Main).launch {
+
+                    val drawable2 = resources.getDrawable(R.drawable.custom_button)
+                    binding.beforeCheckInCheckInBtn.background = drawable2
+
+                    Navigation.findNavController(view).navigate(R.id.afterCheckIn)
+                }
+            }
+        }
+
     }
 
 
