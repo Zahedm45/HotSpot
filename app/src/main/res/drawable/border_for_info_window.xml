@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
-
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-
     <item>
-        <!-- create gradient you want to use with the angle you want to use -->
         <shape>
             <corners android:radius="100dp"/>
             <gradient
@@ -24,7 +19,6 @@
             <solid android:color="#fff" />
         </shape>
     </item>
-
 </layer-list>
 
 
