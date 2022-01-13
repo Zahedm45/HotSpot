@@ -16,18 +16,18 @@
         android:id="@+id/hotspot_picture"
         android:layout_width="70dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         tools:src="@mipmap/ic_profile" />
 
     <TextView
-        android:id="@+id/messageContent"
+        android:id="@+id/hotspot_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="105dp"
         android:layout_marginTop="50dp"
-        tools:text="Distance" />
+        tools:text="Rating" />
 
     <TextView
         android:id="@+id/hotspot_name"
@@ -42,11 +42,11 @@
         tools:text="Hotspot name" />
 
     <TextView
-        android:id="@+id/location"
+        android:id="@+id/hotspot_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
         android:layout_marginTop="50dp"
-        android:layout_marginStart ="150dp"
         tools:text="Location" />
 
     <ImageButton
@@ -56,6 +56,14 @@
         android:layout_gravity="bottom|end"
         android:background="@color/white"
         android:src="@drawable/ic_baseline_delete_outline_24" />
+
+    <ImageView
+        android:id="@+id/ratingStar"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
 
 
 </androidx.cardview.widget.CardView>

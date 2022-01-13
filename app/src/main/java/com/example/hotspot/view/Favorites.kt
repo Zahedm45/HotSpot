@@ -79,9 +79,9 @@ class Favorites : Fragment() {
                 // TODO: should delete item from list of favorite hotspots + update the database
             }
             viewHolder.itemView.hotspot_name.text = hotspot.hotSpotName
-            viewHolder.itemView.messageContent.text = hotspot.overallRating.toString()
+            viewHolder.itemView.hotspot_rating.text = hotspot.overallRating.toString()
+            viewHolder.itemView.hotspot_location.text = hotspot.address?.town
         }
-
 
         override fun getLayout(): Int {
             return R.layout.favorite_item
