@@ -32,14 +32,14 @@ class ChatLogActivity : AppCompatActivity() {
         val TAG = "chatlog"
     }
 
-    val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
+    val adapter = GroupAdapter<GroupieViewHolder>() //vid 6 - 22:15
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
         Log.d(TAG, "Activity is shown on screen")
-        recyclerview_chatlog.adapter = adapter
+        recyclerview_chatlog.adapter = adapter //vid 6 - 22:15
 
         //Passing an object from one activity to another - in this case we are passing the username
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
@@ -55,7 +55,7 @@ class ChatLogActivity : AppCompatActivity() {
             performSendMessage()
         }
 
-        recyclerview_chatlog.adapter = adapter
+
     }
 
     private fun listenForMessages() {
