@@ -374,12 +374,12 @@ class Repository {
         fun getHotSpots(
             onSuccess: ((hotSpots: ArrayList<HotSpot>) -> Unit)?,
             onFailure: ((msg: String) -> Unit)?
-        ) {
+        ) : ListenerRegistration {
 
             val db = Firebase.firestore
             val colRef = db.collection("hotSpots")
 
-            colRef.addSnapshotListener { snapshot, e ->
+            val registration = colRef.addSnapshotListener { snapshot, e ->
 
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
@@ -406,6 +406,8 @@ class Repository {
                     Log.d(TAG, "Current data: null")
                 }
             }
+
+            return registration
         }
 
 

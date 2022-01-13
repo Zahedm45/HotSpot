@@ -85,6 +85,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        MapsAndHotspotsVM.showHotSpotReg?.remove()
+    }
 
 
 
@@ -248,9 +252,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-
+    private val markers: ArrayList<Marker> = ArrayList()
 
     private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
+        MapsAndHotspotsVM.hotSpots = hotSpots
+
+        if (markers.isNotEmpty()) {
+            markers.forEach {
+                it.remove()
+            }
+        }
 
         hotSpots.forEach { crrHotSpot ->
             val lat = crrHotSpot.geoPoint?.latitude
@@ -270,10 +281,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             .snippet("Rating: $rating")
 
                     )?.apply {
-                        this.showInfoWindow()
+                        //this.showInfoWindow()
+                        markers.add(this)
                     }
 
                     it.setInfoWindowAdapter(InfoWindow(requireContext()))
+
                 }
             }
         }
