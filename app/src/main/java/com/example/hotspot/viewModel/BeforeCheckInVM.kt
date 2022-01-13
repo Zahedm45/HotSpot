@@ -1,41 +1,28 @@
 package com.example.hotspot.viewModel
 
-import android.content.ContentValues.TAG
-import android.util.Log
+import com.example.hotspot.model.HotSpot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class BeforeCheckInVM {
 
 
-
-
-
-
     companion object{
 
-        fun setCheckedIn(hotSpotId: String, userId: String, onSuccess: (() -> Unit)? ) {
+        fun setCheckedIn(hotSpot: HotSpot, userId: String, onSuccess: (() -> Unit)? ) {
 
-            val userIdArr: ArrayList<String> = ArrayList()
-            userIdArr.add(userId)
+            if (hotSpot.checkedIn!!.contains(userId)) {
+                return
+            }
+
+            hotSpot.checkedIn?.add(userId)
             val db = Firebase.firestore
-            val colRef = db.collection("hotSpots").document(hotSpotId)
-
-/*            colRef.update({
-
-            })
-            colRef.add.addOnSuccessListener {
-
-
-                Log.i(TAG, "ID is ${it.documents}")
-            }*/
-/*            colRef.add(userIdArr)
+            db.collection("hotSpots").document(hotSpot.id!!).update("checkedIn", hotSpot.checkedIn)
                 .addOnSuccessListener {
                     if (onSuccess != null) {
                         onSuccess()
                     }
-                }*/
-
+                }
         }
     }
 

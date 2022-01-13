@@ -130,7 +130,7 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInCheckInBtn.setOnClickListener {
             val userId = Firebase.auth.uid
             userId?.let {
-                BeforeCheckInVM.setCheckedIn(args.hotSpot.id!!, it, null)
+                BeforeCheckInVM.setCheckedIn(args.hotSpot, it, null)
             }
 
 
