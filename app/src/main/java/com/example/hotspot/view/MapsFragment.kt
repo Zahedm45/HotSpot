@@ -22,6 +22,7 @@ import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.infoWindow.InfoWindow
+import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.MapsAndHotspotsVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -85,6 +86,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     }
 
+
+
+
     override fun onDetach() {
         super.onDetach()
         MapsAndHotspotsVM.showHotSpotReg?.remove()
@@ -124,13 +128,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (Firebase.auth.uid == null) {
+/*        if (Firebase.auth.uid == null) {
             Log.i(TAG, "not logged in ..")
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             requireActivity().finish()
-        }
+        }*/
+
+        DataHolder.getCurrentUserFromDB()
+
         setHasOptionsMenu(true)
 
 

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.util.Log
 import com.example.hotspot.model.HotSpot
@@ -412,17 +413,21 @@ class Repository {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+        fun getCheckedInUserFromDB(usersId: String, onSuccess: ((user: User) -> Unit)) {
+            val db = Firebase.firestore
+            db.collection("users").document(usersId)
+                .get()
+                .addOnSuccessListener { doc ->
+                    doc.toObject<User>()?.apply {
+                        val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
+                        val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
+                        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                            this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
+                            onSuccess(this)
+                        }
+                    }
+                }
+        }
 
 
 

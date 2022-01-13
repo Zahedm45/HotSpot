@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
+import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.PersonalProfileVM
 
 
@@ -63,7 +64,7 @@ class AfterCheckIn : Fragment() {
         adapter.add(UserItem("User Name"))*/
 
         val user = User()
-        PersonalProfileVM.userProfile.let {
+        DataHolder.currentUser?.let {
             user.name = it.name
             user.bitmapImg = it.bitmapImg
             user.age = it.age
@@ -71,6 +72,7 @@ class AfterCheckIn : Fragment() {
 
             adapter.add(UserItem(user))
         }
+
 
 
 
@@ -131,7 +133,13 @@ class UserItem(val user: User): Item() {
         position: Int
     ) {
 
-        viewHolder.itemView.after_checked_in_person_item_user_name.text = user.name
+        val item = viewHolder.itemView
+
+        item.after_checked_in_person_item_user_name.text = user.name
+        item.after_checked_in_person_item_user_pic.setImageBitmap(user.bitmapImg)
+        item.after_checked_in_person_item_user_gender.text = "Gender: ${user.gender}"
+        item.after_checked_in_person_item_user_age.text = "Age ${user.age}"
+
 
         viewHolder.itemView.setOnClickListener {
 
