@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import com.example.hotspot.model.UserProfile
+import com.example.hotspot.other.UtilCalculations
 import com.google.firebase.firestore.DocumentSnapshot
 
 class PersonalProfileVM(
@@ -40,12 +41,15 @@ class PersonalProfileVM(
 
 
             val name = snapshot.get("name").toString()
-            val age = snapshot.get("age").toString().toInt()
             val email = snapshot.get("emailAddress").toString()
             val gender = snapshot.get("gender").toString()
             val userName = snapshot.get("userName").toString()
             val bio = snapshot.get("bio").toString()
             val password = snapshot.get("password").toString()
+            val dayOfBirth = snapshot.get("day")
+            val monthOfBirth = snapshot.get("month")
+            val yearOfBirth = snapshot.get("year")
+            val age = UtilCalculations.getAge(yearOfBirth, monthOfBirth, dayOfBirth)
 
 
 
