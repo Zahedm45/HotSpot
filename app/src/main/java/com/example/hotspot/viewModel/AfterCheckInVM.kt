@@ -69,6 +69,14 @@ class AfterCheckInVM {
 
             if (checkedInIds != checkedIn) {
                 checkedInIds = checkedIn
+
+                checkedInUsers.value?.forEach {
+                    if ()
+
+                }
+
+
+
             }
 
         }
