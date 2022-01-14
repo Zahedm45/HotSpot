@@ -80,11 +80,12 @@ class UserAndIds() {
 
     fun addUser(user: User): Boolean {
 
-        if (user.uid != null) {
+        if (user.uid != null && !ids.contains(user.uid)) {
+            ids.add(user.uid!!)
             userList.add(user)
             users.value = userList
+            return true
         }
-
 
         return false
     }
