@@ -16,13 +16,13 @@ typealias usersAndIds = MutableList<String>*/
 class AfterCheckInVM {
 
     companion object {
-        val checkedInUsersAndIds = UserAndIds()
+        val checkedInUsersAndIds = UsersAndIds()
 
-        var function: Unit? = null
+       // var function: Unit? = null
 
 
         fun setListenerToCheckedInListDB(hotSpot: HotSpot, function: () -> Unit) {
-            this.function = function()
+          //  this.function = function()
 
             if (hotSpot.id != null) {
                 Repository.getAndListenCheckedInIds(hotSpot.id!!
@@ -39,11 +39,29 @@ class AfterCheckInVM {
 
                 checkedInIds.forEach {
                     if (!ids.contains(it)) {
-                        Repository.getCheckedInUserFromDB(it) {
-                                user -> onnSuccessSnapshotUser(user) }
+
+                        Repository.getCheckedInUserFromDB(it) { user -> onnSuccessSnapshotUser(user) }
 
                     }
                 }
+
+
+
+/*                val subIds = ids
+
+                for (id in subIds) {
+                    if (!checkedInIds.contains(id)) {
+                        val tempUser = checkedInUsersAndIds.getUser(id)
+                        if (tempUser != null) {
+                            checkedInUsersAndIds.removeUser(tempUser)
+                            subIds.clear()
+                            break
+                        }
+
+                    }
+
+                }*/
+
             }
         }
 
@@ -51,7 +69,7 @@ class AfterCheckInVM {
 
         private fun onnSuccessSnapshotUser(user: User) {
             checkedInUsersAndIds.addUser(user)
-            function
+        //    function
         }
 
     }
@@ -64,68 +82,6 @@ class AfterCheckInVM {
 
 
 
-
-
-
-
-class UserAndIds() {
-    private val userList = mutableListOf<User>()
-    var users  = MutableLiveData<List<User>>()
-    private var ids = ArrayList<String>()
-
-    init {
-        users.value = userList
-    }
-
-
-    fun addUser(user: User): Boolean {
-
-        if (user.uid != null && !ids.contains(user.uid)) {
-            ids.add(user.uid!!)
-            userList.add(user)
-            users.value = userList
-            return true
-        }
-
-        return false
-    }
-
-
-
-     fun removeUser(user: User) {
-        if (user.uid == null) {
-            return
-            Log.i(TAG, "User id is null")
-        }
-
-
-         if (ids.remove(user.uid)){
-             userList.remove(user)
-             users.value = userList
-         }
-
-    }
-
-
-
-    fun getIds(): MutableList<String> {
-        return ids
-    }
-
-    fun getUser(): MutableLiveData<List<User>> {
-        return users
-    }
-
-
-
-
-
-
-
-
-
-
-}
 
 
 
