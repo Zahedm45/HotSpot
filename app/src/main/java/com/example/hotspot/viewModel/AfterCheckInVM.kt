@@ -80,25 +80,10 @@ class AfterCheckInVM {
             if (checkedInIds != checkedIn) {
                 checkedInIds = checkedIn
 
-
-
-                checkedIn.forEach {
-                }
-
-
-
-
             }
 
         }
 
-
-
-
-        fun addCheckedInUsers(user: User) {
-
-
-        }
 
     }
 
