@@ -431,7 +431,7 @@ class Repository {
 
 
 
-        fun getAndListenCheckedInList(
+        fun getAndListenCheckedInIds(
             hotSpotId: String,
             onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ) {
 
