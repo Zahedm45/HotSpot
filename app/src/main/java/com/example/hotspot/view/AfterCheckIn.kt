@@ -60,7 +60,7 @@ class AfterCheckIn : Fragment() {
 
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
 
-        AfterCheckInVM.checkedInUsersAndIds.value?.getUser()?.observe(viewLifecycleOwner, Observer {
+        AfterCheckInVM.checkedInUsersAndIds.getUser().observe(viewLifecycleOwner, Observer {
             val groupieUsers = ArrayList<UserItem>()
             it.forEach { user ->
                 groupieUsers.add(UserItem(user))

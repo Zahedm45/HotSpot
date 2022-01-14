@@ -16,7 +16,7 @@ typealias usersAndIds = MutableList<String>*/
 class AfterCheckInVM {
 
     companion object {
-        val checkedInUsersAndIds = MutableLiveData<UserAndIds>()
+        val checkedInUsersAndIds = UserAndIds()
 
 
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
@@ -29,14 +29,13 @@ class AfterCheckInVM {
 
 
         private fun onSuccessSnapShotIds(checkedIn: ArrayList<String>) {
-            val values = checkedInUsersAndIds.value
-            val ids = values?.getIds()
+            val ids = checkedInUsersAndIds.getIds()
 
 
             if (ids != checkedIn) {
 
                 checkedIn.forEach {
-                    if (!ids!!.contains(it)) {
+                    if (!ids.contains(it)) {
                         Repository.getCheckedInUserFromDB(it) {
                                 user -> onnSuccessSnapshotUser(user) }
                     }
@@ -49,7 +48,7 @@ class AfterCheckInVM {
 
 
         private fun onnSuccessSnapshotUser(user: User) {
-            checkedInUsersAndIds.value?.addUser(user)
+            checkedInUsersAndIds.addUser(user)
         }
 
     }
@@ -67,8 +66,8 @@ class AfterCheckInVM {
 
 
 class UserAndIds() {
-   private var users: MutableLiveData<MutableList<User>> = MutableLiveData()
-   private var ids: MutableList<String> = ArrayList()
+    private var users  = MutableLiveData<MutableList<User>>()
+    private var ids = ArrayList<String>()
 
 
 
@@ -80,13 +79,22 @@ class UserAndIds() {
         }
 
         if (!ids.contains(user.uid)) {
-            if (ids.add(user.uid!!) && users.value!!.add(user)){
+
+            user.uid?.let {
+                ids.add(it)
+            }
+            users.value?.add(user)
+            return true
+
+
+
+/*            if (ids.add(user.uid!!) && users.value!!.add(user)){
                 return true
 
             } else {
 
                 // TODO: need to take care of if the user was not added
-            }
+            }*/
         }
 
         return false
