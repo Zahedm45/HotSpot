@@ -69,7 +69,7 @@ class AfterCheckIn : Fragment() {
 
     fun onSuccess() {
         AfterCheckInVM.checkedInUsersAndIds.users.observe(viewLifecycleOwner, Observer { it ->
-            Log.i(TAG, "AFTERCHEC")
+           // Log.i(TAG, "AFTERCHEC")
 
             if (it != null) {
                 Log.i(TAG, "AFTERCHEC2 ${it}")
@@ -77,12 +77,19 @@ class AfterCheckIn : Fragment() {
 
 
 
-                it.forEach { user ->
+/*                it.forEach { user ->
                     Log.i(TAG, "AFTERCHEC3 ")
                     groupieUsers.add(UserItem(user))
+                }*/
+
+                for (i in it) {
+                    groupieUsers.add(UserItem(i))
+                    adapter.add(UserItem(i))
+                    adapter.notifyDataSetChanged()
                 }
 
-                adapter.update(groupieUsers)
+
+               // adapter.update(groupieUsers)
             }
 
 

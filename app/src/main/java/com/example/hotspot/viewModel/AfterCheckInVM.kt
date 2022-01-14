@@ -42,12 +42,9 @@ class AfterCheckInVM {
                         Repository.getCheckedInUserFromDB(it) {
                                 user -> onnSuccessSnapshotUser(user) }
 
-
                     }
                 }
-
             }
-
         }
 
 
@@ -72,58 +69,22 @@ class AfterCheckInVM {
 
 
 class UserAndIds() {
+    private val userList = mutableListOf<User>()
     var users  = MutableLiveData<List<User>>()
     private var ids = ArrayList<String>()
 
     init {
-
-        users.value = listOf()
+        users.value = userList
     }
 
 
     fun addUser(user: User): Boolean {
-  //      Log.i(TAG, "users1: ${user.uid}")
 
-        if (user.uid == null) {
-            return false
-  //          Log.i(TAG, "User id is null")
+        if (user.uid != null) {
+            userList.add(user)
+            users.value = userList
         }
 
- //       Log.i(TAG, "users2: ${user.uid} and ${ids}")
-
-        if (!ids.contains(user.uid)) {
- //           Log.i(TAG, "users3: ${user.uid}")
-
-
-            user.uid?.let {
-                ids.add(it)
-                val i = users
-                i.value?.plus(user)
-                users = i
-
-            }
-
-            users.value?.forEach {
-                Log.i(TAG, "users: ${it.name}")
-            }
-
-/*
-            users.value?.plus(user).apply {
-                users.postValue(this)
-            }*/
-
-            return true
-
-
-
-/*            if (ids.add(user.uid!!) && users.value!!.add(user)){
-                return true
-
-            } else {
-
-                // TODO: need to take care of if the user was not added
-            }*/
-        }
 
         return false
     }
@@ -135,10 +96,13 @@ class UserAndIds() {
             return
             Log.i(TAG, "User id is null")
         }
-        ids.remove(user.uid)
-        users.value?.minus(user).apply {
-            users.postValue(this)
-        }
+
+
+         if (ids.remove(user.uid)){
+             userList.remove(user)
+             users.value = userList
+         }
+
     }
 
 
