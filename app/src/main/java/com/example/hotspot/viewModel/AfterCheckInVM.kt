@@ -82,13 +82,18 @@ class UserAndIds() {
 
 
     fun addUser(user: User): Boolean {
+  //      Log.i(TAG, "users1: ${user.uid}")
 
         if (user.uid == null) {
             return false
-            Log.i(TAG, "User id is null")
+  //          Log.i(TAG, "User id is null")
         }
 
+ //       Log.i(TAG, "users2: ${user.uid} and ${ids}")
+
         if (!ids.contains(user.uid)) {
+ //           Log.i(TAG, "users3: ${user.uid}")
+
 
             user.uid?.let {
                 ids.add(it)
@@ -96,6 +101,10 @@ class UserAndIds() {
                 i.value?.plus(user)
                 users = i
 
+            }
+
+            users.value?.forEach {
+                Log.i(TAG, "users: ${it.name}")
             }
 
 /*
