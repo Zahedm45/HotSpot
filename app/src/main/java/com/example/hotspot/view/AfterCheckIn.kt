@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentAfterCheckInBinding
 import com.xwray.groupie.GroupAdapter
@@ -46,9 +47,6 @@ class AfterCheckIn : Fragment() {
         heartBtn()
 
 
-
-
-
         DataHolder.currentUser?.let {
             adapter.add(UserItem(it))
             adapterHelper.add(it)
@@ -56,18 +54,20 @@ class AfterCheckIn : Fragment() {
 
         val hoSpot = args.hotSpot
 
-
-//        hoSpot.checkedIn?.let {
-//            AfterCheckInVM.getCheckedInUserFromDB(it, { user -> onSuccess(user)})
-//        }
-
-
-
         binding.afterCheckedInRecyclerView.adapter = adapter
         binding.afterCheckedInRecyclerView.suppressLayout(true)
 
 
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
+
+        AfterCheckInVM.checkedInUsersAndIds.value?.getUser()?.observe(viewLifecycleOwner, Observer {
+            val groupieUsers = ArrayList<UserItem>()
+            it.forEach { user ->
+                groupieUsers.add(UserItem(user))
+            }
+
+            adapter.update(groupieUsers)
+        })
 
     }
 

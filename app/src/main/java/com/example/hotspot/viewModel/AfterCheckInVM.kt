@@ -16,74 +16,41 @@ typealias usersAndIds = MutableList<String>*/
 class AfterCheckInVM {
 
     companion object {
-       // var checkedInUsers = ArrayList<User>()
-       // var subOnSuccess: ((User) -> Unit?)? = null
-
-/*        val users = ArrayList<User>()
-        val ids = ArrayList<String>()*/
-        val checkedInUsers = MutableLiveData<UserAndIds>()
-        var checkedInIds = ArrayList<String>()
-
-     /*
-        fun getCheckedInUserFromDB(usersId: ArrayList<String>) {
-            usersId.forEach {
-                Repository.getCheckedInUserFromDB(it, {user -> addToCheckedInUsersList(user)})
-            }
-        }
-
-        private fun addToCheckedInUsersList(user: User) {
-            checkedInUsers.add(user)
-        }
-
-
-
-        fun getCheckedInUserFromDB(
-            usersId: ArrayList<String>,
-            onSuccess: (user: User) -> Unit
-            ) {
-
-            checkedInUsers.forEach {
-                onSuccess(it)
-            }
-
-            subOnSuccess = onSuccess
-
-            usersId.forEach {
-                Repository.getCheckedInUserFromDB(it, {user -> subOnSuccess(user)})
-            }
-
-        }
-
-
-        private fun subOnSuccess(user: User) {
-            subOnSuccess?.let { it(user) }
-            checkedInUsers.add(user)
-        }*/
-
-
-
-
-
+        val checkedInUsersAndIds = MutableLiveData<UserAndIds>()
 
 
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
-                Repository.getAndListenCheckedInIds(hotSpot.id!!,
-                    {checkedIn -> onSuccessSnapShot(checkedIn) })
+                Repository.getAndListenCheckedInIds(hotSpot.id!!
+                ) { checkedIn -> onSuccessSnapShotIds(checkedIn) }
             }
 
         }
 
 
-        fun onSuccessSnapShot(checkedIn: ArrayList<String>) {
+        private fun onSuccessSnapShotIds(checkedIn: ArrayList<String>) {
+            val values = checkedInUsersAndIds.value
+            val ids = values?.getIds()
 
-            if (checkedInIds != checkedIn) {
-                checkedInIds = checkedIn
+
+            if (ids != checkedIn) {
+
+                checkedIn.forEach {
+                    if (!ids!!.contains(it)) {
+                        Repository.getCheckedInUserFromDB(it) {
+                                user -> onnSuccessSnapshotUser(user) }
+                    }
+                }
 
             }
 
         }
 
+
+
+        private fun onnSuccessSnapshotUser(user: User) {
+            checkedInUsersAndIds.value?.addUser(user)
+        }
 
     }
 
@@ -93,8 +60,14 @@ class AfterCheckInVM {
 
 
 
+
+
+
+
+
+
 class UserAndIds() {
-   private var users: MutableList<User> = ArrayList()
+   private var users: MutableLiveData<MutableList<User>> = MutableLiveData()
    private var ids: MutableList<String> = ArrayList()
 
 
@@ -107,7 +80,7 @@ class UserAndIds() {
         }
 
         if (!ids.contains(user.uid)) {
-            if (ids.add(user.uid!!) && users.add(user)){
+            if (ids.add(user.uid!!) && users.value!!.add(user)){
                 return true
 
             } else {
@@ -121,13 +94,23 @@ class UserAndIds() {
 
 
 
-    fun removeUser(user: User) {
+     fun removeUser(user: User) {
         if (user.uid == null) {
             return
             Log.i(TAG, "User id is null")
         }
         ids.remove(user.uid)
-        users.remove(user)
+        users.value!!.remove(user)
+    }
+
+
+
+    fun getIds(): MutableList<String> {
+        return ids
+    }
+
+    fun getUser(): MutableLiveData<MutableList<User>> {
+        return users
     }
 
 
@@ -140,3 +123,46 @@ class UserAndIds() {
 
 
 }
+
+
+
+
+
+// var checkedInIds = ArrayList<String>()
+
+/*
+   fun getCheckedInUserFromDB(usersId: ArrayList<String>) {
+       usersId.forEach {
+           Repository.getCheckedInUserFromDB(it, {user -> addToCheckedInUsersList(user)})
+       }
+   }
+
+   private fun addToCheckedInUsersList(user: User) {
+       checkedInUsers.add(user)
+   }
+
+
+
+   fun getCheckedInUserFromDB(
+       usersId: ArrayList<String>,
+       onSuccess: (user: User) -> Unit
+       ) {
+
+       checkedInUsers.forEach {
+           onSuccess(it)
+       }
+
+       subOnSuccess = onSuccess
+
+       usersId.forEach {
+           Repository.getCheckedInUserFromDB(it, {user -> subOnSuccess(user)})
+       }
+
+   }
+
+
+   private fun subOnSuccess(user: User) {
+       subOnSuccess?.let { it(user) }
+       checkedInUsers.add(user)
+   }*/
+
