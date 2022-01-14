@@ -1,8 +1,9 @@
-package com.example.hotspot.model
+package com.example.hotspot.view
 
 import android.content.ContentValues
 import android.util.Log
 import com.example.hotspot.R
+import com.example.hotspot.model.User
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 

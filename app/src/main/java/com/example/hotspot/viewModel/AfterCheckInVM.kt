@@ -1,5 +1,8 @@
 package com.example.hotspot.viewModel
 
+import android.content.ContentValues.TAG
+import android.util.Log
+import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
 
@@ -44,6 +47,24 @@ class AfterCheckInVM {
         private fun subOnSuccess(user: User) {
             subOnSuccess?.let { it(user) }
             checkedInUsers.add(user)
+        }
+
+
+
+        fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
+            if (hotSpot.id != null) {
+                Repository.getAndListenCheckedInList(hotSpot.id!!, {checkedIn -> d(checkedIn) })
+            }
+
+        }
+
+
+        fun d(checkedIn: ArrayList<String>) {
+
+            checkedIn.forEach {
+                Log.i(TAG, "vm t $it")
+            }
+
         }
 
     }

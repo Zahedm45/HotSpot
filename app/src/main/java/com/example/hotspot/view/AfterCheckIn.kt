@@ -1,26 +1,19 @@
 package com.example.hotspot.view
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentAfterCheckInBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.kotlinandroidextensions.Item
-import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
-import com.example.hotspot.model.UserItem
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.DataHolder
-import com.example.hotspot.viewModel.PersonalProfileVM
 
 
 class AfterCheckIn : Fragment() {
@@ -54,21 +47,7 @@ class AfterCheckIn : Fragment() {
 
 
 
-/*
-        adapter.add(UserItem("User Name1"))
-        adapter.add(UserItem("User Name2"))
-        adapter.add(UserItem("User Name3"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))*/
+
 
         DataHolder.currentUser?.let {
             adapter.add(UserItem(it))
@@ -86,6 +65,9 @@ class AfterCheckIn : Fragment() {
 
         binding.afterCheckedInRecyclerView.adapter = adapter
         binding.afterCheckedInRecyclerView.suppressLayout(true)
+
+
+        AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
 
     }
 
@@ -136,6 +118,23 @@ class AfterCheckIn : Fragment() {
 }
 
 
+
+
+/*
+        adapter.add(UserItem("User Name1"))
+        adapter.add(UserItem("User Name2"))
+        adapter.add(UserItem("User Name3"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))
+        adapter.add(UserItem("User Name"))*/
 
 
 

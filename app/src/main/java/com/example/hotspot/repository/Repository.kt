@@ -431,9 +431,46 @@ class Repository {
 
 
 
+        fun getAndListenCheckedInList(
+            hotSpotId: String,
+            onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ) {
+
+            val db = Firebase.firestore
+
+            db.collection("hotSpots").document(hotSpotId)
+                .addSnapshotListener { value, error ->
+
+                    if (error != null) {
+                        Log.w(TAG, "Listen failed.", error)
+                        return@addSnapshotListener
+                    }
+
+
+                    if (value != null) {
+
+                        val checkedInList = value.get("checkedIn") as ArrayList<String>
+
+                        onSuccess(checkedInList)
+                        Log.d(TAG, "snapshot found")
+
+                    } else {
+                        Log.d(TAG, "Current data: null")
+                    }
+
+
+
+
+
+                }
+
+
+        }
+
+
 
 
     }
 
 
 }
+
