@@ -2,6 +2,7 @@ package com.example.hotspot.viewModel
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
@@ -9,10 +10,11 @@ import com.example.hotspot.repository.Repository
 class AfterCheckInVM {
 
     companion object {
-        var checkedInUsers = ArrayList<User>()
-        var subOnSuccess: ((User) -> Unit?)? = null
+       // var checkedInUsers = ArrayList<User>()
+       // var subOnSuccess: ((User) -> Unit?)? = null
 
-
+        val checkedInUsers = MutableLiveData<ArrayList<User>>()
+        var checkedInIds = ArrayList<String>()
 
         fun getCheckedInUserFromDB(usersId: ArrayList<String>) {
             usersId.forEach {
@@ -51,6 +53,10 @@ class AfterCheckInVM {
 
 
 
+
+
+
+
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
                 Repository.getAndListenCheckedInList(hotSpot.id!!, {checkedIn -> d(checkedIn) })
@@ -61,8 +67,8 @@ class AfterCheckInVM {
 
         fun d(checkedIn: ArrayList<String>) {
 
-            checkedIn.forEach {
-                Log.i(TAG, "vm t $it")
+            if (checkedInIds != checkedIn) {
+                checkedInIds = checkedIn
             }
 
         }

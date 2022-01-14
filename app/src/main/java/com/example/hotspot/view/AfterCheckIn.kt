@@ -57,9 +57,9 @@ class AfterCheckIn : Fragment() {
         val hoSpot = args.hotSpot
 
 
-        hoSpot.checkedIn?.let {
-            AfterCheckInVM.getCheckedInUserFromDB(it, { user -> onSuccess(user)})
-        }
+//        hoSpot.checkedIn?.let {
+//            AfterCheckInVM.getCheckedInUserFromDB(it, { user -> onSuccess(user)})
+//        }
 
 
 
