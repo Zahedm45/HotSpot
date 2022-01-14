@@ -72,12 +72,7 @@ class Favorites : Fragment() {
                     resolveHotspotRef((hotSpot.get("hotspot") as DocumentReference).id, adapter)
                 }
                 binding.RVfavorites.adapter = adapter
-                adapter.setOnItemClickListener{ item, view ->
-                   val
-                   val intent = Intent(context,LoginActivity::class.java)
-                   startActivity(intent)
-                    Log.d(TAG,"123")
-                }
+
 
 
             }
