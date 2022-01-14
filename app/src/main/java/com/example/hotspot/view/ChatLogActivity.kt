@@ -79,47 +79,12 @@ class ChatLogActivity : AppCompatActivity() {
                 Log.w(TAG, "Error getting documents: ", exception)
             }
 
-
-        /*ref.addChildEventListener(object: ChildEventListener {
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                val chatMessage = snapshot.getValue(ChatMessage::class.java)
-
-                if (chatMessage != null) {
-                    Log.d(TAG, chatMessage.text)
-
-                    if (chatMessage.fromId.equals(FirebaseAuth.getInstance().uid)) {
-                        adapter.add(ChatFromItem(chatMessage.text))
-                    } else {
-                        adapter.add(ChatToItem(chatMessage.text))
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-
-            }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-
-            }
-
-        })*/
     }
 
     // this is how we actually send a message to firebase
     private fun performSendMessage() {
 
         val db = Firebase.firestore
-        //val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
-        //Log.d(TAG, "")
 
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val text = editText_chatlog.text.toString()
@@ -129,17 +94,6 @@ class ChatLogActivity : AppCompatActivity() {
 
         val message = ChatMessage("temp", text, fromid,
             toid, timestamp)
-
-
-        /*db.collection("messages").document(fromid!!).collection(toid!!)
-            .add(message)
-            .addOnSuccessListener {
-                Log.d(TAG, "Message sent")
-            }
-            .addOnFailureListener {
-                Log.w(TAG, "Error sending message")
-            }*/
-
 
         db.collection("messages").document(timestamp.toString()).set(message)
             //.add(message)
