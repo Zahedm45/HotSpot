@@ -9,8 +9,11 @@ import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.other.UtilView
 import com.example.hotspot.viewModel.PersonalProfileVM
+import kotlinx.android.synthetic.main.fragment_personal_profile.*
 
 
 class PersonalProfile : Fragment(),View.OnClickListener {
@@ -29,7 +32,7 @@ class PersonalProfile : Fragment(),View.OnClickListener {
 
         _binding = FragmentPersonalProfileBinding.inflate(inflater, container, false)
         val view = binding.root
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My Profile"
+
 
         PersonalProfileVM.getProfile(binding)
 
@@ -47,9 +50,10 @@ class PersonalProfile : Fragment(),View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.fragment_personal_profile_editProfile_btn -> navController.navigate(R.id.action_personalProfile_to_editProfile)
-
-
+            R.id.fragment_personal_profile_editProfile_btn -> {
+                ButtonAnimations.clickButton(fragment_personal_profile_editProfile_btn)
+                navController.navigate(R.id.action_personalProfile_to_editProfile)
+            }
         }
     }
 
