@@ -24,6 +24,7 @@ import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.infoWindow.InfoWindow
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.MapsAndHotspotsVM
+import com.example.hotspot.viewModel.PersonalProfileVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -87,12 +88,23 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+    override fun onPause() {
+        super.onPause()
+        MapsAndHotspotsVM.showHotSpotReg?.remove()
+        Log.i(TAG, "Has been removed")
+
+    }
 
 
+
+/*
     override fun onDetach() {
         super.onDetach()
         MapsAndHotspotsVM.showHotSpotReg?.remove()
+        Log.i(TAG, "Has been removed")
+
     }
+*/
 
 
 
@@ -136,7 +148,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             requireActivity().finish()
         }*/
 
-        DataHolder.getCurrentUserFromDB()
+      //  DataHolder.getCurrentUserFromDB()
 
         setHasOptionsMenu(true)
 

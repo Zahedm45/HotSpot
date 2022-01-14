@@ -18,8 +18,12 @@ class AfterCheckInVM {
     companion object {
         val checkedInUsersAndIds = UserAndIds()
 
+        var function: Unit? = null
 
-        fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
+
+        fun setListenerToCheckedInListDB(hotSpot: HotSpot, function: () -> Unit) {
+            this.function = function()
+
             if (hotSpot.id != null) {
                 Repository.getAndListenCheckedInIds(hotSpot.id!!
                 ) { checkedIn -> onSuccessSnapShotIds(checkedIn) }
@@ -28,16 +32,17 @@ class AfterCheckInVM {
         }
 
 
-        private fun onSuccessSnapShotIds(checkedIn: ArrayList<String>) {
+        private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
             val ids = checkedInUsersAndIds.getIds()
 
+            if (ids != checkedInIds) {
 
-            if (ids != checkedIn) {
-
-                checkedIn.forEach {
+                checkedInIds.forEach {
                     if (!ids.contains(it)) {
                         Repository.getCheckedInUserFromDB(it) {
                                 user -> onnSuccessSnapshotUser(user) }
+
+
                     }
                 }
 
@@ -49,6 +54,7 @@ class AfterCheckInVM {
 
         private fun onnSuccessSnapshotUser(user: User) {
             checkedInUsersAndIds.addUser(user)
+            function
         }
 
     }
@@ -66,9 +72,13 @@ class AfterCheckInVM {
 
 
 class UserAndIds() {
-    private var users  = MutableLiveData<MutableList<User>>()
+    var users  = MutableLiveData<List<User>>()
     private var ids = ArrayList<String>()
 
+    init {
+
+        users.value = listOf()
+    }
 
 
     fun addUser(user: User): Boolean {
@@ -82,8 +92,17 @@ class UserAndIds() {
 
             user.uid?.let {
                 ids.add(it)
+                val i = users
+                i.value?.plus(user)
+                users = i
+
             }
-            users.value?.add(user)
+
+/*
+            users.value?.plus(user).apply {
+                users.postValue(this)
+            }*/
+
             return true
 
 
@@ -108,7 +127,9 @@ class UserAndIds() {
             Log.i(TAG, "User id is null")
         }
         ids.remove(user.uid)
-        users.value!!.remove(user)
+        users.value?.minus(user).apply {
+            users.postValue(this)
+        }
     }
 
 
@@ -117,7 +138,7 @@ class UserAndIds() {
         return ids
     }
 
-    fun getUser(): MutableLiveData<MutableList<User>> {
+    fun getUser(): MutableLiveData<List<User>> {
         return users
     }
 

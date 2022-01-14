@@ -15,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 class DataHolder {
 
     companion object {
-        var currentUser: User? = null
+/*        var currentUser: User? = null
 
 
         fun getCurrentUserFromDB() {
@@ -29,7 +29,7 @@ class DataHolder {
 
         private fun addToCheckedInUsersList(user: User) {
             currentUser = user
-        }
+        }*/
     }
 
 

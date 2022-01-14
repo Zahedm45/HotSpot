@@ -1,6 +1,8 @@
 package com.example.hotspot.view
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +16,6 @@ import com.xwray.groupie.GroupieViewHolder
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.AfterCheckInVM
-import com.example.hotspot.viewModel.DataHolder
 
 
 class AfterCheckIn : Fragment() {
@@ -47,10 +48,12 @@ class AfterCheckIn : Fragment() {
         heartBtn()
 
 
+/*
         DataHolder.currentUser?.let {
             adapter.add(UserItem(it))
             adapterHelper.add(it)
         }
+*/
 
         val hoSpot = args.hotSpot
 
@@ -58,19 +61,34 @@ class AfterCheckIn : Fragment() {
         binding.afterCheckedInRecyclerView.suppressLayout(true)
 
 
-        AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
+        AfterCheckInVM.setListenerToCheckedInListDB(hoSpot) { onSuccess() }
 
-        AfterCheckInVM.checkedInUsersAndIds.getUser().observe(viewLifecycleOwner, Observer {
-            val groupieUsers = ArrayList<UserItem>()
-            it.forEach { user ->
-                groupieUsers.add(UserItem(user))
-            }
-
-            adapter.update(groupieUsers)
-        })
 
     }
 
+
+    fun onSuccess() {
+        AfterCheckInVM.checkedInUsersAndIds.users.observe(viewLifecycleOwner, Observer { it ->
+            Log.i(TAG, "AFTERCHEC")
+
+            if (it != null) {
+                Log.i(TAG, "AFTERCHEC2 ${it}")
+                val groupieUsers = ArrayList<UserItem>()
+
+
+
+                it.forEach { user ->
+                    Log.i(TAG, "AFTERCHEC3 ")
+                    groupieUsers.add(UserItem(user))
+                }
+
+                adapter.update(groupieUsers)
+            }
+
+
+        })
+
+    }
 
 
 
