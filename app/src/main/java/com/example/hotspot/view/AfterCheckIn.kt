@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
+import com.example.hotspot.model.UserItem
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.PersonalProfileVM
@@ -140,64 +141,6 @@ class AfterCheckIn : Fragment() {
 
 
 
-
-class UserItem(val user: User): Item() {
-
-    override fun bind(
-        viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
-        position: Int
-    ) {
-
-        val item = viewHolder.itemView
-
-        item.after_checked_in_person_item_user_name.text = user.name
-        item.after_checked_in_person_item_user_pic.setImageBitmap(user.bitmapImg)
-        item.after_checked_in_person_item_user_gender.text = "Gender: ${user.gender}"
-        item.after_checked_in_person_item_user_age.text = "Age ${user.age}"
-
-
-        viewHolder.itemView.setOnClickListener {
-            Log.i(TAG, "Click listener $user")
-        }
-    }
-
-
-
-    override fun getLayout(): Int {
-        return R.layout.after_checked_in_recycler_view_item
-    }
-}
-
-
-
-
-
-
-
-
-
-/*    @SuppressLint("ClickableViewAccessibility")
-    private fun disableScrollingUpperPart() {
-        val scrollview = binding.afterCheckInScrollView
-        scrollview.setOnTouchListener(OnTouchListener { v, event ->
-            true
-        })
-    }*/
-
-
-/*        binding.afterCheckInScrollView.viewTreeObserver.addOnScrollChangedListener( ViewTreeObserver.OnScrollChangedListener {
-            val scX = binding.afterCheckInScrollView.scrollX
-            val scY = binding.afterCheckInScrollView.scrollY
-
-            if(scX == 0 && scY >= 655f) {
-                disableScrollingUpperPart()
-                binding.afterCheckedInRecyclerView.suppressLayout(false)
-                Log.i(TAG, "Scroll Scroll x  ${scX} y $scY")
-            }
-
-            Log.i(TAG, "Scroll ${scX} y $scY")
-
-        })*/
 
 
 
