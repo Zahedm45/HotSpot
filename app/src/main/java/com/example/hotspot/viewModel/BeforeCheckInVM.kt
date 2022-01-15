@@ -1,9 +1,12 @@
 package com.example.hotspot.viewModel
 
+import android.util.Log
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
+import com.example.hotspot.other.network.TAG
 import com.example.hotspot.repository.Repository
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -16,10 +19,9 @@ class BeforeCheckInVM {
 
 
         fun setCheckedInDB(hotSpot: HotSpot, user: User, onSuccess: (() -> Unit)? ) {
-            val userId = user.uid
-
+            val userId = Firebase.auth.uid.toString()
             hotSpot.checkedIn?.forEach {
-                if (it.id == userId) {
+                if (it.id.toString() == userId) {
                     return
                 }
             }
