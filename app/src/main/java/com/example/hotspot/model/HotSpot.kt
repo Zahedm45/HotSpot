@@ -2,6 +2,7 @@ package com.example.hotspot.model
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.graphics.Bitmap
 import android.location.Geocoder
 import android.os.Parcel
 import android.os.Parcelable
@@ -24,7 +25,8 @@ data class HotSpot(
     var description: String? = null,
     var geoPoint: GeoPoint? = null,
     var rating: Double? = null,
-    var checkedIn: ArrayList<CheckedInDB>? = null
+    var checkedIn: ArrayList<CheckedInDB>? = null,
+    var bitmap: Bitmap? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -33,8 +35,10 @@ data class HotSpot(
         parcel.readString(),
         parcel.readValue(GeoPoint::class.java.classLoader) as? GeoPoint,
         parcel.readValue(Double::class.java.classLoader) as? Double,
-        parcel.readValue(CheckedInDB::class.java.classLoader) as? ArrayList<CheckedInDB>
-    ) {
+        parcel.readValue(CheckedInDB::class.java.classLoader) as? ArrayList<CheckedInDB>,
+        parcel.readValue(Bitmap::class.java.classLoader) as? Bitmap
+
+        ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -93,6 +97,9 @@ class SubClassForHotspot() {
             checkedIn2.add("lædlkjlæd fsdoielæe")
             checkedIn2.add("ldældæel3ooieioeri33")
 
+            Log.i(TAG, "Successfully random")
+
+            val che = ArrayList<CheckedInDB>()
             val hotSpot = HotSpot().apply {
                 val ref = FirebaseDatabase.getInstance().reference
                 val uniqueId: String? = ref.push().key
@@ -101,6 +108,7 @@ class SubClassForHotspot() {
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
                 rating = randomTwoDig
+                checkedIn = che
                 // checkedIn = checkedIn2
             }
 

@@ -1,5 +1,6 @@
 package com.example.hotspot.viewModel
 
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.repository.Repository
 import com.google.firebase.firestore.ListenerRegistration
@@ -17,21 +18,23 @@ class BeforeCheckInVM {
 
 
             hotSpot.checkedIn?.forEach {
-
+                if (it.id == userId) {
+                    return
+                }
             }
 
-            if (hotSpot.checkedIn!!.contains(userId)) {
+/*            if (hotSpot.checkedIn!!.contains(userId)) {
                 return
-            }
+            }*/
 
-            hotSpot.checkedIn?.add(userId)
+/*            hotSpot.checkedIn?.add(CheckedInDB(id = userId))
             val db = Firebase.firestore
             db.collection("hotSpots").document(hotSpot.id!!).update("checkedIn", hotSpot.checkedIn)
                 .addOnSuccessListener {
                     if (onSuccess != null) {
                         onSuccess()
                     }
-                }
+                }*/
         }
 
 
