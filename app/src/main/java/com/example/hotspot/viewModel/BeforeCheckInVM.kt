@@ -2,7 +2,6 @@ package com.example.hotspot.viewModel
 
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
-import com.example.hotspot.model.SubCheckedIn
 import com.example.hotspot.repository.Repository
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
@@ -17,7 +16,7 @@ class BeforeCheckInVM {
 
         fun setCheckedIn(hotSpot: HotSpot, userId: String, onSuccess: (() -> Unit)? ) {
 
-            hotSpot.checkedIn?.checkedInList?.forEach {
+            hotSpot.checkedIn?.forEach {
                 if (it.id == userId) {
                     return
                 }
@@ -28,9 +27,9 @@ class BeforeCheckInVM {
 
             val userToAdd = CheckedInDB(subCheckedIn)*/
 
-            hotSpot.checkedIn?.checkedInList?.add(SubCheckedIn(id = userId))
+            hotSpot.checkedIn?.add(CheckedInDB(id = userId))
             val db = Firebase.firestore
-            db.collection("hotSpots").document(hotSpot.id!!).update("checkedIn", hotSpot.checkedIn)
+            db.collection("hotSpots2").document(hotSpot.id!!).update("checkedIn", hotSpot.checkedIn)
                 .addOnSuccessListener {
                     if (onSuccess != null) {
                         onSuccess()

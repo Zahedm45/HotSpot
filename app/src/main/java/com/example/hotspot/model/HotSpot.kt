@@ -25,7 +25,7 @@ data class HotSpot(
     var description: String? = null,
     var geoPoint: GeoPoint? = null,
     var rating: Double? = null,
-    var checkedIn: CheckedInDB? = null,
+    var checkedIn: ArrayList<CheckedInDB>? = null,
     var bitmap: Bitmap? = null
 ) : Parcelable {
 
@@ -37,7 +37,7 @@ data class HotSpot(
         parcel.readString(),
         parcel.readValue(GeoPoint::class.java.classLoader) as GeoPoint,
         parcel.readValue(Double::class.java.classLoader) as? Double,
-        parcel.readValue(CheckedInDB::class.java.classLoader) as CheckedInDB,
+        parcel.readValue(CheckedInDB::class.java.classLoader) as ArrayList<CheckedInDB>,
         parcel.readParcelable(Bitmap::class.java.classLoader)
     ) {
     }
@@ -70,9 +70,6 @@ data class HotSpot(
 
 
 /*
-
-
-
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -105,83 +102,7 @@ data class HotSpot(
         override fun newArray(size: Int): Array<HotSpot?> {
             return arrayOfNulls(size)
         }
-    }
-
-
-*/
-
-
-
-
-    /*  constructor(parcel: Parcel) : this(
-          parcel.readString(),
-          parcel.readString(),
-          parcel.readValue(Address::class.java.classLoader) as? Address,
-          parcel.readString(),
-          parcel.readValue(GeoPoint::class.java.classLoader) as GeoPoint,
-          parcel.readValue(Double::class.java.classLoader) as? Double,
-          parcel.readValue(CheckedInDB::class.java.classLoader) as? CheckedInDB,
-          parcel.readParcelable(Bitmap::class.java.classLoader)
-      ) {
-      }
-
-      override fun writeToParcel(parcel: Parcel, flags: Int) {
-          parcel.writeString(id)
-          parcel.writeString(name)
-          parcel.writeString(description)
-          parcel.writeValue(rating)
-          parcel.writeParcelable(bitmap, flags)
-      }
-
-      override fun describeContents(): Int {
-          return 0
-      }
-
-      companion object CREATOR : Parcelable.Creator<HotSpot> {
-          override fun createFromParcel(parcel: Parcel): HotSpot {
-              return HotSpot(parcel)
-          }
-
-          override fun newArray(size: Int): Array<HotSpot?> {
-              return arrayOfNulls(size)
-          }
-      }
-  */
-
-
-    /*
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Address::class.java.classLoader) as? Address,
-        parcel.readString(),
-        parcel.readValue(GeoPoint::class.java.classLoader) as? GeoPoint,
-        parcel.readValue(Double::class.java.classLoader) as? Double,
-        parcel.readValue(CheckedInDB::class.java.classLoader) as? ArrayList<CheckedInDB>,
-        parcel.readValue(Bitmap::class.java.classLoader) as? Bitmap
-
-        ) {
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeValue(rating)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<HotSpot> {
-        override fun createFromParcel(parcel: Parcel): HotSpot {
-            return HotSpot(parcel)
-        }
-
-        override fun newArray(size: Int): Array<HotSpot?> {
-            return arrayOfNulls(size)
-        }
-    }
-*/
+    }*/
 
 
 }
@@ -225,14 +146,25 @@ class SubClassForHotspot() {
 
 
 
-            val subArr = ArrayList<SubCheckedIn>()
-            subArr.add(SubCheckedIn(
+/*            val subArr = ArrayList<CheckedInDB>()
+            subArr.add(
+                CheckedInDB(
                 id = "gSnHzxGiXFTftWTpuF2LYgDKm123",
                 geoPoint = GeoPoint(55.44, 12.33),
                 isInterested = true
-                ))
+                )
+            )*/
 
-            val che = CheckedInDB(subArr)
+            val che = CheckedInDB(
+
+                id = "gSnHzxGiXFTftWTpuF2LYgDKm123",
+                geoPoint = GeoPoint(55.44, 12.33),
+                isInterested = true
+            )
+
+            val subArr = ArrayList<CheckedInDB>()
+            subArr.add(che)
+
             val hotSpot = HotSpot().apply {
                 val ref = FirebaseDatabase.getInstance().reference
                 val uniqueId: String? = ref.push().key
@@ -241,13 +173,13 @@ class SubClassForHotspot() {
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
                 rating = randomTwoDig
-                checkedIn = che
+                checkedIn = subArr
                 // checkedIn = checkedIn2
             }
 
 
             hotSpot.id?.let {
-                db.collection("hotSpots").document(it).set(hotSpot)
+                db.collection("hotSpots2").document(it).set(hotSpot)
                     .addOnSuccessListener {
                         Log.i(TAG, "Successfully random Hotspots created")
                     }

@@ -382,7 +382,7 @@ class Repository {
 
 
             val db = Firebase.firestore
-            val colRef = db.collection("hotSpots")
+            val colRef = db.collection("hotSpots2")
 
             val registration = colRef.addSnapshotListener { snapshot, e ->
 
@@ -441,7 +441,7 @@ class Repository {
 
             val db = Firebase.firestore
 
-            val registration = db.collection("hotSpots").document(hotSpotId)
+            val registration = db.collection("hotSpots2").document(hotSpotId)
                 .addSnapshotListener { value, error ->
 
                     if (error != null) {
@@ -454,7 +454,7 @@ class Repository {
 
                         val hotSpot = value.toObject<HotSpot>()
 
-                        val checkedInList = hotSpot?.checkedIn?.checkedInList
+                        val checkedInList = hotSpot?.checkedIn
 
                         val newList = ArrayList<String>()
                         checkedInList?.forEach {
