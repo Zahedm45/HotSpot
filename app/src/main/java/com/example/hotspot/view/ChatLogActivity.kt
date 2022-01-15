@@ -16,10 +16,7 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -40,6 +37,7 @@ class ChatLogActivity : AppCompatActivity() {
     val adapter = GroupAdapter<GroupieViewHolder>() //vid 6 - 22:15
     val db = Firebase.firestore
     val currentUserId = FirebaseAuth.getInstance().uid
+    var latestMessageTimestamp: Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +52,6 @@ class ChatLogActivity : AppCompatActivity() {
         }
 
 
-
         listenForMessages()
 
         send_button_chatlog.setOnClickListener {
@@ -65,47 +62,50 @@ class ChatLogActivity : AppCompatActivity() {
 
     }
 
+
     private fun listenForMessages() {
-        //val ref = FirebaseDatabase.getInstance().getReference("/messages")
-        val ref = db.collection("messages")
+
         val fromid = FirebaseAuth.getInstance().uid
         val user = intent.getParcelableExtra<User>(USER_KEY)
         val toid = user?.uid
+        val ref = db.collection("messages")
 
-        //val query1 = ref.whereIn("fromId", listOf(fromid,toid))
-        //val query2 = ref.whereIn("toId", listOf(fromid,toid))
-
-        //val task1 = query1.get()
-        //val task2 = query2.get()
-
-        /*val combinedTask: Task<*> = Tasks.whenAllSuccess<QueryDocumentSnapshot>(task1,task2).addOnSuccessListener { documents ->
-            for (document in documents) {
-                if (document.data["fromId"] == fromid) {
-                    //adapter.add(ChatToItem(document.data["text"].toString()))
-                }
-                else { //adapter.add(ChatFromItem(document.data["text"].toString()))
-                    }
-                Log.d(TAG, "${document.id} => ${document.data}")
+            ref.whereIn("toFrom",listOf(fromid+toid,toid+fromid))
+                .whereGreaterThan("timestamp",latestMessageTimestamp)
+                .addSnapshotListener {
+                newDocuments, e ->
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e)
+                return@addSnapshotListener
             }
+                    Log.w(TAG, "listenForMessages")
+                    if (newDocuments != null) {
+                        for (document in newDocuments.documentChanges) {
+                            when (document.type) {
+                                DocumentChange.Type.ADDED -> {
+                                    if (document.document.data["fromId"] == fromid) {
+                                        adapter.add(ChatToItem(document.document.data["text"].toString()))
+
+                                    } else { adapter.add(ChatFromItem(document.document.data["text"].toString())) }
+
+                                    Log.d(TAG, "${document.document.id} => ${document.document.data}")
+
+                                    if (document == newDocuments.elementAt(newDocuments.size() -1)) {
+                                        latestMessageTimestamp = document.document.data["timestamp"].toString().toLong()
+                                        Log.d(TAG,"New latestMessageTimestamp = $latestMessageTimestamp")
+                                    }
+                                }
+
+                                DocumentChange.Type.MODIFIED -> Log.d(TAG,"Document modified. Possible error!")
+                                DocumentChange.Type.REMOVED -> Log.d(TAG,"Document removed. Possible error!")
+                            }
+
+                        }
+                    }
         }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-            }*/
+    }
 
-        ref.whereIn("toFrom",listOf(fromid+toid,toid+fromid))
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    if (document.data["fromId"] == fromid) {
-                        adapter.add(ChatToItem(document.data["text"].toString()))
-                    }
-                    else { adapter.add(ChatFromItem(document.data["text"].toString())) }
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-            }
+    private fun newMessageAdded(newDocuments: QuerySnapshot) {
 
     }
 
