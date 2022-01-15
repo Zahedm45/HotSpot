@@ -436,11 +436,11 @@ class Repository {
 
         fun getAndListenCheckedInIds(
             hotSpotId: String,
-            onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ) {
+            onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ): ListenerRegistration {
 
             val db = Firebase.firestore
 
-            db.collection("hotSpots").document(hotSpotId)
+            val registration = db.collection("hotSpots").document(hotSpotId)
                 .addSnapshotListener { value, error ->
 
                     if (error != null) {
@@ -465,7 +465,7 @@ class Repository {
 
                 }
 
-
+            return registration
         }
 
 

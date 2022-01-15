@@ -124,6 +124,10 @@ class AfterCheckIn : Fragment() {
 
     }
 
+    override fun onStop() {
+        super.onStop()
+        AfterCheckInVM.checkedInListenerRig?.remove()
+    }
 
 
 

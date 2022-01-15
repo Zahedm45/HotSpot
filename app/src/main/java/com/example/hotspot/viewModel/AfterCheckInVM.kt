@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
+import com.google.firebase.firestore.ListenerRegistration
 
 
 /*typealias users = MutableList<User>
@@ -15,10 +16,11 @@ typealias usersAndIds = MutableList<String>*/
 class AfterCheckInVM {
 
     companion object {
+        var checkedInListenerRig: ListenerRegistration? = null
 
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
-                Repository.getAndListenCheckedInIds(hotSpot.id!!
+                checkedInListenerRig = Repository.getAndListenCheckedInIds(hotSpot.id!!
                 ) { checkedIn -> onSuccessSnapShotIds(checkedIn) }
             }
 
