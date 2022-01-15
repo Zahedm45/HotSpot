@@ -16,6 +16,8 @@ import com.xwray.groupie.GroupieViewHolder
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.AfterCheckInVM
+import com.example.hotspot.viewModel.BeforeCheckInVM
+import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
 
 
@@ -37,6 +39,15 @@ class AfterCheckIn : Fragment() {
         return inflater.inflate(R.layout.fragment_after_check_in, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        DataHolder.currentUser?.let {
+            UsersAndIds.addUser(it)
+            it.uid?.let { it1 -> BeforeCheckInVM.setCheckedIn(args.hotSpot, it1, null) }
+        }
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
