@@ -1,5 +1,6 @@
 package com.example.hotspot.view
 
+import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -59,6 +60,10 @@ class AfterCheckIn : Fragment() {
         setObserverForCheckedInList()
         isInterestedBtn()
 
+
+        AfterCheckInVM.getIsInterested().observe(viewLifecycleOwner, Observer {
+            Log.i(ContentValues.TAG, "this.2. ${it}")
+        })
 
     }
 
@@ -137,19 +142,9 @@ class AfterCheckIn : Fragment() {
 
 
 
-    fun isInterestedBtn() {
-
-        var isOn = false
+    private fun isInterestedBtn() {
         binding.afterCheckInterestedBtn.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-
-
-
-
-            } else {
-                Log.i(TAG, "is on..2 $isChecked")
-            }
-
+            AfterCheckInVM.setIsInterested(isChecked)
         }
 
     }

@@ -2,6 +2,8 @@ package com.example.hotspot.viewModel
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
@@ -19,7 +21,7 @@ class AfterCheckInVM {
 
     companion object {
         var checkedInListenerRig: ListenerRegistration? = null
-        private var isInterested = true
+        private var isInterested : MutableLiveData<Boolean> = MutableLiveData(true)
 
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
@@ -91,8 +93,12 @@ class AfterCheckInVM {
 
 
         fun setIsInterested(isInterested: Boolean) {
-           this.isInterested = isInterested
+
+           this.isInterested.postValue(isInterested)
         }
+
+
+        fun getIsInterested() = isInterested as LiveData<Boolean>
     }
 
 
