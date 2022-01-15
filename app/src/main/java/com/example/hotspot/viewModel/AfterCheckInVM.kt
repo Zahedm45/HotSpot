@@ -29,16 +29,7 @@ class AfterCheckInVM {
 
         private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
 
-            Log.i(TAG, "exception is here1 $checkedInIds")
-
-
-
-/*
-            if (checkedInUsers.isNullOrEmpty()) {
-                Log.i(TAG, "exception is here")
-                return
-            }
-*/
+          //  Log.i(TAG, "exception is here1 $checkedInIds")
 
 
             for (checkedIn in checkedInIds) {
@@ -46,15 +37,6 @@ class AfterCheckInVM {
 
             }
 
-/*            checkedInUsers.forEach {
-                Log.i(TAG, "exception is here2")
-                it.id?.let {
-                    checkedInIds.add(it)
-                }
-            }*/
-
-
-/*
             val ids = UsersAndIds.getIds()
 
             if (ids == checkedInIds) {
@@ -77,7 +59,6 @@ class AfterCheckInVM {
             }
 
             UsersAndIds.removeUser(toRemove)
-*/
 
         }
 

@@ -378,7 +378,7 @@ class Repository {
             onFailure: ((msg: String) -> Unit)?
         ) : ListenerRegistration {
 
-            Log.d(TAG, "snapshot found: hotSpots1")
+        //    Log.d(TAG, "snapshot found: hotSpots1")
 
 
             val db = Firebase.firestore
@@ -405,7 +405,7 @@ class Repository {
                         onSuccess(hotSpots)
                     }
 
-                    Log.d(TAG, "snapshot found: hotSpots2")
+                  //  Log.d(TAG, "snapshot found: hotSpots2")
 
                 } else {
                     Log.d(TAG, "Current data: null")
@@ -452,20 +452,18 @@ class Repository {
 
                     if (value != null) {
 
+                        val hotSpot = value.toObject<HotSpot>()
 
-                        val checkedInList = value.get("checkedIn") as CheckedInDB
+                        val checkedInList = hotSpot?.checkedIn?.checkedInList
 
                         val newList = ArrayList<String>()
-
-                        checkedInList.checkedInList?.forEach {
+                        checkedInList?.forEach {
+                            Log.d(TAG, "snapshot found: checkedIn3 ${it.id}")
                             it.id?.let { it1 -> newList.add(it1) }
 
                         }
 
                         onSuccess(newList)
-
-
-                        Log.d(TAG, "snapshot found: checkedIn")
 
                     } else {
                         Log.d(TAG, "Current data: null")

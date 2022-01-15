@@ -30,6 +30,46 @@ data class HotSpot(
 ) : Parcelable {
 
 
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Address::class.java.classLoader) as? Address,
+        parcel.readString(),
+        parcel.readValue(GeoPoint::class.java.classLoader) as GeoPoint,
+        parcel.readValue(Double::class.java.classLoader) as? Double,
+        parcel.readValue(CheckedInDB::class.java.classLoader) as CheckedInDB,
+        parcel.readParcelable(Bitmap::class.java.classLoader)
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
+        parcel.writeString(name)
+        parcel.writeString(description)
+        parcel.writeValue(rating)
+        parcel.writeParcelable(bitmap, flags)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<HotSpot> {
+        override fun createFromParcel(parcel: Parcel): HotSpot {
+            return HotSpot(parcel)
+        }
+
+        override fun newArray(size: Int): Array<HotSpot?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+
+
+
+
+
+/*
 
 
 
@@ -68,6 +108,7 @@ data class HotSpot(
     }
 
 
+*/
 
 
 
