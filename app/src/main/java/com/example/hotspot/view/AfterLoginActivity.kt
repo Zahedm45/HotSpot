@@ -1,19 +1,31 @@
 package com.example.hotspot.view
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.hotspot.R
+import com.example.hotspot.other.network.ConnectionLiveData
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AfterLoginActivity: AppCompatActivity() {
-
+    private lateinit var connectionLiveData: ConnectionLiveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_after_login)
+
+        connectionLiveData = ConnectionLiveData(this)
+        connectionLiveData.observe(this, { isConnected ->
+            when(isConnected){
+                true -> print("is connected to internet")
+                false -> print("connection error")
+            }
+        })
 
 //        navigateToMapFragment(intent)
         supportActionBar?.hide()
@@ -21,6 +33,10 @@ class AfterLoginActivity: AppCompatActivity() {
         val navCont = findNavController(R.id.nav_host_fragment)
         btn.setupWithNavController(navCont)
         btn.itemIconTintList = null
+
+
+
+
 
         navCont.addOnDestinationChangedListener{_, destination, _ ->
             when(destination.id){
@@ -40,6 +56,10 @@ class AfterLoginActivity: AppCompatActivity() {
             }
         }
     }
+
+
+
+
 
 
 //    override fun onNewIntent(intent: Intent?) {
