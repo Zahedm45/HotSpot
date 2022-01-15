@@ -70,9 +70,10 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInEventLocationName.text = args.hotSpot.name
 
 
-        binding.beforeCheckInDescriptionTv.text = getAddress()
+        binding.beforeCIAddressTv.text = getAddress()
         binding.beforeCheckInRatingBar.rating = args.hotSpot.rating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+        binding.beforeCIDescriptionTv.text = args.hotSpot.description
 
 
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)

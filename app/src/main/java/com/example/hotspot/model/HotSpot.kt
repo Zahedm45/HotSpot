@@ -21,6 +21,7 @@ data class HotSpot(
     var id: String? = null,
     var name: String? = null,
     var address: Address? = null,
+    var description: String? = null,
     var geoPoint: GeoPoint? = null,
     var rating: Double? = null,
     var checkedIn: ArrayList<String>? = null
@@ -29,6 +30,7 @@ data class HotSpot(
         parcel.readString(),
         parcel.readString(),
         parcel.readValue(Address::class.java.classLoader) as? Address,
+        parcel.readString(),
         parcel.readValue(GeoPoint::class.java.classLoader) as? GeoPoint,
         parcel.readValue(Double::class.java.classLoader) as? Double,
         parcel.readValue(String::class.java.classLoader) as? ArrayList<String>
