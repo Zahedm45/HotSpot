@@ -80,33 +80,37 @@ class ChatLogActivity : AppCompatActivity() {
             }
                     Log.w(TAG, "listenForMessages")
                     if (newDocuments != null) {
-                        for (document in newDocuments.documentChanges) {
-                            when (document.type) {
-                                DocumentChange.Type.ADDED -> {
-                                    if (document.document.data["fromId"] == fromid) {
-                                        adapter.add(ChatToItem(document.document.data["text"].toString()))
-
-                                    } else { adapter.add(ChatFromItem(document.document.data["text"].toString())) }
-
-                                    Log.d(TAG, "${document.document.id} => ${document.document.data}")
-
-                                    if (document == newDocuments.elementAt(newDocuments.size() -1)) {
-                                        latestMessageTimestamp = document.document.data["timestamp"].toString().toLong()
-                                        Log.d(TAG,"New latestMessageTimestamp = $latestMessageTimestamp")
-                                    }
-                                }
-
-                                DocumentChange.Type.MODIFIED -> Log.d(TAG,"Document modified. Possible error!")
-                                DocumentChange.Type.REMOVED -> Log.d(TAG,"Document removed. Possible error!")
-                            }
-
-                        }
+                        newMessageAdded(newDocuments)
                     }
         }
     }
 
     private fun newMessageAdded(newDocuments: QuerySnapshot) {
+        val fromid = FirebaseAuth.getInstance().uid
+        val user = intent.getParcelableExtra<User>(USER_KEY)
+        val toid = user?.uid
 
+        for (document in newDocuments.documentChanges) {
+            when (document.type) {
+                DocumentChange.Type.ADDED -> {
+                    if (document.document.data["fromId"] == fromid) {
+                        adapter.add(ChatToItem(document.document.data["text"].toString()))
+
+                    } else { adapter.add(ChatFromItem(document.document.data["text"].toString())) }
+
+                    Log.d(TAG, "${document.document.id} => ${document.document.data}")
+
+                    if (document == newDocuments.elementAt(newDocuments.size() -1)) {
+                        latestMessageTimestamp = document.document.data["timestamp"].toString().toLong()
+                        Log.d(TAG,"New latestMessageTimestamp = $latestMessageTimestamp")
+                    }
+                }
+
+                DocumentChange.Type.MODIFIED -> Log.d(TAG,"Document modified. Possible error!")
+                DocumentChange.Type.REMOVED -> Log.d(TAG,"Document removed. Possible error!")
+            }
+
+        }
     }
 
     // this is how we actually send a message to firebase
