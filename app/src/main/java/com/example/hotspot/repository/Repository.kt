@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.location.Location
 import android.util.Log
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
@@ -436,7 +437,7 @@ class Repository {
 
         fun getAndListenCheckedInIds(
             hotSpotId: String,
-            onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ): ListenerRegistration {
+            onSuccess: ((checkedIn: ArrayList<CheckedInDB> ) -> Unit) ): ListenerRegistration {
 
             val db = Firebase.firestore
 
@@ -452,14 +453,39 @@ class Repository {
                     if (value != null) {
 
                         val checkedInList = value.get("checkedIn") as ArrayList<String>
-                        onSuccess(checkedInList)
+
+                        val toCheckedInDB = ArrayList<CheckedInDB>()
+                        checkedInList.forEach {
+                            toCheckedInDB.add(it as CheckedInDB)
+                        }
+
+/*
+                        var i = 0
+                        while ( i < checkedInList) {
+                            Log.d(TAG, "snapshot found: checkedIn ${checkedInList}")
+
+                        }
+*/
+
+
+
+
+                        //val checkedInList = value.toObject<ArrayList<CheckedInDB>>()
+                       // val checkedInList = value.get("checkedIn") as ArrayList<CheckedInDB>
+
+
+
+
+
+/*
+                        if (checkedInList != null) {
+                            onSuccess(checkedInList )
+                        }*/
                         Log.d(TAG, "snapshot found: checkedIn")
 
                     } else {
                         Log.d(TAG, "Current data: null")
                     }
-
-
 
 
 

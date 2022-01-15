@@ -16,18 +16,17 @@ class BeforeCheckInVM {
 
         fun setCheckedIn(hotSpot: HotSpot, userId: String, onSuccess: (() -> Unit)? ) {
 
-
+/*
             hotSpot.checkedIn?.forEach {
                 if (it.id == userId) {
                     return
                 }
             }
 
-/*            if (hotSpot.checkedIn!!.contains(userId)) {
-                return
-            }*/
 
-/*            hotSpot.checkedIn?.add(CheckedInDB(id = userId))
+            val userToAdd = CheckedInDB(id = userId)
+
+            hotSpot.checkedIn?.add(userToAdd)
             val db = Firebase.firestore
             db.collection("hotSpots").document(hotSpot.id!!).update("checkedIn", hotSpot.checkedIn)
                 .addOnSuccessListener {
@@ -39,7 +38,7 @@ class BeforeCheckInVM {
 
 
 
-        fun getAndListenCheckedInIdsDB(hotSpotId: String, onSuccess: ((hotSpots: ArrayList<String>) -> Unit)) {
+        fun getAndListenCheckedInIdsDB(hotSpotId: String, onSuccess: ((hotSpots: ArrayList<CheckedInDB>) -> Unit)) {
             getAndListenCheckedInIdsRegis = Repository
                 .getAndListenCheckedInIds(hotSpotId) { hotSpot -> onSuccess(hotSpot) }
         }

@@ -2,6 +2,7 @@ package com.example.hotspot.viewModel
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
@@ -27,7 +28,34 @@ class AfterCheckInVM {
         }
 
 
-        private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
+        private fun onSuccessSnapShotIds(checkedInUsers: ArrayList<CheckedInDB>) {
+
+            val checkedInIds = ArrayList<String>()
+            Log.i(TAG, "exception is here1 $checkedInUsers")
+
+
+
+/*
+            if (checkedInUsers.isNullOrEmpty()) {
+                Log.i(TAG, "exception is here")
+                return
+            }
+*/
+
+
+            for (checkedIn in checkedInUsers) {
+                Log.i(TAG, "exception is here2 $checkedIn")
+
+            }
+
+/*            checkedInUsers.forEach {
+                Log.i(TAG, "exception is here2")
+                it.id?.let {
+                    checkedInIds.add(it)
+                }
+            }*/
+
+
             val ids = UsersAndIds.getIds()
 
             if (ids == checkedInIds) {

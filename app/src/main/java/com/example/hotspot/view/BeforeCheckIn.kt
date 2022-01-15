@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -95,7 +96,7 @@ class BeforeCheckIn : Fragment() {
 
 
 
-    private fun onCheckedInListChange(checkedInIds: ArrayList<String>) {
+    private fun onCheckedInListChange(checkedInIds: ArrayList<CheckedInDB>) {
 
         var checkedIn = checkedInIds.size
         if (checkedIn == null) {
