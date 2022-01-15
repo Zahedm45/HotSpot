@@ -77,7 +77,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         addProgressBar()
 
         myLocationBtn(view)
-
+        Log.i(TAG, "Has been removed22")
 /*        binding.fragmentMapsMyLocationBtn.setOnClickListener {
            // addHotSpotsInDB()
             if (location != null && googleMap != null) {
@@ -88,8 +88,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
-    override fun onPause() {
-        super.onPause()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         MapsAndHotspotsVM.showHotSpotReg?.remove()
         Log.i(TAG, "Has been removed")
 
