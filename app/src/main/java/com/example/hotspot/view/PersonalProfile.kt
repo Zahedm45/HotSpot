@@ -85,6 +85,12 @@ class PersonalProfile : Fragment(),View.OnClickListener {
     }
 
 
+    override fun onDetach() {
+        super.onDetach()
+        PersonalProfileVM.getUserProfileReg?.remove()
+
+    }
+
 
 
 }
