@@ -29,17 +29,8 @@ class AfterCheckInVM {
 
         private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
 
-          //  Log.i(TAG, "exception is here1 $checkedInIds")
-
-
-            for (checkedIn in checkedInIds) {
-                Log.i(TAG, "exception is here2 $checkedIn")
-
-            }
-
             val ids = UsersAndIds.getIds()
-
-            if (ids == checkedInIds) {
+            if (ids.containsAll(checkedInIds)) {
                 Log.i(TAG, "Same ids")
                 return
             }
