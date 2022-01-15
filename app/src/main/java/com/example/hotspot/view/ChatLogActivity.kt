@@ -1,25 +1,16 @@
 package com.example.hotspot.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.icu.number.NumberFormatter.with
 import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
 import com.example.hotspot.view.NewMessageActivity.Companion.USER_KEY
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
-import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -28,6 +19,8 @@ import kotlinx.android.synthetic.main.activity_chat_log.*
 import kotlinx.android.synthetic.main.chat_from_row.view.*
 import kotlinx.android.synthetic.main.chat_to_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
+import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 
 class ChatLogActivity : AppCompatActivity() {
 
@@ -146,6 +139,12 @@ class ChatLogActivity : AppCompatActivity() {
 class ChatFromItem(val text: String): Item() {
     override fun bind(viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder, position: Int) {
         viewHolder.itemView.textview_from_row.text = text
+
+        val targetImage = viewHolder.itemView.image_from_row
+        Picasso.get()
+            .load("https://cdn.discordapp.com/attachments/464635980574490625/931939181138169886/kekw.jpg")
+            .into(targetImage); // An ImageView object to show the loaded image
+
     }
 
     override fun getLayout(): Int {
@@ -157,6 +156,11 @@ class ChatToItem(val text: String): Item() {
     override fun bind(viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder, position: Int) {
         viewHolder.itemView.textview_to_row.text = text
 
+        val targetImage = viewHolder.itemView.image_to_row
+        //Glide.with(viewHolder.itemView.context).load(uri).into(targetImage)
+        Picasso.get()
+            .load("https://cdn.discordapp.com/attachments/464635980574490625/931937181797347378/monkaStare.png")
+            .into(targetImage); // An ImageView object to show the loaded image
 
     }
 
