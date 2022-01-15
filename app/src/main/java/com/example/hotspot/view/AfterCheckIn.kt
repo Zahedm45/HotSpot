@@ -97,13 +97,7 @@ class AfterCheckIn : Fragment() {
 
 
     private fun setCheckedInUI(checkedInSize: Int) {
-
-        if (checkedInSize != null) {
-            binding.afterCheckInCheckedIn.text = checkedInSize.toString()
-
-        } else {
-            binding.afterCheckInCheckedIn.text = "0"
-        }
+        binding.afterCheckInCheckedIn.text = checkedInSize.toString()
     }
 
 
