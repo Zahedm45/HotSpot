@@ -18,12 +18,12 @@
         android:padding="16dp"
         android:text="this is my message, hello"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/imageView3"
+        app:layout_constraintEnd_toStartOf="@id/image_to_row"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/image_to_row"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"

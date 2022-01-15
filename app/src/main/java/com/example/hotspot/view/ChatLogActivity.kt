@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.hotspot.R
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
@@ -58,8 +59,6 @@ class ChatLogActivity : AppCompatActivity() {
             Log.d(TAG, "Attempt to send message")
             performSendMessage()
         }
-
-
     }
 
 
@@ -111,6 +110,7 @@ class ChatLogActivity : AppCompatActivity() {
             }
 
         }
+        recyclerview_chatlog.scrollToPosition(adapter.itemCount -1)
     }
 
     // this is how we actually send a message to firebase
@@ -135,6 +135,9 @@ class ChatLogActivity : AppCompatActivity() {
             .addOnFailureListener {
             Log.w(TAG, "Error sending message")
             }
+
+        editText_chatlog.text.clear()
+
     }
 }
 
@@ -153,6 +156,8 @@ class ChatFromItem(val text: String): Item() {
 class ChatToItem(val text: String): Item() {
     override fun bind(viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder, position: Int) {
         viewHolder.itemView.textview_to_row.text = text
+
+
     }
 
     override fun getLayout(): Int {
