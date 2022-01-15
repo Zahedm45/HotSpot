@@ -2,7 +2,6 @@ package com.example.hotspot.viewModel
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
@@ -16,7 +15,7 @@ typealias usersAndIds = MutableList<String>*/
 class AfterCheckInVM {
 
     companion object {
-        val checkedInUsersAndIds = UsersAndIds()
+        //val checkedInUsersAndIds = UsersAndIds()
 
        // var function: Unit? = null
 
@@ -33,34 +32,36 @@ class AfterCheckInVM {
 
 
         private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
-            var ids = checkedInUsersAndIds.getIds()
+            var ids = UsersAndIds.getIds()
 
             if (ids == checkedInIds) {
+                Log.i(TAG, "Same ids")
                 return
             }
 
+            for (id in checkedInIds) {
+                if (!ids.contains(id)) {
+                    Repository.getCheckedInUserFromDB(id) { user -> onnSuccessSnapshotUser(user) }
+                }
+            }
 
-            checkedInIds.forEach {
+/*            checkedInIds.forEach {
                 if (!ids.contains(it)) {
                     Repository.getCheckedInUserFromDB(it) { user -> onnSuccessSnapshotUser(user) }
                 }
-            }
+            }*/
 
 
-            val subIds = ids
-
-            for (id in subIds) {
+            val toRemove = ArrayList<String>()
+            for (id in ids) {
                 if (!checkedInIds.contains(id)) {
-                    val tempUser = checkedInUsersAndIds.getUser(id)
-                    if (tempUser != null) {
-                        checkedInUsersAndIds.removeUser(tempUser)
-                        subIds.clear()
-                        break
-                    }
+                    toRemove.add(id)
 
                 }
 
             }
+
+            UsersAndIds.removeUser(toRemove)
 
 
         }
@@ -68,7 +69,7 @@ class AfterCheckInVM {
 
 
         private fun onnSuccessSnapshotUser(user: User) {
-            checkedInUsersAndIds.addUser(user)
+            UsersAndIds.addUser(user)
         }
 
     }

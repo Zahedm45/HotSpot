@@ -16,6 +16,7 @@ import com.xwray.groupie.GroupieViewHolder
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.AfterCheckInVM
+import com.example.hotspot.viewModel.UsersAndIds
 
 
 class AfterCheckIn : Fragment() {
@@ -65,7 +66,7 @@ class AfterCheckIn : Fragment() {
 
 
 
-        AfterCheckInVM.checkedInUsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
+        UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
             if (it != null) {
                 Log.i(TAG, "AFTERCHEC2 ${it}")
                 val groupieUsers = ArrayList<UserItem>()
