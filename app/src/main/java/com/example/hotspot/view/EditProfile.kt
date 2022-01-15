@@ -14,12 +14,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
 import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.other.UtilView
+import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.viewModel.EditProfileVM
 import java.util.*
 import kotlin.concurrent.timerTask
@@ -27,6 +29,7 @@ import kotlin.concurrent.timerTask
 class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
+    private lateinit var connectionLiveData: ConnectionLiveData
     private val editProfileVM = EditProfileVM
     var bitmap: Bitmap? = null
 
@@ -37,6 +40,7 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_edit_profile, container, false)
         binding = FragmentEditProfileBinding.inflate(inflater,container, false)
 
@@ -46,11 +50,19 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
         editProfileVM.getUserProfile(binding, this)
 
+        connectionLiveData = ConnectionLiveData(this.requireContext())
+        connectionLiveData.observe(this.viewLifecycleOwner, { isConnected ->
+            when(isConnected){
+                true -> Log.d("true", "true LUCAS")
+                false -> Log.d("false", "LUCAS")
+            }
+        })
 
 
         binding.fragmentEdidProfileChangePicBtn.setOnClickListener {
