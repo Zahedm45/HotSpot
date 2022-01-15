@@ -37,17 +37,7 @@ class AfterCheckIn : Fragment() {
         return inflater.inflate(R.layout.fragment_after_check_in, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-/*        DataHolder.currentUser?.let {
-            UsersAndIds.addUser(it)
-            it.uid?.let { userId ->
-                BeforeCheckInVM.setCheckedInDB(args.hotSpot, userId, null)
-            }
-        }*/
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
