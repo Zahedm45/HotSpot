@@ -186,11 +186,6 @@ class SubClassForHotspot() {
             }
 
 
-
-
-
-
-
         }
 
     }

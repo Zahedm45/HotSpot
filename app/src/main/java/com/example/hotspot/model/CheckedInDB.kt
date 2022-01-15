@@ -7,7 +7,6 @@ data class CheckedInDB(
     var geoPoint: GeoPoint? = null,
     var isInterested: Boolean? = null
 
-
     //var checkedInList: ArrayList<SubCheckedIn>? = null
 )
 
