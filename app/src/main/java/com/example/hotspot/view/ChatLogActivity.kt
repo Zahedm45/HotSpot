@@ -1,6 +1,5 @@
 package com.example.hotspot.view
 
-import android.icu.number.NumberFormatter.with
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_chat_log.*
 import kotlinx.android.synthetic.main.chat_from_row.view.*
 import kotlinx.android.synthetic.main.chat_to_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
-import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 
 class ChatLogActivity : AppCompatActivity() {
@@ -86,9 +85,15 @@ class ChatLogActivity : AppCompatActivity() {
             when (document.type) {
                 DocumentChange.Type.ADDED -> {
                     if (document.document.data["fromId"] == fromid) {
-                        adapter.add(ChatToItem(document.document.data["text"].toString()))
+                        adapter.add(ChatToItem(
+                            document.document.data["text"].toString(),
+                            fromid!!
+                        ))
 
-                    } else { adapter.add(ChatFromItem(document.document.data["text"].toString())) }
+                    } else { adapter.add(ChatFromItem(
+                        document.document.data["text"].toString(),toid!!
+
+                    )) }
 
                     Log.d(TAG, "${document.document.id} => ${document.document.data}")
 
@@ -136,14 +141,17 @@ class ChatLogActivity : AppCompatActivity() {
 
 
 
-class ChatFromItem(val text: String): Item() {
+class ChatFromItem(val text: String, val toId: String): Item() {
     override fun bind(viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder, position: Int) {
         viewHolder.itemView.textview_from_row.text = text
+        val ref = "https://firebasestorage.googleapis.com/v0/b/hotspot-onmyown.appspot.com" +
+                "/o/images%2F" + toId + "?alt=media&token="
+
 
         val targetImage = viewHolder.itemView.image_from_row
         Picasso.get()
-            .load("https://cdn.discordapp.com/attachments/464635980574490625/931939181138169886/kekw.jpg")
-            .into(targetImage); // An ImageView object to show the loaded image
+            .load(ref)
+            .into(targetImage)
 
     }
 
@@ -152,15 +160,17 @@ class ChatFromItem(val text: String): Item() {
     }
 }
 
-class ChatToItem(val text: String): Item() {
+class ChatToItem(val text: String, val fromId: String): Item() {
     override fun bind(viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder, position: Int) {
         viewHolder.itemView.textview_to_row.text = text
+        val ref = "https://firebasestorage.googleapis.com/v0/b/hotspot-onmyown.appspot.com" +
+                "/o/images%2F" + fromId + "?alt=media&token="
 
         val targetImage = viewHolder.itemView.image_to_row
-        //Glide.with(viewHolder.itemView.context).load(uri).into(targetImage)
         Picasso.get()
-            .load("https://cdn.discordapp.com/attachments/464635980574490625/931937181797347378/monkaStare.png")
-            .into(targetImage); // An ImageView object to show the loaded image
+            .load(ref)
+            .into(targetImage)
+
 
     }
 
