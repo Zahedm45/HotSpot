@@ -12,18 +12,20 @@ import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
 import com.example.hotspot.model.CheckedInDB
+import com.example.hotspot.view.Constant.CHECKED_IN
+import com.example.hotspot.view.Constant.STREET_WITHOUT_NAME
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
-
+object Constant {
+    const val STREET_WITHOUT_NAME = "Vej uden navn"
+    const val CHECKED_IN = "Checked in: "
+}
 
 class BeforeCheckIn : Fragment() {
 
@@ -31,15 +33,12 @@ class BeforeCheckIn : Fragment() {
     private lateinit var binding: BeforeCheckInBinding
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
     ): View? {
-
-        val view = inflater.inflate(R.layout.before_check_in, container, false)
-        return view
+        return inflater.inflate(R.layout.before_check_in, container, false)
     }
 
 
@@ -67,8 +66,6 @@ class BeforeCheckIn : Fragment() {
 
     private fun setAllInfo() {
         binding.beforeCheckInEventLocationName.text = args.hotSpot.name
-
-
         binding.beforeCIAddressTv.text = getAddress()
         binding.beforeCheckInRatingBar.rating = args.hotSpot.rating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
@@ -107,19 +104,12 @@ class BeforeCheckIn : Fragment() {
         }
 
         args.hotSpot.checkedIn?.removeAll(toRemove.toSet())
-
-
-
-        var checkedIn = checkedInIds.size
-        if (checkedIn == null) {
-            checkedIn = 0
-        }
-
+        val checkedIn = checkedInIds.size
         val pix = binding.beforeCheckInCheckedIn.textSize.toInt()
         val textSizeBefore = (pix/resources.displayMetrics.scaledDensity)
 
         binding.beforeCheckInCheckedIn.textSize = textSizeBefore + 4
-        binding.beforeCheckInCheckedIn.text = "Checked in: ${checkedIn}"
+        binding.beforeCheckInCheckedIn.text = CHECKED_IN + checkedIn
         CoroutineScope(IO).launch {
             delay(500)
             CoroutineScope(Main).launch {
@@ -151,7 +141,7 @@ class BeforeCheckIn : Fragment() {
 
 
     private fun checkIfNull(str: String?): String {
-        if (str == "null" || str == null || str == "Vej uden navn") {
+        if (str == "null" || str == null || str == STREET_WITHOUT_NAME) {
            return ""
         }
 
@@ -202,7 +192,6 @@ class BeforeCheckIn : Fragment() {
 
                     val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
                     view.findNavController().navigate(action)
-
 
                    // Navigation.findNavController(view).navigate(R.id.afterCheckIn)
                 }
