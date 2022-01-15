@@ -65,7 +65,7 @@ class AfterCheckIn : Fragment() {
 
 
 
-        AfterCheckInVM.checkedInUsersAndIds.users.observe(viewLifecycleOwner, Observer { it ->
+        AfterCheckInVM.checkedInUsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
             if (it != null) {
                 Log.i(TAG, "AFTERCHEC2 ${it}")
                 val groupieUsers = ArrayList<UserItem>()
@@ -75,7 +75,7 @@ class AfterCheckIn : Fragment() {
                 for (i in it) {
                     groupieUsers.add(UserItem(i))
                     //adapter.add(UserItem(i))
-                    Log.i(TAG, "AFTERCHEC3 ${it}")
+                  //  Log.i(TAG, "AFTERCHEC3 ${it}")
 
                 }
 

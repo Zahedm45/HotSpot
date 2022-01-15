@@ -1,14 +1,16 @@
 package com.example.hotspot.viewModel
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.User
 
 
 class UsersAndIds() {
     private val userList = mutableListOf<User>()
-    var users  = MutableLiveData<List<User>>()
+    private var users  = MutableLiveData<List<User>>()
     private var ids = ArrayList<String>()
 
     init {
@@ -30,16 +32,25 @@ class UsersAndIds() {
 
 
 
-    fun removeUser(user: User) {
+    fun removeUser(user: User): Boolean {
         if (user.uid == null) {
-            return
+            return false
             Log.i(ContentValues.TAG, "User id is null")
         }
 
-        if (ids.remove(user.uid)){
+        Log.i(TAG, "123456before remove $userList and user id is ${user.uid}")
+
+
+        if (ids.contains(user.uid)){
+            ids.remove(user.uid)
             userList.remove(user)
             users.value = userList
+            Log.i(TAG, "123456after remove $userList and user id is ${user.uid}")
+            return true
+
         }
+
+        return false
 
     }
 
@@ -52,15 +63,16 @@ class UsersAndIds() {
         return ids
     }
 
-    fun getUser(): MutableLiveData<List<User>> {
-        return users
-    }
+    fun getUser() = users as LiveData<List<User>>
 
 
     fun getUser(userId: String): User? {
+
         if (ids.contains(userId)) {
+
             userList.forEach {
                 if (it.uid == userId) {
+                   // Log.i(TAG, "user id $it")
                     return it
                 }
             }
@@ -71,7 +83,7 @@ class UsersAndIds() {
 
 
 
-    fun removeUser(userId: String) {
+/*    fun removeUser(userId: String) {
         if (ids.remove(userId)){
 
             val newTempList = userList
@@ -83,7 +95,7 @@ class UsersAndIds() {
                 }
             }
         }
-    }
+    }*/
 
 
 }

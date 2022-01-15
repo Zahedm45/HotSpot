@@ -33,43 +33,42 @@ class AfterCheckInVM {
 
 
         private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
-            val ids = checkedInUsersAndIds.getIds()
+            var ids = checkedInUsersAndIds.getIds()
 
-            if (ids != checkedInIds) {
+            if (ids == checkedInIds) {
+                return
+            }
 
-                checkedInIds.forEach {
-                    if (!ids.contains(it)) {
 
-                        Repository.getCheckedInUserFromDB(it) { user -> onnSuccessSnapshotUser(user) }
+            checkedInIds.forEach {
+                if (!ids.contains(it)) {
+                    Repository.getCheckedInUserFromDB(it) { user -> onnSuccessSnapshotUser(user) }
+                }
+            }
 
+
+            val subIds = ids
+
+            for (id in subIds) {
+                if (!checkedInIds.contains(id)) {
+                    val tempUser = checkedInUsersAndIds.getUser(id)
+                    if (tempUser != null) {
+                        checkedInUsersAndIds.removeUser(tempUser)
+                        subIds.clear()
+                        break
                     }
+
                 }
 
-
-
-/*                val subIds = ids
-
-                for (id in subIds) {
-                    if (!checkedInIds.contains(id)) {
-                        val tempUser = checkedInUsersAndIds.getUser(id)
-                        if (tempUser != null) {
-                            checkedInUsersAndIds.removeUser(tempUser)
-                            subIds.clear()
-                            break
-                        }
-
-                    }
-
-                }*/
-
             }
+
+
         }
 
 
 
         private fun onnSuccessSnapshotUser(user: User) {
             checkedInUsersAndIds.addUser(user)
-        //    function
         }
 
     }
