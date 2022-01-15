@@ -68,7 +68,7 @@ class AfterCheckInVM {
 
 
 
-        fun setIsInterestedDB(isInterested: Boolean, hotSpot: HotSpot) {
+        private fun updateIsInterestedDB(isInterested: Boolean, hotSpot: HotSpot) {
 
             val userId = Firebase.auth.uid
             hotSpot.checkedIn?.let {
@@ -92,9 +92,12 @@ class AfterCheckInVM {
 
 
 
-        fun setIsInterested(isInterested: Boolean) {
+        fun setIsInterested(isInterested: Boolean, hotSpot: HotSpot) {
+            if (this.isInterested.value != isInterested) {
+                this.isInterested.postValue(isInterested)
+                updateIsInterestedDB(isInterested, hotSpot)
 
-           this.isInterested.postValue(isInterested)
+            }
         }
 
 

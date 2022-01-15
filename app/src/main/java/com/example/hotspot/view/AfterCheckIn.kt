@@ -138,7 +138,7 @@ class AfterCheckIn : Fragment() {
 
     private fun isInterestedBtn() {
         binding.afterCheckInterestedBtn.setOnCheckedChangeListener { _, isChecked ->
-            AfterCheckInVM.setIsInterested(isChecked)
+            AfterCheckInVM.setIsInterested(isChecked, args.hotSpot)
         }
 
     }

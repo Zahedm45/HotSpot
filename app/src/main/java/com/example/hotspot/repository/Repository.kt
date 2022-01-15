@@ -453,12 +453,11 @@ class Repository {
                     if (value != null) {
 
                         val hotSpot = value.toObject<HotSpot>()
-
                         val checkedInList = hotSpot?.checkedIn
 
                         val newList = ArrayList<String>()
                         checkedInList?.forEach {
-                            Log.d(TAG, "snapshot found: checkedIn3 ${it.id}")
+                            Log.d(TAG, "snapshot found: checkedIn3 ${it.isInterested}")
                             it.id?.let { it1 -> newList.add(it1) }
 
                         }
