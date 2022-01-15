@@ -42,12 +42,8 @@ class AfterCheckIn : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfterCheckInBinding.bind(view)
 
-
-
-
         setHotSpotInfo()
         heartBtn()
-
 
 /*
         DataHolder.currentUser?.let {
@@ -55,23 +51,14 @@ class AfterCheckIn : Fragment() {
             adapterHelper.add(it)
         }
 */
-
+       // binding.afterCheckedInRecyclerView.suppressLayout(true)
         val hoSpot = args.hotSpot
-
-
-        binding.afterCheckedInRecyclerView.suppressLayout(true)
-
-
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
-
 
 
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
             if (it != null) {
                 val groupieUsers = ArrayList<UserItem>()
-
-
-
                 for (i in it) {
                     groupieUsers.add(UserItem(i))
 
@@ -82,10 +69,7 @@ class AfterCheckIn : Fragment() {
 
                 binding.afterCheckedInRecyclerView.adapter = adapter
                 setCheckedInUI(it.size)
-
             }
-
-
         })
 
 
