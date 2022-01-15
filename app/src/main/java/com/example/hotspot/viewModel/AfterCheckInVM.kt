@@ -2,7 +2,6 @@ package com.example.hotspot.viewModel
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
@@ -28,10 +27,9 @@ class AfterCheckInVM {
         }
 
 
-        private fun onSuccessSnapShotIds(checkedInUsers: ArrayList<String>) {
+        private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
 
-            val checkedInIds = ArrayList<String>()
-            Log.i(TAG, "exception is here1 $checkedInUsers")
+            Log.i(TAG, "exception is here1 $checkedInIds")
 
 
 
@@ -43,7 +41,7 @@ class AfterCheckInVM {
 */
 
 
-            for (checkedIn in checkedInUsers) {
+            for (checkedIn in checkedInIds) {
                 Log.i(TAG, "exception is here2 $checkedIn")
 
             }
@@ -56,6 +54,7 @@ class AfterCheckInVM {
             }*/
 
 
+/*
             val ids = UsersAndIds.getIds()
 
             if (ids == checkedInIds) {
@@ -78,6 +77,7 @@ class AfterCheckInVM {
             }
 
             UsersAndIds.removeUser(toRemove)
+*/
 
         }
 
