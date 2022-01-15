@@ -11,8 +11,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
+import com.example.hotspot.viewModel.UsersAndIds
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
@@ -95,6 +97,18 @@ class BeforeCheckIn : Fragment() {
 
 
     private fun onCheckedInListChange(checkedInIds: ArrayList<String>) {
+
+        val toRemove = ArrayList<CheckedInDB>()
+
+        args.hotSpot.checkedIn?.forEach {
+            if (!checkedInIds.contains(it.id)) {
+                toRemove.add(it)
+            }
+        }
+
+        args.hotSpot.checkedIn?.removeAll(toRemove.toSet())
+
+
 
         var checkedIn = checkedInIds.size
         if (checkedIn == null) {

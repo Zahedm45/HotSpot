@@ -30,13 +30,14 @@ class AfterCheckInVM {
         private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
 
             val ids = UsersAndIds.getIds()
-            if (ids.containsAll(checkedInIds)) {
-                Log.i(TAG, "Same ids")
+/*            if (ids == checkedInIds) {
+                Log.i(TAG, "Same ids ${ids} and checkedInd $checkedInIds")
                 return
-            }
-
+            }*/
+            Log.i(TAG, "Same ids")
             for (id in checkedInIds) {
                 if (!ids.contains(id)) {
+                    Log.i(TAG, "Same ids ${ids} and checkedInd $checkedInIds")
                     Repository.getCheckedInUserFromDB(id) { user -> onnSuccessSnapshotUser(user) }
                 }
             }
