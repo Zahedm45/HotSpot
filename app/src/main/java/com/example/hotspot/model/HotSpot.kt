@@ -181,9 +181,17 @@ class SubClassForHotspot() {
 
             Log.i(TAG, "Successfully random")
 
-            val sub = ArrayList<SubCheckedIn>()
 
-            val che = CheckedInDB(sub)
+
+
+            val subArr = ArrayList<SubCheckedIn>()
+            subArr.add(SubCheckedIn(
+                id = "gSnHzxGiXFTftWTpuF2LYgDKm123",
+                geoPoint = GeoPoint(55.44, 12.33),
+                isInterested = true
+                ))
+
+            val che = CheckedInDB(subArr)
             val hotSpot = HotSpot().apply {
                 val ref = FirebaseDatabase.getInstance().reference
                 val uniqueId: String? = ref.push().key
