@@ -52,6 +52,13 @@ class AfterCheckIn : Fragment() {
         }
 */
        // binding.afterCheckedInRecyclerView.suppressLayout(true)
+
+        setObserverForCheckedInList()
+
+
+    }
+
+    private fun setObserverForCheckedInList() {
         val hoSpot = args.hotSpot
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
 
@@ -71,8 +78,6 @@ class AfterCheckIn : Fragment() {
                 setCheckedInUI(it.size)
             }
         })
-
-
     }
 
 
@@ -116,7 +121,6 @@ class AfterCheckIn : Fragment() {
         if (!adapterHelper.contains(user)) {
             adapter.add(item)
         }
-
 
     }
 
