@@ -2,6 +2,7 @@ package com.example.hotspot.view
 
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import androidx.fragment.app.Fragment
@@ -53,6 +54,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var progressBar: ProgressBar
     private var location: LatLng? = null
 
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        DataHolder.getCurrentUserFromDB()
+    }
 
 
 
