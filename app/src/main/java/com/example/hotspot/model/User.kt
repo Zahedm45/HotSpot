@@ -8,11 +8,15 @@ data class User(
     var age: Int? = null,
     var emailAddress: String? = null,
     var bio: String? = null,
-    val gender: String,
+    val gender: String? = null,
     var bitmapImg: Bitmap? = null,
-    var day: Int,
-    var month: Int,
-    var year: Int,
-    var gender: String? = null,
-    var bitmapImg: Bitmap? = null
-)
+    var day: Int? = null,
+    var month: Int? = null ,
+    var year: Int? = null,
+   // var gender: String? = null,
+  //  var bitmapImg: Bitmap? = null
+) {
+
+
+
+}
