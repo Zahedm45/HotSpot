@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/button_effect"
+        android:weightSum="10"
 
 
         >
@@ -38,10 +39,13 @@
 
 
         <LinearLayout
-            android:layout_width="280dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="8"
+
+            >
 
 
             <TextView
@@ -79,15 +83,29 @@
                     android:text="Gender: Men" />
 
 
-                <TextView
+<!--                <TextView
                     android:id="@+id/after_checked_in_person_item_user_seeking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="Interested: Yes" />
+                    android:text="Interested: Yes" />-->
 
             </LinearLayout>
+
+
+
+
+
+
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/after_checked_is_interested_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/green_light_for_is_interested" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
