@@ -15,14 +15,8 @@ typealias usersAndIds = MutableList<String>*/
 class AfterCheckInVM {
 
     companion object {
-        //val checkedInUsersAndIds = UsersAndIds()
 
-       // var function: Unit? = null
-
-
-        fun setListenerToCheckedInListDB(hotSpot: HotSpot, function: () -> Unit) {
-          //  this.function = function()
-
+        fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
                 Repository.getAndListenCheckedInIds(hotSpot.id!!
                 ) { checkedIn -> onSuccessSnapShotIds(checkedIn) }
@@ -32,7 +26,7 @@ class AfterCheckInVM {
 
 
         private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
-            var ids = UsersAndIds.getIds()
+            val ids = UsersAndIds.getIds()
 
             if (ids == checkedInIds) {
                 Log.i(TAG, "Same ids")
@@ -45,24 +39,15 @@ class AfterCheckInVM {
                 }
             }
 
-/*            checkedInIds.forEach {
-                if (!ids.contains(it)) {
-                    Repository.getCheckedInUserFromDB(it) { user -> onnSuccessSnapshotUser(user) }
-                }
-            }*/
-
 
             val toRemove = ArrayList<String>()
             for (id in ids) {
                 if (!checkedInIds.contains(id)) {
                     toRemove.add(id)
-
                 }
-
             }
 
             UsersAndIds.removeUser(toRemove)
-
 
         }
 
