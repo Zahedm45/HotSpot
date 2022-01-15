@@ -1,6 +1,5 @@
 package com.example.hotspot.viewModel
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -23,7 +22,6 @@ class UsersAndIds() {
 
 
         fun addUser(user: User): Boolean {
-
             if (user.uid != null && !ids.contains(user.uid)) {
                 ids.add(user.uid!!)
                 userList.add(user)
@@ -37,16 +35,15 @@ class UsersAndIds() {
 
 
         fun removeUser(userIds: ArrayList<String>) {
-
-            val users2 = mutableListOf<User>()
+            val usersToRemove = mutableListOf<User>()
             userIds.forEach {
-                getUser(it)?.let {
-                    users2.add(it)
+                getUser(it)?.let { user ->
+                    usersToRemove.add(user)
                 }
             }
-
-            ids.removeAll(userIds)
-            userList.removeAll(users2)
+            ids.removeAll(userIds.toSet())
+            userList.removeAll(usersToRemove)
+            users.value = userList
         }
 
 
@@ -65,7 +62,6 @@ class UsersAndIds() {
 
                 userList.forEach {
                     if (it.uid == userId) {
-                        // Log.i(TAG, "user id $it")
                         return it
                     }
                 }
