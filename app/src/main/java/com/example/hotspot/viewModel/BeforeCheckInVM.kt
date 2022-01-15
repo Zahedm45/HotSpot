@@ -15,6 +15,11 @@ class BeforeCheckInVM {
 
         fun setCheckedIn(hotSpot: HotSpot, userId: String, onSuccess: (() -> Unit)? ) {
 
+
+            hotSpot.checkedIn?.forEach {
+
+            }
+
             if (hotSpot.checkedIn!!.contains(userId)) {
                 return
             }

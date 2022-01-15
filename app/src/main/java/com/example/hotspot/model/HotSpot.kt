@@ -24,7 +24,7 @@ data class HotSpot(
     var description: String? = null,
     var geoPoint: GeoPoint? = null,
     var rating: Double? = null,
-    var checkedIn: ArrayList<String>? = null
+    var checkedIn: ArrayList<CheckedInDB>? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -33,7 +33,7 @@ data class HotSpot(
         parcel.readString(),
         parcel.readValue(GeoPoint::class.java.classLoader) as? GeoPoint,
         parcel.readValue(Double::class.java.classLoader) as? Double,
-        parcel.readValue(String::class.java.classLoader) as? ArrayList<String>
+        parcel.readValue(CheckedInDB::class.java.classLoader) as? ArrayList<CheckedInDB>
     ) {
     }
 
@@ -101,7 +101,7 @@ class SubClassForHotspot() {
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
                 rating = randomTwoDig
-                checkedIn = checkedIn2
+                // checkedIn = checkedIn2
             }
 
 
