@@ -28,7 +28,7 @@ class AfterCheckInVM {
         }
 
 
-        private fun onSuccessSnapShotIds(checkedInUsers: ArrayList<CheckedInDB>) {
+        private fun onSuccessSnapShotIds(checkedInUsers: ArrayList<String>) {
 
             val checkedInIds = ArrayList<String>()
             Log.i(TAG, "exception is here1 $checkedInUsers")

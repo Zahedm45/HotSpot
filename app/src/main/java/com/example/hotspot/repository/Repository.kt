@@ -437,7 +437,7 @@ class Repository {
 
         fun getAndListenCheckedInIds(
             hotSpotId: String,
-            onSuccess: ((checkedIn: ArrayList<CheckedInDB> ) -> Unit) ): ListenerRegistration {
+            onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ): ListenerRegistration {
 
             val db = Firebase.firestore
 
@@ -452,35 +452,19 @@ class Repository {
 
                     if (value != null) {
 
-                        val checkedInList = value.get("checkedIn") as ArrayList<String>
 
-                        val toCheckedInDB = ArrayList<CheckedInDB>()
-                        checkedInList.forEach {
-                            toCheckedInDB.add(it as CheckedInDB)
-                        }
+                        val checkedInList = value.get("checkedIn") as CheckedInDB
 
-/*
-                        var i = 0
-                        while ( i < checkedInList) {
-                            Log.d(TAG, "snapshot found: checkedIn ${checkedInList}")
+                        val newList = ArrayList<String>()
+
+                        checkedInList.checkedInList?.forEach {
+                            it.id?.let { it1 -> newList.add(it1) }
 
                         }
-*/
+
+                        onSuccess(newList)
 
 
-
-
-                        //val checkedInList = value.toObject<ArrayList<CheckedInDB>>()
-                       // val checkedInList = value.get("checkedIn") as ArrayList<CheckedInDB>
-
-
-
-
-
-/*
-                        if (checkedInList != null) {
-                            onSuccess(checkedInList )
-                        }*/
                         Log.d(TAG, "snapshot found: checkedIn")
 
                     } else {

@@ -87,7 +87,9 @@ class BeforeCheckIn : Fragment() {
 
     private fun updateCheckedInList() {
         args.hotSpot.id?.let {
-            BeforeCheckInVM.getAndListenCheckedInIdsDB(it) {ids -> onCheckedInListChange(ids)}
+            BeforeCheckInVM.getAndListenCheckedInIdsDB(it) { ids ->
+                onCheckedInListChange(ids)
+            }
         }
 
 
@@ -96,7 +98,7 @@ class BeforeCheckIn : Fragment() {
 
 
 
-    private fun onCheckedInListChange(checkedInIds: ArrayList<CheckedInDB>) {
+    private fun onCheckedInListChange(checkedInIds: ArrayList<String>) {
 
         var checkedIn = checkedInIds.size
         if (checkedIn == null) {
