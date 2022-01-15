@@ -479,6 +479,16 @@ class Repository {
 
 
 
+        fun updateIsInterestedDB(hotSpotId: String, checkedInDB: ArrayList<CheckedInDB>) {
+            val db = Firebase.firestore
+            db.collection("hotSpots2").document(hotSpotId).update("checkedIn", checkedInDB)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Success...")
+
+                }
+
+        }
+
     }
 
 

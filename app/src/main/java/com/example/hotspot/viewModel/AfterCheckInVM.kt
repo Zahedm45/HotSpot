@@ -5,7 +5,9 @@ import android.util.Log
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.ktx.Firebase
 
 
 /*typealias users = MutableList<User>
@@ -17,6 +19,7 @@ class AfterCheckInVM {
 
     companion object {
         var checkedInListenerRig: ListenerRegistration? = null
+        private var isInterested = true
 
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
@@ -60,6 +63,36 @@ class AfterCheckInVM {
             UsersAndIds.addUser(user)
         }
 
+
+
+
+        fun setIsInterestedDB(isInterested: Boolean, hotSpot: HotSpot) {
+
+            val userId = Firebase.auth.uid
+            hotSpot.checkedIn?.let {
+                for (checkedIn in it) {
+                    if (checkedIn.id == userId){
+                        checkedIn.isInterested = isInterested
+                        break
+                    }
+                }
+            }
+
+            hotSpot.id?.let { hotSpot.checkedIn?.let { it1 ->
+                Repository.updateIsInterestedDB(it,
+                    it1
+                )
+            } }
+
+        }
+
+
+
+
+
+        fun setIsInterested(isInterested: Boolean) {
+           this.isInterested = isInterested
+        }
     }
 
 

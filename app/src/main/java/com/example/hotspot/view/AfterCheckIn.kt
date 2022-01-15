@@ -1,6 +1,7 @@
 package com.example.hotspot.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.xwray.groupie.GroupieViewHolder
 
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
+import com.example.hotspot.other.network.TAG
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
@@ -55,6 +57,7 @@ class AfterCheckIn : Fragment() {
        // binding.afterCheckedInRecyclerView.suppressLayout(true)
 
         setObserverForCheckedInList()
+        isInterestedBtn()
 
 
     }
@@ -132,6 +135,24 @@ class AfterCheckIn : Fragment() {
 
 
 
+
+
+    fun isInterestedBtn() {
+
+        var isOn = false
+        binding.afterCheckInterestedBtn.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+
+
+
+
+            } else {
+                Log.i(TAG, "is on..2 $isChecked")
+            }
+
+        }
+
+    }
 
 }
 
