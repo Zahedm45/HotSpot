@@ -67,6 +67,9 @@ class AfterCheckIn : Fragment() {
 
     }
 
+    lateinit var groupieUsers: ArrayList<UserItem>
+
+
     private fun setObserverForCheckedInList() {
         val hoSpot = args.hotSpot
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
@@ -74,14 +77,14 @@ class AfterCheckIn : Fragment() {
 
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
             if (it != null) {
-                val groupieUsers = ArrayList<UserItem>()
+                groupieUsers = ArrayList()
                 for (i in it) {
                     groupieUsers.add(UserItem(i))
 
                 }
 
-                adapter.clear()
-                adapter.addAll(groupieUsers)
+                //adapter.clear()
+                adapter.update(groupieUsers)
 
                 binding.afterCheckedInRecyclerView.adapter = adapter
                 setCheckedInUI(it.size)

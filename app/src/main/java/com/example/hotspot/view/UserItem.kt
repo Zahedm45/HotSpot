@@ -21,7 +21,6 @@ class UserItem(val user: User): Item() {
         item.after_checked_in_person_item_user_gender.text = "Gender: ${user.gender}"
         item.after_checked_in_person_item_user_age.text = "Age ${user.age}"
 
-
         viewHolder.itemView.setOnClickListener {
             Log.i(ContentValues.TAG, "Click listener $user")
         }
