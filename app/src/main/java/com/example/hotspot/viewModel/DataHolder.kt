@@ -12,7 +12,7 @@ class DataHolder {
         var currentUser: User? = null
 
 
-        fun getCurrentUserFromDB() {
+        fun fetchCurrentUserFromDB() {
             val userId = Firebase.auth.uid
             if (userId != null) {
                 Repository.getCheckedInUserFromDB(userId) {

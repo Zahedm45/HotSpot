@@ -1,11 +1,8 @@
 package com.example.hotspot.view
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.graphics.Paint
-import android.graphics.PixelFormat
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,12 +11,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
-import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.viewModel.BeforeCheckInVM
+import com.example.hotspot.viewModel.DataHolder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
@@ -168,10 +164,13 @@ class BeforeCheckIn : Fragment() {
     @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     private fun checkInBtn(view: View) {
         binding.beforeCheckInCheckInBtn.setOnClickListener {
-            val userId = Firebase.auth.uid
-            userId?.let {
-                BeforeCheckInVM.setCheckedIn(args.hotSpot, it, null)
+          //  val userId = Firebase.auth.uid
+            DataHolder.currentUser?.let {
+                BeforeCheckInVM.setCheckedInDB(args.hotSpot, it, null)
+            } ?: run {
+                // TODO
             }
+
 
 
             CoroutineScope(IO).launch {

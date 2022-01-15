@@ -1,13 +1,11 @@
 package com.example.hotspot.view
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
@@ -25,14 +23,11 @@ import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.infoWindow.InfoWindow
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.MapsAndHotspotsVM
-import com.example.hotspot.viewModel.PersonalProfileVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.GeoPoint
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -57,10 +52,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        DataHolder.getCurrentUserFromDB()
+        DataHolder.fetchCurrentUserFromDB()
     }
-
-
 
 
     override fun onCreateView(
@@ -69,9 +62,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         savedInstanceState: Bundle?
     ): View? {
 
-
-        val view = inflater.inflate(R.layout.fragment_maps4, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_maps4, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,11 +70,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding = FragmentMaps4Binding.bind(view)
 
         requestLocPermissionAndTrackLocation()
-
         addProgressBar()
-
         myLocationBtn(view)
-        Log.i(TAG, "Has been removed22")
+
 /*        binding.fragmentMapsMyLocationBtn.setOnClickListener {
            // addHotSpotsInDB()
             if (location != null && googleMap != null) {
@@ -98,8 +87,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     override fun onDestroyView() {
         super.onDestroyView()
         MapsAndHotspotsVM.showHotSpotReg?.remove()
-        Log.i(TAG, "Has been removed")
-
     }
 
 
