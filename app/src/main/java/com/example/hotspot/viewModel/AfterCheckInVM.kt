@@ -20,7 +20,7 @@ class AfterCheckInVM {
 
     companion object {
         var checkedInListenerRig: ListenerRegistration? = null
-        private var isInterested : MutableLiveData<Boolean> = MutableLiveData(true)
+      //  private var isInterested : MutableLiveData<Boolean> = MutableLiveData(true)
 
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
@@ -86,6 +86,27 @@ class AfterCheckInVM {
 
 
 
+        fun setIsInterested(isInterested: Boolean, hotSpotId: String) {
+            val userId = DataHolder.currentUser?.uid
+
+            if (userId != null) {
+                Repository.updateIsInterestedDB(hotSpotId, userId, isInterested)
+            }
+
+
+
+
+
+ /*           if (this.isInterested.value != isInterested) {
+                this.isInterested.postValue(isInterested)
+                updateIsInterestedDB(isInterested, hotSpot)
+
+            }*/
+        }
+
+
+
+
         private fun updateIsInterestedDB(isInterested: Boolean, hotSpot: HotSpot) {
 
 /*            val userId = Firebase.auth.uid
@@ -110,16 +131,10 @@ class AfterCheckInVM {
 
 
 
-        fun setIsInterested(isInterested: Boolean, hotSpot: HotSpot) {
-            if (this.isInterested.value != isInterested) {
-                this.isInterested.postValue(isInterested)
-              //  updateIsInterestedDB(isInterested, hotSpot)
-
-            }
-        }
 
 
-        fun getIsInterested() = isInterested as LiveData<Boolean>
+
+       // fun getIsInterested() = isInterested as LiveData<Boolean>
     }
 
 

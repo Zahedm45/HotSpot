@@ -400,8 +400,6 @@ class Repository {
                         onSuccess(hotSpots)
                     }
 
-                  //  Log.d(TAG, "snapshot found: hotSpots2")
-
                 } else {
                     Log.d(TAG, "Current data: null")
                 }
@@ -418,9 +416,7 @@ class Repository {
         fun getAndListenCheckedInIds(
             hotSpotId: String,
             onSuccess: ((checkedIn: ArrayList<CheckedInDB>) -> Unit) ): ListenerRegistration {
-
             val db = Firebase.firestore
-
             val registration = db.collection("hotSpots3").document(hotSpotId).collection("checkedIn")
                 .addSnapshotListener { value, error ->
 
@@ -438,14 +434,11 @@ class Repository {
                         value.forEach {
                             checkedIns.add(it.toObject<CheckedInDB>())
                         }
-
                         onSuccess(checkedIns)
-
 
                     } else {
                         Log.d(TAG, "Current data: null")
                     }
-
                 }
 
             return registration
@@ -463,7 +456,6 @@ class Repository {
             onSuccess: ((user: User, checkedIn: CheckedInDB) -> Unit)
 
         ) {
-
 
             val db = Firebase.firestore
             db.collection("users").document(usersId)
@@ -485,16 +477,13 @@ class Repository {
 
 
 
-
-
-
-
-
-        fun updateIsInterestedDB(hotSpotId: String, checkedInDB: ArrayList<CheckedInDB>) {
+        fun updateIsInterestedDB(hotSpotId: String, useId: String, isInterested: Boolean) {
             val db = Firebase.firestore
-            db.collection("hotSpots3").document(hotSpotId).update("checkedIn", checkedInDB)
+            db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(useId)
+                .update("interested", isInterested)
+
                 .addOnSuccessListener {
-                    Log.d(TAG, "Success...")
+                    Log.d(TAG, "Success...Repository")
 
                 }
 
@@ -506,22 +495,3 @@ class Repository {
 }
 
 
-
-
-
-
-
-
-/*                        val hotSpot = value.toObject<HotSpot>()
-                        val checkedInList = hotSpot?.checkedIn
-
-                        val newList = ArrayList<String>()
-                        checkedInList?.forEach {
-                            Log.d(TAG, "snapshot found: checkedIn3 ${it.isInterested}")
-                            it.id?.let { it1 -> newList.add(it1) }
-
-                        }
-
-                        if (hotSpot != null) {
-                            onSuccess(newList, hotSpot)
-                        }*/
