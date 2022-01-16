@@ -42,9 +42,12 @@ class BeforeCheckInVM {
 
 
 
-        fun getAndListenCheckedInIdsDB(hotSpotId: String, onSuccess: ((hotSpots: ArrayList<String>) -> Unit)) {
-/*            getAndListenCheckedInIdsRegis = Repository
-                .getAndListenCheckedInIds(hotSpotId) { hotSpot -> onSuccess(hotSpot) }*/
+        fun getAndListenCheckedInIdsDB(hotSpotId: String, onSuccess: ((checkedIn: ArrayList<CheckedInDB>) -> Unit)) {
+
+
+
+            getAndListenCheckedInIdsRegis = Repository
+                .getAndListenCheckedInIds(hotSpotId) { checkedIn -> onSuccess(checkedIn) }
         }
     }
 

@@ -93,9 +93,12 @@ class BeforeCheckIn : Fragment() {
 
 
 
-    private fun onCheckedInListChange(checkedInIds: ArrayList<String>) {
+    private fun onCheckedInListChange(checkedIn: ArrayList<CheckedInDB>) {
 
-        val toRemove = ArrayList<CheckedInDB>()
+        binding.beforeCheckInCheckedIn.text = CHECKED_IN + checkedIn.size
+
+
+       // val toRemove = ArrayList<CheckedInDB>()
 
 /*        args.hotSpot.checkedIn?.forEach {
             if (!checkedInIds.contains(it.id)) {
