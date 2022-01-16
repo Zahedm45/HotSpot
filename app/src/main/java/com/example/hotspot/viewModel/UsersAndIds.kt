@@ -1,9 +1,11 @@
 package com.example.hotspot.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.User
+import com.example.hotspot.other.network.TAG
 
 
 class UsersAndIds() {
@@ -15,71 +17,59 @@ class UsersAndIds() {
         private var users  = MutableLiveData<List<User>>()
         private var checked = ArrayList<CheckedInDB>()
 
+        private var map = mutableMapOf<String, Boolean>()
+
         init {
             users.value = userList
         }
 
 
-        fun addUser(user: User, checkedInDB: CheckedInDB): Boolean {
-/*            if (checked.contains(checkedInDB)) {
-                return false
-            }
-            */
+        fun addUser(user: User, checkedInDB: CheckedInDB) {
 
-           // var checkedInDbToRemove = CheckedInDB()
-            for (crr in checked) {
 
-                if (crr.id == checkedInDB.id ) {
-                    if (crr.isInterested != checkedInDB.isInterested) {
-                       // checkedInDbToRemove = crr
-                        removeUser(crr)
-                        checked.add(checkedInDB)
-                        userList.add(user)
-                        users.value = userList
+            user.uid?.let {
 
-                    }
-                    return false
+                if (map.containsKey(it)) {
+                    updateUser(checkedInDB)
+                    return
+                }
+
+
+                checkedInDB.isInterested?.let {
+                    map[user.uid.toString()] = it
+                    userList.add(user)
+                    users.value = userList
                 }
             }
 
-/*            checked.add(checkedInDB)
-            userList.add(user)
-            users.value = userList
-            return true*/
+        }
+
+        private fun updateUser(userId: CheckedInDB) {
+
+
+
         }
 
 
+        fun removeUser(userId: String) {
 
-        fun removeUser(checkedInDB: CheckedInDB) {
-
-            if (!checked.contains(checkedInDB)) {
+            if (!map.containsKey(userId)) {
                 return
+                Log.i(TAG, "")
             }
+
 
             var userToRemove = User()
             for (curr in userList) {
-                if (curr.uid == checkedInDB.id) {
+                if (curr.uid == userId) {
                     userToRemove = curr
                     break
                 }
-
             }
 
-
+            map.remove(userId)
             userList.remove(userToRemove)
             users.value = userList
-
-
-            var checkedInDBToRemove = CheckedInDB()
-
-            for (curr in checked) {
-                if (curr.id == )
-
-            }
-
-
-            checked.remove(checkedInDB)
-
 
         }
 
