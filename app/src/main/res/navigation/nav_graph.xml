@@ -54,7 +54,9 @@
         tools:layout="@layout/fragment_edit_profile" >
         <action
             android:id="@+id/action_editProfile_to_personalProfile"
-            app:destination="@id/personalProfile" />
+            app:destination="@id/personalProfile"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
 
 
@@ -109,7 +111,9 @@
         tools:layout="@layout/fragment_personal_profile" >
         <action
             android:id="@+id/action_personalProfile_to_editProfile"
-            app:destination="@id/editProfile" />
+            app:destination="@id/editProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
 
 

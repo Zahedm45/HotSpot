@@ -1,17 +1,37 @@
-/*package com.example.hotspot.view
+package com.example.hotspot.view
 
+import android.content.ContentValues
+import android.util.Log
 import com.example.hotspot.R
 import com.example.hotspot.model.User
-import com.xwray.groupie.Item
-import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.chat_item.view.*
+import com.xwray.groupie.kotlinandroidextensions.Item
+import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
-class UserItem(val user: User): Item<ViewHolder>() {
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.user_name.text = user.name
+class UserItem(val user: User): Item() {
 
+    override fun bind(
+        viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
+        position: Int
+    ) {
+
+        val item = viewHolder.itemView
+
+        item.after_checked_in_person_item_user_name.text = user.name
+        item.after_checked_in_person_item_user_pic.setImageBitmap(user.bitmapImg)
+        item.after_checked_in_person_item_user_gender.text = "Gender: ${user.gender}"
+        item.after_checked_in_person_item_user_age.text = "Age ${user.age}"
+
+
+        viewHolder.itemView.setOnClickListener {
+            Log.i(ContentValues.TAG, "Click listener $user")
+        }
     }
 
-    override fun getLayout() = R.layout.fragment_message_overview
 
-} */
+
+    override fun getLayout(): Int {
+        return R.layout.after_checked_in_recycler_view_item
+    }
+}
+
+

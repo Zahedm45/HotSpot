@@ -40,6 +40,7 @@ class FragmentProfileName : Fragment() {
         binding.continueButton.setOnClickListener{
             if(!isContinueClickable) return@setOnClickListener
             viewModel.setName(binding.firstNameText.text.toString())
+            ButtonAnimations.clickButton(binding.continueButton)
             findNavController().navigate(R.id.action_createProfileName_to_createProfileAgeFragment)
         }
 

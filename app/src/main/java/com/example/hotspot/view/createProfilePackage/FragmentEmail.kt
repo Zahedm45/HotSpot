@@ -40,6 +40,7 @@ class FragmentEmail : Fragment() {
         binding.continueButton.setOnClickListener{
             if(!isContinueClickable) return@setOnClickListener
             viewModel.setEmail(binding.tvEmail.text.toString())
+            ButtonAnimations.clickButton(binding.continueButton)
             findNavController().navigate(R.id.action_fragmentEmail_to_createProfileGenderFragment)
         }
 

@@ -9,8 +9,10 @@ import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLoadingPageBinding
 import com.example.hotspot.databinding.ActivityLoginSuggestionBinding
 import com.example.hotspot.other.Constants
+import com.example.hotspot.other.network.TAG
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
+import com.example.hotspot.viewModel.DataHolder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
@@ -62,7 +64,7 @@ class ActivityLoadingPage : AppCompatActivity() {
     }
 
     private fun toMapsActivity(){
-
+        Log.d(TAG,"LUCASLOFTt")
         val intent = Intent(this@ActivityLoadingPage, AfterLoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)

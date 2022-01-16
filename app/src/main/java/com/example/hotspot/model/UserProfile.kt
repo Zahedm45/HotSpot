@@ -13,5 +13,8 @@ data class UserProfile(
     var password: String, // delete?
     var bio: String? = null,
     val gender: String,
-    var bitmapImg: Bitmap? = null // unnecessary?
+    var bitmapImg: Bitmap? = null, // unnecessary?
+    var day: Int,
+    var month: Int,
+    var year: Int
     )

@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentCreateProfileGenderBinding
+import com.example.hotspot.other.ButtonAnimations
 
 class FragmentGender : Fragment() {
 
@@ -32,11 +33,13 @@ class FragmentGender : Fragment() {
 
         binding.manButton.setOnClickListener {
             viewModel.setGender("Male")
+            ButtonAnimations.clickButton(binding.manButton)
             findNavController().navigate(R.id.action_createProfileGenderFragment_to_fragmentProfileText)
         }
 
         binding.womanButton.setOnClickListener {
             viewModel.setGender("Female")
+            ButtonAnimations.clickButton(binding.womanButton)
             findNavController().navigate(R.id.action_createProfileGenderFragment_to_fragmentProfileText)
         }
 

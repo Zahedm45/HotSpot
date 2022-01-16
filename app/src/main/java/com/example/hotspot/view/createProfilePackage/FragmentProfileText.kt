@@ -35,6 +35,7 @@ class FragmentProfileText : Fragment() {
         binding.continueButton.setOnClickListener {
             if(!isContinueClickable) return@setOnClickListener
             viewModel.setProfileText(binding.firstNameText.text.toString())
+            ButtonAnimations.clickButton(binding.continueButton)
             findNavController().navigate(R.id.action_fragmentProfileText_to_createProfileUploadImageFragment)
         }
 

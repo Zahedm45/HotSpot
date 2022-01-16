@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.util.Log
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
@@ -17,6 +19,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.getField
@@ -185,13 +188,13 @@ class Repository {
         }
 
 
-        fun getUserProfile(onDataChange: (snapshot: DocumentSnapshot) -> Unit) {
+        fun getUserProfile(onDataChange: (snapshot: DocumentSnapshot) -> Unit) : ListenerRegistration? {
 
             val fbUser = Firebase.auth.currentUser
 
             if (fbUser == null) {
                 Log.i(TAG, "User is not logged in..")
-                return
+                return null
             }
 
 
@@ -199,7 +202,7 @@ class Repository {
             val docRef = db.collection("users").document(fbUser.uid)
 
 
-            docRef.addSnapshotListener { snapshot, e ->
+            val registration = docRef.addSnapshotListener { snapshot, e ->
 
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
@@ -216,6 +219,7 @@ class Repository {
                 }
             }
 
+            return registration
         }
 
 
@@ -391,12 +395,15 @@ class Repository {
         fun getHotSpots(
             onSuccess: ((hotSpots: ArrayList<HotSpot>) -> Unit)?,
             onFailure: ((msg: String) -> Unit)?
-        ) {
+        ) : ListenerRegistration {
+
+        //    Log.d(TAG, "snapshot found: hotSpots1")
+
 
             val db = Firebase.firestore
-            val colRef = db.collection("hotSpots")
+            val colRef = db.collection("hotSpots2")
 
-            colRef.addSnapshotListener { snapshot, e ->
+            val registration = colRef.addSnapshotListener { snapshot, e ->
 
                 if (e != null) {
                     Log.w(TAG, "Listen failed.", e)
@@ -417,28 +424,76 @@ class Repository {
                         onSuccess(hotSpots)
                     }
 
-                    Log.d(TAG, "snapshot found")
+                  //  Log.d(TAG, "snapshot found: hotSpots2")
 
                 } else {
                     Log.d(TAG, "Current data: null")
                 }
             }
+
+            return registration
         }
 
 
 
+        fun getCheckedInUserFromDB(usersId: String, onSuccess: ((user: User) -> Unit)) {
+            val db = Firebase.firestore
+            db.collection("users").document(usersId)
+                .get()
+                .addOnSuccessListener { doc ->
+                    doc.toObject<User>()?.apply {
+                        val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
+                        val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
+                        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                            this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
+                            onSuccess(this)
+                        }
+                    }
+                }
+        }
 
 
 
+        fun getAndListenCheckedInIds(
+            hotSpotId: String,
+            onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ): ListenerRegistration {
+
+            val db = Firebase.firestore
+
+            val registration = db.collection("hotSpots2").document(hotSpotId)
+                .addSnapshotListener { value, error ->
+
+                    if (error != null) {
+                        Log.w(TAG, "Listen failed.", error)
+                        return@addSnapshotListener
+                    }
+
+
+                    if (value != null) {
+
+                        val hotSpot = value.toObject<HotSpot>()
+
+                        val checkedInList = hotSpot?.checkedIn
+
+                        val newList = ArrayList<String>()
+                        checkedInList?.forEach {
+                            Log.d(TAG, "snapshot found: checkedIn3 ${it.id}")
+                            it.id?.let { it1 -> newList.add(it1) }
+
+                        }
+
+                        onSuccess(newList)
+
+                    } else {
+                        Log.d(TAG, "Current data: null")
+                    }
 
 
 
+                }
 
-
-
-
-
-
+            return registration
+        }
 
 
 
@@ -447,3 +502,4 @@ class Repository {
 
 
 }
+

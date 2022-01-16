@@ -156,6 +156,9 @@ class SharedViewModelCreateProfile : ViewModel() {
         val gender = this._gender.value.toString()
         val bio = this._profileText.value.toString()
         val bitMap = this._image.value
+        val day = this._dayOfBirth.value
+        val month = this._monthOfBirth.value
+        val year = this._yearOfBirth.value
 
 
         if (bitMap == null) {
@@ -179,9 +182,13 @@ class SharedViewModelCreateProfile : ViewModel() {
             return null
         }
 
-
         if (gender.isNullOrBlank()) {
             onFailure("You forgot to enter gender.")
+            return null
+        }
+
+        if(day == null || month == null || year == null){
+            onFailure("Wrong date.")
             return null
         }
 
@@ -191,7 +198,10 @@ class SharedViewModelCreateProfile : ViewModel() {
             emailAddress = email,
             bio = bio,
             gender = gender,
-            bitmapImg = bitMap
+            bitmapImg = bitMap,
+            day = day,
+            month = month,
+            year = year
         )
     }
 }
