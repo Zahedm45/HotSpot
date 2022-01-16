@@ -29,10 +29,7 @@ class AfterCheckInVM {
                 curr.id?.let {
 
                     if (!oldCheckedIn.containsKey(it)) {
-                        Repository.getCheckedInUserFromDB(
-                            it,
-                            curr
-                        ) { user, crr -> onnSuccessGetUser(user, crr) }
+                        Repository.getCheckedInUserFromDB(it, curr) { user, crr -> onnSuccessGetUser(user, crr) }
 
                     } else {
                         UsersAndIds.updateUser(curr)

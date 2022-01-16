@@ -17,6 +17,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
+import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
 import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
@@ -61,8 +62,6 @@ class AfterCheckIn : Fragment() {
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
 
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
-
-           // Log.i(TAG, "AfterCheckIn $it")
 
             if (it != null) {
                 groupieUsers = ArrayList()
