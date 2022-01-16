@@ -10,6 +10,7 @@ import android.util.Log
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
+import com.example.hotspot.model.shadowClassNullable.NullableHotSpot
 import com.example.hotspot.viewModel.PersonalProfileVM
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Tasks.await
@@ -417,6 +418,8 @@ class Repository {
 
 
 
+
+
         fun getCheckedInUserFromDB(usersId: String, onSuccess: ((user: User) -> Unit)) {
             val db = Firebase.firestore
             db.collection("users").document(usersId)
@@ -432,6 +435,9 @@ class Repository {
                     }
                 }
         }
+
+
+
 
 
 
