@@ -18,6 +18,39 @@ class UserItem(val user: User, val hotSpot: HotSpot): Item() {
 
         val item = viewHolder.itemView
 
+
+/*        hotSpot.checkedIn?.forEach {
+            if (it.id == user.uid) {
+                Log.i(ContentValues.TAG, "recycler view ${it.id} and ${user.uid}")
+
+                Log.i(ContentValues.TAG, "recycler view2 ${it.isInterested}")
+                if (it.isInterested == true) {
+
+                    Log.i(ContentValues.TAG, "recycler view2")
+
+                    item.interested_img_green.visibility = View.VISIBLE
+                    item.interested_img_red.visibility = View.GONE
+                    // notifyChanged()
+
+
+                } else if (it.isInterested != true) {
+                    Log.i(ContentValues.TAG, "recycler view3")
+                    item.interested_img_red.visibility = View.VISIBLE
+
+                    item.interested_img_green.visibility = View.GONE
+
+                    //notifyChanged()
+                } else {
+                    item.interested_img_red.visibility = View.GONE
+                    item.interested_img_green.visibility = View.GONE
+
+
+                }
+            }
+        }*/
+
+
+
         item.after_checked_in_person_item_user_name.text = user.name
         item.after_checked_in_person_item_user_pic.setImageBitmap(user.bitmapImg)
         item.after_checked_in_person_item_user_gender.text = "Gender: ${user.gender}"
@@ -28,30 +61,7 @@ class UserItem(val user: User, val hotSpot: HotSpot): Item() {
         }
 
 
-        hotSpot.checkedIn?.forEach {
-            if (it.id == user.uid) {
-                Log.i(ContentValues.TAG, "recycler view ${it.id} and ${user.uid}")
 
-                Log.i(ContentValues.TAG, "recycler view2 ${it.isInterested}")
-                if (it.isInterested == true) {
-
-                    Log.i(ContentValues.TAG, "recycler view2")
-
-                    item.interested_img_green.visibility = View.GONE
-                    item.interested_img_red.visibility = View.VISIBLE
-                   // notifyChanged()
-
-
-
-                } else {
-                    Log.i(ContentValues.TAG, "recycler view3")
-
-                    item.interested_img_green.visibility = View.VISIBLE
-                    item.interested_img_red.visibility = View.GONE
-                    //notifyChanged()
-                }
-            }
-        }
 
     }
 

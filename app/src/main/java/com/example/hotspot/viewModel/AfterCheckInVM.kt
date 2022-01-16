@@ -60,7 +60,6 @@ class AfterCheckInVM {
         }
 
 
-
         private fun onnSuccessSnapshotUser(user: User) {
             UsersAndIds.addUser(user)
         }
