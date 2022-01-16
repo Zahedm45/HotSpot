@@ -79,7 +79,7 @@ class AfterCheckIn : Fragment() {
             if (it != null) {
                 groupieUsers = ArrayList()
                 for (i in it) {
-                    groupieUsers.add(UserItem(i))
+                    groupieUsers.add(UserItem(i, hoSpot))
 
                 }
 
@@ -122,11 +122,11 @@ class AfterCheckIn : Fragment() {
 
 
     fun onSuccess(user: User) {
-        val item = UserItem(user)
+/*        val item = UserItem(user)
 
         if (!adapterHelper.contains(user)) {
             adapter.add(item)
-        }
+        }*/
 
     }
 

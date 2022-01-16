@@ -99,13 +99,53 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/after_checked_is_interested_img"
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/after_check_in_constraint_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/green_light_for_is_interested" />
+            >
+
+
+            <ImageView
+                android:id="@+id/interested_img_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/red_ligth_for_is_interested"
+
+                app:layout_constraintTop_toTopOf="@+id/after_check_in_constraint_light"
+                app:layout_constraintBottom_toBottomOf="@+id/after_check_in_constraint_light"
+                app:layout_constraintStart_toStartOf="@+id/after_check_in_constraint_light"
+                app:layout_constraintEnd_toEndOf="@+id/after_check_in_constraint_light"
+
+                />
+
+
+            <ImageView
+                android:id="@+id/after_checked_is_interested_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/green_light_for_is_interested"
+
+                app:layout_constraintTop_toTopOf="@+id/after_check_in_constraint_light"
+                app:layout_constraintBottom_toBottomOf="@+id/after_check_in_constraint_light"
+                app:layout_constraintStart_toStartOf="@+id/after_check_in_constraint_light"
+                app:layout_constraintEnd_toEndOf="@+id/after_check_in_constraint_light"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
