@@ -26,8 +26,8 @@ class AfterCheckIn : Fragment() {
     private lateinit var binding: FragmentAfterCheckInBinding
     private val args: AfterCheckInArgs by navArgs()
 
-    val adapter = GroupAdapter<GroupieViewHolder>()
-    val adapterHelper = ArrayList<User>()
+    private val adapter = GroupAdapter<GroupieViewHolder>()
+    lateinit var groupieUsers: ArrayList<UserItem>
 
 
 
@@ -45,35 +45,15 @@ class AfterCheckIn : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfterCheckInBinding.bind(view)
 
-
         setHotSpotInfo()
         heartBtn()
-
-
-
-/*
-
-        UsersAndIds.getIsInterestedTrueList().observe(viewLifecycleOwner, Observer{ interestedList ->
-            Log.i(ContentValues.TAG, "observer from another side... UsersItem ")
-        })
-*/
-
-
-/*
-        DataHolder.currentUser?.let {
-            adapter.add(UserItem(it))
-            adapterHelper.add(it)
-        }
-*/
-       // binding.afterCheckedInRecyclerView.suppressLayout(true)
-
         setObserverForCheckedInList()
         isInterestedBtn()
 
     }
 
 
-    lateinit var groupieUsers: ArrayList<UserItem>
+
 
 
     private fun setObserverForCheckedInList() {
