@@ -77,7 +77,7 @@ class AfterCheckIn : Fragment() {
 
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
 
-            Log.i(TAG, "AfterCheckIn $it")
+           // Log.i(TAG, "AfterCheckIn $it")
 
             if (it != null) {
                 groupieUsers = ArrayList()
@@ -151,24 +151,6 @@ class AfterCheckIn : Fragment() {
 
 }
 
-
-
-
-/*
-        adapter.add(UserItem("User Name1"))
-        adapter.add(UserItem("User Name2"))
-        adapter.add(UserItem("User Name3"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))*/
 
 
 

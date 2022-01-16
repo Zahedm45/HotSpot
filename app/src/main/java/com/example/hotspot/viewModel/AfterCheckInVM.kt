@@ -36,7 +36,7 @@ class AfterCheckInVM {
 
             val oldCheckedIn = UsersAndIds.checkedInMap
 
-            Log.i(TAG, "AfterCheckedInMv")
+          //  Log.i(TAG, "AfterCheckedInMv")
             for (curr in newCheckedIn) {
 
                 curr.id?.let {
@@ -68,8 +68,11 @@ class AfterCheckInVM {
                 }
             }
 
+            if (!toRemove.isNullOrEmpty()){
+                UsersAndIds.removeUser(toRemove)
+            }
 
-            UsersAndIds.removeUser(toRemove)
+
 
         }
 

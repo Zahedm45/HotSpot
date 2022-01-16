@@ -71,7 +71,6 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding.beforeCIDescriptionTv.text = args.hotSpot.description
 
-
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         // binding.beforeCheckInReviews.paintFlags =  Paint.UNDERLINE_TEXT_FLAG or binding.beforeCheckInReviews.paintFlags
         //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
@@ -194,7 +193,6 @@ class BeforeCheckIn : Fragment() {
 
                     val drawable2 = resources.getDrawable(R.drawable.custom_button)
                     binding.beforeCheckInCheckInBtn.background = drawable2
-
 
                     val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
                     view.findNavController().navigate(action)

@@ -81,12 +81,17 @@ class UsersAndIds() {
 
         fun removeUser(userIds: ArrayList<String>) {
 
-            userIds.forEach {
-                userList.removeIf {user -> user.uid == it}
-                checkedInMap.remove(it)
-            }
+           // val anyChange = false
 
-            users.value = userList
+            userIds.forEach {
+                userList.removeIf {user -> user.uid == it}.apply {
+                    checkedInMap.remove(it)
+                    users.value = userList
+                    Log.i(TAG, "Removed... UsersAndIds")
+                }
+
+            }
+            Log.i(TAG, "Removed... dd")
 
         }
 
