@@ -76,6 +76,9 @@ class AfterCheckIn : Fragment() {
 
 
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
+
+            Log.i(TAG, "AfterCheckIn $it")
+
             if (it != null) {
                 groupieUsers = ArrayList()
                 for (i in it) {

@@ -1,10 +1,12 @@
 package com.example.hotspot.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
+import com.example.hotspot.other.network.TAG
 import com.example.hotspot.repository.Repository
 import com.google.firebase.firestore.ListenerRegistration
 
@@ -32,25 +34,24 @@ class AfterCheckInVM {
 
         private fun onSuccessSnapShotIds(newCheckedIn: ArrayList<CheckedInDB>) {
 
-
             val oldCheckedIn = UsersAndIds.checkedInMap
 
-           for (curr in newCheckedIn) {
+            Log.i(TAG, "AfterCheckedInMv")
+            for (curr in newCheckedIn) {
 
-               curr.id?.let {
+                curr.id?.let {
 
-                   if (!oldCheckedIn.containsKey(it)){
-                       Repository.getCheckedInUserFromDB(it, curr) { user, crr -> onnSuccessGetUser(user, crr) }
+                    if (!oldCheckedIn.containsKey(it)) {
+                        Repository.getCheckedInUserFromDB(
+                            it,
+                            curr
+                        ) { user, crr -> onnSuccessGetUser(user, crr) }
 
-                   } else {
-                       UsersAndIds.updateUser(curr)
-                   }
-               }
-           }
-
-
-
-
+                    } else {
+                        UsersAndIds.updateUser(curr)
+                    }
+                }
+            }
 
 
             val newIdList = ArrayList<String>()
@@ -65,13 +66,13 @@ class AfterCheckInVM {
                 if (!newIdList.contains(curr.key)) {
                     UsersAndIds.removeUser(curr.key)
 
-                   // toRemove.add(curr.key)
+                    // toRemove.add(curr.key)
                 }
             }
 
-
-
         }
+
+
 
 
         private fun onnSuccessGetUser(user: User, checkedInDB: CheckedInDB) {
@@ -108,7 +109,7 @@ class AfterCheckInVM {
         fun setIsInterested(isInterested: Boolean, hotSpot: HotSpot) {
             if (this.isInterested.value != isInterested) {
                 this.isInterested.postValue(isInterested)
-                updateIsInterestedDB(isInterested, hotSpot)
+              //  updateIsInterestedDB(isInterested, hotSpot)
 
             }
         }
