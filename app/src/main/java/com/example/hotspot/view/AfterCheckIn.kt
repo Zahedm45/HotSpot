@@ -74,7 +74,6 @@ class AfterCheckIn : Fragment() {
         val hoSpot = args.hotSpot
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
 
-
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
 
            // Log.i(TAG, "AfterCheckIn $it")

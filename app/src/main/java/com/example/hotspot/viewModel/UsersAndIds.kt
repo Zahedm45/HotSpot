@@ -100,10 +100,12 @@ class UsersAndIds() {
 
            // val anyChange = false
 
-            userIds.forEach {
-                userList.removeIf {user -> user.uid == it}.apply {
-                    checkedInMap.remove(it)
+            userIds.forEach { id ->
+                userList.removeIf {user -> user.uid == id}.apply {
+                    checkedInMap.remove(id)
                     users.value = userList
+                    isInterestedTrueListHelper.remove(id)
+
                     Log.i(TAG, "Removed... UsersAndIds")
                 }
 
@@ -114,6 +116,7 @@ class UsersAndIds() {
         fun getUser() = users as LiveData<List<User>>
 
 
+        fun getIsInterestedTrueList() = isInterestedTrueList as LiveData<List<String>>
 
 
     }
