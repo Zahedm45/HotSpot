@@ -36,7 +36,7 @@ class BeforeCheckInVM {
                     }
 
                     val checkedInDB = CheckedInDB(userId, true)
-                    setCheckedInLocal(user, checkedInDB)
+                   // setCheckedInLocal(user, checkedInDB)
                     db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(userId)
                         .set(checkedInDB)
                         .addOnSuccessListener {
