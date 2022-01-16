@@ -10,16 +10,21 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class BeforeCheckInVM {
 
 
     companion object{
         var getAndListenCheckedInIdsRegis: ListenerRegistration? = null
-
-
-        // TODO it someone delete it from the database
         private var addedCheckedInAndHotspotId = UsersAndIds.checkedInMap
+
+        private lateinit var checkedInDB : CheckedInDB
+        private lateinit var user: User
 
         fun setCheckedInDB(hotSpot: HotSpot, user: User, onSuccess: (() -> Unit)? ) {
 
@@ -28,15 +33,15 @@ class BeforeCheckInVM {
 
             hotSpot.id?.let { hotSpotId ->
                 user.uid?.let { userId ->
-
+                    checkedInDB = CheckedInDB(userId, true)
+                    this.user = user
+                    Log.i(TAG, "User was $addedCheckedInAndHotspotId")
                     if (addedCheckedInAndHotspotId.containsKey(userId)) {
 
-                        Log.i(TAG, "User was previously added to the database (BeforeCheckInVM)")
+                        Log.i(TAG, "User was previously added to the database (BeforeCheckInVM) 1")
                         return
                     }
-
-                    val checkedInDB = CheckedInDB(userId, true)
-                   // setCheckedInLocal(user, checkedInDB)
+                    //setCheckedInLocal(user, checkedInDB)
                     db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(userId)
                         .set(checkedInDB)
                         .addOnSuccessListener {
@@ -45,6 +50,7 @@ class BeforeCheckInVM {
                             }
                         }
 
+                    setCheckedInLocal()
                 } ?: run {
                     Log.i(TAG, "User id is null (BeforeCheckedInVM)")
                 }
@@ -65,8 +71,14 @@ class BeforeCheckInVM {
 
 
 
-        private fun setCheckedInLocal (user: User, checkedInDB: CheckedInDB) {
-            UsersAndIds.addUser(user, checkedInDB)
+        private fun setCheckedInLocal () {
+
+            CoroutineScope(Default).launch {
+                delay(300)
+                CoroutineScope(Main).launch {
+                    UsersAndIds.addUser(user, checkedInDB)
+                }
+            }
         }
     }
 

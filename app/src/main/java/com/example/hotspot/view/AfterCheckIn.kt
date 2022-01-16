@@ -16,6 +16,7 @@ import com.xwray.groupie.GroupieViewHolder
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.AfterCheckInVM
+import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.UsersAndIds
 import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
@@ -44,6 +45,7 @@ class AfterCheckIn : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfterCheckInBinding.bind(view)
 
+
         setHotSpotInfo()
         heartBtn()
 
@@ -69,6 +71,7 @@ class AfterCheckIn : Fragment() {
         isInterestedBtn()
 
     }
+
 
     lateinit var groupieUsers: ArrayList<UserItem>
 
