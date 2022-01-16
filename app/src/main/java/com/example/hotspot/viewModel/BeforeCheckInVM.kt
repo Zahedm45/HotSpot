@@ -36,6 +36,7 @@ class BeforeCheckInVM {
                     }
 
                     val checkedInDB = CheckedInDB(userId, true)
+                    setCheckedInLocal(user, checkedInDB)
                     db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(userId)
                         .set(checkedInDB)
                         .addOnSuccessListener {
@@ -60,6 +61,12 @@ class BeforeCheckInVM {
 
             getAndListenCheckedInIdsRegis = Repository
                 .getAndListenCheckedInIds(hotSpotId) { checkedIn -> onSuccess(checkedIn) }
+        }
+
+
+
+        private fun setCheckedInLocal (user: User, checkedInDB: CheckedInDB) {
+            UsersAndIds.addUser(user, checkedInDB)
         }
     }
 

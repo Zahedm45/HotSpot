@@ -28,6 +28,7 @@ class DataHolder {
         private fun addToCheckedInUsersList(user: User, checkedInDB: CheckedInDB) {
             currentUser = user
         }
+
     }
 
 

@@ -58,19 +58,15 @@ class UserItem(val user: User, val hotSpot: HotSpot, val viewLifecycleOwner: Lif
 
 
         UsersAndIds.getIsInterestedTrueList().observe(viewLifecycleOwner, Observer{ interestedList ->
-            Log.i(ContentValues.TAG, "observer... UsersItem ")
 
             if (interestedList.contains(user.uid)) {
-                Log.i(ContentValues.TAG, "observer... UsersItem true ")
                 item.interested_img_green.visibility = View.VISIBLE
                 item.interested_img_red.visibility = View.GONE
 
             }  else {
                 item.interested_img_red.visibility = View.VISIBLE
                 item.interested_img_green.visibility = View.GONE
-                Log.i(ContentValues.TAG, "observer... UsersItem false")
             }
-
         })
 
 
