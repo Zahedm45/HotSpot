@@ -154,6 +154,8 @@ class ChatFromItem(val text: String, val toId: String): Item() {
             .load(ref)
             .into(targetImage)
 
+
+
     }
 
     override fun getLayout(): Int {

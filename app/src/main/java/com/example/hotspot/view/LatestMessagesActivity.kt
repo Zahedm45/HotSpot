@@ -54,7 +54,6 @@ class LatestMessagesActivity : AppCompatActivity() {
                 users.forEach { user ->
                     adapter.add(LatestMessageRow(user))
                 }
-                if ()
                 adapter.setOnItemClickListener { item, view ->
                     val latestMessageRow = item as LatestMessageRow
                     val intent = Intent(view.context, ChatLogActivity::class.java)
