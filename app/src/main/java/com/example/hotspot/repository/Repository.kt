@@ -418,11 +418,7 @@ class Repository {
                     }
 
                     if (value != null) {
-
                         val checkedIns = ArrayList<CheckedInDB>()
-
-                        Log.w(TAG, "Listen222 . Repository " )
-
                         value.forEach {
                             checkedIns.add(it.toObject<CheckedInDB>())
                         }
@@ -473,7 +469,6 @@ class Repository {
             val db = Firebase.firestore
             db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(useId)
                 .update("interested", isInterested)
-
                 .addOnSuccessListener {
                     Log.d(TAG, "Success...Repository")
 
