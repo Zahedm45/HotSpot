@@ -126,7 +126,7 @@
 
 
             <ImageView
-                android:id="@+id/after_checked_is_interested_img"
+                android:id="@+id/interested_img_green"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

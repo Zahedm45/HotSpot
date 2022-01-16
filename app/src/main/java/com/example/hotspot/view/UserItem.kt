@@ -2,6 +2,7 @@ package com.example.hotspot.view
 
 import android.content.ContentValues
 import android.util.Log
+import android.view.View
 import com.example.hotspot.R
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
@@ -29,18 +30,28 @@ class UserItem(val user: User, val hotSpot: HotSpot): Item() {
 
         hotSpot.checkedIn?.forEach {
             if (it.id == user.uid) {
+                Log.i(ContentValues.TAG, "recycler view ${it.id} and ${user.uid}")
 
+                Log.i(ContentValues.TAG, "recycler view2 ${it.isInterested}")
                 if (it.isInterested == true) {
 
-                   // item.after_checked_is_interested_img.setImageDrawable(R.drawable.green_light_for_is_interested)
+                    Log.i(ContentValues.TAG, "recycler view2")
+
+                    item.interested_img_green.visibility = View.GONE
+                    item.interested_img_red.visibility = View.VISIBLE
+                   // notifyChanged()
+
+
 
                 } else {
+                    Log.i(ContentValues.TAG, "recycler view3")
 
+                    item.interested_img_green.visibility = View.VISIBLE
+                    item.interested_img_red.visibility = View.GONE
+                    //notifyChanged()
                 }
             }
         }
-
-
 
     }
 
