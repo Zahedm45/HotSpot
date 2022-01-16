@@ -453,11 +453,20 @@ class Repository {
 
                         val checkedIn = ArrayList<CheckedInDB>()
 
+                        Log.w(TAG, "Listen222 failed. $" )
+
                         value.forEach {
                             checkedIn.add(it.toObject())
                         }
 
 
+                        checkedIn.forEach {
+                            Log.w(TAG, "Listen22 failed. $it " )
+                        }
+
+
+
+                        // onSuccess(checkedIn)
 
 
 
