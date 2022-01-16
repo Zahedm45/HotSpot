@@ -18,7 +18,7 @@ class UsersAndIds() {
       //  private var checked = ArrayList<CheckedInDB>()
 
 
-        private var map = mutableMapOf<String, Boolean>()
+        var checkedInMap = mutableMapOf<String, Boolean>()
         private var isInterestedChanged = MutableLiveData<Boolean>()
 
 
@@ -36,14 +36,14 @@ class UsersAndIds() {
 
             user.uid?.let {
 
-                if (map.containsKey(it)) {
+                if (checkedInMap.containsKey(it)) {
                     updateUser(checkedInDB)
                     return
                 }
 
 
                 checkedInDB.isInterested?.let {
-                    map[user.uid.toString()] = it
+                    checkedInMap[user.uid.toString()] = it
                     userList.add(user)
                     users.value = userList
                 }
@@ -53,15 +53,15 @@ class UsersAndIds() {
 
 
 
-        private fun updateUser(checkedIn: CheckedInDB) {
+        fun updateUser(checkedIn: CheckedInDB) {
 
             if (checkedIn.id == null || checkedIn.isInterested == null) {
                 return
             }
 
 
-            if (map.get(checkedIn.id) != checkedIn.isInterested ) {
-                map.replace(checkedIn.id!!, checkedIn.isInterested!!)
+            if (checkedInMap.get(checkedIn.id) != checkedIn.isInterested ) {
+                checkedInMap.replace(checkedIn.id!!, checkedIn.isInterested!!)
                 setIsInterestedChanged()
 
             }
@@ -82,7 +82,7 @@ class UsersAndIds() {
 
         fun removeUser(userId: String) {
 
-            if (!map.containsKey(userId)) {
+            if (!checkedInMap.containsKey(userId)) {
                 Log.i(TAG, "User does not contain in the list")
                 return
             }
@@ -96,12 +96,13 @@ class UsersAndIds() {
                 }
             }
 
-            map.remove(userId)
+            checkedInMap.remove(userId)
             userList.remove(userToRemove)
             users.value = userList
 
         }
 
+       // fun getCheckedInMap() = checkedInMap as LiveData<*>
 
 
 

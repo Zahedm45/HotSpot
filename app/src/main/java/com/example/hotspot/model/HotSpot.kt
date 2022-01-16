@@ -107,7 +107,7 @@ class SubClassForHotspot() {
             val che = CheckedInDB(
 
                 id = "gSnHzxGiXFTftWTpuF2LYgDKm123",
-                geoPoint = GeoPoint(55.44, 12.33),
+             //   geoPoint = GeoPoint(55.44, 12.33),
                 isInterested = true
             )
 

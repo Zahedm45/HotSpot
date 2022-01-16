@@ -1,16 +1,12 @@
 package com.example.hotspot.viewModel
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.ktx.Firebase
 
 
 /*typealias users = MutableList<User>
@@ -35,6 +31,51 @@ class AfterCheckInVM {
 
 
         private fun onSuccessSnapShotIds(checkedInIds: ArrayList<CheckedInDB>) {
+
+
+            val oldCheckedIn = UsersAndIds.checkedInMap
+            val newCheckedIn = checkedInIds
+
+           for (curr in newCheckedIn) {
+
+               curr.id?.let {
+
+                   if (!oldCheckedIn.containsKey(it)){
+                       Repository.getCheckedInUserFromDB(it) { user -> onnSuccessGetUser(user, curr) }
+
+                   } else {
+                       UsersAndIds.updateUser(curr)
+                   }
+               }
+           }
+
+
+
+
+
+
+            val newIdList = ArrayList<String>()
+            newCheckedIn.forEach {
+                it.id?.let { id -> newIdList.add(id) }
+            }
+
+
+            val toRemove = ArrayList<String>()
+            for (curr in oldCheckedIn) {
+
+                if (!newIdList.contains(curr.key)) {
+
+                    UsersAndIds.removeUser(curr.key)
+
+                   // toRemove.add(curr.key)
+                }
+            }
+
+
+
+
+
+
 
 
 
@@ -66,8 +107,8 @@ class AfterCheckInVM {
         }
 
 
-        private fun onnSuccessSnapshotUser(user: User) {
-            UsersAndIds.addUser(user)
+        private fun onnSuccessGetUser(user: User, checkedInDB: CheckedInDB) {
+            UsersAndIds.addUser(user, checkedInDB)
         }
 
 
