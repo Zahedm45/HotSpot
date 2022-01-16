@@ -17,7 +17,6 @@ class BeforeCheckInVM {
     companion object{
         var getAndListenCheckedInIdsRegis: ListenerRegistration? = null
 
-
         fun setCheckedInDB(hotSpot: HotSpot, user: User, onSuccess: (() -> Unit)? ) {
 
             // TODO
@@ -32,12 +31,28 @@ class BeforeCheckInVM {
             */
 
             val db = Firebase.firestore
-            db.collection("hotSpots2").document(hotSpot.id!!).update("checkedIn", hotSpot.checkedIn)
-                .addOnSuccessListener {
-                    if (onSuccess != null) {
-                        onSuccess()
-                    }
+
+            hotSpot.id?.let { hotSpotId ->
+                user.uid?.let { userId ->
+                    val checkedInDB = CheckedInDB(id = userId)
+                    db.collection("hotSpots3").document(hotSpotId).collection("checkedIn")
+
+                        .add(checkedInDB)
+                        .addOnSuccessListener {
+                            if (onSuccess != null) {
+                                onSuccess()
+                            }
+                        }
+
+
+                } ?: run {
+                    Log.i(TAG, "User id is null (BeforeCheckedInVM)")
                 }
+
+            } ?: run{
+                Log.i(TAG, "HotSpot id is null (BeforeCheckedInVM)")
+            }
+
         }
 
 
