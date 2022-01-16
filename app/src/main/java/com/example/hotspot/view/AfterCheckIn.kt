@@ -81,8 +81,8 @@ class AfterCheckIn : Fragment() {
 
             if (it != null) {
                 groupieUsers = ArrayList()
-                for (i in it) {
-                    groupieUsers.add(UserItem(i, hoSpot))
+                for (user in it) {
+                    groupieUsers.add(UserItem(user, hoSpot))
 
                 }
 

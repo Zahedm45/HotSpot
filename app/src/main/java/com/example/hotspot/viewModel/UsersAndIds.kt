@@ -18,14 +18,19 @@ class UsersAndIds() {
       //  private var checked = ArrayList<CheckedInDB>()
 
 
+        private var isInterestedTrueList = MutableLiveData<List<String>>()
+        private var isInterestedTrueListHelper = mutableListOf<String>()
+
+
         var checkedInMap = mutableMapOf<String, Boolean>()
-        private var isInterestedChanged = MutableLiveData<Boolean>()
+       // private var isInterestedChanged = MutableLiveData<Boolean>()
 
 
 
         init {
             users.value = userList
-            isInterestedChanged.value = false
+         //   isInterestedChanged.value = false
+            isInterestedTrueList.value = isInterestedTrueListHelper
         }
 
 
@@ -34,18 +39,24 @@ class UsersAndIds() {
         fun addUser(user: User, checkedInDB: CheckedInDB) {
 
 
-            user.uid?.let {
+            user.uid?.let { id ->
 
-                if (checkedInMap.containsKey(it)) {
+                if (checkedInMap.containsKey(id)) {
                     updateUser(checkedInDB)
                     return
                 }
 
 
-                checkedInDB.isInterested?.let {
-                    checkedInMap[user.uid.toString()] = it
+                checkedInDB.isInterested?.let { isInterested ->
+                    checkedInMap[user.uid.toString()] = isInterested
                     userList.add(user)
                     users.value = userList
+
+                    if (isInterested) {
+                        isInterestedTrueListHelper.add(id)
+                        isInterestedTrueList.value = isInterestedTrueListHelper
+                    }
+
                 }
             }
         }
@@ -61,13 +72,19 @@ class UsersAndIds() {
 
             if (checkedInMap.get(checkedIn.id) != checkedIn.isInterested ) {
                 checkedInMap.replace(checkedIn.id!!, checkedIn.isInterested!!)
-                setIsInterestedChanged()
+
+                if (checkedIn.isInterested!!) {
+                    isInterestedTrueListHelper.add(checkedIn.id!!)
+                    isInterestedTrueList.value = isInterestedTrueListHelper
+                }
+
+              //  setIsInterestedChanged()
 
             }
 
         }
 
-        private fun setIsInterestedChanged() {
+/*        private fun setIsInterestedChanged() {
             if (isInterestedChanged.value == true) {
                 isInterestedChanged.value = false
 
@@ -75,7 +92,7 @@ class UsersAndIds() {
                 val i = true
                 isInterestedChanged.value = i
             }
-        }
+        }*/
 
 
 
@@ -91,7 +108,6 @@ class UsersAndIds() {
                 }
 
             }
-            Log.i(TAG, "Removed... dd")
 
         }
 
