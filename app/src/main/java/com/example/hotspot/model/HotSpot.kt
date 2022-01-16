@@ -127,11 +127,20 @@ class SubClassForHotspot() {
             }
 
 
-            hotSpot.id?.let {
-                db.collection("hotSpots2").document(it).set(hotSpot)
+
+
+            hotSpot.id?.let { id ->
+                db.collection("hotSpots3").document(id).set(hotSpot)
                     .addOnSuccessListener {
                         Log.i(TAG, "Successfully random Hotspots are created")
                     }
+
+                che.id?.let {
+                    db.collection("hotSpots3").document(id).collection("checkedIn").document(
+                        it
+                    ).set(che)
+                }
+
             }
 
 

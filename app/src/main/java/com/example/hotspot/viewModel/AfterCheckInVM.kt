@@ -25,16 +25,21 @@ class AfterCheckInVM {
 
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
+
                 checkedInListenerRig = Repository.getAndListenCheckedInIds(hotSpot.id!!
-                ) { checkedIn -> onSuccessSnapShotIds(checkedIn) }
+                ) { checkedIn, hotSpotDB -> onSuccessSnapShotIds(checkedIn, hotSpotDB) }
             }
 
         }
 
 
-        private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
+        private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>, hotSpot: HotSpot) {
 
-            val ids = UsersAndIds.getIds()
+
+
+
+
+/*            val ids = UsersAndIds.getIds()
             if (ids == checkedInIds) {
                 Log.i(TAG, "Same ids ${ids} and checkedInd $checkedInIds")
                 return
@@ -55,7 +60,7 @@ class AfterCheckInVM {
                 }
             }
 
-            UsersAndIds.removeUser(toRemove)
+            UsersAndIds.removeUser(toRemove)*/
 
         }
 

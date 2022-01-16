@@ -382,7 +382,7 @@ class Repository {
 
 
             val db = Firebase.firestore
-            val colRef = db.collection("hotSpots2")
+            val colRef = db.collection("hotSpots3")
 
             val registration = colRef.addSnapshotListener { snapshot, e ->
 
@@ -437,11 +437,11 @@ class Repository {
 
         fun getAndListenCheckedInIds(
             hotSpotId: String,
-            onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ): ListenerRegistration {
+            onSuccess: ((checkedIn: ArrayList<String>, hotSpots: HotSpot ) -> Unit) ): ListenerRegistration {
 
             val db = Firebase.firestore
 
-            val registration = db.collection("hotSpots2").document(hotSpotId)
+            val registration = db.collection("hotSpots3").document(hotSpotId)
                 .addSnapshotListener { value, error ->
 
                     if (error != null) {
@@ -463,7 +463,9 @@ class Repository {
 
                         }
 
-                        onSuccess(newList)
+                        if (hotSpot != null) {
+                            onSuccess(newList, hotSpot)
+                        }
 
                     } else {
                         Log.d(TAG, "Current data: null")
@@ -481,7 +483,7 @@ class Repository {
 
         fun updateIsInterestedDB(hotSpotId: String, checkedInDB: ArrayList<CheckedInDB>) {
             val db = Firebase.firestore
-            db.collection("hotSpots2").document(hotSpotId).update("checkedIn", checkedInDB)
+            db.collection("hotSpots3").document(hotSpotId).update("checkedIn", checkedInDB)
                 .addOnSuccessListener {
                     Log.d(TAG, "Success...")
 
