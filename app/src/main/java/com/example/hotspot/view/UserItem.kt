@@ -3,13 +3,16 @@ package com.example.hotspot.view
 import android.content.ContentValues
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.example.hotspot.R
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
+import com.example.hotspot.viewModel.UsersAndIds
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
-class UserItem(val user: User, val hotSpot: HotSpot): Item() {
+class UserItem(val user: User, val hotSpot: HotSpot, val viewLifecycleOwner: LifecycleOwner): Item() {
 
     override fun bind(
         viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
@@ -48,6 +51,27 @@ class UserItem(val user: User, val hotSpot: HotSpot): Item() {
                 }
             }
         }*/
+
+
+
+
+
+
+        UsersAndIds.getIsInterestedTrueList().observe(viewLifecycleOwner, Observer{ interestedList ->
+            Log.i(ContentValues.TAG, "observer... UsersItem ")
+
+            if (interestedList.contains(user.uid)) {
+                Log.i(ContentValues.TAG, "observer... UsersItem true ")
+                item.interested_img_green.visibility = View.VISIBLE
+                item.interested_img_red.visibility = View.GONE
+
+            }  else {
+                item.interested_img_red.visibility = View.VISIBLE
+                item.interested_img_green.visibility = View.GONE
+                Log.i(ContentValues.TAG, "observer... UsersItem false")
+            }
+
+        })
 
 
 

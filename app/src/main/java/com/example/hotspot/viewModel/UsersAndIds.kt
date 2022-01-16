@@ -19,7 +19,7 @@ class UsersAndIds() {
 
 
         private var isInterestedTrueList = MutableLiveData<List<String>>()
-        private var isInterestedTrueListHelper = mutableListOf<String>()
+        private val isInterestedTrueListHelper = mutableListOf<String>()
 
 
         var checkedInMap = mutableMapOf<String, Boolean>()
@@ -75,30 +75,21 @@ class UsersAndIds() {
 
                 if (checkedIn.isInterested!!) {
                     isInterestedTrueListHelper.add(checkedIn.id!!)
-                    isInterestedTrueList.value = isInterestedTrueListHelper
+
+                } else {
+                    isInterestedTrueListHelper.remove(checkedIn.id!!)
                 }
 
-              //  setIsInterestedChanged()
+                isInterestedTrueList.value = isInterestedTrueListHelper
+
+                //  setIsInterestedChanged()
 
             }
 
         }
 
-/*        private fun setIsInterestedChanged() {
-            if (isInterestedChanged.value == true) {
-                isInterestedChanged.value = false
-
-            } else {
-                val i = true
-                isInterestedChanged.value = i
-            }
-        }*/
-
-
 
         fun removeUser(userIds: ArrayList<String>) {
-
-           // val anyChange = false
 
             userIds.forEach { id ->
                 userList.removeIf {user -> user.uid == id}.apply {
@@ -123,6 +114,22 @@ class UsersAndIds() {
 
 
 }
+
+
+
+
+
+
+
+/*        private fun setIsInterestedChanged() {
+            if (isInterestedChanged.value == true) {
+                isInterestedChanged.value = false
+
+            } else {
+                val i = true
+                isInterestedChanged.value = i
+            }
+        }*/
 
 
 

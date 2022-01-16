@@ -15,11 +15,9 @@ import com.xwray.groupie.GroupieViewHolder
 
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
-import com.example.hotspot.other.network.TAG
 import com.example.hotspot.viewModel.AfterCheckInVM
-import com.example.hotspot.viewModel.BeforeCheckInVM
-import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
+import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 
 class AfterCheckIn : Fragment() {
@@ -49,6 +47,16 @@ class AfterCheckIn : Fragment() {
         setHotSpotInfo()
         heartBtn()
 
+
+
+/*
+
+        UsersAndIds.getIsInterestedTrueList().observe(viewLifecycleOwner, Observer{ interestedList ->
+            Log.i(ContentValues.TAG, "observer from another side... UsersItem ")
+        })
+*/
+
+
 /*
         DataHolder.currentUser?.let {
             adapter.add(UserItem(it))
@@ -59,11 +67,6 @@ class AfterCheckIn : Fragment() {
 
         setObserverForCheckedInList()
         isInterestedBtn()
-
-
-        AfterCheckInVM.getIsInterested().observe(viewLifecycleOwner, Observer {
-            Log.i(ContentValues.TAG, "this.2. ${it}")
-        })
 
     }
 
@@ -81,7 +84,7 @@ class AfterCheckIn : Fragment() {
             if (it != null) {
                 groupieUsers = ArrayList()
                 for (user in it) {
-                    groupieUsers.add(UserItem(user, hoSpot))
+                    groupieUsers.add(UserItem(user, hoSpot, viewLifecycleOwner))
 
                 }
 
