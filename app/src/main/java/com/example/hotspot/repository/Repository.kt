@@ -414,26 +414,6 @@ class Repository {
 
 
 
-        fun getCheckedInUserFromDB(usersId: String, onSuccess: ((user: User) -> Unit)) {
-            val db = Firebase.firestore
-            db.collection("users").document(usersId)
-                .get()
-                .addOnSuccessListener { doc ->
-                    doc.toObject<User>()?.apply {
-                        val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
-                        val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
-                        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                            this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
-                            onSuccess(this)
-                        }
-                    }
-                }
-        }
-
-
-
-
-
 
         fun getAndListenCheckedInIds(
             hotSpotId: String,
@@ -461,36 +441,46 @@ class Repository {
                             checkedIns.add(it.toObject<CheckedInDB>())
                         }
 
+                        onSuccess(checkedIns)
 
-                         onSuccess(checkedIns)
-
-
-
-
-/*                        val hotSpot = value.toObject<HotSpot>()
-                        val checkedInList = hotSpot?.checkedIn
-
-                        val newList = ArrayList<String>()
-                        checkedInList?.forEach {
-                            Log.d(TAG, "snapshot found: checkedIn3 ${it.isInterested}")
-                            it.id?.let { it1 -> newList.add(it1) }
-
-                        }
-
-                        if (hotSpot != null) {
-                            onSuccess(newList, hotSpot)
-                        }*/
 
                     } else {
                         Log.d(TAG, "Current data: null")
                     }
 
-
-
                 }
 
             return registration
         }
+
+
+
+
+
+
+
+        fun getCheckedInUserFromDB(usersId: String, onSuccess: ((user: User) -> Unit)) {
+            val db = Firebase.firestore
+            db.collection("users").document(usersId)
+                .get()
+                .addOnSuccessListener { doc ->
+                    doc.toObject<User>()?.apply {
+                        val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
+                        val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
+                        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                            this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
+                            onSuccess(this)
+                        }
+                    }
+                }
+        }
+
+
+
+
+
+
+
 
 
 
@@ -510,3 +500,23 @@ class Repository {
 
 }
 
+
+
+
+
+
+
+
+/*                        val hotSpot = value.toObject<HotSpot>()
+                        val checkedInList = hotSpot?.checkedIn
+
+                        val newList = ArrayList<String>()
+                        checkedInList?.forEach {
+                            Log.d(TAG, "snapshot found: checkedIn3 ${it.isInterested}")
+                            it.id?.let { it1 -> newList.add(it1) }
+
+                        }
+
+                        if (hotSpot != null) {
+                            onSuccess(newList, hotSpot)
+                        }*/

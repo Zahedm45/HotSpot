@@ -41,7 +41,7 @@ class AfterCheckInVM {
                curr.id?.let {
 
                    if (!oldCheckedIn.containsKey(it)){
-                       Repository.getCheckedInUserFromDB(it) { user -> onnSuccessGetUser(user, curr) }
+                       Repository.getCheckedInUserFromDB(it) { user -> onnSuccessGetUser(user) }
 
                    } else {
                        UsersAndIds.updateUser(curr)
@@ -64,7 +64,6 @@ class AfterCheckInVM {
             for (curr in oldCheckedIn) {
 
                 if (!newIdList.contains(curr.key)) {
-
                     UsersAndIds.removeUser(curr.key)
 
                    // toRemove.add(curr.key)
@@ -108,6 +107,9 @@ class AfterCheckInVM {
 
 
         private fun onnSuccessGetUser(user: User, checkedInDB: CheckedInDB) {
+            Repository.
+
+
             UsersAndIds.addUser(user, checkedInDB)
         }
 
