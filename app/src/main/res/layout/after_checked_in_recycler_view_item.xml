@@ -116,6 +116,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/red_ligth_for_is_interested"
+                android:visibility="gone"
 
 
                 app:layout_constraintTop_toTopOf="@+id/after_check_in_constraint_light"
@@ -133,6 +134,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/green_light_for_is_interested"
+                android:visibility="gone"
 
                 app:layout_constraintTop_toTopOf="@+id/after_check_in_constraint_light"
                 app:layout_constraintBottom_toBottomOf="@+id/after_check_in_constraint_light"

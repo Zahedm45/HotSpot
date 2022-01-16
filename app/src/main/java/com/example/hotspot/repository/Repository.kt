@@ -451,6 +451,7 @@ class Repository {
 
 
                     if (value != null) {
+                        Log.d(TAG, "Currennnn")
 
                         val hotSpot = value.toObject<HotSpot>()
                         val checkedInList = hotSpot?.checkedIn
