@@ -1,9 +1,8 @@
 package com.example.hotspot.viewModel
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.User
 
 
@@ -14,43 +13,64 @@ class UsersAndIds() {
 
         private val userList = mutableListOf<User>()
         private var users  = MutableLiveData<List<User>>()
-        private var ids = ArrayList<String>()
+        private var checked = ArrayList<CheckedInDB>()
 
         init {
             users.value = userList
         }
 
 
-        fun addUser(user: User): Boolean {
-            if (user.uid != null && !ids.contains(user.uid)) {
-                ids.add(user.uid!!)
-                userList.add(user)
-                users.value = userList
-                return true
+        fun addUser(user: User, checkedInDB: CheckedInDB): Boolean {
+            if (checked.contains(checkedInDB)) {
+                return false
             }
 
-            return false
+            checked.add(checkedInDB)
+            userList.add(user)
+            users.value = userList
+            return true
         }
 
 
 
-        fun removeUser(userIds: ArrayList<String>) {
-            val usersToRemove = mutableListOf<User>()
+        fun removeUser(checkedInDB: CheckedInDB) {
+
+            if (!checked.contains(checkedInDB)) {
+                return
+            }
+
+            var userToRemove = User()
+
+
+            for (curr in userList) {
+                if (curr.uid == checkedInDB.id) {
+                    userToRemove = curr
+                }
+
+            }
+
+            checked.remove(checkedInDB)
+            userList.remove(userToRemove)
+            users.value = userList
+
+
+/*            val usersToRemove = mutableListOf<User>()
+
             userIds.forEach {
                 getUser(it)?.let { user ->
                     usersToRemove.add(user)
                 }
             }
-            ids.removeAll(userIds.toSet())
+            checked.removeAll(userIds.toSet())
             userList.removeAll(usersToRemove)
-            users.value = userList
+            users.value = userList*/
         }
 
 
 
 
         fun getIds(): MutableList<String> {
-            return ids
+            return checked
         }
 
         fun getUser() = users as LiveData<List<User>>
@@ -58,7 +78,7 @@ class UsersAndIds() {
 
         fun getUser(userId: String): User? {
 
-            if (ids.contains(userId)) {
+            if (checked.contains(userId)) {
 
                 userList.forEach {
                     if (it.uid == userId) {
