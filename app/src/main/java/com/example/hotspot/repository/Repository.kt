@@ -437,7 +437,7 @@ class Repository {
 
         fun getAndListenCheckedInIds(
             hotSpotId: String,
-            onSuccess: ((checkedIn: ArrayList<String>, hotSpots: HotSpot ) -> Unit) ): ListenerRegistration {
+            onSuccess: ((checkedIn: ArrayList<CheckedInDB>) -> Unit) ): ListenerRegistration {
 
             val db = Firebase.firestore
 
@@ -460,13 +460,8 @@ class Repository {
                         }
 
 
-                        checkedIn.forEach {
-                            Log.w(TAG, "Listen22 failed. $it " )
-                        }
 
-
-
-                        // onSuccess(checkedIn)
+                         onSuccess(checkedIn)
 
 
 

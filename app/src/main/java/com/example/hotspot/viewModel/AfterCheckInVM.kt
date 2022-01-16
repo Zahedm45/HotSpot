@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
@@ -27,13 +28,13 @@ class AfterCheckInVM {
             if (hotSpot.id != null) {
 
                 checkedInListenerRig = Repository.getAndListenCheckedInIds(hotSpot.id!!
-                ) { checkedIn, hotSpotDB -> onSuccessSnapShotIds(checkedIn, hotSpotDB) }
+                ) { checkedIn -> onSuccessSnapShotIds(checkedIn) }
             }
 
         }
 
 
-        private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>, hotSpot: HotSpot) {
+        private fun onSuccessSnapShotIds(checkedInIds: ArrayList<CheckedInDB>) {
 
 
 
