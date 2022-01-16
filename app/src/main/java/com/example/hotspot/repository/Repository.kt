@@ -373,7 +373,7 @@ class Repository {
 
 
 
-        fun getHotSpots(
+        fun getAndListenHotSpotsDB(
             onSuccess: ((hotSpots: ArrayList<HotSpot>) -> Unit)?,
             onFailure: ((msg: String) -> Unit)?
         ) : ListenerRegistration {
@@ -441,7 +441,7 @@ class Repository {
 
             val db = Firebase.firestore
 
-            val registration = db.collection("hotSpots3").document(hotSpotId)
+            val registration = db.collection("hotSpots3").document(hotSpotId).collection("checkedIn")
                 .addSnapshotListener { value, error ->
 
                     if (error != null) {
@@ -449,9 +449,18 @@ class Repository {
                         return@addSnapshotListener
                     }
 
-
                     if (value != null) {
-                        Log.d(TAG, "Currennnn")
+
+                        val checkedIn = ArrayList<CheckedInDB>()
+
+                        value.forEach {
+                            checkedIn.add(it.toObject())
+                        }
+
+
+
+
+
 
 /*                        val hotSpot = value.toObject<HotSpot>()
                         val checkedInList = hotSpot?.checkedIn
