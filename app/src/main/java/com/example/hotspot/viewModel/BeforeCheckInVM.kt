@@ -17,33 +17,33 @@ class BeforeCheckInVM {
     companion object{
         var getAndListenCheckedInIdsRegis: ListenerRegistration? = null
 
+
+        // TODO it someone delete it from the database
+        private var addedCheckedInAndHotspotId = ArrayList<String>()
+
         fun setCheckedInDB(hotSpot: HotSpot, user: User, onSuccess: (() -> Unit)? ) {
 
-            // TODO
-
-/*            val userId = Firebase.auth.uid.toString()
-            hotSpot.checkedIn?.forEach {
-                if (it.id.toString() == userId) {
-                    return
-                }
-            }
-            hotSpot.checkedIn?.add(CheckedInDB(id = userId))
-            */
 
             val db = Firebase.firestore
 
             hotSpot.id?.let { hotSpotId ->
                 user.uid?.let { userId ->
+
+                    if (addedCheckedInAndHotspotId.contains("$userId$hotSpotId")) {
+                        Log.i(TAG, "User was previously added to the database (BeforeCheckInVM)")
+                        return
+                    }
+
                     val checkedInDB = CheckedInDB(id = userId)
                     db.collection("hotSpots3").document(hotSpotId).collection("checkedIn")
 
                         .add(checkedInDB)
                         .addOnSuccessListener {
+                            addedCheckedInAndHotspotId.add("$userId$hotSpotId")
                             if (onSuccess != null) {
                                 onSuccess()
                             }
                         }
-
 
                 } ?: run {
                     Log.i(TAG, "User id is null (BeforeCheckedInVM)")
