@@ -17,13 +17,18 @@ class UsersAndIds() {
         private var users  = MutableLiveData<List<User>>()
       //  private var checked = ArrayList<CheckedInDB>()
 
+
         private var map = mutableMapOf<String, Boolean>()
+        private var isInterestedChanged = MutableLiveData<Boolean>()
 
 
 
         init {
             users.value = userList
+            isInterestedChanged.value = false
         }
+
+
 
 
         fun addUser(user: User, checkedInDB: CheckedInDB) {
@@ -43,24 +48,36 @@ class UsersAndIds() {
                     users.value = userList
                 }
             }
+        }
+
+
+
+
+        private fun updateUser(checkedIn: CheckedInDB) {
+
+            if (checkedIn.id == null || checkedIn.isInterested == null) {
+                return
+            }
+
+
+            if (map.get(checkedIn.id) != checkedIn.isInterested ) {
+                map.replace(checkedIn.id!!, checkedIn.isInterested!!)
+                setIsInterestedChanged()
+
+            }
 
         }
 
-        private fun updateUser(userId: CheckedInDB) {
+        private fun setIsInterestedChanged() {
+            if (isInterestedChanged.value == true) {
+                isInterestedChanged.value = false
 
-            map.forEach {
-                if (it.key == userId.id) {
-                    if (it.value != userId.isInterested) {
-
-                        userId.isInterested?.let { isInterested ->
-                                map.replace(it.key, isInterested)
-                        }
-
-                     //   users.value = userList
-                    }
-                }
+            } else {
+                val i = true
+                isInterestedChanged.value = i
             }
         }
+
 
 
         fun removeUser(userId: String) {
@@ -88,11 +105,56 @@ class UsersAndIds() {
 
 
 
-        fun getCheckedIn(): MutableList<CheckedInDB> {
+/*        fun getCheckedIn(): MutableList<CheckedInDB> {
             return checked
-        }
+        }*/
 
         fun getUser() = users as LiveData<List<User>>
+
+
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/*            map.forEach {
+                if (it.key == checkedIn.id) {
+                    if (it.value != checkedIn.isInterested) {
+
+                        checkedIn.isInterested?.let { isInterested ->
+                                map.replace(it.key, isInterested)
+                        }
+
+                     //   users.value = userList
+                    }
+                }
+            }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -110,15 +172,7 @@ class UsersAndIds() {
         }
 */
 
-    }
 
-
-
-}
-
-
-
-class
 
 
 
