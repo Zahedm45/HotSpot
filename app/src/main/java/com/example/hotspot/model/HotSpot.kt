@@ -25,7 +25,7 @@ data class HotSpot(
     var description: String? = null,
     var geoPoint: GeoPoint? = null,
     var rating: Double? = null,
-    var checkedIn: ArrayList<CheckedInDB>? = null,
+//    var checkedIn: ArrayList<CheckedInDB>? = null,
     var bitmap: Bitmap? = null
 ) : Parcelable {
 
@@ -37,7 +37,7 @@ data class HotSpot(
         parcel.readString(),
         parcel.readValue(GeoPoint::class.java.classLoader) as GeoPoint,
         parcel.readValue(Double::class.java.classLoader) as? Double,
-        parcel.readValue(CheckedInDB::class.java.classLoader) as ArrayList<CheckedInDB>,
+    //    parcel.readValue(CheckedInDB::class.java.classLoader) as ArrayList<CheckedInDB>,
         parcel.readParcelable(Bitmap::class.java.classLoader)
     ) {
     }
@@ -111,8 +111,8 @@ class SubClassForHotspot() {
                 isInterested = true
             )
 
-            val subArr = ArrayList<CheckedInDB>()
-            subArr.add(che)
+/*            val subArr = ArrayList<CheckedInDB>()
+            subArr.add(che)*/
 
             val hotSpot = HotSpot().apply {
                 val ref = FirebaseDatabase.getInstance().reference
@@ -122,7 +122,7 @@ class SubClassForHotspot() {
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
                 rating = randomTwoDig
-                checkedIn = subArr
+              //  checkedIn = subArr
                 // checkedIn = checkedIn2
             }
 

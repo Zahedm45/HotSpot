@@ -19,7 +19,7 @@ class UserItem(val user: User, val hotSpot: HotSpot): Item() {
         val item = viewHolder.itemView
 
 
-        hotSpot.checkedIn?.forEach {
+/*        hotSpot.checkedIn?.forEach {
             if (it.id == user.uid) {
                 Log.i(ContentValues.TAG, "recycler view ${it.id} and ${user.uid}")
 
@@ -47,7 +47,7 @@ class UserItem(val user: User, val hotSpot: HotSpot): Item() {
 
                 }
             }
-        }
+        }*/
 
 
 

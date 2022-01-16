@@ -453,7 +453,7 @@ class Repository {
                     if (value != null) {
                         Log.d(TAG, "Currennnn")
 
-                        val hotSpot = value.toObject<HotSpot>()
+/*                        val hotSpot = value.toObject<HotSpot>()
                         val checkedInList = hotSpot?.checkedIn
 
                         val newList = ArrayList<String>()
@@ -465,7 +465,7 @@ class Repository {
 
                         if (hotSpot != null) {
                             onSuccess(newList, hotSpot)
-                        }
+                        }*/
 
                     } else {
                         Log.d(TAG, "Current data: null")

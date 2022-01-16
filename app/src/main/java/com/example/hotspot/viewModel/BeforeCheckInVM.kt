@@ -19,7 +19,9 @@ class BeforeCheckInVM {
 
 
         fun setCheckedInDB(hotSpot: HotSpot, user: User, onSuccess: (() -> Unit)? ) {
-            val userId = Firebase.auth.uid.toString()
+
+            // TODO
+/*            val userId = Firebase.auth.uid.toString()
             hotSpot.checkedIn?.forEach {
                 if (it.id.toString() == userId) {
                     return
@@ -34,14 +36,14 @@ class BeforeCheckInVM {
                     if (onSuccess != null) {
                         onSuccess()
                     }
-                }
+                }*/
         }
 
 
 
         fun getAndListenCheckedInIdsDB(hotSpotId: String, onSuccess: ((hotSpots: ArrayList<String>) -> Unit)) {
-            getAndListenCheckedInIdsRegis = Repository
-                .getAndListenCheckedInIds(hotSpotId) { hotSpot -> onSuccess(hotSpot) }
+/*            getAndListenCheckedInIdsRegis = Repository
+                .getAndListenCheckedInIds(hotSpotId) { hotSpot -> onSuccess(hotSpot) }*/
         }
     }
 

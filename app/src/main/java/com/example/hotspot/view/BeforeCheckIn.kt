@@ -97,7 +97,7 @@ class BeforeCheckIn : Fragment() {
 
         val toRemove = ArrayList<CheckedInDB>()
 
-        args.hotSpot.checkedIn?.forEach {
+/*        args.hotSpot.checkedIn?.forEach {
             if (!checkedInIds.contains(it.id)) {
                 toRemove.add(it)
             }
@@ -116,7 +116,7 @@ class BeforeCheckIn : Fragment() {
                 binding.beforeCheckInCheckedIn.textSize = textSizeBefore
             }
 
-        }
+        }*/
 
     }
 
