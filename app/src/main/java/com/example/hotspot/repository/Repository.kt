@@ -334,9 +334,7 @@ class Repository {
                 Log.i(TAG, "User is not sign in.")
                 return
             }
-
             val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
-
             val bytArr = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytArr)
             val data = bytArr.toByteArray()
@@ -373,9 +371,6 @@ class Repository {
             onFailure: ((msg: String) -> Unit)?
         ) : ListenerRegistration {
 
-        //    Log.d(TAG, "snapshot found: hotSpots1")
-
-
             val db = Firebase.firestore
             val colRef = db.collection("hotSpots3")
 
@@ -386,14 +381,12 @@ class Repository {
                     return@addSnapshotListener
                 }
 
-
                 if (snapshot != null) {
 
                     val hotSpots: ArrayList<HotSpot> = ArrayList()
                     snapshot.forEach { crrHotspot ->
                         val hotSpot = crrHotspot.toObject<HotSpot>()
                         hotSpots.add(hotSpot)
-
                     }
 
                     if (onSuccess != null) {
@@ -404,7 +397,6 @@ class Repository {
                     Log.d(TAG, "Current data: null")
                 }
             }
-
             return registration
         }
 
