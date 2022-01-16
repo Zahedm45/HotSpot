@@ -5,16 +5,22 @@ import android.graphics.Color.BLACK
 import android.graphics.Color.RED
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.LoginActivity
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.DocumentSnapshot
 import com.hbb20.CountryCodePicker
@@ -40,6 +46,9 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
 
     private lateinit var phoneNumber: String
 
+    private var isSubmitClickable = false
+    private var isContinueClickable = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhoneAuthBinding.inflate(layoutInflater)
@@ -52,6 +61,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         countrySelector()
+        hasCodeBeenEntered()
 
         mCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -69,7 +79,15 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                 Log.w(TAG, "onVerificationFailed", e)
                 binding.progressBar.visibility = View.GONE
                 binding.phoneAuthContinueButton.visibility = View.VISIBLE
-                errorToast("Invalid phone number.")
+
+                if (e is FirebaseAuthInvalidCredentialsException) {
+                    errorToast("Invalid phone number.")
+                    // Invalid request
+                } else if (e is FirebaseTooManyRequestsException) {
+                    errorToast("SMS quota on Firebase exceeded.")
+                    // The SMS quota for the project has been exceeded
+                }
+
             }
 
             override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
@@ -83,20 +101,23 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                 binding.enterNumberLinearLayout.visibility = View.GONE
                 binding.progressBar.visibility = View.GONE
 
-
             }
         }
 
         binding.phoneAuthContinueButton.setOnClickListener{
-            if(binding.phoneNumberEditText.text.isEmpty()){
-                Toast.makeText(this,"Please enter a phone number.",Toast.LENGTH_LONG).show()
-                return@setOnClickListener
+            if(!isContinueClickable){
+                                return@setOnClickListener
             }
+            ButtonAnimations.clickButton(binding.phoneAuthContinueButton)
             phoneNumber = binding.ccp.fullNumberWithPlus
             startPhoneNumberVerification(phoneNumber)
         }
 
         binding.submitButton.setOnClickListener{
+            if(!isSubmitClickable){
+                return@setOnClickListener
+            }
+            ButtonAnimations.clickButton(binding.submitButton)
             verifyPhoneNumberWithCode(verifyID, binding.verifyCodeTextEdit.text.toString().trim())
         }
 
@@ -113,7 +134,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
 
     private fun startPhoneNumberVerification(phoneNumber: String){
         binding.progressBar.visibility = View.VISIBLE
-        binding.phoneAuthContinueButton.visibility = View.GONE
+
 
         val options = PhoneAuthOptions.newBuilder(firebaseAuth)
             .setPhoneNumber(phoneNumber)
@@ -161,18 +182,10 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                     CoroutineScope(IO).launch {
                         isCreated = repository.isUserProfileCreated()
                         if(!isCreated) {
-                            val intentCreateProfile = Intent(this@ActivityPhoneAuthentification, ActivityCreateProfile::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                            startActivity(intentCreateProfile)
-                            finish()
+                            startCreateProfileActivity()
                         }
                         else{
-                            val intent = Intent(this@ActivityPhoneAuthentification, AfterLoginActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                            startActivity(intent)
-                            finish()
+                            startLoggedInActivity()
                         }
                     }
                     //start create profile activity
@@ -196,17 +209,62 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     private fun countrySelector(){
         binding.ccp.registerCarrierNumberEditText(binding.phoneNumberEditText)
 
-        binding.ccp.setPhoneNumberValidityChangeListener(PhoneNumberValidityChangeListener {
-
-        })
-
         binding.ccp.setPhoneNumberValidityChangeListener {
             if(!it){
                 binding.phoneNumberEditText.setTextColor(RED)
+                ButtonAnimations.fadeOut(binding.phoneAuthContinueButton)
+                isContinueClickable = false
             }
-            else{
+            else if(it){
+                ButtonAnimations.fadeIn(binding.phoneAuthContinueButton)
                 binding.phoneNumberEditText.setTextColor(BLACK)
+                isContinueClickable = true
             }
         }
+    }
+
+    private fun hasCodeBeenEntered(){
+
+        binding.verifyCodeTextEdit.addTextChangedListener(textWatcher)
+    }
+
+    private val textWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+            if (s != null) {
+
+                Log.d("Editable",s.length.toString())
+                if (s.length == 6) {
+                    ButtonAnimations.fadeIn(binding.submitButton)
+                    binding.verifyCodeTextEdit.setTextColor(BLACK)
+                    isSubmitClickable = true
+                }
+                else {
+                    binding.verifyCodeTextEdit.setTextColor(RED)
+                    ButtonAnimations.fadeOut(binding.submitButton)
+                    isSubmitClickable = false
+                }
+            }
+        }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+        }
+    }
+
+    private fun startCreateProfileActivity(){
+        val intentCreateProfile = Intent(this@ActivityPhoneAuthentification, ActivityCreateProfile::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intentCreateProfile)
+        finish()
+    }
+
+    private fun startLoggedInActivity(){
+        val intent = Intent(this@ActivityPhoneAuthentification, AfterLoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+        finish()
     }
 }

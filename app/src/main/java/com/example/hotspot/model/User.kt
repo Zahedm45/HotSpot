@@ -12,5 +12,8 @@ data class User(
     var emailAddress: String? = null,
     var bio: String? = null,
     val gender: String? = null,
-    var bitmapImg: Bitmap? = null
+    var bitmapImg: Bitmap? = null,
+    var day: Int? = null,
+    var month: Int? = null ,
+    var year: Int? = null,
 ) : Parcelable

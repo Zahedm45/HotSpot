@@ -14,6 +14,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.hotspot.databinding.FragmentCreateProfileUploadImageBinding
 import android.content.ContentResolver
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.util.Log
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.view.AfterLoginActivity
 
 
@@ -26,6 +30,8 @@ class FragmentUploadImage : Fragment() {
     private val pickImage = 100
     private var imageUri: Uri? = null
 
+    private var isSubmitClickable = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,8 +41,11 @@ class FragmentUploadImage : Fragment() {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
+
         binding.progressBarIndeterminate.visibility = View.GONE
         binding.continueButton.setOnClickListener {
+            if(!isSubmitClickable) return@setOnClickListener
+            ButtonAnimations.clickButton(binding.continueButton)
             binding.progressBar.visibility = View.GONE
             binding.progressBarIndeterminate.visibility = View.VISIBLE
             viewModel.createNewProfile( { ->
@@ -69,7 +78,17 @@ class FragmentUploadImage : Fragment() {
 
         viewModel.getImage().observe(viewLifecycleOwner, Observer {
             binding.uploadPhoto.setImageBitmap(it)
-            //Toast.makeText(this.requireContext(),"test", Toast.LENGTH_SHORT).show()
+
+            if(it.toString().isNotEmpty()){
+                ButtonAnimations.fadeIn(binding.continueButton)
+                isSubmitClickable = true
+                Log.d("Empty", "Empty")
+            }
+            else{
+                ButtonAnimations.fadeOut(binding.continueButton)
+                isSubmitClickable = false
+                Log.d("not", "not")
+            }
         })
     }
 
@@ -94,6 +113,8 @@ class FragmentUploadImage : Fragment() {
         Toast.makeText(this.requireContext(), "Success", Toast.LENGTH_SHORT).show()
         val intent = Intent(this.context, AfterLoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
     }
 

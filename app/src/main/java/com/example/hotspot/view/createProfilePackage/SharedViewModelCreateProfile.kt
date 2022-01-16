@@ -10,10 +10,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 
 class SharedViewModelCreateProfile : ViewModel() {
-    private lateinit var auth : FirebaseAuth
-    private lateinit var databaseReference : DatabaseReference
-    private lateinit var storageReference : StorageReference
-
     private val _firstName = MutableLiveData<String>()
     private val _profileText = MutableLiveData<String>()
     private val _dateString = MutableLiveData<String>()
@@ -22,6 +18,7 @@ class SharedViewModelCreateProfile : ViewModel() {
     private val _yearOfBirth = MutableLiveData<Int>()
     private val _gender = MutableLiveData<String>()
     private val _image = MutableLiveData<Bitmap>()
+    private val _email = MutableLiveData<String>()
 
     //Getters BEGIN
     fun getFirstName() : LiveData<String> {
@@ -53,6 +50,10 @@ class SharedViewModelCreateProfile : ViewModel() {
 
     fun getImage() : LiveData<Bitmap> {
         return _image
+    }
+
+    fun getEmail() : LiveData<String>{
+        return _email
     }
     // Getters END
 
@@ -88,6 +89,10 @@ class SharedViewModelCreateProfile : ViewModel() {
 
     fun setImageUri(bitMap : Bitmap){
         _image.value = bitMap
+    }
+
+    fun setEmail(email : String){
+        _email.value = email
     }
 
     // Setters END
@@ -144,11 +149,14 @@ class SharedViewModelCreateProfile : ViewModel() {
 
 
         val name = this._firstName.value.toString()
-        val email = "example@email.com"
+        val email = this._email.value.toString()
         val age = this._dayOfBirth.value
         val gender = this._gender.value.toString()
         val bio = this._profileText.value.toString()
         val bitMap = this._image.value
+        val day = this._dayOfBirth.value
+        val month = this._monthOfBirth.value
+        val year = this._yearOfBirth.value
 
 
         if (bitMap == null) {
@@ -172,9 +180,13 @@ class SharedViewModelCreateProfile : ViewModel() {
             return null
         }
 
-
         if (gender.isNullOrBlank()) {
             onFailure("You forgot to enter gender.")
+            return null
+        }
+
+        if(day == null || month == null || year == null){
+            onFailure("Wrong date.")
             return null
         }
 
@@ -185,7 +197,10 @@ class SharedViewModelCreateProfile : ViewModel() {
             emailAddress = email,
             bio = bio,
             gender = gender,
-            bitmapImg = bitMap
+            bitmapImg = bitMap,
+            day = day,
+            month = month,
+            year = year
         )
     }
 }

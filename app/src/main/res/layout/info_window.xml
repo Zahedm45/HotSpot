@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border_for_info_window"
+    android:orientation="horizontal"
+    android:padding="25dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_background"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/info_window_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/info_window_snippet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:maxLines="10"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/info_window_imgButton"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="110dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal"
+            android:alpha="0.9"
+            android:backgroundTint="@color/light_gray"
+            android:elevation="30dp"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/btn_star_big_on"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+
+
+        <TextView
+            android:id="@+id/info_window_click_for_details_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap for details"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:maxLines="10"
+            android:textColor="#000"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:id="@+id/info_window_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:text="TextViewlædlkd lædldækfjdæfldkf dlæklfækldkjd djlædsjældkfjædl jlædjlkæjf ldjdlkæfdæ "
+
+        android:layout_marginVertical="10dp"
+        />
+
+
+    <TextView
+        android:id="@+id/info_window_snippet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:textSize="14sp"
+        android:textAlignment="center"
+
+        android:text="TextView" />
+
+
+
+    <Button
+        android:id="@+id/info_window_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+
+        android:text="Button" />
+
+</LinearLayout>-->
+
+
+
+<!--
+    android:background="@color/design_default_color_background"-->

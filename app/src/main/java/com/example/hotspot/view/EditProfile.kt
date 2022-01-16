@@ -3,20 +3,33 @@ package com.example.hotspot.view
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
+import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.other.UtilView
+import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.viewModel.EditProfileVM
+import java.util.*
+import kotlin.concurrent.timerTask
 
 class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
+    private lateinit var connectionLiveData: ConnectionLiveData
     private val editProfileVM = EditProfileVM
     var bitmap: Bitmap? = null
 
@@ -27,17 +40,15 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_edit_profile, container, false)
 
-        (activity as AppCompatActivity?)!!.supportActionBar!!.apply {
-            title = "Edit Profile"
-//            setDisplayHomeAsUpEnabled(true)
-//            setDisplayShowHomeEnabled(true)
-        }
+        val view = inflater.inflate(R.layout.fragment_edit_profile, container, false)
+        binding = FragmentEditProfileBinding.inflate(inflater,container, false)
+
 
 
         return view
     }
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +56,13 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         binding = FragmentEditProfileBinding.bind(view)
         editProfileVM.getUserProfile(binding, this)
 
+        connectionLiveData = ConnectionLiveData(this.requireContext())
+        connectionLiveData.observe(this.viewLifecycleOwner, { isConnected ->
+            when(isConnected){
+                true -> Log.d("true", "true LUCAS")
+                false -> Log.d("false", "LUCAS")
+            }
+        })
 
 
         binding.fragmentEdidProfileChangePicBtn.setOnClickListener {
@@ -53,10 +71,21 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
             startActivityForResult(intent, 0)
         }
 
-        binding.editProfileSaveChangeBtn.setOnClickListener {
-           // Log.i(TAG, "Clicked...")
-            editProfileVM.updateUserProfile(bitmap)
+        binding.tvSignOut.setOnClickListener{
+            UtilView.signOut(this.requireActivity())
         }
+
+        binding.tvDone.setOnClickListener {
+           // Log.i(TAG, "Clicked...")
+                ButtonAnimations.clickText(binding.tvDone)
+            Timer().schedule(timerTask{
+
+            }, 2000)
+
+            editProfileVM.updateUserProfile(bitmap)
+            findNavController().navigate(R.id.action_editProfile_to_personalProfile)
+        }
+        setGradientColor()
 
 
     }
@@ -73,6 +102,18 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         }
     }
 
+    private fun setGradientColor(){
+        val paint = binding.tvDone.paint
+        val width = paint.measureText(binding.tvDone.text.toString())
+        val textShader = LinearGradient(0f, 0f, width, binding.tvDone.textSize,
+            this.resources.getColor(R.color.orange_hotspot),
+            this.resources.getColor(R.color.purple_hotspot),
+            Shader.TileMode.CLAMP
+        )
 
+        binding.tvDone.paint.setShader(textShader)
+        binding.tvDone.setTextColor(Color.RED)
+        Log.d("is this being called?", "is it?")
+    }
 
 }
