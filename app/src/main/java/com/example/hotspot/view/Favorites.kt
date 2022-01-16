@@ -17,6 +17,9 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -76,11 +79,12 @@ class Favorites : Fragment() {
 
 
             }
+
     }
     private fun resolveHotspotRef(ref : String, adapter: GroupAdapter<GroupieViewHolder>){
         val db = Firebase.firestore
         val favoriteHotspotsRef = db
-            .collection("hotSpots").document(ref)
+            .collection("hotSpots2").document(ref)
         favoriteHotspotsRef.get()
             .addOnSuccessListener { task ->
                 if (task.exists()) {
@@ -99,11 +103,22 @@ class Favorites : Fragment() {
         ) {
 
             viewHolder.itemView.deleteButton.setOnClickListener{
-                // TODO: should delete item from list of favorite hotspots + update the database
+               // deleteItem()
             }
+
             viewHolder.itemView.hotspot_name.text = hotspot.name
             viewHolder.itemView.hotspot_rating.text = hotspot.rating.toString()
             viewHolder.itemView.hotspot_location.text = hotspot.address?.town
+
+            val imageRef = Firebase.storage.reference.child("HotSpots/${hotspot.id}.png")
+            imageRef.downloadUrl.addOnSuccessListener { Uri ->
+                val imageUrl = Uri.toString()
+                val imageView = viewHolder.itemView.hotspot_picture
+                Picasso.get().load(imageUrl).into(imageView)
+        }
+
+        //private fun deleteItem() {
+           // TODO("Not yet implemented")
         }
 
         override fun getLayout(): Int {
@@ -112,4 +127,9 @@ class Favorites : Fragment() {
     }
 
 
+
+
+
 }
+
+
