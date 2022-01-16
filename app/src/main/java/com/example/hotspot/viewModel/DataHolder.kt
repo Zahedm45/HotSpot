@@ -19,14 +19,13 @@ class DataHolder {
 
                 val checkedInDB = CheckedInDB(id = userId)
 
-                Repository.getCheckedInUserFromDB(userId) {
-                        user -> addToCheckedInUsersList(user)
-                }
+                Repository.getCheckedInUserFromDB(userId, checkedInDB) {
+                        user, checkedIn -> addToCheckedInUsersList(user, checkedIn) }
             }
         }
 
 
-        private fun addToCheckedInUsersList(user: User) {
+        private fun addToCheckedInUsersList(user: User, checkedInDB: CheckedInDB) {
             currentUser = user
         }
     }

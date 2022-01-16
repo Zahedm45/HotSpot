@@ -459,7 +459,14 @@ class Repository {
 
 
 
-        fun getCheckedInUserFromDB(usersId: String, onSuccess: ((user: User) -> Unit)) {
+        fun getCheckedInUserFromDB(
+            usersId: String,
+            checkedInDB: CheckedInDB,
+            onSuccess: ((user: User, checkedIn: CheckedInDB) -> Unit)
+
+        ) {
+
+
             val db = Firebase.firestore
             db.collection("users").document(usersId)
                 .get()
@@ -469,7 +476,7 @@ class Repository {
                         val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
                         ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                             this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
-                            onSuccess(this)
+                            onSuccess(this, checkedInDB)
                         }
                     }
                 }

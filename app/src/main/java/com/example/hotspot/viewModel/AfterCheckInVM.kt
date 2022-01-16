@@ -30,18 +30,17 @@ class AfterCheckInVM {
         }
 
 
-        private fun onSuccessSnapShotIds(checkedInIds: ArrayList<CheckedInDB>) {
+        private fun onSuccessSnapShotIds(newCheckedIn: ArrayList<CheckedInDB>) {
 
 
             val oldCheckedIn = UsersAndIds.checkedInMap
-            val newCheckedIn = checkedInIds
 
            for (curr in newCheckedIn) {
 
                curr.id?.let {
 
                    if (!oldCheckedIn.containsKey(it)){
-                       Repository.getCheckedInUserFromDB(it) { user -> onnSuccessGetUser(user) }
+                       Repository.getCheckedInUserFromDB(it, curr) { user, crr -> onnSuccessGetUser(user, crr) }
 
                    } else {
                        UsersAndIds.updateUser(curr)
@@ -72,44 +71,10 @@ class AfterCheckInVM {
 
 
 
-
-
-
-
-
-
-
-
-/*            val ids = UsersAndIds.getIds()
-            if (ids == checkedInIds) {
-                Log.i(TAG, "Same ids ${ids} and checkedInd $checkedInIds")
-                return
-            }
-
-            for (id in checkedInIds) {
-                if (!ids.contains(id)) {
-                    Repository.getCheckedInUserFromDB(id) { user -> onnSuccessSnapshotUser(user) }
-                }
-            }
-
-
-            val toRemove = ArrayList<String>()
-            for (id in ids) {
-                if (!checkedInIds.contains(id)) {
-
-                    toRemove.add(id)
-                }
-            }
-
-            UsersAndIds.removeUser(toRemove)*/
-
         }
 
 
         private fun onnSuccessGetUser(user: User, checkedInDB: CheckedInDB) {
-            Repository.
-
-
             UsersAndIds.addUser(user, checkedInDB)
         }
 
@@ -203,3 +168,46 @@ class AfterCheckInVM {
        checkedInUsers.add(user)
    }*/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*            val ids = UsersAndIds.getIds()
+            if (ids == checkedInIds) {
+                Log.i(TAG, "Same ids ${ids} and checkedInd $checkedInIds")
+                return
+            }
+
+            for (id in checkedInIds) {
+                if (!ids.contains(id)) {
+                    Repository.getCheckedInUserFromDB(id) { user -> onnSuccessSnapshotUser(user) }
+                }
+            }
+
+
+            val toRemove = ArrayList<String>()
+            for (id in ids) {
+                if (!checkedInIds.contains(id)) {
+
+                    toRemove.add(id)
+                }
+            }
+
+            UsersAndIds.removeUser(toRemove)*/

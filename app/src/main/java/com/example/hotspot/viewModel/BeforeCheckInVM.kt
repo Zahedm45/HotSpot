@@ -19,7 +19,7 @@ class BeforeCheckInVM {
 
 
         // TODO it someone delete it from the database
-        private var addedCheckedInAndHotspotId = ArrayList<String>()
+        private var addedCheckedInAndHotspotId = UsersAndIds.checkedInMap
 
         fun setCheckedInDB(hotSpot: HotSpot, user: User, onSuccess: (() -> Unit)? ) {
 
@@ -29,17 +29,17 @@ class BeforeCheckInVM {
             hotSpot.id?.let { hotSpotId ->
                 user.uid?.let { userId ->
 
-                    if (addedCheckedInAndHotspotId.contains("$userId$hotSpotId")) {
+                    if (addedCheckedInAndHotspotId.containsKey(userId)) {
+
                         Log.i(TAG, "User was previously added to the database (BeforeCheckInVM)")
                         return
                     }
 
                     val checkedInDB = CheckedInDB(id = userId)
-                    db.collection("hotSpots3").document(hotSpotId).collection("checkedIn")
-
-                        .add(checkedInDB)
+                    db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(userId)
+                        .set(checkedInDB)
                         .addOnSuccessListener {
-                            addedCheckedInAndHotspotId.add("$userId$hotSpotId")
+                           // addedCheckedInAndHotspotId.add("$userId$hotSpotId")
                             if (onSuccess != null) {
                                 onSuccess()
                             }
