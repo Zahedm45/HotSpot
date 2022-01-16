@@ -21,14 +21,31 @@ class UsersAndIds() {
 
 
         fun addUser(user: User, checkedInDB: CheckedInDB): Boolean {
-            if (checked.contains(checkedInDB)) {
+/*            if (checked.contains(checkedInDB)) {
                 return false
             }
+            */
 
-            checked.add(checkedInDB)
+           // var checkedInDbToRemove = CheckedInDB()
+            for (crr in checked) {
+
+                if (crr.id == checkedInDB.id ) {
+                    if (crr.isInterested != checkedInDB.isInterested) {
+                       // checkedInDbToRemove = crr
+                        removeUser(crr)
+                        checked.add(checkedInDB)
+                        userList.add(user)
+                        users.value = userList
+
+                    }
+                    return false
+                }
+            }
+
+/*            checked.add(checkedInDB)
             userList.add(user)
             users.value = userList
-            return true
+            return true*/
         }
 
 
@@ -40,30 +57,30 @@ class UsersAndIds() {
             }
 
             var userToRemove = User()
-
-
             for (curr in userList) {
                 if (curr.uid == checkedInDB.id) {
                     userToRemove = curr
+                    break
                 }
 
             }
 
-            checked.remove(checkedInDB)
+
             userList.remove(userToRemove)
             users.value = userList
 
 
-/*            val usersToRemove = mutableListOf<User>()
+            var checkedInDBToRemove = CheckedInDB()
 
-            userIds.forEach {
-                getUser(it)?.let { user ->
-                    usersToRemove.add(user)
-                }
+            for (curr in checked) {
+                if (curr.id == )
+
             }
-            checked.removeAll(userIds.toSet())
-            userList.removeAll(usersToRemove)
-            users.value = userList*/
+
+
+            checked.remove(checkedInDB)
+
+
         }
 
 
