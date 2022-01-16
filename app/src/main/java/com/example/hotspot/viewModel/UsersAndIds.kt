@@ -15,9 +15,11 @@ class UsersAndIds() {
 
         private val userList = mutableListOf<User>()
         private var users  = MutableLiveData<List<User>>()
-        private var checked = ArrayList<CheckedInDB>()
+      //  private var checked = ArrayList<CheckedInDB>()
 
         private var map = mutableMapOf<String, Boolean>()
+
+
 
         init {
             users.value = userList
@@ -46,16 +48,26 @@ class UsersAndIds() {
 
         private fun updateUser(userId: CheckedInDB) {
 
+            map.forEach {
+                if (it.key == userId.id) {
+                    if (it.value != userId.isInterested) {
 
+                        userId.isInterested?.let { isInterested ->
+                                map.replace(it.key, isInterested)
+                        }
 
+                     //   users.value = userList
+                    }
+                }
+            }
         }
 
 
         fun removeUser(userId: String) {
 
             if (!map.containsKey(userId)) {
+                Log.i(TAG, "User does not contain in the list")
                 return
-                Log.i(TAG, "")
             }
 
 
@@ -106,7 +118,7 @@ class UsersAndIds() {
 
 
 
-
+class
 
 
 
