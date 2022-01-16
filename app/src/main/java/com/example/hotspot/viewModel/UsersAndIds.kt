@@ -59,7 +59,6 @@ class UsersAndIds() {
                 return
             }
 
-
             if (checkedInMap.get(checkedIn.id) != checkedIn.isInterested ) {
                 checkedInMap.replace(checkedIn.id!!, checkedIn.isInterested!!)
                 setIsInterestedChanged()
@@ -80,35 +79,16 @@ class UsersAndIds() {
 
 
 
-        fun removeUser(userId: String) {
+        fun removeUser(userIds: ArrayList<String>) {
 
-            if (!checkedInMap.containsKey(userId)) {
-                Log.i(TAG, "User does not contain in the list")
-                return
+            userIds.forEach {
+                userList.removeIf {user -> user.uid == it}
+                checkedInMap.remove(it)
             }
 
-
-            var userToRemove = User()
-            for (curr in userList) {
-                if (curr.uid == userId) {
-                    userToRemove = curr
-                    break
-                }
-            }
-
-            checkedInMap.remove(userId)
-            userList.remove(userToRemove)
             users.value = userList
 
         }
-
-       // fun getCheckedInMap() = checkedInMap as LiveData<*>
-
-
-
-/*        fun getCheckedIn(): MutableList<CheckedInDB> {
-            return checked
-        }*/
 
         fun getUser() = users as LiveData<List<User>>
 
@@ -118,112 +98,7 @@ class UsersAndIds() {
     }
 
 
-
 }
 
 
 
-
-
-
-
-/*            map.forEach {
-                if (it.key == checkedIn.id) {
-                    if (it.value != checkedIn.isInterested) {
-
-                        checkedIn.isInterested?.let { isInterested ->
-                                map.replace(it.key, isInterested)
-                        }
-
-                     //   users.value = userList
-                    }
-                }
-            }*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-        fun getUser(userId: String): User? {
-
-            if (checked.contains(userId)) {
-
-                userList.forEach {
-                    if (it.uid == userId) {
-                        return it
-                    }
-                }
-            }
-            return null
-        }
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*       fun removeUser(user: User): Boolean {
-            if (user.uid == null) {
-                return false
-                Log.i(ContentValues.TAG, "User id is null")
-            }
-
-            Log.i(TAG, "123456before remove $userList and user id is ${user.uid}")
-
-
-            if (ids.contains(user.uid)){
-                ids.remove(user.uid)
-                userList.remove(user)
-                users.value = userList
-                Log.i(TAG, "123456after remove $userList and user id is ${user.uid}")
-                return true
-
-            }
-
-            return false
-
-        }
-*/
-
-
-
-
-
-/*    fun removeUser(userId: String) {
-        if (ids.remove(userId)){
-
-            val newTempList = userList
-            for (user in newTempList) {
-                if (user.uid == userId) {
-                    userList.remove(user)
-                    users.value = userList
-                    break
-                }
-            }
-        }
-    }*/

@@ -39,7 +39,6 @@ class BeforeCheckInVM {
                     db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(userId)
                         .set(checkedInDB)
                         .addOnSuccessListener {
-                           // addedCheckedInAndHotspotId.add("$userId$hotSpotId")
                             if (onSuccess != null) {
                                 onSuccess()
                             }

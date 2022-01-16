@@ -64,11 +64,12 @@ class AfterCheckInVM {
             for (curr in oldCheckedIn) {
 
                 if (!newIdList.contains(curr.key)) {
-                    UsersAndIds.removeUser(curr.key)
-
-                    // toRemove.add(curr.key)
+                    toRemove.add(curr.key)
                 }
             }
+
+
+            UsersAndIds.removeUser(toRemove)
 
         }
 
