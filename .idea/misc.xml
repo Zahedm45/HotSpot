@@ -139,6 +139,7 @@
         <entry key="app/src/main/res/layout/after_checked_in_recycler_view_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/before_check_in.xml" value="0.335" />
         <entry key="app/src/main/res/layout/favorite_item.xml" value="0.46788990825688076" />
+        <entry key="app/src/main/res/layout/fragment_after_check_in.xml" value="0.12864583333333332" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.14114583333333333" />
         <entry key="app/src/main/res/layout/fragment_create_profile.xml" value="0.2796875" />

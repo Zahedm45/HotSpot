@@ -4,9 +4,12 @@ package com.example.hotspot.view
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.Divider
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentFavoritesBinding
 import com.example.hotspot.model.HotSpot
@@ -22,6 +25,7 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.favorite_item.view.*
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
 class Favorites : Fragment() {
@@ -54,8 +58,6 @@ class Favorites : Fragment() {
         binding = FragmentFavoritesBinding.bind(view)
         navController = Navigation.findNavController(view)
 
-
-
     }
 
     private fun fetchFavoriteHotspots(){
@@ -73,6 +75,15 @@ class Favorites : Fragment() {
                     resolveHotspotRef((hotSpot.get("hotspot") as DocumentReference).id, adapter)
                 }
                 binding.RVfavorites.adapter = adapter
+                adapter.setOnItemClickListener { item, view ->
+
+                }
+
+
+                }
+
+
+
 
 
 
@@ -100,6 +111,11 @@ class Favorites : Fragment() {
             position: Int
         ) {
 
+            viewHolder.itemView.setOnClickListener {
+                val action = FavoritesDirections.actionFavoritesToBeforeCheckIn(hotspot)
+                Navigation.findNavController(viewHolder.itemView).navigate(action)
+            }
+
             viewHolder.itemView.deleteButton.setOnClickListener{
                // deleteItem()
             }
@@ -119,6 +135,7 @@ class Favorites : Fragment() {
            // TODO("Not yet implemented")
         }
 
+
         override fun getLayout(): Int {
             return R.layout.favorite_item
         }
@@ -128,6 +145,6 @@ class Favorites : Fragment() {
 
 
 
-}
+
 
 
