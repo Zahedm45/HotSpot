@@ -69,13 +69,14 @@ class UsersAndIds() {
 
 
 
-        fun getIds(): MutableList<String> {
+        fun getCheckedIn(): MutableList<CheckedInDB> {
             return checked
         }
 
         fun getUser() = users as LiveData<List<User>>
 
 
+/*
         fun getUser(userId: String): User? {
 
             if (checked.contains(userId)) {
@@ -88,6 +89,7 @@ class UsersAndIds() {
             }
             return null
         }
+*/
 
     }
 
