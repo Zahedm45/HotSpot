@@ -55,7 +55,6 @@
     <string name="i_did_not_receive_a_verification_code_resend">I did not receive a verification code? <b>Resend</b></string>
     <string name="sign_out">"Sign out"</string>
     <string name="new_message">NEW MESSAGE</string>
-    <string name="sign_out">Sign out</string>
     <string name="Submit_changes">Submit changes</string>
     <string name="change_profile_message">Profile message</string>
     <string name="delete_account">Delete account</string>

@@ -1,6 +1,7 @@
 package com.example.hotspot.view
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,7 +17,12 @@ class AfterLoginActivity: AppCompatActivity() {
     private lateinit var connectionLiveData: ConnectionLiveData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+        val intent = Intent(this, LatestMessagesActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        /*super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_after_login)
 
         connectionLiveData = ConnectionLiveData(this)
@@ -54,7 +60,7 @@ class AfterLoginActivity: AppCompatActivity() {
                     }.start()
                 }
             }
-        }
+        }*/
     }
 
 

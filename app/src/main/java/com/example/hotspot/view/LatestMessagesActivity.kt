@@ -8,6 +8,7 @@ import android.view.MenuItem
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLatestMessagesBinding
 import com.example.hotspot.model.User
+import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
 import kotlinx.android.synthetic.main.activity_latest_messages.*
@@ -83,7 +84,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         //Perform check to see if user is logged in (if necessary)
         val uid = FirebaseAuth.getInstance().uid
         if (uid == null) {
-            val intent = Intent(this, CreateProfileActivity::class.java)
+            val intent = Intent(this, ActivityCreateProfile::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
@@ -105,7 +106,7 @@ class LatestMessagesActivity : AppCompatActivity() {
             R.id.menu_sign_out -> {
                 FirebaseAuth.getInstance().signOut()
                 //Run registration activity
-                val intent = Intent(this, CreateProfileActivity::class.java)
+                val intent = Intent(this, ActivityCreateProfile::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }

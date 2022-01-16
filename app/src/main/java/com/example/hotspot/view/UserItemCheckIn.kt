@@ -7,7 +7,7 @@ import com.example.hotspot.model.User
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
-class UserItem(val user: User): Item() {
+class UserItemCheckIn(val user: User): Item() {
 
     override fun bind(
         viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,

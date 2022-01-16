@@ -14,8 +14,6 @@ import com.xwray.groupie.GroupieViewHolder
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.AfterCheckInVM
-import com.example.hotspot.viewModel.BeforeCheckInVM
-import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
 
 
@@ -66,9 +64,9 @@ class AfterCheckIn : Fragment() {
 
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
             if (it != null) {
-                val groupieUsers = ArrayList<UserItem>()
+                val groupieUsers = ArrayList<UserItemCheckIn>()
                 for (i in it) {
-                    groupieUsers.add(UserItem(i))
+                    groupieUsers.add(UserItemCheckIn(i))
 
                 }
 
@@ -117,7 +115,7 @@ class AfterCheckIn : Fragment() {
 
 
     fun onSuccess(user: User) {
-        val item = UserItem(user)
+        val item = UserItemCheckIn(user)
 
         if (!adapterHelper.contains(user)) {
             adapter.add(item)
