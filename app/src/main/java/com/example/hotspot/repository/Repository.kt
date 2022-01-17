@@ -405,14 +405,21 @@ class Repository {
                 .addSnapshotListener { value, error ->
 
                     if (error != null) {
-                        Log.w(TAG, "Listen failed.", error)
+                        //Log.w(TAG, "Listen failed.", error)
                         return@addSnapshotListener
                     }
 
                     if (value != null) {
                         val checkedIns = ArrayList<CheckedInDB>()
                         value.forEach {
-                            checkedIns.add(it.toObject<CheckedInDB>())
+
+                            val checkedIn = it.toObject<CheckedInDB>()
+                            if (checkedIn.id == null) {
+                                checkedIn.id = it.id
+                            }
+                           // Log.d(TAG, "Current $checkedIn")
+
+                            checkedIns.add(checkedIn)
                         }
                         onSuccess(checkedIns)
 
@@ -453,6 +460,10 @@ class Repository {
                 .get()
                 .addOnSuccessListener { doc ->
                     doc.toObject<User>()?.apply {
+
+                        if(this.uid == null) {
+                            this.uid = usersId
+                        }
                         user = this
                         subFunOfGetCheckedInUserFromDB()
                     }
@@ -464,6 +475,7 @@ class Repository {
         private fun subFunOfGetCheckedInUserFromDB() {
             user?.let { itUser ->
                 bitmap?.let {
+                    Log.d(TAG, "Success...Repository $user and $it")
                     itUser.bitmapImg = it
                     onSuccess(itUser, checkedInDB!!)
                 }
