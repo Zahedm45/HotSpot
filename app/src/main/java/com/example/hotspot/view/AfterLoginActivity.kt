@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -82,11 +83,12 @@ class AfterLoginActivity: AppCompatActivity() {
         val snackbar = Snackbar.make(findViewById(R.id.nav_host_fragment), "" ,Snackbar.LENGTH_INDEFINITE)
 
 
-
         val customSnackView: View = layoutInflater.inflate(R.layout.snackbar_no_wifi, findViewById<View>(R.id.snackbar_cardView) as? ViewGroup)
-
         val layout = snackbar.view as SnackbarLayout
         layout.setPadding(0,0,0,0)
+        customSnackView.setOnClickListener(){
+            if(snackbar.isShown) snackbar.dismiss()
+        }
         val color: Int = resources.getColor(R.color.transparent)
         layout.setBackgroundColor(color)
         layout.addView(customSnackView, 0)
