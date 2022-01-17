@@ -68,11 +68,19 @@ class BeforeCheckIn : Fragment() {
 
 
     private fun setAllInfo() {
+
         binding.beforeCheckInEventLocationName.text = args.hotSpot.name
         binding.beforeCIAddressTv.text = getAddress()
         binding.beforeCheckInRatingBar.rating = args.hotSpot.rating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding.beforeCIDescriptionTv.text = args.hotSpot.description
+
+
+        val imageRef = Firebase.storage.reference.child("HotSpots/${args.hotSpot.id}.png")
+       imageRef.downloadUrl.addOnSuccessListener { Uri ->
+            val imageUrl = Uri.toString()
+            val imageView = binding.beforeCheckInPartyImg
+            Picasso.get().load(imageUrl).into(imageView)}
 
 
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
