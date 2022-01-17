@@ -38,12 +38,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        binding.activityLoginForgotPassword.setOnClickListener {
-            //TODO delete forgot password function, no longer necessary
-           // forgotPassword()
-        }
-
-
     }
 
     private fun startPhoneAuthentication(){
