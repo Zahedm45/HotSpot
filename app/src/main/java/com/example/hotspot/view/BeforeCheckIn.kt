@@ -27,6 +27,7 @@ import com.example.hotspot.viewModel.UsersAndIds
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.android.synthetic.main.custom_toast_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -182,9 +183,9 @@ class BeforeCheckIn : Fragment() {
 
     @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     private fun checkInBtn(view: View) {
-        val isUserPresent = isUserPresent()
-        binding.beforeCheckInCheckInBtn.setOnClickListener {
 
+        binding.beforeCheckInCheckInBtn.setOnClickListener {
+            val isUserPresent = isUserPresent()
             if (isUserPresent) {
                 DataHolder.currentUser?.let { user ->
                     val checkedInDB = CheckedInDB(id = user.uid)
@@ -230,11 +231,16 @@ class BeforeCheckIn : Fragment() {
         }
         val area = Math.PI * RADIUS.pow(2.0)
         if (distance[0] <= area) {
-
-
-
             return true
         }
+
+
+
+        val toastLayout = layoutInflater.inflate(R.layout.custom_toast_layout, custom_toast_layout)
+        val toast = Toast(requireContext())
+        toast.view = toastLayout
+        toast.duration = Toast.LENGTH_LONG
+        toast.show()
         return false
     }
 
