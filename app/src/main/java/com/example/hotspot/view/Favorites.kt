@@ -2,33 +2,38 @@ package com.example.hotspot.view
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.Divider
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentFavoritesBinding
 import com.example.hotspot.model.HotSpot
+import com.example.hotspot.other.network.TAG
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.favorite_item.view.*
-
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
 class Favorites : Fragment() {
 
 
-    lateinit var navController: NavController
+   // lateinit var navController: NavController
     private lateinit var binding: FragmentFavoritesBinding
 
 
@@ -37,7 +42,7 @@ class Favorites : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My favorites"
+      //  (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My favorites"
         return view
     }
 
@@ -46,6 +51,7 @@ class Favorites : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         fetchFavoriteHotspots()
+        Log.i(TAG, "oncreate")
 
     }
 
@@ -53,9 +59,17 @@ class Favorites : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavoritesBinding.bind(view)
-        navController = Navigation.findNavController(view)
+      //  navController = Navigation.findNavController(view)
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        fetchFavoriteHotspots()
+
+    }
+
+
 
     private fun fetchFavoriteHotspots(){
         val db = Firebase.firestore
@@ -72,8 +86,18 @@ class Favorites : Fragment() {
                     resolveHotspotRef((hotSpot.get("hotspot") as DocumentReference).id, adapter)
                 }
                 binding.RVfavorites.adapter = adapter
+/*
+                adapter.setOnItemClickListener { item, view ->
 
-            }
+                }
+*/
+
+
+                }
+
+
+
+
 
 
             }
@@ -81,7 +105,6 @@ class Favorites : Fragment() {
     }
     private fun resolveHotspotRef(ref : String, adapter: GroupAdapter<GroupieViewHolder>){
         val db = Firebase.firestore
-        val section = Section()
         val favoriteHotspotsRef = db
             .collection("hotSpots2").document(ref)
         favoriteHotspotsRef.get()
@@ -89,52 +112,51 @@ class Favorites : Fragment() {
                 if (task.exists()) {
                     val hotspot = task.toObject<HotSpot>()
                     if (hotspot is HotSpot) {
-                        //adapter.add(HotSpotItem(hotspot))
-                        section.add(HotSpotItem(hotspot))
-                        adapter.add(section)
+
+                        adapter.add(HotSpotItem(hotspot))
                     }
                 }
             }
     }
 
 
-class HotSpotItem(val hotspot: HotSpot): Item() {
+
+    class HotSpotItem(val hotspot: HotSpot): Item() {
         override fun bind(
             viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
             position: Int
         ) {
 
-            viewHolder.apply {
-                with(viewHolder.itemView) {
-                    hotspot_name.text = hotspot.name
-                    hotspot_rating.text = hotspot.rating.toString()
-                    hotspot_location.text = hotspot.address?.town
-
-                    val imageRef = Firebase.storage.reference.child("HotSpots/${hotspot.id}.png")
-                    imageRef.downloadUrl.addOnSuccessListener { Uri ->
-                        val imageUrl = Uri.toString()
-                        val imageView = viewHolder.itemView.hotspot_picture
-                        Picasso.get().load(imageUrl).into(imageView)
-
-
-                        itemView.setOnClickListener {
-                            val action = FavoritesDirections.actionFavoritesToBeforeCheckIn(hotspot)
-                            Navigation.findNavController(viewHolder.itemView).navigate(action)
-
-                        }
-
-                    }
-
-
-                }
+            viewHolder.itemView.setOnClickListener {
+                val action = FavoritesDirections.actionFavoritesToBeforeCheckIn(hotspot)
+                it.findNavController().navigate(action)
+               // Navigation.findNavController(viewHolder.itemView).navigate(action)
             }
 
+            viewHolder.itemView.deleteButton.setOnClickListener{
+               // deleteItem()
+            }
+
+            viewHolder.itemView.hotspot_name.text = hotspot.name
+            viewHolder.itemView.hotspot_rating.text = hotspot.rating.toString()
+            viewHolder.itemView.hotspot_location.text = hotspot.address?.town
+
+            val imageRef = Firebase.storage.reference.child("HotSpots/${hotspot.id}.png")
+            imageRef.downloadUrl.addOnSuccessListener { Uri ->
+                val imageUrl = Uri.toString()
+                val imageView = viewHolder.itemView.hotspot_picture
+                Picasso.get().load(imageUrl).into(imageView)
         }
 
-            override fun getLayout(): Int {
-                return R.layout.favorite_item
-            }
+        //private fun deleteItem() {
+           // TODO("Not yet implemented")
         }
+
+
+        override fun getLayout(): Int {
+            return R.layout.favorite_item
+        }
+    }
 
 
 
