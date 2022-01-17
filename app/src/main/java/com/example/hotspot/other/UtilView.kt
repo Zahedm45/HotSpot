@@ -15,7 +15,7 @@ object UtilView {
 
      fun navigateToLoginPage(activity: Activity) {
         val intent = Intent(activity, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
     }
 
