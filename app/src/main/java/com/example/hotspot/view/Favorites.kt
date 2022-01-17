@@ -33,7 +33,6 @@ import kotlinx.android.synthetic.main.fragment_favorites.*
 class Favorites : Fragment() {
 
 
-   // lateinit var navController: NavController
     private lateinit var binding: FragmentFavoritesBinding
 
 
@@ -42,7 +41,6 @@ class Favorites : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
-      //  (activity as AppCompatActivity?)!!.supportActionBar!!.title = "My favorites"
         return view
     }
 
@@ -59,7 +57,7 @@ class Favorites : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavoritesBinding.bind(view)
-      //  navController = Navigation.findNavController(view)
+
 
     }
 
@@ -86,18 +84,9 @@ class Favorites : Fragment() {
                     resolveHotspotRef((hotSpot.get("hotspot") as DocumentReference).id, adapter)
                 }
                 binding.RVfavorites.adapter = adapter
-/*
-                adapter.setOnItemClickListener { item, view ->
-
-                }
-*/
 
 
                 }
-
-
-
-
 
 
             }
@@ -126,30 +115,26 @@ class Favorites : Fragment() {
             viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
             position: Int
         ) {
+            viewHolder.apply {
+                with(viewHolder.itemView){
+                    hotspot_name.text = hotspot.name
+                    hotspot_rating.text = hotspot.rating.toString()
+                    hotspot_location.text = hotspot.address?.town
+                    val imageRef = Firebase.storage.reference.child("HotSpots/${hotspot.id}.png")
+                    imageRef.downloadUrl.addOnSuccessListener { Uri ->
+                        val imageUrl = Uri.toString()
+                        val imageView = viewHolder.itemView.hotspot_picture
+                        Picasso.get().load(imageUrl).into(imageView)
+                }
+            }
 
             viewHolder.itemView.setOnClickListener {
                 val action = FavoritesDirections.actionFavoritesToBeforeCheckIn(hotspot)
                 it.findNavController().navigate(action)
-               // Navigation.findNavController(viewHolder.itemView).navigate(action)
             }
 
-            viewHolder.itemView.deleteButton.setOnClickListener{
-               // deleteItem()
-            }
-
-            viewHolder.itemView.hotspot_name.text = hotspot.name
-            viewHolder.itemView.hotspot_rating.text = hotspot.rating.toString()
-            viewHolder.itemView.hotspot_location.text = hotspot.address?.town
-
-            val imageRef = Firebase.storage.reference.child("HotSpots/${hotspot.id}.png")
-            imageRef.downloadUrl.addOnSuccessListener { Uri ->
-                val imageUrl = Uri.toString()
-                val imageView = viewHolder.itemView.hotspot_picture
-                Picasso.get().load(imageUrl).into(imageView)
         }
 
-        //private fun deleteItem() {
-           // TODO("Not yet implemented")
         }
 
 
