@@ -11,6 +11,7 @@ import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
@@ -64,7 +65,9 @@ class Repository {
 
         }
 */ //TODO we no longer need this method.
-
+        fun getFirebaseUser() : FirebaseUser?{
+            return Firebase.auth.currentUser
+        }
 
         fun addProfileToFirebase(
             user: User,
@@ -473,7 +476,6 @@ class Repository {
                     Log.d(TAG, "Success...Repository")
 
                 }
-
         }
 
     }
