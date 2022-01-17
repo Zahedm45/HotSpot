@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/hotspot_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hotspot Name"
-        android:textStyle="bold"
-        android:textSize="26sp"
-        android:textColor="@color/black"
-        android:textAlignment="center"
-        android:layout_marginTop="1dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
         android:padding="10dp"
-        android:fontFamily="@font/poppins_semibold">
+        android:text="Hotspot Name"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:textStyle="bold">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ScrollView>
     </TextView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_reviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@+id/hotspot_name"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
