@@ -238,7 +238,7 @@ class BeforeCheckIn : Fragment() {
         textView.text = "You are approximately $dist km away from the location."
         val toast = Toast(requireContext())
         toast.view = toastLayout
-        toast.duration = Toast.LENGTH_SHORT
+        toast.duration = Toast.LENGTH_LONG
         toast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 200)
         toast.show()
         addDelay(toast, 1000)
