@@ -2,29 +2,41 @@ package com.example.hotspot.view
 
 import android.annotation.SuppressLint
 import android.graphics.Paint
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.shape.CircleShape
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
 import com.example.hotspot.model.CheckedInDB
+import com.example.hotspot.other.network.TAG
+import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.Constant.CHECKED_IN
+import com.example.hotspot.view.Constant.RADIUS
 import com.example.hotspot.view.Constant.STREET_WITHOUT_NAME
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
+import com.google.android.gms.maps.model.Circle
+import com.google.android.gms.maps.model.CircleOptions
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.pow
+
 object Constant {
     const val STREET_WITHOUT_NAME = "Vej uden navn"
     const val CHECKED_IN = "Checked in: "
+    const val RADIUS = 10.0
 }
 
 class BeforeCheckIn : Fragment() {
@@ -169,6 +181,11 @@ class BeforeCheckIn : Fragment() {
 
     @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     private fun checkInBtn(view: View) {
+
+        if (!isUserPresent()) {
+            return
+        }
+
         binding.beforeCheckInCheckInBtn.setOnClickListener {
           //  val userId = Firebase.auth.uid
             DataHolder.currentUser?.let { user ->
@@ -206,7 +223,45 @@ class BeforeCheckIn : Fragment() {
 
 
 
+    private fun isUserPresent(): Boolean {
+
+        val userCurrLocation = MapService.lastLocation.value
+
+        if (userCurrLocation?.longitude == null) {
+            Log.i(TAG, "Unable to get user location")
+            return false
+        }
+        val distance = FloatArray(1)
+        args.hotSpot.geoPoint?.latitude?.let { lat ->
+            args.hotSpot.geoPoint?.longitude?.let { lng ->
+               Location.distanceBetween(
+                   lat, lng, userCurrLocation.latitude, userCurrLocation.longitude, distance)
+            }
+        }
+        val area = Math.PI * RADIUS.pow(2.0)
+        if (distance[0] <= area) {
+            return true
+        }
+        return false
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
