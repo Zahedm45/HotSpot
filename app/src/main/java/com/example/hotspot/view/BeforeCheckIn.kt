@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.compose.foundation.shape.CircleShape
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
@@ -26,16 +25,12 @@ import com.example.hotspot.view.Constant.STREET_WITHOUT_NAME
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
-import com.google.android.gms.maps.model.Circle
-import com.google.android.gms.maps.model.CircleOptions
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.custom_toast_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.math.pow
 
 object Constant {
     const val STREET_WITHOUT_NAME = "Vej uden navn"
@@ -215,7 +210,6 @@ class BeforeCheckIn : Fragment() {
     }
 
 
-
     private fun isUserPresent(): Boolean {
 
         val userCurrLocation = MapService.lastLocation.value
@@ -238,6 +232,8 @@ class BeforeCheckIn : Fragment() {
 
         val toastLayout = layoutInflater.inflate(R.layout.custom_toast_layout, custom_toast_layout)
         val textView = toastLayout.findViewById<TextView>(R.id.custom_toast_text_tv)
+
+
         val dist = Math.round( (distance[0] / 1000) * 10.0) / 10.0
         textView.text = "You are approximately $dist km away from the location."
         val toast = Toast(requireContext())
@@ -245,7 +241,18 @@ class BeforeCheckIn : Fragment() {
         toast.duration = Toast.LENGTH_SHORT
         toast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 200)
         toast.show()
+        addDelay(toast, 1000)
         return false
+    }
+
+    private fun addDelay(toast: Toast, timeMilles: Long) {
+        CoroutineScope(IO).launch {
+            delay(timeMilles)
+            CoroutineScope(Main).launch {
+                Log.i(TAG, "delay..")
+                toast.cancel()
+            }
+        }
     }
 
 
