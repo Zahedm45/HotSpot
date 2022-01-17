@@ -5,6 +5,7 @@ import android.graphics.Paint
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -240,6 +241,7 @@ class BeforeCheckIn : Fragment() {
         val toast = Toast(requireContext())
         toast.view = toastLayout
         toast.duration = Toast.LENGTH_LONG
+        toast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 200)
         toast.show()
         return false
     }

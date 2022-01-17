@@ -5,15 +5,33 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/border_for_info_window"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_gravity="top|center"
-    android:layout_marginHorizontal="50dp"
-
     >
+
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is Custom Toast"
-        android:textSize="24sp"/>
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="40dp"
+        android:text="You have to be present at the HotSpot's location to be able to check in"
+        android:textSize="24sp"
+
+        />
+
+
+    <TextView
+        android:id="@+id/custom_toast_text_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center"
+        android:text="TextView"
+        android:textSize="24sp"
+        />
+
 </LinearLayout>
