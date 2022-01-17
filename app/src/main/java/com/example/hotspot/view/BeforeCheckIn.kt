@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.foundation.shape.CircleShape
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -181,44 +182,33 @@ class BeforeCheckIn : Fragment() {
 
     @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     private fun checkInBtn(view: View) {
-
-        if (!isUserPresent()) {
-            return
-        }
-
+        val isUserPresent = isUserPresent()
         binding.beforeCheckInCheckInBtn.setOnClickListener {
-          //  val userId = Firebase.auth.uid
-            DataHolder.currentUser?.let { user ->
-                val checkedInDB = CheckedInDB(id = user.uid)
 
-
-                UsersAndIds.addUser(user, checkedInDB)
-                BeforeCheckInVM.setCheckedInDB(args.hotSpot, user, null)
-            } ?: run {
-                // TODO
-                DataHolder.fetchCurrentUserFromDB()
+            if (isUserPresent) {
+                DataHolder.currentUser?.let { user ->
+                    val checkedInDB = CheckedInDB(id = user.uid)
+                    UsersAndIds.addUser(user, checkedInDB)
+                    BeforeCheckInVM.setCheckedInDB(args.hotSpot, user, null)
+                } ?: run {
+                    DataHolder.fetchCurrentUserFromDB()
+                }
             }
-
-
 
             CoroutineScope(IO).launch {
                 val drawable = resources.getDrawable(R.drawable.custom_button_click_effect)
                 binding.beforeCheckInCheckInBtn.background = drawable
-
                 delay(100)
                 CoroutineScope(Main).launch {
-
                     val drawable2 = resources.getDrawable(R.drawable.custom_button)
                     binding.beforeCheckInCheckInBtn.background = drawable2
-
-                    val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
-                    view.findNavController().navigate(action)
-
-                   // Navigation.findNavController(view).navigate(R.id.afterCheckIn)
+                    if (isUserPresent) {
+                        val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
+                        view.findNavController().navigate(action)
+                    }
                 }
             }
         }
-
     }
 
 
@@ -240,6 +230,9 @@ class BeforeCheckIn : Fragment() {
         }
         val area = Math.PI * RADIUS.pow(2.0)
         if (distance[0] <= area) {
+
+
+
             return true
         }
         return false
