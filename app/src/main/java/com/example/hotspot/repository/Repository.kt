@@ -451,7 +451,7 @@ class Repository {
                 .addOnSuccessListener { doc ->
                     doc.toObject<User>()?.apply {
                         val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
-                        val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
+                        val ONE_MEGABYTE: Long = (624 * 624).toLong()
                         ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                             this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
                             onSuccess(this, checkedInDB)
