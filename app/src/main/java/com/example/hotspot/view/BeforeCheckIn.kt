@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.compose.foundation.shape.CircleShape
 import androidx.navigation.findNavController
@@ -230,14 +231,15 @@ class BeforeCheckIn : Fragment() {
                    lat, lng, userCurrLocation.latitude, userCurrLocation.longitude, distance)
             }
         }
-        val area = Math.PI * RADIUS.pow(2.0)
+        val area = Math.PI * RADIUS * RADIUS
         if (distance[0] <= area) {
             return true
         }
 
-
-
         val toastLayout = layoutInflater.inflate(R.layout.custom_toast_layout, custom_toast_layout)
+        val textView = toastLayout.findViewById<TextView>(R.id.custom_toast_text_tv)
+        val dist = Math.round( (distance[0] / 1000) * 10.0) / 10.0
+        textView.text = "You are approximately $dist km away from the location."
         val toast = Toast(requireContext())
         toast.view = toastLayout
         toast.duration = Toast.LENGTH_LONG
