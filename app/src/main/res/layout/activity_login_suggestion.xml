@@ -27,16 +27,6 @@
         android:text="@string/log_in2"
         android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/activity_login_forgotPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/poppins_light"
-        android:gravity="center"
-        android:text="@string/Forgot_login"
-        android:textColor="#99FFFFFF"
-        android:textSize="12sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/activity_login_create_profile_btn"
