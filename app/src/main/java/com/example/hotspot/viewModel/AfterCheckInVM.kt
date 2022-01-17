@@ -27,7 +27,6 @@ class AfterCheckInVM {
             for (curr in newCheckedIn) {
 
                 curr.id?.let {
-
                     if (!oldCheckedIn.containsKey(it)) {
                         Repository.getCheckedInUserFromDB(it, curr) { user, crr -> onnSuccessGetUser(user, crr) }
 
