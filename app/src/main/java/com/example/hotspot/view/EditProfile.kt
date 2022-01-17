@@ -67,6 +67,7 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         })
 
 
+
         binding.fragmentEdidProfileChangePicBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -78,14 +79,15 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         }
 
         binding.tvDone.setOnClickListener {
-           // Log.i(TAG, "Clicked...")
                 ButtonAnimations.clickText(binding.tvDone)
-            Timer().schedule(timerTask{
-
-            }, 2000)
 
             editProfileVM.updateUserProfile(bitmap)
             findNavController().navigate(R.id.action_editProfile_to_personalProfile)
+        }
+
+        binding.tvDeleteAccount.setOnClickListener(){
+            ButtonAnimations.clickText(binding.tvDeleteAccount)
+            editProfileVM.deleteUser()
         }
         setGradientColor()
 
