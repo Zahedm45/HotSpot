@@ -71,7 +71,6 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding.beforeCIDescriptionTv.text = args.hotSpot.description
 
-
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         // binding.beforeCheckInReviews.paintFlags =  Paint.UNDERLINE_TEXT_FLAG or binding.beforeCheckInReviews.paintFlags
         //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
@@ -93,11 +92,14 @@ class BeforeCheckIn : Fragment() {
 
 
 
-    private fun onCheckedInListChange(checkedInIds: ArrayList<String>) {
+    private fun onCheckedInListChange(checkedIn: ArrayList<CheckedInDB>) {
 
-        val toRemove = ArrayList<CheckedInDB>()
+        binding.beforeCheckInCheckedIn.text = CHECKED_IN + checkedIn.size
 
-        args.hotSpot.checkedIn?.forEach {
+
+       // val toRemove = ArrayList<CheckedInDB>()
+
+/*        args.hotSpot.checkedIn?.forEach {
             if (!checkedInIds.contains(it.id)) {
                 toRemove.add(it)
             }
@@ -116,7 +118,7 @@ class BeforeCheckIn : Fragment() {
                 binding.beforeCheckInCheckedIn.textSize = textSizeBefore
             }
 
-        }
+        }*/
 
     }
 
@@ -170,7 +172,10 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInCheckInBtn.setOnClickListener {
           //  val userId = Firebase.auth.uid
             DataHolder.currentUser?.let { user ->
-                UsersAndIds.addUser(user)
+                val checkedInDB = CheckedInDB(id = user.uid)
+
+
+                UsersAndIds.addUser(user, checkedInDB)
                 BeforeCheckInVM.setCheckedInDB(args.hotSpot, user, null)
             } ?: run {
                 // TODO
@@ -188,7 +193,6 @@ class BeforeCheckIn : Fragment() {
 
                     val drawable2 = resources.getDrawable(R.drawable.custom_button)
                     binding.beforeCheckInCheckInBtn.background = drawable2
-
 
                     val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
                     view.findNavController().navigate(action)

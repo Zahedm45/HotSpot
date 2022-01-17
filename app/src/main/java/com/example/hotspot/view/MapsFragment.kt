@@ -15,7 +15,6 @@ import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
-import com.example.hotspot.model.SubClassForHotspot
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
@@ -72,14 +71,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         requestLocPermissionAndTrackLocation()
         addProgressBar()
         myLocationBtn(view)
-
-/*        binding.fragmentMapsMyLocationBtn.setOnClickListener {
-           // addHotSpotsInDB()
-            if (location != null && googleMap != null) {
-                moveCamara(12f)
-            }
-        }*/
-
     }
 
 
@@ -89,16 +80,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         MapsAndHotspotsVM.showHotSpotReg?.remove()
     }
 
-
-
-/*
-    override fun onDetach() {
-        super.onDetach()
-        MapsAndHotspotsVM.showHotSpotReg?.remove()
-        Log.i(TAG, "Has been removed")
-
-    }
-*/
 
 
 
@@ -122,11 +103,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 }
             }
         }
-
     }
-
-
-
 
 
 
@@ -142,11 +119,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             requireActivity().finish()
         }*/
 
-      //  DataHolder.getCurrentUserFromDB()
-
         setHasOptionsMenu(true)
-
-
     }
 
 
@@ -179,7 +152,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         requestLocPermissionAndTrackLocation()
-
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
@@ -189,7 +161,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         } else {
             requestLocPermissionAndTrackLocation()
         }
-
     }
 
 
@@ -218,11 +189,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-
-
-
     private fun observeUserPosition() {
-
         MapService.lastLocation.observe(viewLifecycleOwner, Observer { it ->
             if(it != null) {
                 val latitude =   it.latitude
@@ -232,10 +199,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 location?.let {
                     updateBlueDot()
                 }
-
             }
         })
-
     }
 
 
@@ -305,8 +270,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
         setOnClickListener(hotSpots)
-
-
         CoroutineScope(IO).launch {
             delay(1000)
             CoroutineScope(Main).launch {
@@ -334,7 +297,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                         hotSpot = it
                         return@loop
                     }
-
                 }
             }
 
@@ -397,6 +359,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+/*
     private fun addHotSpotsInDB() {
         SubClassForHotspot.defineRH("No Stress Bar", 55.667, 12.5842, requireContext())
         SubClassForHotspot.defineRH("Muck Bar", 55.7143, 12.5595, requireContext())
@@ -410,6 +373,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     }
 
+*/
 
 
 

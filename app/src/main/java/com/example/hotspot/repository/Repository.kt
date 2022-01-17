@@ -11,19 +11,14 @@ import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.tasks.Tasks.await
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.getField
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 
@@ -339,9 +334,7 @@ class Repository {
                 Log.i(TAG, "User is not sign in.")
                 return
             }
-
             val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
-
             val bytArr = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytArr)
             val data = bytArr.toByteArray()
@@ -373,16 +366,13 @@ class Repository {
 
 
 
-        fun getHotSpots(
+        fun getAndListenHotSpotsDB(
             onSuccess: ((hotSpots: ArrayList<HotSpot>) -> Unit)?,
             onFailure: ((msg: String) -> Unit)?
         ) : ListenerRegistration {
 
-        //    Log.d(TAG, "snapshot found: hotSpots1")
-
-
             val db = Firebase.firestore
-            val colRef = db.collection("hotSpots2")
+            val colRef = db.collection("hotSpots3")
 
             val registration = colRef.addSnapshotListener { snapshot, e ->
 
@@ -391,33 +381,70 @@ class Repository {
                     return@addSnapshotListener
                 }
 
-
                 if (snapshot != null) {
 
                     val hotSpots: ArrayList<HotSpot> = ArrayList()
                     snapshot.forEach { crrHotspot ->
                         val hotSpot = crrHotspot.toObject<HotSpot>()
                         hotSpots.add(hotSpot)
-
                     }
 
                     if (onSuccess != null) {
                         onSuccess(hotSpots)
                     }
 
-                  //  Log.d(TAG, "snapshot found: hotSpots2")
-
                 } else {
                     Log.d(TAG, "Current data: null")
                 }
             }
+            return registration
+        }
+
+
+
+
+
+
+        fun getAndListenCheckedInIds(
+            hotSpotId: String,
+            onSuccess: ((checkedIn: ArrayList<CheckedInDB>) -> Unit) ): ListenerRegistration {
+            val db = Firebase.firestore
+            val registration = db.collection("hotSpots3").document(hotSpotId).collection("checkedIn")
+                .addSnapshotListener { value, error ->
+
+                    if (error != null) {
+                        Log.w(TAG, "Listen failed.", error)
+                        return@addSnapshotListener
+                    }
+
+                    if (value != null) {
+                        val checkedIns = ArrayList<CheckedInDB>()
+                        value.forEach {
+                            checkedIns.add(it.toObject<CheckedInDB>())
+                        }
+                        onSuccess(checkedIns)
+
+                    } else {
+                        Log.d(TAG, "Current data: null")
+                    }
+                }
 
             return registration
         }
 
 
 
-        fun getCheckedInUserFromDB(usersId: String, onSuccess: ((user: User) -> Unit)) {
+
+
+
+
+        fun getCheckedInUserFromDB(
+            usersId: String,
+            checkedInDB: CheckedInDB,
+            onSuccess: ((user: User, checkedIn: CheckedInDB) -> Unit)
+
+        ) {
+
             val db = Firebase.firestore
             db.collection("users").document(usersId)
                 .get()
@@ -427,7 +454,7 @@ class Repository {
                         val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
                         ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                             this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
-                            onSuccess(this)
+                            onSuccess(this, checkedInDB)
                         }
                     }
                 }
@@ -435,52 +462,23 @@ class Repository {
 
 
 
-        fun getAndListenCheckedInIds(
-            hotSpotId: String,
-            onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ): ListenerRegistration {
 
+
+
+        fun updateIsInterestedDB(hotSpotId: String, useId: String, isInterested: Boolean) {
             val db = Firebase.firestore
-
-            val registration = db.collection("hotSpots2").document(hotSpotId)
-                .addSnapshotListener { value, error ->
-
-                    if (error != null) {
-                        Log.w(TAG, "Listen failed.", error)
-                        return@addSnapshotListener
-                    }
-
-
-                    if (value != null) {
-
-                        val hotSpot = value.toObject<HotSpot>()
-
-                        val checkedInList = hotSpot?.checkedIn
-
-                        val newList = ArrayList<String>()
-                        checkedInList?.forEach {
-                            Log.d(TAG, "snapshot found: checkedIn3 ${it.id}")
-                            it.id?.let { it1 -> newList.add(it1) }
-
-                        }
-
-                        onSuccess(newList)
-
-                    } else {
-                        Log.d(TAG, "Current data: null")
-                    }
-
-
+            db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(useId)
+                .update("interested", isInterested)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Success...Repository")
 
                 }
 
-            return registration
         }
-
-
-
 
     }
 
 
 }
+
 

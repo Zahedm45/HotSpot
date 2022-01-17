@@ -55,7 +55,7 @@
 
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch1"
+            android:id="@+id/after_check_interested_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -63,8 +63,7 @@
             android:text="Interested"
             android:textColor="@color/white"
             android:textSize="18sp"
-
-
+            android:checked="true"
             app:layout_constraintBottom_toBottomOf="@+id/after_check_in_party_img"
             app:layout_constraintEnd_toEndOf="parent" />
 
