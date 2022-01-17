@@ -22,49 +22,35 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
+import java.lang.Exception
 
 class Repository {
 
 
     companion object {
 
-        // private val auth = Firebase.auth
-        // private val fbUser = Firebase.auth.currentUser
-        //private val db = Firebase.firestore
-
-/*
-        fun createUserInFirebase(
-            user: User,
-            onSuccess: (() -> Unit),
-            onFailure: ((message: String) -> Unit)
-
-        ) {
-
-
-
-            val email = user.emailAddress
-            val password = user.password
-
-            if(email.isBlank() || password.isBlank()) {
-                return
-            }
-
-           val auth = Firebase.auth
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-
-                    if (task.isSuccessful) {
-                        addProfileToFirebase(user, onSuccess, onFailure)
-
-                    } else {
-
-                        Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                        onFailure(task.exception?.message.toString())
+        fun deleteUser(){
+            try {
+                val user = Firebase.auth.currentUser!!
+                val db = Firebase.firestore
+                db.collection("users").document(user.uid)
+                    .delete().addOnCompleteListener() {
+                        if (it.isSuccessful) {
+                            user.delete()
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        Log.d(TAG, "User account deleted.")
+                                    }
+                                }
+                        }
                     }
-                }
-
+            } catch (e : Exception){
+                Log.d(TAG,e.toString())
+                Log.d("Lucas Lucas Lucas Lucas Lucas Lucas", e.stackTraceToString())
+                e.printStackTrace()
+            }
         }
-*/ //TODO we no longer need this method.
+
         fun getFirebaseUser() : FirebaseUser?{
             return Firebase.auth.currentUser
         }
@@ -474,13 +460,9 @@ class Repository {
                 .update("interested", isInterested)
                 .addOnSuccessListener {
                     Log.d(TAG, "Success...Repository")
-
                 }
         }
-
     }
-
-
 }
 
 

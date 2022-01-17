@@ -31,7 +31,7 @@ import kotlin.concurrent.timerTask
 class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
-    private lateinit var connectionLiveData: ConnectionLiveData
+
     private val editProfileVM = EditProfileVM
     var bitmap: Bitmap? = null
 
@@ -57,14 +57,6 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEditProfileBinding.bind(view)
         editProfileVM.getUserProfile(binding, this)
-
-        connectionLiveData = ConnectionLiveData(this.requireContext())
-        connectionLiveData.observe(this.viewLifecycleOwner, { isConnected ->
-            when(isConnected){
-                true -> print("ok")
-                false -> Snackbar.make(binding.root,"Wifi", Snackbar.LENGTH_INDEFINITE).show()
-            }
-        })
 
 
 
