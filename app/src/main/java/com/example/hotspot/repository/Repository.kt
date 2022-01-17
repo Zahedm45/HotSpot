@@ -5,6 +5,8 @@ import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.icu.number.NumberFormatter.with
+import android.icu.number.NumberRangeFormatter.with
 import android.location.Location
 import android.util.Log
 import com.example.hotspot.model.CheckedInDB
@@ -18,6 +20,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
@@ -435,8 +438,10 @@ class Repository {
 
 
 
-
-
+        private lateinit var onSuccess: (user: User, checkedIn: CheckedInDB) -> Unit
+        private var user: User? = null
+        private var bitmap: Bitmap? = null
+        private var checkedInDB: CheckedInDB? = null
 
         fun getCheckedInUserFromDB(
             usersId: String,
@@ -444,20 +449,38 @@ class Repository {
             onSuccess: ((user: User, checkedIn: CheckedInDB) -> Unit)
 
         ) {
+            this.onSuccess = onSuccess
+            this.checkedInDB = checkedInDB
+
+            val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
+            val ONE_MEGABYTE: Long = (624 * 624).toLong()
+            ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+                subFunOfGetCheckedInUserFromDB()
+            }
 
             val db = Firebase.firestore
             db.collection("users").document(usersId)
                 .get()
                 .addOnSuccessListener { doc ->
                     doc.toObject<User>()?.apply {
-                        val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
-                        val ONE_MEGABYTE: Long = (624 * 624).toLong()
-                        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                            this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
-                            onSuccess(this, checkedInDB)
-                        }
+                        user = this
+                        subFunOfGetCheckedInUserFromDB()
                     }
                 }
+        }
+
+
+
+        private fun subFunOfGetCheckedInUserFromDB() {
+            user?.let { itUser ->
+                bitmap?.let {
+                    itUser.bitmapImg = it
+                    onSuccess(itUser, checkedInDB!!)
+                }
+
+            }
+
         }
 
 

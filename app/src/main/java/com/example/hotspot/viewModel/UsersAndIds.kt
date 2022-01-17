@@ -70,7 +70,7 @@ class UsersAndIds() {
                 return
             }
 
-            if (checkedInMap.get(checkedIn.id) != checkedIn.isInterested ) {
+            if (checkedInMap[checkedIn.id] != checkedIn.isInterested ) {
                 checkedInMap.replace(checkedIn.id!!, checkedIn.isInterested!!)
 
                 if (checkedIn.isInterested!!) {
