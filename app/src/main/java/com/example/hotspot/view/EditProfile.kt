@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
@@ -23,6 +24,7 @@ import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.other.UtilView
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.viewModel.EditProfileVM
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -59,8 +61,8 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         connectionLiveData = ConnectionLiveData(this.requireContext())
         connectionLiveData.observe(this.viewLifecycleOwner, { isConnected ->
             when(isConnected){
-                true -> Log.d("true", "true LUCAS")
-                false -> Log.d("false", "LUCAS")
+                true -> print("ok")
+                false -> Snackbar.make(binding.root,"Wifi", Snackbar.LENGTH_INDEFINITE).show()
             }
         })
 
