@@ -11,6 +11,7 @@ import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLoginSuggestionBinding
 import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.other.DialogWifi
+import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.other.network.TAG
 import com.example.hotspot.view.phoneAuthentification.ActivityPhoneAuthentification
 
@@ -18,7 +19,7 @@ import com.example.hotspot.view.phoneAuthentification.ActivityPhoneAuthentificat
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginSuggestionBinding
-
+    private lateinit var connectionLiveData: ConnectionLiveData
 
 
 
@@ -28,25 +29,33 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginSuggestionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        connectionLiveData = ConnectionLiveData(this)
 
 
         supportActionBar?.hide()
 
-        binding.activityLoginCreateProfileBtn.setOnClickListener {
+        connectionLiveData = ConnectionLiveData(this)
+        connectionLiveData.observe(this, { isConnected ->
 
-            ButtonAnimations.clickButton(binding.activityLoginCreateProfileBtn)
-            startPhoneAuthentication()
-        }
+            binding.activityLoginCreateProfileBtn.setOnClickListener {
+                if(!isConnected) {
+                    DialogWifi().show(supportFragmentManager, TAG)
+                    return@setOnClickListener
+                }
+                ButtonAnimations.clickButton(binding.activityLoginCreateProfileBtn)
+                startPhoneAuthentication()
+            }
 
-        binding.activityLoginLoginBtn.setOnClickListener {
+            binding.activityLoginLoginBtn.setOnClickListener {
+                if(!isConnected) {
+                    DialogWifi().show(supportFragmentManager, TAG)
+                    return@setOnClickListener
+                }
+                ButtonAnimations.clickButton(binding.activityLoginLoginBtn)
+                startPhoneAuthentication()
+            }
 
-            DialogWifi().show(supportFragmentManager, TAG)
-            return@setOnClickListener
-            ButtonAnimations.clickButton(binding.activityLoginLoginBtn)
-            startPhoneAuthentication()
-        }
-
+        })
 
     }
 
