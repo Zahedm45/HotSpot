@@ -56,7 +56,7 @@ class UsersAndIds() {
                         isInterestedTrueListHelper.add(id)
                         isInterestedTrueList.value = isInterestedTrueListHelper
                     }
-                    Log.i(TAG, "UsersAndIds.... added")
+                    Log.i(TAG, "UsersAndIds.... user added")
 
 
                 }
@@ -85,7 +85,7 @@ class UsersAndIds() {
                 isInterestedTrueList.value = isInterestedTrueListHelper
 
                 //  setIsInterestedChanged()
-                Log.i(TAG, "UsersAndIds.... updated")
+                Log.i(TAG, "UsersAndIds.... user updated")
 
 
             }
@@ -101,7 +101,7 @@ class UsersAndIds() {
                     users.value = userList
                     isInterestedTrueListHelper.remove(id)
 
-                    Log.i(TAG, "UsersAndIds.... removed")
+                    Log.i(TAG, "UsersAndIds.... user removed")
                 }
 
             }
