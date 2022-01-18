@@ -21,6 +21,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
 import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.other.DialogWifi
 import com.example.hotspot.other.UtilView
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.viewModel.EditProfileVM
@@ -31,7 +32,7 @@ import kotlin.concurrent.timerTask
 class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
-
+    private lateinit var connectionLiveData: ConnectionLiveData
     private val editProfileVM = EditProfileVM
     var bitmap: Bitmap? = null
 
@@ -65,23 +66,37 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
             intent.type = "image/*"
             startActivityForResult(intent, 0)
         }
+        connectionLiveData = ConnectionLiveData(this.requireContext())
+        connectionLiveData.observe(this.requireActivity(), { isConnected ->
 
-        binding.tvSignOut.setOnClickListener{
-            UtilView.signOut(this.requireActivity())
-        }
+            binding.tvSignOut.setOnClickListener{
+                ButtonAnimations.clickText(binding.tvSignOut)
+                if(!isConnected) {
+                    DialogWifi().show(this.childFragmentManager, com.example.hotspot.other.network.TAG)
+                    return@setOnClickListener
+                }
+                UtilView.signOut(this.requireActivity())
+            }
+
+            binding.tvDeleteAccount.setOnClickListener(){
+                ButtonAnimations.clickText(binding.tvDeleteAccount)
+                if(!isConnected) {
+                    DialogWifi().show(this.childFragmentManager, com.example.hotspot.other.network.TAG)
+                    return@setOnClickListener
+                }
+                editProfileVM.deleteUser()
+                navigateToLogin()
+            }
+        })
+
 
         binding.tvDone.setOnClickListener {
-                ButtonAnimations.clickText(binding.tvDone)
-
+            ButtonAnimations.clickText(binding.tvDone)
             editProfileVM.updateUserProfile(bitmap)
             findNavController().navigate(R.id.action_editProfile_to_personalProfile)
         }
 
-        binding.tvDeleteAccount.setOnClickListener(){
-            ButtonAnimations.clickText(binding.tvDeleteAccount)
-            editProfileVM.deleteUser()
-            navigateToLogin()
-        }
+
         setGradientColor()
 
 

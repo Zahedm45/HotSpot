@@ -49,6 +49,7 @@ class FragmentUploadImage : Fragment() {
 
 
         connectionLiveData = ConnectionLiveData(this.requireContext())
+
         connectionLiveData.observe(this.viewLifecycleOwner, { isConnected ->
             binding.continueButton.setOnClickListener {
                 if(!isSubmitClickable) return@setOnClickListener
