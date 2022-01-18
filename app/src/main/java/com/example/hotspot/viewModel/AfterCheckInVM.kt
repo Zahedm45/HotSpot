@@ -33,10 +33,10 @@ class AfterCheckInVM {
                 newCheckedIn.forEach {
                     it.id?.let { id -> newIdList.add(id) }
                 }
-
+                val tempOldC = oldCheckedIn
                 val toRemove = ArrayList<String>()
-                for (curr in oldCheckedIn) {
 
+                for (curr in tempOldC) {
                     if (!newIdList.contains(curr.key)) {
                         toRemove.add(curr.key)
                     }
@@ -49,6 +49,7 @@ class AfterCheckInVM {
                 }
 
             }
+
 
 
             for (curr in newCheckedIn) {
