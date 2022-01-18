@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityNewMessageBinding
 import com.example.hotspot.model.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -41,13 +42,16 @@ class NewMessageActivity : AppCompatActivity() {
 
         val db = Firebase.firestore
         val userRef = db.collection("users")
+        val uid = FirebaseAuth.getInstance().uid
 
         userRef.get()
             .addOnSuccessListener {
                 val users = it.toObjects<User>()
                 val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 users.forEach { user ->
-                    adapter.add(UserItem(user, user.uid!!))
+                    if (user.uid != uid) {
+                        adapter.add(UserItem(user, user.uid!!))
+                    }
                 }
                 adapter.setOnItemClickListener { item, view ->
                     val userItem = item as UserItem
