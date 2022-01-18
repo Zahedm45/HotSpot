@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.location.Location
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -172,6 +173,7 @@ class BeforeCheckIn : Fragment() {
         }
 
         binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
+            deleteFavoriteHotspot()
             binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
             binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
             Log.i(TAG, "Removed hot 3")
@@ -271,6 +273,19 @@ class BeforeCheckIn : Fragment() {
         } ?: run { Log.i(TAG, "HotSpot id is null ($this)") }
 
     }
+
+    private fun deleteFavoriteHotspot(){
+        args.hotSpot.id?.let{ hotSpotId ->
+
+            DataHolder.currentUser?.uid?.let { userId ->
+                BeforeCheckInVM.deleteHotSpotDB(hotSpotId,userId)
+            } ?: run { Log.i(TAG, "User id is null ($this)") }
+
+        } ?: run { Log.i(TAG, "HotSpot id is null ($this)") }
+
+    }
+
+
 
 }
 

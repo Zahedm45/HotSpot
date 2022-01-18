@@ -88,6 +88,10 @@ class BeforeCheckInVM {
             SubRepository.addHotSpotDB(hotSpotId, userId)
         }
 
+        fun deleteHotSpotDB(hotSpotId: String, userId: String){
+            SubRepository.deleteHotSpotDB(hotSpotId,userId)
+        }
+
     }
 
 

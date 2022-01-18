@@ -1,5 +1,6 @@
 package com.example.hotspot.repository
 
+import android.nfc.Tag
 import android.util.Log
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.other.network.TAG
@@ -11,12 +12,15 @@ class SubRepository {
 
     companion object {
 
+        val db = Firebase.firestore
+        val map = mutableMapOf<String, String>()
+
         fun addHotSpotDB(hotSpotId: String, userId: String) {
             Log.i(TAG, "HotSpot added...1")
 
-            val db = Firebase.firestore
+           // val db = Firebase.firestore
 
-            val map = mutableMapOf<String, String>()
+            //val map = mutableMapOf<String, String>()
             map.put("hotspotId", hotSpotId)
 
             db.collection("users").document(userId).collection("favoriteHotspots").document(hotSpotId)
@@ -24,6 +28,19 @@ class SubRepository {
                 .addOnSuccessListener {
                     Log.i(TAG, "HotSpot added...")
                 }
+        }
+
+        fun deleteHotSpotDB(hotSpotId: String, userId : String){
+            Log.i(TAG, "HotSpot deleted...")
+            map.put("hotspotId", hotSpotId)
+
+            db.collection("users").document(userId).collection("favoriteHotspots").document(hotSpotId)
+                .delete()
+                .addOnSuccessListener {
+                    Log.i(TAG, "HotSpot deleted...")
+                }
+
+
         }
 
     }
