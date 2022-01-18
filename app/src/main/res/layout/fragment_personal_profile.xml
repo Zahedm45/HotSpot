@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:elevation="0dp"
+        android:backgroundTint="#f7f7f7"
         >
 
 
