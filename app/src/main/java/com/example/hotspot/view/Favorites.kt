@@ -81,7 +81,7 @@ class Favorites : Fragment() {
                 val hotspots = qr.documents
                 val adapter = GroupAdapter<GroupieViewHolder>()
                 hotspots.forEach{hotSpot ->
-                    resolveHotspotRef((hotSpot.get("hotspot") as DocumentReference).id, adapter)
+                    resolveHotspotRef(hotSpot.get("hotspotId") as String, adapter)
                 }
                 binding.RVfavorites.adapter = adapter
 
@@ -95,7 +95,7 @@ class Favorites : Fragment() {
     private fun resolveHotspotRef(ref : String, adapter: GroupAdapter<GroupieViewHolder>){
         val db = Firebase.firestore
         val favoriteHotspotsRef = db
-            .collection("hotSpots2").document(ref)
+            .collection("hotSpots3").document(ref)
         favoriteHotspotsRef.get()
             .addOnSuccessListener { task ->
                 if (task.exists()) {

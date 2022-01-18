@@ -1,6 +1,7 @@
 package com.example.hotspot.repository
 
 import android.util.Log
+import com.example.hotspot.model.HotSpot
 import com.example.hotspot.other.network.TAG
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
