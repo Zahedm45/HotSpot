@@ -18,14 +18,12 @@ class SubRepository {
             val map = mutableMapOf<String, String>()
             map.put("hotspotId", hotSpotId)
 
-            db.collection("users").document(userId).collection("favoriteHotspots")
-                .add(map)
+            db.collection("users").document(userId).collection("favoriteHotspots").document(hotSpotId)
+                .set(map)
                 .addOnSuccessListener {
                     Log.i(TAG, "HotSpot added...")
                 }
         }
-
-
 
     }
 
