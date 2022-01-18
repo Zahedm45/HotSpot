@@ -125,7 +125,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_layout_for_hotspot_name"
-            app:layout_constraintBottom_toTopOf="@+id/before_check_in_description_tv"
+            app:layout_constraintBottom_toTopOf="@+id/beforeCI_address_tv"
             android:text="0" />
 
 
@@ -146,7 +146,7 @@
 
 
         <TextView
-            android:id="@+id/before_check_in_description_tv"
+            android:id="@+id/beforeCI_address_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -162,10 +162,36 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/before_check_in_rating_bar"
+            app:layout_constraintBottom_toTopOf="@+id/beforeCI_description_tv"
             app:layout_constraintTop_toBottomOf="@+id/before_check_in_checked_in"
 
             />
+
+
+        <TextView
+            android:id="@+id/beforeCI_description_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:lineSpacingExtra="5dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:fontFamily="@font/poppins_light"
+            android:textStyle="italic"
+            android:text="No description"
+            android:textSize="14sp"
+
+            android:layout_marginTop="15dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/before_check_in_rating_bar"
+            app:layout_constraintTop_toBottomOf="@+id/beforeCI_address_tv"
+
+            />
+
+
 
 
 
@@ -188,7 +214,7 @@
             android:isIndicator="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/before_check_in_description_tv"
+            app:layout_constraintTop_toBottomOf="@+id/beforeCI_description_tv"
             app:layout_constraintBottom_toTopOf="@+id/before_check_in_reviews"
             />
 

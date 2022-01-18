@@ -29,7 +29,12 @@
 
         <action
             android:id="@+id/action_beforeCheckIn_to_afterCheckIn"
-            app:destination="@id/afterCheckIn" />
+            app:destination="@id/afterCheckIn"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/mapsFragment" />
         <argument
             android:name="hotSpot"
             app:argType="com.example.hotspot.model.HotSpot"
@@ -54,7 +59,10 @@
         tools:layout="@layout/fragment_edit_profile" >
         <action
             android:id="@+id/action_editProfile_to_personalProfile"
-            app:destination="@id/personalProfile" />
+            app:destination="@id/personalProfile"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/mapsFragment" />
     </fragment>
 
 
@@ -69,19 +77,6 @@
             android:id="@+id/action_favorites_to_beforeCheckIn"
             app:destination="@id/beforeCheckIn" />
     </fragment>
-
-
-
-    <fragment
-        android:id="@+id/listeView"
-        android:name="com.example.hotspot.view.ListeView"
-        android:label="fragment_liste_view"
-        tools:layout="@layout/fragment_liste_view" >
-        <action
-            android:id="@+id/action_listeView_to_beforeCheckIn"
-            app:destination="@id/beforeCheckIn" />
-    </fragment>
-
 
 
     <fragment
@@ -103,7 +98,11 @@
         tools:layout="@layout/fragment_personal_profile" >
         <action
             android:id="@+id/action_personalProfile_to_editProfile"
-            app:destination="@id/editProfile" />
+            app:destination="@id/editProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 
@@ -130,7 +129,11 @@
         tools:layout="@layout/fragment_maps4" >
         <action
             android:id="@+id/action_mapsFragment_to_beforeCheckIn"
-            app:destination="@id/beforeCheckIn" />
+            app:destination="@id/beforeCheckIn"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_fade"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
 
     </fragment>
 

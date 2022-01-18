@@ -87,7 +87,7 @@ class EditProfileVM {
         private fun navigateToPersonalProfile() {
             Toast.makeText(fragment.context, "Successfully saved.", Toast.LENGTH_SHORT).show()
 
-            fragment.view?.let { Navigation.findNavController(it).navigate(R.id.action_editProfile_to_personalProfile) }
+            //fragment.view?.let { Navigation.findNavController(it).navigate(R.id.action_editProfile_to_personalProfile) }
 
 
         }
@@ -104,11 +104,11 @@ class EditProfileVM {
 
                 navigateToPersonalProfile()
             }
-
         }
 
-
-
+        fun deleteUser(){
+            repository.deleteUser()
+        }
     }
 
 

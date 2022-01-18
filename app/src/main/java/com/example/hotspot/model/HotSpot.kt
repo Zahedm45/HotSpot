@@ -2,6 +2,7 @@ package com.example.hotspot.model
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.graphics.Bitmap
 import android.location.Geocoder
 import android.os.Parcel
 import android.os.Parcelable
@@ -21,23 +22,32 @@ data class HotSpot(
     var id: String? = null,
     var name: String? = null,
     var address: Address? = null,
+    var description: String? = null,
     var geoPoint: GeoPoint? = null,
     var rating: Double? = null,
-    var checkedIn: ArrayList<String>? = null
+  //  var checkedIn: ArrayList<CheckedInDB>? = null,
+    var bitmap: Bitmap? = null
 ) : Parcelable {
+
+
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readValue(Address::class.java.classLoader) as? Address,
-        parcel.readValue(GeoPoint::class.java.classLoader) as? GeoPoint,
+        parcel.readString(),
+        parcel.readValue(GeoPoint::class.java.classLoader) as GeoPoint,
         parcel.readValue(Double::class.java.classLoader) as? Double,
-        parcel.readValue(String::class.java.classLoader) as? ArrayList<String>
+   //     parcel.readValue(CheckedInDB::class.java.classLoader) as ArrayList<CheckedInDB>,
+        parcel.readParcelable(Bitmap::class.java.classLoader)
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(name)
+        parcel.writeString(description)
         parcel.writeValue(rating)
+        parcel.writeParcelable(bitmap, flags)
     }
 
     override fun describeContents(): Int {
@@ -53,7 +63,6 @@ data class HotSpot(
             return arrayOfNulls(size)
         }
     }
-
 
 }
 
@@ -91,6 +100,20 @@ class SubClassForHotspot() {
             checkedIn2.add("lædlkjlæd fsdoielæe")
             checkedIn2.add("ldældæel3ooieioeri33")
 
+            Log.i(TAG, "Successfully random")
+
+
+
+            val che = CheckedInDB(
+
+                id = "gSnHzxGiXFTftWTpuF2LYgDKm123",
+             //   geoPoint = GeoPoint(55.44, 12.33),
+                isInterested = true
+            )
+
+/*            val subArr = ArrayList<CheckedInDB>()
+            subArr.add(che)*/
+
             val hotSpot = HotSpot().apply {
                 val ref = FirebaseDatabase.getInstance().reference
                 val uniqueId: String? = ref.push().key
@@ -99,21 +122,26 @@ class SubClassForHotspot() {
                 this.address = address
                 geoPoint = GeoPoint(latitude, longitude)
                 rating = randomTwoDig
-                checkedIn = checkedIn2
+              //  checkedIn = subArr
+                // checkedIn = checkedIn2
             }
 
 
-            hotSpot.id?.let {
-                db.collection("hotSpots").document(it).set(hotSpot)
+
+
+            hotSpot.id?.let { id ->
+                db.collection("hotSpots3").document(id).set(hotSpot)
                     .addOnSuccessListener {
-                        Log.i(TAG, "Successfully random Hotspots created")
+                        Log.i(TAG, "Successfully random Hotspots are created")
                     }
+
+                che.id?.let {
+                    db.collection("hotSpots3").document(id).collection("checkedIn").document(
+                        it
+                    ).set(che)
+                }
+
             }
-
-
-
-
-
 
 
         }

@@ -38,7 +38,9 @@
 
         <activity
             android:name=".view.createProfilePackage.ActivityCreateProfile"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"
+            />
 
 
 

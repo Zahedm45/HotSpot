@@ -38,6 +38,7 @@ class FragmentAge : Fragment() {
 
         binding.continueButton.setOnClickListener{
             if(!isContinueClickable) return@setOnClickListener
+            ButtonAnimations.clickButton(binding.continueButton)
             findNavController().navigate(R.id.action_createProfileAgeFragment_to_fragmentEmail)
         }
 
@@ -51,9 +52,7 @@ class FragmentAge : Fragment() {
 
         binding.dateButton.setOnClickListener{
             initDatePicker()
-            viewModel.setDayOfBirth(cday)
-            viewModel.setMonth(cmonth)
-            viewModel.setYear(cyear)
+
         }
 
         viewModel.getDateString().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
@@ -86,6 +85,9 @@ class FragmentAge : Fragment() {
             val dateString = setDateString(mdayOfMonth, mmonth,myear)
             binding.dateButton.setText(dateString)
             viewModel.setdateString(dateString)
+            viewModel.setDayOfBirth(mdayOfMonth)
+            viewModel.setMonth(mmonth)
+            viewModel.setYear(myear)
         }, year, month, day)
 
         dpd.show()

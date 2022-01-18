@@ -14,8 +14,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.hotspot.databinding.FragmentCreateProfileUploadImageBinding
 import android.content.ContentResolver
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.util.Log
 import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.other.DialogWifi
+import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.view.AfterLoginActivity
 
 
@@ -24,6 +28,7 @@ class FragmentUploadImage : Fragment() {
     private val viewModel: SharedViewModelCreateProfile by activityViewModels()
     private var _binding: FragmentCreateProfileUploadImageBinding? = null
     private val binding get() = _binding!!
+    private lateinit var connectionLiveData: ConnectionLiveData
 
     private val pickImage = 100
     private var imageUri: Uri? = null
@@ -41,18 +46,30 @@ class FragmentUploadImage : Fragment() {
         }
 
         binding.progressBarIndeterminate.visibility = View.GONE
-        binding.continueButton.setOnClickListener {
-            if(!isSubmitClickable) return@setOnClickListener
-            binding.progressBar.visibility = View.GONE
-            binding.progressBarIndeterminate.visibility = View.VISIBLE
-            viewModel.createNewProfile( { ->
-                updateUIOnSuccess()
-            },
-                {
-                        msg -> updateUIOnFailure(msg)
+
+
+        connectionLiveData = ConnectionLiveData(this.requireContext())
+
+        connectionLiveData.observe(this.viewLifecycleOwner, { isConnected ->
+            binding.continueButton.setOnClickListener {
+                if(!isSubmitClickable) return@setOnClickListener
+                if(!isConnected) {
+                    DialogWifi().show(this.childFragmentManager, com.example.hotspot.other.network.TAG)
+                    return@setOnClickListener
                 }
-            )
-        }
+                ButtonAnimations.clickButton(binding.continueButton)
+                binding.progressBar.visibility = View.GONE
+                binding.progressBarIndeterminate.visibility = View.VISIBLE
+                viewModel.createNewProfile( { ->
+                    updateUIOnSuccess()
+                },
+                    {
+                            msg -> updateUIOnFailure(msg)
+                    }
+                )
+            }
+        })
+
         return binding.root
     }
 
@@ -110,6 +127,8 @@ class FragmentUploadImage : Fragment() {
         Toast.makeText(this.requireContext(), "Success", Toast.LENGTH_SHORT).show()
         val intent = Intent(this.context, AfterLoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
     }
 

@@ -1,12 +1,11 @@
 package com.example.hotspot.view
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import androidx.fragment.app.Fragment
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
@@ -16,20 +15,19 @@ import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
-import com.example.hotspot.model.SubClassForHotspot
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.infoWindow.InfoWindow
+import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.MapsAndHotspotsVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.GeoPoint
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -52,7 +50,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var location: LatLng? = null
 
 
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        DataHolder.fetchCurrentUserFromDB()
+    }
 
 
     override fun onCreateView(
@@ -61,9 +62,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         savedInstanceState: Bundle?
     ): View? {
 
-
-        val view = inflater.inflate(R.layout.fragment_maps4, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_maps4, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,18 +70,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding = FragmentMaps4Binding.bind(view)
 
         requestLocPermissionAndTrackLocation()
-
         addProgressBar()
-
         myLocationBtn(view)
+    }
 
-/*        binding.fragmentMapsMyLocationBtn.setOnClickListener {
-           // addHotSpotsInDB()
-            if (location != null && googleMap != null) {
-                moveCamara(12f)
-            }
-        }*/
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        MapsAndHotspotsVM.showHotSpotReg?.remove()
     }
 
 
@@ -92,27 +88,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun myLocationBtn(view: View) {
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
           //  addHotSpotsInDB()
-
-            CoroutineScope(IO).launch {
-                val drawable = resources.getDrawable(R.drawable.button_effect_my_location)
-                binding.fragmentMapsMyLocationBtn.background = drawable
-
-                delay(100)
-                CoroutineScope(Main).launch {
-                    val drawable2 = resources.getDrawable(R.drawable.round_btn)
-                    binding.fragmentMapsMyLocationBtn.background = drawable2
-
-                    if (location != null && googleMap != null) {
-                        moveCamara(12f)
-                    }
-                }
+            if (location != null && googleMap != null) {
+                moveCamara(12f)
             }
+            ButtonAnimations.clickImageButton(binding.fragmentMapsMyLocationBtn)
         }
-
     }
-
-
-
 
 
 
@@ -120,16 +101,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (Firebase.auth.uid == null) {
+/*        if (Firebase.auth.uid == null) {
             Log.i(TAG, "not logged in ..")
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             requireActivity().finish()
-        }
+        }*/
+
         setHasOptionsMenu(true)
-
-
     }
 
 
@@ -162,7 +142,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         requestLocPermissionAndTrackLocation()
-
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
@@ -172,7 +151,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         } else {
             requestLocPermissionAndTrackLocation()
         }
-
     }
 
 
@@ -201,11 +179,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-
-
-
     private fun observeUserPosition() {
-
         MapService.lastLocation.observe(viewLifecycleOwner, Observer { it ->
             if(it != null) {
                 val latitude =   it.latitude
@@ -215,10 +189,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 location?.let {
                     updateBlueDot()
                 }
-
             }
         })
-
     }
 
 
@@ -248,9 +220,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-
+    private val markers: ArrayList<Marker> = ArrayList()
 
     private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
+        MapsAndHotspotsVM.hotSpots = hotSpots
+
+        if (markers.isNotEmpty()) {
+            markers.forEach {
+                it.remove()
+            }
+        }
 
         hotSpots.forEach { crrHotSpot ->
             val lat = crrHotSpot.geoPoint?.latitude
@@ -270,17 +249,17 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                             .snippet("Rating: $rating")
 
                     )?.apply {
-                        this.showInfoWindow()
+                        //this.showInfoWindow()
+                        markers.add(this)
                     }
 
                     it.setInfoWindowAdapter(InfoWindow(requireContext()))
+
                 }
             }
         }
 
         setOnClickListener(hotSpots)
-
-
         CoroutineScope(IO).launch {
             delay(1000)
             CoroutineScope(Main).launch {
@@ -308,7 +287,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                         hotSpot = it
                         return@loop
                     }
-
                 }
             }
 
@@ -371,6 +349,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+/*
     private fun addHotSpotsInDB() {
         SubClassForHotspot.defineRH("No Stress Bar", 55.667, 12.5842, requireContext())
         SubClassForHotspot.defineRH("Muck Bar", 55.7143, 12.5595, requireContext())
@@ -384,6 +363,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     }
 
+*/
 
 
 
