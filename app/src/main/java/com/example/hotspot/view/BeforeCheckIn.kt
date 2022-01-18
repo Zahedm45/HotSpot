@@ -22,6 +22,8 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.text.StringBuilder
+
 object Constant {
     const val STREET_WITHOUT_NAME = "Vej uden navn"
     const val CHECKED_IN = "Checked in: "
@@ -65,11 +67,17 @@ class BeforeCheckIn : Fragment() {
 
 
     private fun setAllInfo() {
+        val builder = StringBuilder()
+        builder.append("\'")
+        builder.append(args.hotSpot.description)
+        builder.append("\'")
+
+
         binding.beforeCheckInEventLocationName.text = args.hotSpot.name
         binding.beforeCIAddressTv.text = getAddress()
         binding.beforeCheckInRatingBar.rating = args.hotSpot.rating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        binding.beforeCIDescriptionTv.text = args.hotSpot.description
+        binding.beforeCIDescriptionTv.text = builder
 
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         // binding.beforeCheckInReviews.paintFlags =  Paint.UNDERLINE_TEXT_FLAG or binding.beforeCheckInReviews.paintFlags
