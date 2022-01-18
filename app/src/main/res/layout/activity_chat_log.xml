@@ -14,14 +14,15 @@
         android:ems="10"
         android:hint="Enter message"
         android:inputType="textPersonName"
-        android:background="@color/white"
+        android:background="@drawable/rounded_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/send_button_chatlog"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingLeft="20dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginEnd="8dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/send_button_chatlog"
@@ -43,7 +44,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="8dp"
-        android:background="#3E9C27B0"
+        android:background="#3EFFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/editText_chatlog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
