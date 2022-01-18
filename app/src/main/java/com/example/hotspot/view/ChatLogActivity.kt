@@ -98,11 +98,8 @@ class ChatLogActivity : AppCompatActivity() {
 
                     )) }
 
-                    Log.d(TAG, "${document.document.id} => ${document.document.data}")
-
                     if (document == newDocuments.elementAt(newDocuments.size() -1)) {
                         latestMessageTimestamp = document.document.data["timestamp"].toString().toLong()
-                        Log.d(TAG,"New latestMessageTimestamp = $latestMessageTimestamp")
                     }
                 }
 

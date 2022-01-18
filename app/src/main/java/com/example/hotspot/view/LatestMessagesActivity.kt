@@ -8,7 +8,9 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLatestMessagesBinding
+import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
+import com.example.hotspot.view.ChatLogActivity.Companion.TAG
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
@@ -59,28 +61,28 @@ class LatestMessagesActivity : AppCompatActivity() {
                     messageRef.whereIn("toFrom",listOf(uid+user.uid,user.uid+uid))
                         .addSnapshotListener {
                                 newDocuments, e ->
+
                             if (e != null) {
-                                Log.w("LatestMessagesActivity", "Listen failed.", e)
+                                Log.d("LatestMessagesActivity", "Listen failed.", e)
                                 return@addSnapshotListener
                             }
+                            val messages = newDocuments?.toObjects<ChatMessage>()
 
-                            if (newDocuments != null) {
-                                for (document in newDocuments) {
-                                    if (document.data["toFrom"] == uid+user.uid) {
-                                        tempLatestMessage = document.data["text"].toString()
-                                    }
+                            if (messages != null) {
+                                messages.forEach { message ->
 
-                                }
-                                if (tempLatestMessage == "") {
-                                    for (document in newDocuments) {
-                                        if (document.data["toFrom"] == user.uid+uid) {
-                                            tempLatestMessage = document.data["text"].toString()
-                                        }
+                                    if (message.toFrom == uid+user.uid || message.toFrom == user.uid+uid) {
+                                        tempLatestMessage = message.text
+
                                     }
                                 }
+
+                                adapter.add(LatestMessageRow(user, tempLatestMessage))
+                            }
+                            else {
+                                Log.d(TAG,"Messages == null")
                             }
                         }
-                    adapter.add(LatestMessageRow(user, tempLatestMessage))
                 }
                 adapter.setOnItemClickListener { item, view ->
                     val latestMessageRow = item as LatestMessageRow
