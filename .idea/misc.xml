@@ -35,9 +35,13 @@
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navi.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navigation.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/mikej/StudioProjects/HotSpot/app/src/main/res/layout/activity_chat_log.xml" value="0.22333333333333336" />
+        <entry key="..\:/Users/mikej/StudioProjects/HotSpot/app/src/main/res/layout/after_checked_in_recycler_view_item.xml" value="0.10869565217391304" />
         <entry key="..\:/Users/mikej/StudioProjects/HotSpot/app/src/main/res/layout/before_check_in.xml" value="0.11752786220871327" />
+        <entry key="..\:/Users/mikej/StudioProjects/HotSpot/app/src/main/res/layout/chat_item.xml" value="0.10869565217391304" />
+        <entry key="..\:/Users/mikej/StudioProjects/HotSpot/app/src/main/res/layout/favorite_item.xml" value="0.22333333333333336" />
         <entry key="..\:/Users/mikej/StudioProjects/HotSpot/app/src/main/res/layout/fragment_favorites.xml" value="0.1" />
         <entry key="..\:/Users/mikej/StudioProjects/HotSpot/app/src/main/res/layout/fragment_reviews.xml" value="0.25" />
+        <entry key="..\:/Users/mikej/StudioProjects/HotSpot/app/src/main/res/layout/review_item.xml" value="0.25" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/circle_for_profile_picture.xml" value="0.31614583333333335" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/edittext_background1.xml" value="0.31614583333333335" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21796875" />
