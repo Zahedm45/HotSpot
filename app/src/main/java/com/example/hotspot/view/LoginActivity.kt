@@ -38,20 +38,22 @@ class LoginActivity : AppCompatActivity() {
         connectionLiveData.observe(this, { isConnected ->
 
             binding.activityLoginCreateProfileBtn.setOnClickListener {
+
+                ButtonAnimations.clickButton(binding.activityLoginCreateProfileBtn)
                 if(!isConnected) {
                     DialogWifi().show(supportFragmentManager, TAG)
                     return@setOnClickListener
                 }
-                ButtonAnimations.clickButton(binding.activityLoginCreateProfileBtn)
                 startPhoneAuthentication()
             }
 
             binding.activityLoginLoginBtn.setOnClickListener {
+
+                ButtonAnimations.clickButton(binding.activityLoginLoginBtn)
                 if(!isConnected) {
                     DialogWifi().show(supportFragmentManager, TAG)
                     return@setOnClickListener
                 }
-                ButtonAnimations.clickButton(binding.activityLoginLoginBtn)
                 startPhoneAuthentication()
             }
 
