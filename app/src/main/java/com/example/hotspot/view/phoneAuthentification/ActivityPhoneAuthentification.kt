@@ -57,6 +57,8 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
         binding.enterVerificationLinearLayout.visibility = View.GONE
         binding.progressBar.visibility = View.GONE
         binding.progressBar2.visibility = View.GONE
+        binding.ivErrorIcon.visibility = View.GONE
+
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -209,6 +211,9 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     private fun countrySelector(){
         binding.ccp.registerCarrierNumberEditText(binding.phoneNumberEditText)
 
+
+
+
         binding.ccp.setPhoneNumberValidityChangeListener {
             if(!it){
                 binding.phoneNumberEditText.setTextColor(RED)
@@ -217,7 +222,9 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
             }
             else if(it){
                 ButtonAnimations.fadeIn(binding.phoneAuthContinueButton)
+
                 binding.phoneNumberEditText.setTextColor(BLACK)
+                binding.ivErrorIcon.visibility = View.GONE
                 isContinueClickable = true
             }
         }

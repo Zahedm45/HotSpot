@@ -1,6 +1,7 @@
 package com.example.hotspot.other
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
 import androidx.core.content.ContextCompat.startActivity
@@ -35,4 +36,6 @@ object UtilView {
         Firebase.auth.signOut()
         navigateToLoginPage(activity)
     }
+
+
 }

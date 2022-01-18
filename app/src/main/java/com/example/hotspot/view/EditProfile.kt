@@ -80,6 +80,7 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         binding.tvDeleteAccount.setOnClickListener(){
             ButtonAnimations.clickText(binding.tvDeleteAccount)
             editProfileVM.deleteUser()
+            navigateToLogin()
         }
         setGradientColor()
 
@@ -110,6 +111,14 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
         binding.tvDone.paint.setShader(textShader)
         binding.tvDone.setTextColor(Color.RED)
         Log.d("is this being called?", "is it?")
+    }
+
+    private fun navigateToLogin(){
+        val intent = Intent(this.context, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+        this.activity?.finish()
     }
 
 }

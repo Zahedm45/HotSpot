@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         style="?android:attr/progressBarStyleHorizontal"
         android:progress="16"
+        android:progressTint="@color/orange_hotspot"
         />
     <TextView
         android:layout_width="match_parent"
@@ -36,6 +37,8 @@
         android:fontFamily="@font/poppins_light"
         android:textColor="#000"
         android:layout_marginHorizontal="30dp"
+        android:backgroundTint="@color/black"
+
         />
 
     <TextView
