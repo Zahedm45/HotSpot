@@ -50,7 +50,7 @@ class AfterCheckIn : Fragment() {
         isInterestedBtn()
 
 
-        var mImgCheck = binding.afterCheckInProgress
+        var mImgCheck = binding.afterCheckInProgressDone
         (mImgCheck.drawable as Animatable).start()
 
 
