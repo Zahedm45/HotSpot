@@ -1,5 +1,6 @@
 package com.example.hotspot.view
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.UsersAndIds
 import android.graphics.drawable.Animatable
+import android.widget.ProgressBar
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.hotspot.R
 import kotlinx.coroutines.CoroutineScope
@@ -46,9 +49,8 @@ class AfterCheckIn : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfterCheckInBinding.bind(view)
+        setProgress()
 
-
-        binding.afterCheckedInRecyclerView.visibility = View.GONE
         setHotSpotInfo()
         heartBtn()
         setObserverForCheckedInList()
@@ -70,21 +72,30 @@ class AfterCheckIn : Fragment() {
 
     }
 
+    private lateinit var progressBar: ProgressBar
 
+
+
+    private fun setProgress() {
+       binding.afterCheckedInRecyclerView.isVisible = false
+        progressBar = binding.afterCheckInProgress
+        progressBar.indeterminateDrawable
+            .setColorFilter(ContextCompat.getColor(requireContext(), R.color.orange), PorterDuff.Mode.SRC_IN )
+    }
 
 
     private fun clearProgress() {
-
         val done = binding.afterCheckInProgressDone
         done.visibility = View.VISIBLE
         (done.drawable as Animatable).start()
-
         CoroutineScope(IO).launch {
             delay(800)
             CoroutineScope(Main).launch {
                 binding.afterCheckInBlank.isVisible = false
                 binding.afterCheckInProgress.visibility = View.GONE
-                binding.afterCheckedInRecyclerView.visibility = View.VISIBLE
+                binding.afterCheckedInRecyclerView.isVisible = true
+
+
                 (done.drawable as Animatable).stop()
                 done.visibility = View.GONE
 
@@ -109,7 +120,6 @@ class AfterCheckIn : Fragment() {
 
                 //adapter.clear()
                 adapter.update(groupieUserCheckedIns)
-
                 binding.afterCheckedInRecyclerView.adapter = adapter
                 setCheckedInUI(it.size)
             }
