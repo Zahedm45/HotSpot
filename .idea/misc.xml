@@ -88,10 +88,28 @@
         <entry key="app/src/main/res/drawable-v24/edittext_background1.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable-v24/ic_baseline_remove_red_eye_24.xml" value="0.40208333333333335" />
         <entry key="app/src/main/res/drawable/border_for_info_window.xml" value="0.3692708333333333" />
+        <entry key="app/src/main/res/drawable/bottom_nav_message_selector.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/bottom_nav_person_selector.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/bottom_navigation_text_selector.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/button_edit_text.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/button_effect.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable/button_effect_my_location.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/button_empty.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/button_filled.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/custom_border_for_toast.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/custom_button.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/custom_button_click_effect.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/custom_button_reverse.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/green_light_for_is_interested.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/ic_round_my_location_24.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/large_icon_favorite.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/person.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/red_ligth_for_is_interested.xml" value="0.3692708333333333" />
+        <entry key="app/src/main/res/drawable/ripple_for_custom_toast.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/round_btn.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/vector_favorite_gradient.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/vector_map_gradient.xml" value="0.3921875" />
         <entry key="app/src/main/res/layout/activity_after_login.xml" value="0.10833333333333334" />
         <entry key="app/src/main/res/layout/activity_create_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.37604166666666666" />
@@ -100,6 +118,7 @@
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/after_checked_in_recycler_view_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/before_check_in.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/layout/custom_toast_layout.xml" value="0.262037037037037" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/fragment_create_profile.xml" value="0.2796875" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.37604166666666666" />
@@ -110,6 +129,8 @@
         <entry key="app/src/main/res/layout/fragment_message_overview.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_personal_profile.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/info_window.xml" value="0.1828774062816616" />
+        <entry key="app/src/main/res/layout/snackbar_no_wifi.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/menu/nav_top_menu.xml" value="0.37604166666666666" />
       </map>
