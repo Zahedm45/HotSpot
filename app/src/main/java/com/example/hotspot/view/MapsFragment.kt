@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.example.hotspot.other.MapUtility
 import com.example.hotspot.other.UtilView.menuOptionClick
@@ -87,21 +88,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun myLocationBtn(view: View) {
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
           //  addHotSpotsInDB()
-
-            CoroutineScope(IO).launch {
-                val drawable = resources.getDrawable(R.drawable.button_effect_my_location)
-                binding.fragmentMapsMyLocationBtn.background = drawable
-
-                delay(100)
-                CoroutineScope(Main).launch {
-                    val drawable2 = resources.getDrawable(R.drawable.round_btn)
-                    binding.fragmentMapsMyLocationBtn.background = drawable2
-
-                    if (location != null && googleMap != null) {
-                        moveCamara(12f)
-                    }
-                }
+            if (location != null && googleMap != null) {
+                moveCamara(12f)
             }
+            ButtonAnimations.clickImageButton(binding.fragmentMapsMyLocationBtn)
         }
     }
 
