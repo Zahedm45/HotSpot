@@ -1,8 +1,6 @@
 package com.example.hotspot.view
 
-import android.content.ContentValues
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +14,7 @@ import com.xwray.groupie.GroupieViewHolder
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.AfterCheckInVM
-import com.example.hotspot.viewModel.BeforeCheckInVM
-import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
-import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 
 class AfterCheckIn : Fragment() {
@@ -28,7 +23,7 @@ class AfterCheckIn : Fragment() {
     private val args: AfterCheckInArgs by navArgs()
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
-    lateinit var groupieUsers: ArrayList<UserItem>
+    lateinit var groupieUserCheckedIns: ArrayList<UserItemCheckedIn>
 
 
 
@@ -64,14 +59,14 @@ class AfterCheckIn : Fragment() {
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
 
             if (it != null) {
-                groupieUsers = ArrayList()
+                groupieUserCheckedIns = ArrayList()
                 for (user in it) {
-                    groupieUsers.add(UserItem(user, hoSpot, viewLifecycleOwner))
+                    groupieUserCheckedIns.add(UserItemCheckedIn(user, hoSpot, viewLifecycleOwner))
 
                 }
 
                 //adapter.clear()
-                adapter.update(groupieUsers)
+                adapter.update(groupieUserCheckedIns)
 
                 binding.afterCheckedInRecyclerView.adapter = adapter
                 setCheckedInUI(it.size)
