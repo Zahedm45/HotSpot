@@ -47,15 +47,6 @@
                     android:text="Full name"
                     android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/latest_received_message"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:maxLines="1"
-                    android:text="Latest receieved message"
-                    android:textSize="15dp"
-                    android:textStyle="italic" />
             </LinearLayout>
 
 
