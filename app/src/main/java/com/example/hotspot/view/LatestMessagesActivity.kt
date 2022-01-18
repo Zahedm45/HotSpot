@@ -20,6 +20,7 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.chat_to_row.view.*
 import kotlinx.android.synthetic.main.latest_message_row.*
 import kotlinx.android.synthetic.main.latest_message_row.view.*
@@ -101,6 +102,14 @@ class LatestMessagesActivity : AppCompatActivity() {
         ) {
             viewHolder.itemView.latest_message_name.text = user.name
             viewHolder.itemView.latest_message_received.text = latestMessage
+
+            val imageId = user.uid
+            val ref = "https://firebasestorage.googleapis.com/v0/b/hotspot-onmyown.appspot.com" +
+                    "/o/images%2F" + imageId + "?alt=media&token="
+            val targetImage = viewHolder.itemView.latest_message_pic
+            Picasso.get()
+                .load(ref)
+                .into(targetImage)
         }
 
         override fun getLayout(): Int {
