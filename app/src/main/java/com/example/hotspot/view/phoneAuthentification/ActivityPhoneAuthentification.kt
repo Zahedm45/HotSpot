@@ -15,6 +15,8 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
 import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.other.DialogWifi
+import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.AfterLoginActivity
 import com.example.hotspot.view.LoginActivity
@@ -37,6 +39,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     private lateinit var forceResendtingToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var mCallBacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var connectionLiveData: ConnectionLiveData
 
     private lateinit var verifyID: String
 
@@ -106,27 +109,44 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
             }
         }
 
-        binding.phoneAuthContinueButton.setOnClickListener{
-            if(!isContinueClickable){
-                                return@setOnClickListener
+        connectionLiveData = ConnectionLiveData(this)
+        connectionLiveData.observe(this, { isConnected ->
+            binding.phoneAuthContinueButton.setOnClickListener{
+                if(!isContinueClickable){
+                    return@setOnClickListener
+                }
+                if(!isConnected) {
+                    DialogWifi().show(supportFragmentManager, com.example.hotspot.other.network.TAG)
+                    return@setOnClickListener
+                }
+                ButtonAnimations.clickButton(binding.phoneAuthContinueButton)
+                phoneNumber = binding.ccp.fullNumberWithPlus
+                startPhoneNumberVerification(phoneNumber)
             }
-            ButtonAnimations.clickButton(binding.phoneAuthContinueButton)
-            phoneNumber = binding.ccp.fullNumberWithPlus
-            startPhoneNumberVerification(phoneNumber)
-        }
 
-        binding.submitButton.setOnClickListener{
-            if(!isSubmitClickable){
-                return@setOnClickListener
+            binding.submitButton.setOnClickListener{
+                if(!isSubmitClickable){
+                    return@setOnClickListener
+                }
+                if(!isConnected) {
+                    DialogWifi().show(supportFragmentManager, com.example.hotspot.other.network.TAG)
+                    return@setOnClickListener
+                }
+                ButtonAnimations.clickButton(binding.submitButton)
+                verifyPhoneNumberWithCode(verifyID, binding.verifyCodeTextEdit.text.toString().trim())
             }
-            ButtonAnimations.clickButton(binding.submitButton)
-            verifyPhoneNumberWithCode(verifyID, binding.verifyCodeTextEdit.text.toString().trim())
-        }
 
-        binding.resendText.setOnClickListener{
-            val phoneNumber = binding.ccp.fullNumberWithPlus
-            resendVerificationCode(phoneNumber, forceResendtingToken)
-        }
+            binding.resendText.setOnClickListener{
+                if(!isConnected) {
+                    DialogWifi().show(supportFragmentManager, com.example.hotspot.other.network.TAG)
+                    return@setOnClickListener
+                }
+                val phoneNumber = binding.ccp.fullNumberWithPlus
+                resendVerificationCode(phoneNumber, forceResendtingToken)
+            }
+        })
+
+
 
     }
 

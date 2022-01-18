@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginSuggestionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        connectionLiveData = ConnectionLiveData(this)
+
 
 
         supportActionBar?.hide()
