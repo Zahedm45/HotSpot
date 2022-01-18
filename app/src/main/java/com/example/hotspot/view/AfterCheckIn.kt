@@ -1,6 +1,8 @@
 package com.example.hotspot.view
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +15,12 @@ import com.xwray.groupie.GroupieViewHolder
 
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
+import com.example.hotspot.other.network.TAG
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
+import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
 
 class AfterCheckIn : Fragment() {
@@ -24,8 +28,8 @@ class AfterCheckIn : Fragment() {
     private lateinit var binding: FragmentAfterCheckInBinding
     private val args: AfterCheckInArgs by navArgs()
 
-    val adapter = GroupAdapter<GroupieViewHolder>()
-    val adapterHelper = ArrayList<User>()
+    private val adapter = GroupAdapter<GroupieViewHolder>()
+    lateinit var groupieUsers: ArrayList<UserItem>
 
 
 
@@ -45,35 +49,30 @@ class AfterCheckIn : Fragment() {
 
         setHotSpotInfo()
         heartBtn()
-
-/*
-        DataHolder.currentUser?.let {
-            adapter.add(UserItem(it))
-            adapterHelper.add(it)
-        }
-*/
-       // binding.afterCheckedInRecyclerView.suppressLayout(true)
-
         setObserverForCheckedInList()
-
+        isInterestedBtn()
 
     }
+
+
+
+
 
     private fun setObserverForCheckedInList() {
         val hoSpot = args.hotSpot
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
 
-
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
+
             if (it != null) {
-                val groupieUsers = ArrayList<UserItem>()
-                for (i in it) {
-                    groupieUsers.add(UserItem(i))
+                groupieUsers = ArrayList()
+                for (user in it) {
+                    groupieUsers.add(UserItem(user, hoSpot, viewLifecycleOwner))
 
                 }
 
-                adapter.clear()
-                adapter.addAll(groupieUsers)
+                //adapter.clear()
+                adapter.update(groupieUsers)
 
                 binding.afterCheckedInRecyclerView.adapter = adapter
                 setCheckedInUI(it.size)
@@ -89,13 +88,7 @@ class AfterCheckIn : Fragment() {
 
 
     private fun setCheckedInUI(checkedInSize: Int) {
-
-        if (checkedInSize != null) {
-            binding.afterCheckInCheckedIn.text = checkedInSize.toString()
-
-        } else {
-            binding.afterCheckInCheckedIn.text = "0"
-        }
+        binding.afterCheckInCheckedIn.text = checkedInSize.toString()
     }
 
 
@@ -103,12 +96,16 @@ class AfterCheckIn : Fragment() {
 
     private fun heartBtn() {
         binding.afterCheckInFavoriteBtnWhite.setOnClickListener {
+            Log.i(TAG, "heart ()")
+
             binding.afterCheckInFavoriteBtnWhite.visibility = View.GONE
             binding.afterCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
-
+         //   addFavoriteHotSpot()
         }
 
         binding.afterCheckInFavoriteBtnThemeColor.setOnClickListener {
+            Log.i(TAG, "heart2 ()")
+
             binding.afterCheckInFavoriteBtnThemeColor.visibility = View.GONE
             binding.afterCheckInFavoriteBtnWhite.visibility = View.VISIBLE
 
@@ -116,14 +113,11 @@ class AfterCheckIn : Fragment() {
     }
 
 
-    fun onSuccess(user: User) {
-        val item = UserItem(user)
 
-        if (!adapterHelper.contains(user)) {
-            adapter.add(item)
-        }
+    private fun removeFavoriteHotSpot() {
 
     }
+
 
     override fun onStop() {
         super.onStop()
@@ -133,26 +127,23 @@ class AfterCheckIn : Fragment() {
 
 
 
+
+    private fun isInterestedBtn() {
+        binding.afterCheckInterestedBtn.setOnCheckedChangeListener { _, isChecked ->
+            args.hotSpot.id?.let { id ->
+                AfterCheckInVM.setIsInterested(isChecked, id)
+            }
+
+        }
+
+    }
+
 }
 
 
 
 
-/*
-        adapter.add(UserItem("User Name1"))
-        adapter.add(UserItem("User Name2"))
-        adapter.add(UserItem("User Name3"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))*/
+
 
 
 

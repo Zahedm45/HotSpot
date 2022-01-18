@@ -2,29 +2,41 @@ package com.example.hotspot.view
 
 import android.annotation.SuppressLint
 import android.graphics.Paint
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
 import com.example.hotspot.model.CheckedInDB
+import com.example.hotspot.other.network.TAG
+import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.Constant.CHECKED_IN
+import com.example.hotspot.view.Constant.RADIUS
 import com.example.hotspot.view.Constant.STREET_WITHOUT_NAME
+import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
+import kotlinx.android.synthetic.main.custom_toast_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 object Constant {
     const val STREET_WITHOUT_NAME = "Vej uden navn"
     const val CHECKED_IN = "Checked in: "
+    const val RADIUS = 10.0
 }
 
 class BeforeCheckIn : Fragment() {
@@ -69,7 +81,6 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding.beforeCIDescriptionTv.text = args.hotSpot.description
 
-
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         // binding.beforeCheckInReviews.paintFlags =  Paint.UNDERLINE_TEXT_FLAG or binding.beforeCheckInReviews.paintFlags
         //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
@@ -91,11 +102,14 @@ class BeforeCheckIn : Fragment() {
 
 
 
-    private fun onCheckedInListChange(checkedInIds: ArrayList<String>) {
+    private fun onCheckedInListChange(checkedIn: ArrayList<CheckedInDB>) {
 
-        val toRemove = ArrayList<CheckedInDB>()
+        binding.beforeCheckInCheckedIn.text = CHECKED_IN + checkedIn.size
 
-        args.hotSpot.checkedIn?.forEach {
+
+       // val toRemove = ArrayList<CheckedInDB>()
+
+/*        args.hotSpot.checkedIn?.forEach {
             if (!checkedInIds.contains(it.id)) {
                 toRemove.add(it)
             }
@@ -114,7 +128,7 @@ class BeforeCheckIn : Fragment() {
                 binding.beforeCheckInCheckedIn.textSize = textSizeBefore
             }
 
-        }
+        }*/
 
     }
 
@@ -151,13 +165,16 @@ class BeforeCheckIn : Fragment() {
 
     private fun heartButton() {
         binding.beforeCheckInFavoriteBtnWhite.setOnClickListener {
+            addFavoriteHotSpot()
             binding.beforeCheckInFavoriteBtnWhite.visibility = View.GONE
             binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
+            Log.i(TAG, "Added hot 2")
         }
 
         binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
             binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
             binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
+            Log.i(TAG, "Removed hot 3")
 
         }
     }
@@ -165,40 +182,95 @@ class BeforeCheckIn : Fragment() {
 
     @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     private fun checkInBtn(view: View) {
+
         binding.beforeCheckInCheckInBtn.setOnClickListener {
-          //  val userId = Firebase.auth.uid
-            DataHolder.currentUser?.let { user ->
-                UsersAndIds.addUser(user)
-                BeforeCheckInVM.setCheckedInDB(args.hotSpot, user, null)
-            } ?: run {
-                // TODO
-                DataHolder.fetchCurrentUserFromDB()
+            val isUserPresent = isUserPresent()
+            if (isUserPresent) {
+                DataHolder.currentUser?.let { user ->
+                    val checkedInDB = CheckedInDB(id = user.uid)
+                    UsersAndIds.addUser(user, checkedInDB)
+                    BeforeCheckInVM.setCheckedInDB(args.hotSpot, user, null)
+                } ?: run {
+                    DataHolder.fetchCurrentUserFromDB()
+                }
             }
-
-
 
             CoroutineScope(IO).launch {
                 val drawable = resources.getDrawable(R.drawable.custom_button_click_effect)
                 binding.beforeCheckInCheckInBtn.background = drawable
-
                 delay(100)
                 CoroutineScope(Main).launch {
-
                     val drawable2 = resources.getDrawable(R.drawable.custom_button)
                     binding.beforeCheckInCheckInBtn.background = drawable2
-
-
-                    val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
-                    view.findNavController().navigate(action)
-
-                   // Navigation.findNavController(view).navigate(R.id.afterCheckIn)
+                    if (isUserPresent) {
+                        val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
+                        view.findNavController().navigate(action)
+                    }
                 }
             }
         }
-
     }
 
 
+    private fun isUserPresent(): Boolean {
+
+        val userCurrLocation = MapService.lastLocation.value
+
+        if (userCurrLocation?.longitude == null) {
+            Log.i(TAG, "Unable to get user location")
+            return false
+        }
+        val distance = FloatArray(1)
+        args.hotSpot.geoPoint?.latitude?.let { lat ->
+            args.hotSpot.geoPoint?.longitude?.let { lng ->
+               Location.distanceBetween(
+                   lat, lng, userCurrLocation.latitude, userCurrLocation.longitude, distance)
+            }
+        }
+        val area = Math.PI * RADIUS * RADIUS
+        if (distance[0] <= area) {
+            return true
+        }
+
+        val toastLayout = layoutInflater.inflate(R.layout.custom_toast_layout, custom_toast_layout)
+        val textView = toastLayout.findViewById<TextView>(R.id.custom_toast_text_tv)
+
+
+        val dist = Math.round( (distance[0] / 1000) * 10.0) / 10.0
+        textView.text = "You are approximately $dist km away from the location."
+        val toast = Toast(requireContext())
+        toast.view = toastLayout
+        toast.duration = Toast.LENGTH_LONG
+        toast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.TOP, 0, 200)
+        toast.show()
+        addDelay(toast, 1000)
+        return false
+    }
+
+    private fun addDelay(toast: Toast, timeMilles: Long) {
+        CoroutineScope(IO).launch {
+            delay(timeMilles)
+            CoroutineScope(Main).launch {
+                Log.i(TAG, "delay..")
+                toast.cancel()
+            }
+        }
+    }
+
+
+
+    private fun addFavoriteHotSpot() {
+        args.hotSpot.id?.let { hotSpotId ->
+
+            DataHolder.currentUser?.uid?.let { userId ->
+                BeforeCheckInVM.addHotSpotDB(hotSpotId, userId)
+
+            } ?: run { Log.i(TAG, "User id is null ($this)") }
+
+
+        } ?: run { Log.i(TAG, "HotSpot id is null ($this)") }
+
+    }
 
 }
 

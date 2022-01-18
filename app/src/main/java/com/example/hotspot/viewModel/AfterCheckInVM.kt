@@ -1,25 +1,24 @@
 package com.example.hotspot.viewModel
 
-import android.content.ContentValues.TAG
-import android.util.Log
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
+import com.example.hotspot.repository.SubRepository
 import com.google.firebase.firestore.ListenerRegistration
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 
-
-/*typealias users = MutableList<User>
-typealias ids = MutableList<String>
-
-typealias usersAndIds = MutableList<String>*/
 
 class AfterCheckInVM {
 
     companion object {
         var checkedInListenerRig: ListenerRegistration? = null
-
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
+
                 checkedInListenerRig = Repository.getAndListenCheckedInIds(hotSpot.id!!
                 ) { checkedIn -> onSuccessSnapShotIds(checkedIn) }
             }
@@ -27,89 +26,67 @@ class AfterCheckInVM {
         }
 
 
-        private fun onSuccessSnapShotIds(checkedInIds: ArrayList<String>) {
+        private fun onSuccessSnapShotIds(newCheckedIn: ArrayList<CheckedInDB>) {
+            val oldCheckedIn = UsersAndIds.checkedInMap
 
-            val ids = UsersAndIds.getIds()
-            if (ids == checkedInIds) {
-                Log.i(TAG, "Same ids ${ids} and checkedInd $checkedInIds")
-                return
+            CoroutineScope(Default).launch {
+                val newIdList = ArrayList<String>()
+                newCheckedIn.forEach {
+                    it.id?.let { id -> newIdList.add(id) }
+                }
+
+                val toRemove = ArrayList<String>()
+                for (curr in oldCheckedIn) {
+
+                    if (!newIdList.contains(curr.key)) {
+                        toRemove.add(curr.key)
+                    }
+                }
+
+                CoroutineScope(Main).launch {
+                    if (!toRemove.isNullOrEmpty()){
+                        UsersAndIds.removeUser(toRemove)
+                    }
+                }
+
             }
 
-            for (id in checkedInIds) {
-                if (!ids.contains(id)) {
-                    Repository.getCheckedInUserFromDB(id) { user -> onnSuccessSnapshotUser(user) }
+
+            for (curr in newCheckedIn) {
+
+                curr.id?.let {
+                    if (!oldCheckedIn.containsKey(it)) {
+                        Repository.getCheckedInUserFromDB(it, curr) { user, crr -> onnSuccessGetUser(user, crr) }
+
+                    } else {
+                        UsersAndIds.updateUser(curr)
+                    }
                 }
             }
-
-
-            val toRemove = ArrayList<String>()
-            for (id in ids) {
-                if (!checkedInIds.contains(id)) {
-
-                    toRemove.add(id)
-                }
-            }
-
-            UsersAndIds.removeUser(toRemove)
 
         }
 
 
-
-        private fun onnSuccessSnapshotUser(user: User) {
-            UsersAndIds.addUser(user)
+        private fun onnSuccessGetUser(user: User, checkedInDB: CheckedInDB) {
+            UsersAndIds.addUser(user, checkedInDB)
         }
+
+
+        fun setIsInterested(isInterested: Boolean, hotSpotId: String) {
+            val userId = DataHolder.currentUser?.uid
+            if (userId != null) {
+                Repository.updateIsInterestedDB(hotSpotId, userId, isInterested)
+            }
+        }
+
+
+
+
+
+
 
     }
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-// var checkedInIds = ArrayList<String>()
-
-/*
-   fun getCheckedInUserFromDB(usersId: ArrayList<String>) {
-       usersId.forEach {
-           Repository.getCheckedInUserFromDB(it, {user -> addToCheckedInUsersList(user)})
-       }
-   }
-
-   private fun addToCheckedInUsersList(user: User) {
-       checkedInUsers.add(user)
-   }
-
-
-
-   fun getCheckedInUserFromDB(
-       usersId: ArrayList<String>,
-       onSuccess: (user: User) -> Unit
-       ) {
-
-       checkedInUsers.forEach {
-           onSuccess(it)
-       }
-
-       subOnSuccess = onSuccess
-
-       usersId.forEach {
-           Repository.getCheckedInUserFromDB(it, {user -> subOnSuccess(user)})
-       }
-
-   }
-
-
-   private fun subOnSuccess(user: User) {
-       subOnSuccess?.let { it(user) }
-       checkedInUsers.add(user)
-   }*/
 

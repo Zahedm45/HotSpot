@@ -55,7 +55,7 @@
 
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch1"
+            android:id="@+id/after_check_interested_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -63,8 +63,7 @@
             android:text="Interested"
             android:textColor="@color/white"
             android:textSize="18sp"
-
-
+            android:checked="true"
             app:layout_constraintBottom_toBottomOf="@+id/after_check_in_party_img"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -105,12 +104,30 @@
 
 
 
+
+
+                <ImageButton
+                    android:id="@+id/after_check_in_favorite_btn_theme_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:src="@drawable/large_icon_favorite"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+
+
                 <ImageButton
                     android:id="@+id/after_check_in_favorite_btn_white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/white"
+                    android:background="@color/transparent"
                     android:src="@drawable/large_icon_favorite_white"
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -121,20 +138,7 @@
                     />
 
 
-                <ImageButton
-                    android:id="@+id/after_check_in_favorite_btn_theme_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:src="@drawable/large_icon_favorite"
-                    android:visibility="invisible"
 
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
