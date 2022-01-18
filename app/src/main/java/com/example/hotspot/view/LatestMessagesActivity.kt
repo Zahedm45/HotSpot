@@ -3,6 +3,7 @@ package com.example.hotspot.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.hotspot.R
@@ -44,16 +45,42 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         val db = Firebase.firestore
         val userRef = db.collection("users")
+        val messageRef = db.collection("messages")
 
-        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
-        val toid = user?.uid
+        //val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        val uid = FirebaseAuth.getInstance().uid
 
         userRef.get()
             .addOnSuccessListener {
                 val users = it.toObjects<User>()
                 val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
+                var tempLatestMessage = ""
                 users.forEach { user ->
-                    adapter.add(LatestMessageRow(user))
+                    messageRef.whereIn("toFrom",listOf(uid+user.uid,user.uid+uid))
+                        .addSnapshotListener {
+                                newDocuments, e ->
+                            if (e != null) {
+                                Log.w("LatestMessagesActivity", "Listen failed.", e)
+                                return@addSnapshotListener
+                            }
+
+                            if (newDocuments != null) {
+                                for (document in newDocuments) {
+                                    if (document.data["toFrom"] == uid+user.uid) {
+                                        tempLatestMessage = document.data["text"].toString()
+                                    }
+
+                                }
+                                if (tempLatestMessage == "") {
+                                    for (document in newDocuments) {
+                                        if (document.data["toFrom"] == user.uid+uid) {
+                                            tempLatestMessage = document.data["text"].toString()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    adapter.add(LatestMessageRow(user, tempLatestMessage))
                 }
                 adapter.setOnItemClickListener { item, view ->
                     val latestMessageRow = item as LatestMessageRow
@@ -65,12 +92,13 @@ class LatestMessagesActivity : AppCompatActivity() {
             }
     }
 
-    class LatestMessageRow(val user: User): com.xwray.groupie.kotlinandroidextensions.Item() {
+    class LatestMessageRow(val user: User, val latestMessage: String): com.xwray.groupie.kotlinandroidextensions.Item() {
         override fun bind(
             viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
             position: Int
         ) {
             viewHolder.itemView.latest_message_name.text = user.name
+            viewHolder.itemView.latest_message_received.text = latestMessage
         }
 
         override fun getLayout(): Int {
