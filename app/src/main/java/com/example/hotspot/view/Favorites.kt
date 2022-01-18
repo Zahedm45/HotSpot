@@ -125,7 +125,9 @@ class Favorites : Fragment() {
                         val imageUrl = Uri.toString()
                         val imageView = viewHolder.itemView.hotspot_picture
                         Picasso.get().load(imageUrl).into(imageView)
+
                 }
+
             }
 
             viewHolder.itemView.setOnClickListener {
@@ -141,6 +143,8 @@ class Favorites : Fragment() {
         override fun getLayout(): Int {
             return R.layout.favorite_item
         }
+
+
     }
 
 

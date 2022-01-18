@@ -27,7 +27,11 @@ import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.custom_toast_layout.*
+import kotlinx.android.synthetic.main.favorite_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -81,6 +85,12 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInRatingBar.rating = args.hotSpot.rating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding.beforeCIDescriptionTv.text = args.hotSpot.description
+
+        val imageRef = Firebase.storage.reference.child("HotSpots/${args.hotSpot.id}.png")
+        imageRef.downloadUrl.addOnSuccessListener { Uri ->
+            val imageUrl = Uri.toString()
+            val imageView = binding.beforeCheckInPartyImg
+            Picasso.get().load(imageUrl).into(imageView) }
 
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         // binding.beforeCheckInReviews.paintFlags =  Paint.UNDERLINE_TEXT_FLAG or binding.beforeCheckInReviews.paintFlags
