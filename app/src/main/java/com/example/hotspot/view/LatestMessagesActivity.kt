@@ -70,6 +70,7 @@ class LatestMessagesActivity : AppCompatActivity() {
                             val messages = newDocuments?.toObjects<ChatMessage>()
 
                             if (messages != null) {
+                                tempLatestMessage = ""
                                 messages.forEach { message ->
 
                                     if (message.toFrom == uid+user.uid || message.toFrom == user.uid+uid) {
@@ -77,8 +78,9 @@ class LatestMessagesActivity : AppCompatActivity() {
 
                                     }
                                 }
-
-                                adapter.add(LatestMessageRow(user, tempLatestMessage))
+                                if (tempLatestMessage != "") {
+                                    adapter.add(LatestMessageRow(user, tempLatestMessage))
+                                }
                             }
                             else {
                                 Log.d(TAG,"Messages == null")
