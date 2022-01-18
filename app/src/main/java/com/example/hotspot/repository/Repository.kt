@@ -414,10 +414,11 @@ class Repository {
                         value.forEach {
 
                             val checkedIn = it.toObject<CheckedInDB>()
-                            if (checkedIn.id == null) {
+                            checkedIn.id = it.id
+
+ /*                           if (checkedIn.id == null) {
                                 checkedIn.id = it.id
-                            }
-                           // Log.d(TAG, "Current $checkedIn")
+                            }*/
 
                             checkedIns.add(checkedIn)
                         }
@@ -432,13 +433,6 @@ class Repository {
         }
 
 
-        /*
-
-                private lateinit var onSuccess: (user: User, checkedIn: CheckedInDB) -> Unit
-                private var user: User? = null
-                private var bitmap: Bitmap? = null
-                private var checkedInDB: CheckedInDB? = null
-         */
         fun getCheckedInUserFromDB(
             usersId: String,
             checkedInDB: CheckedInDB,
