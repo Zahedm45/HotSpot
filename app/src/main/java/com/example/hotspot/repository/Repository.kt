@@ -5,71 +5,58 @@ import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.icu.number.NumberFormatter.with
+import android.icu.number.NumberRangeFormatter.with
 import android.location.Location
 import android.util.Log
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.tasks.Tasks.await
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.getField
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
+import java.lang.Exception
 
 class Repository {
 
 
     companion object {
 
-        // private val auth = Firebase.auth
-        // private val fbUser = Firebase.auth.currentUser
-        //private val db = Firebase.firestore
-
-/*
-        fun createUserInFirebase(
-            user: User,
-            onSuccess: (() -> Unit),
-            onFailure: ((message: String) -> Unit)
-
-        ) {
-
-
-
-            val email = user.emailAddress
-            val password = user.password
-
-            if(email.isBlank() || password.isBlank()) {
-                return
-            }
-
-           val auth = Firebase.auth
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-
-                    if (task.isSuccessful) {
-                        addProfileToFirebase(user, onSuccess, onFailure)
-
-                    } else {
-
-                        Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                        onFailure(task.exception?.message.toString())
+        fun deleteUser(){
+            try {
+                val user = Firebase.auth.currentUser!!
+                val db = Firebase.firestore
+                db.collection("users").document(user.uid)
+                    .delete().addOnCompleteListener() {
+                        if (it.isSuccessful) {
+                            user.delete()
+                                .addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        Log.d(TAG, "User account deleted.")
+                                    }
+                                }
+                        }
                     }
-                }
-
+            } catch (e : Exception){
+                Log.d(TAG,e.toString())
+                Log.d("Lucas Lucas Lucas Lucas Lucas Lucas", e.stackTraceToString())
+                e.printStackTrace()
+            }
         }
-*/ //TODO we no longer need this method.
 
+        fun getFirebaseUser() : FirebaseUser?{
+            return Firebase.auth.currentUser
+        }
 
         fun addProfileToFirebase(
             user: User,
@@ -339,9 +326,7 @@ class Repository {
                 Log.i(TAG, "User is not sign in.")
                 return
             }
-
             val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
-
             val bytArr = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytArr)
             val data = bytArr.toByteArray()
@@ -373,16 +358,13 @@ class Repository {
 
 
 
-        fun getHotSpots(
+        fun getAndListenHotSpotsDB(
             onSuccess: ((hotSpots: ArrayList<HotSpot>) -> Unit)?,
             onFailure: ((msg: String) -> Unit)?
         ) : ListenerRegistration {
 
-        //    Log.d(TAG, "snapshot found: hotSpots1")
-
-
             val db = Firebase.firestore
-            val colRef = db.collection("hotSpots2")
+            val colRef = db.collection("hotSpots3")
 
             val registration = colRef.addSnapshotListener { snapshot, e ->
 
@@ -391,86 +373,59 @@ class Repository {
                     return@addSnapshotListener
                 }
 
-
                 if (snapshot != null) {
 
                     val hotSpots: ArrayList<HotSpot> = ArrayList()
                     snapshot.forEach { crrHotspot ->
                         val hotSpot = crrHotspot.toObject<HotSpot>()
                         hotSpots.add(hotSpot)
-
                     }
 
                     if (onSuccess != null) {
                         onSuccess(hotSpots)
                     }
 
-                  //  Log.d(TAG, "snapshot found: hotSpots2")
-
                 } else {
                     Log.d(TAG, "Current data: null")
                 }
             }
-
             return registration
         }
 
 
 
-        fun getCheckedInUserFromDB(usersId: String, onSuccess: ((user: User) -> Unit)) {
-            val db = Firebase.firestore
-            db.collection("users").document(usersId)
-                .get()
-                .addOnSuccessListener { doc ->
-                    doc.toObject<User>()?.apply {
-                        val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
-                        val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
-                        ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                            this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
-                            onSuccess(this)
-                        }
-                    }
-                }
-        }
 
 
 
         fun getAndListenCheckedInIds(
             hotSpotId: String,
-            onSuccess: ((checkedIn: ArrayList<String> ) -> Unit) ): ListenerRegistration {
-
+            onSuccess: ((checkedIn: ArrayList<CheckedInDB>) -> Unit) ): ListenerRegistration {
             val db = Firebase.firestore
-
-            val registration = db.collection("hotSpots2").document(hotSpotId)
+            val registration = db.collection("hotSpots3").document(hotSpotId).collection("checkedIn")
                 .addSnapshotListener { value, error ->
 
                     if (error != null) {
-                        Log.w(TAG, "Listen failed.", error)
+                        //Log.w(TAG, "Listen failed.", error)
                         return@addSnapshotListener
                     }
 
-
                     if (value != null) {
+                        val checkedIns = ArrayList<CheckedInDB>()
+                        value.forEach {
 
-                        val hotSpot = value.toObject<HotSpot>()
+                            val checkedIn = it.toObject<CheckedInDB>()
+                            if (checkedIn.id == null) {
+                                checkedIn.id = it.id
+                            }
+                           // Log.d(TAG, "Current $checkedIn")
 
-                        val checkedInList = hotSpot?.checkedIn
-
-                        val newList = ArrayList<String>()
-                        checkedInList?.forEach {
-                            Log.d(TAG, "snapshot found: checkedIn3 ${it.id}")
-                            it.id?.let { it1 -> newList.add(it1) }
-
+                            checkedIns.add(checkedIn)
                         }
-
-                        onSuccess(newList)
+                        onSuccess(checkedIns)
 
                     } else {
                         Log.d(TAG, "Current data: null")
                     }
-
-
-
                 }
 
             return registration
@@ -479,8 +434,70 @@ class Repository {
 
 
 
+        private lateinit var onSuccess: (user: User, checkedIn: CheckedInDB) -> Unit
+        private var user: User? = null
+        private var bitmap: Bitmap? = null
+        private var checkedInDB: CheckedInDB? = null
+
+        fun getCheckedInUserFromDB(
+            usersId: String,
+            checkedInDB: CheckedInDB,
+            onSuccess: ((user: User, checkedIn: CheckedInDB) -> Unit)
+
+        ) {
+            this.onSuccess = onSuccess
+            this.checkedInDB = checkedInDB
+
+            val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
+            val ONE_MEGABYTE: Long = (624 * 624).toLong()
+            ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+                subFunOfGetCheckedInUserFromDB()
+            }
+
+            val db = Firebase.firestore
+            db.collection("users").document(usersId)
+                .get()
+                .addOnSuccessListener { doc ->
+                    doc.toObject<User>()?.apply {
+
+                        if(this.uid == null) {
+                            this.uid = usersId
+                        }
+                        user = this
+                        subFunOfGetCheckedInUserFromDB()
+                    }
+                }
+        }
+
+
+
+        private fun subFunOfGetCheckedInUserFromDB() {
+            user?.let { itUser ->
+                bitmap?.let {
+                    Log.d(TAG, "Success...Repository $user and $it")
+                    itUser.bitmapImg = it
+                    onSuccess(itUser, checkedInDB!!)
+                }
+
+            }
+
+        }
+
+
+
+
+
+
+        fun updateIsInterestedDB(hotSpotId: String, useId: String, isInterested: Boolean) {
+            val db = Firebase.firestore
+            db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(useId)
+                .update("interested", isInterested)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Success...Repository")
+                }
+        }
     }
-
-
 }
+
 

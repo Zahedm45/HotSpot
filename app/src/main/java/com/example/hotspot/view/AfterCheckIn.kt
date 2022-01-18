@@ -22,8 +22,8 @@ class AfterCheckIn : Fragment() {
     private lateinit var binding: FragmentAfterCheckInBinding
     private val args: AfterCheckInArgs by navArgs()
 
-    val adapter = GroupAdapter<GroupieViewHolder>()
-    val adapterHelper = ArrayList<User>()
+    private val adapter = GroupAdapter<GroupieViewHolder>()
+    lateinit var groupieUserCheckedIns: ArrayList<UserItemCheckedIn>
 
 
 
@@ -43,35 +43,30 @@ class AfterCheckIn : Fragment() {
 
         setHotSpotInfo()
         heartBtn()
-
-/*
-        DataHolder.currentUser?.let {
-            adapter.add(UserItem(it))
-            adapterHelper.add(it)
-        }
-*/
-       // binding.afterCheckedInRecyclerView.suppressLayout(true)
-
         setObserverForCheckedInList()
-
+        isInterestedBtn()
 
     }
+
+
+
+
 
     private fun setObserverForCheckedInList() {
         val hoSpot = args.hotSpot
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
 
-
         UsersAndIds.getUser().observe(viewLifecycleOwner, Observer { it ->
+
             if (it != null) {
-                val groupieUsers = ArrayList<UserItemCheckIn>()
-                for (i in it) {
-                    groupieUsers.add(UserItemCheckIn(i))
+                groupieUserCheckedIns = ArrayList()
+                for (user in it) {
+                    groupieUserCheckedIns.add(UserItemCheckedIn(user, hoSpot, viewLifecycleOwner))
 
                 }
 
-                adapter.clear()
-                adapter.addAll(groupieUsers)
+                //adapter.clear()
+                adapter.update(groupieUserCheckedIns)
 
                 binding.afterCheckedInRecyclerView.adapter = adapter
                 setCheckedInUI(it.size)
@@ -87,13 +82,7 @@ class AfterCheckIn : Fragment() {
 
 
     private fun setCheckedInUI(checkedInSize: Int) {
-
-        if (checkedInSize != null) {
-            binding.afterCheckInCheckedIn.text = checkedInSize.toString()
-
-        } else {
-            binding.afterCheckInCheckedIn.text = "0"
-        }
+        binding.afterCheckInCheckedIn.text = checkedInSize.toString()
     }
 
 
@@ -115,11 +104,11 @@ class AfterCheckIn : Fragment() {
 
 
     fun onSuccess(user: User) {
-        val item = UserItemCheckIn(user)
+/*        val item = UserItem(user)
 
         if (!adapterHelper.contains(user)) {
             adapter.add(item)
-        }
+        }*/
 
     }
 
@@ -131,26 +120,19 @@ class AfterCheckIn : Fragment() {
 
 
 
+
+    private fun isInterestedBtn() {
+        binding.afterCheckInterestedBtn.setOnCheckedChangeListener { _, isChecked ->
+            args.hotSpot.id?.let { id ->
+                AfterCheckInVM.setIsInterested(isChecked, id)
+            }
+
+        }
+
+    }
+
 }
 
-
-
-
-/*
-        adapter.add(UserItem("User Name1"))
-        adapter.add(UserItem("User Name2"))
-        adapter.add(UserItem("User Name3"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))
-        adapter.add(UserItem("User Name"))*/
 
 
 

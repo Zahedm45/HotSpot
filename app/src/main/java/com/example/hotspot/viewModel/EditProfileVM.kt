@@ -104,11 +104,11 @@ class EditProfileVM {
 
                 navigateToPersonalProfile()
             }
-
         }
 
-
-
+        fun deleteUser(){
+            repository.deleteUser()
+        }
     }
 
 

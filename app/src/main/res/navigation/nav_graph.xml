@@ -29,7 +29,12 @@
 
         <action
             android:id="@+id/action_beforeCheckIn_to_afterCheckIn"
-            app:destination="@id/afterCheckIn" />
+            app:destination="@id/afterCheckIn"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/mapsFragment" />
         <argument
             android:name="hotSpot"
             app:argType="com.example.hotspot.model.HotSpot"
@@ -71,19 +76,6 @@
             android:id="@+id/action_favorites_to_beforeCheckIn"
             app:destination="@id/beforeCheckIn" />
     </fragment>
-
-
-
-    <fragment
-        android:id="@+id/listeView"
-        android:name="com.example.hotspot.view.ListeView"
-        android:label="fragment_liste_view"
-        tools:layout="@layout/fragment_liste_view" >
-        <action
-            android:id="@+id/action_listeView_to_beforeCheckIn"
-            app:destination="@id/beforeCheckIn" />
-    </fragment>
-
 
 
     <fragment
@@ -134,7 +126,11 @@
         tools:layout="@layout/fragment_maps4" >
         <action
             android:id="@+id/action_mapsFragment_to_beforeCheckIn"
-            app:destination="@id/beforeCheckIn" />
+            app:destination="@id/beforeCheckIn"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_fade"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down" />
 
     </fragment>
 
