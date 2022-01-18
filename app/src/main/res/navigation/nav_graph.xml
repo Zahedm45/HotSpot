@@ -73,19 +73,6 @@
     </fragment>
 
 
-
-    <fragment
-        android:id="@+id/listeView"
-        android:name="com.example.hotspot.view.ListeView"
-        android:label="fragment_liste_view"
-        tools:layout="@layout/fragment_liste_view" >
-        <action
-            android:id="@+id/action_listeView_to_beforeCheckIn"
-            app:destination="@id/beforeCheckIn" />
-    </fragment>
-
-
-
     <fragment
         android:id="@+id/messageOverview"
         android:name="com.example.hotspot.view.MessageOverview"
