@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentAfterCheckInBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -17,6 +16,8 @@ import com.example.hotspot.model.User
 import com.example.hotspot.other.network.TAG
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.UsersAndIds
+import android.graphics.drawable.Animatable
+import com.example.hotspot.R
 
 
 class AfterCheckIn : Fragment() {
@@ -45,8 +46,15 @@ class AfterCheckIn : Fragment() {
 
         setHotSpotInfo()
         heartBtn()
-        setObserverForCheckedInList()
+      //  setObserverForCheckedInList()
         isInterestedBtn()
+
+
+        var mImgCheck = binding.afterCheckInProgress
+        (mImgCheck.drawable as Animatable).start()
+
+
+
 
     }
 
