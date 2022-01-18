@@ -497,6 +497,11 @@ class Repository {
                     Log.d(TAG, "Success...Repository")
                 }
         }
+
+        fun getPhoneNumber(): String?{
+            val phoneNumber = Firebase.auth.currentUser?.phoneNumber
+            return phoneNumber
+        }
     }
 }
 
