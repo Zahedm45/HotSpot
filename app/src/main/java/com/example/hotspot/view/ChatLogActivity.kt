@@ -75,6 +75,8 @@ class ChatLogActivity : AppCompatActivity() {
                         newMessageAdded(newDocuments)
                     }
         }
+        recyclerview_chatlog.scrollToPosition(adapter.itemCount -1)
+
     }
 
     private fun newMessageAdded(newDocuments: QuerySnapshot) {
