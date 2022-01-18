@@ -64,31 +64,21 @@ class PersonalProfileVM(
 
             userProfile = UserProfile(name = name, age = age, password = password,
                 emailAddress = email, gender = gender, userName = userName, bio = bio, day = dayOfBirth, month = monthOfBirth, year = yearOfBirth)
+             var showName = StringBuilder()
+             showName.append(userProfile.name)
+             showName.append(",")
 
-            binding.fragmentPersonalProfilePersonName.text = userProfile.name
+            binding.fragmentPersonalProfilePersonName.text = showName
             binding.fragmentPersonalProfileAge.text = "${userProfile.age}"
             binding.fragmentPersonalProfileBio.text = userProfile.bio
             binding.fragmentPersonalProfileEmailTv.text = "${userProfile.emailAddress}"
+
+             binding.tvPhoneNumbber.text = repository.getPhoneNumber()
 
 
             if (userProfile.bitmapImg != null) {
                 binding.fragmentPersonalProfilePicture.setImageBitmap(userProfile.bitmapImg)
             }
-
-
-
-            //     binding.fragmentPersonalProfilePicture.setImageURI(null)
-
-//            val storageRef = FirebaseStorage.getInstance().reference.child("images/${DataHolder.fbUser!!.uid}")
-//            val localFile = File.createTempFile("temImage", "jpeg")
-//
-//            storageRef.getFile(localFile).addOnSuccessListener {
-//
-//                val bit = BitmapFactory.decodeFile(localFile.absolutePath)
-//
-//                binding.fragmentPersonalProfilePicture.setImageBitmap(bit)
-//
-//            }
 
         }
 
