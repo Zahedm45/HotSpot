@@ -15,6 +15,7 @@ import com.xwray.groupie.GroupieViewHolder
 
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.model.User
+import com.example.hotspot.other.network.TAG
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
@@ -95,12 +96,16 @@ class AfterCheckIn : Fragment() {
 
     private fun heartBtn() {
         binding.afterCheckInFavoriteBtnWhite.setOnClickListener {
+            Log.i(TAG, "heart ()")
+
             binding.afterCheckInFavoriteBtnWhite.visibility = View.GONE
             binding.afterCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
-
+         //   addFavoriteHotSpot()
         }
 
         binding.afterCheckInFavoriteBtnThemeColor.setOnClickListener {
+            Log.i(TAG, "heart2 ()")
+
             binding.afterCheckInFavoriteBtnThemeColor.visibility = View.GONE
             binding.afterCheckInFavoriteBtnWhite.visibility = View.VISIBLE
 
@@ -108,14 +113,11 @@ class AfterCheckIn : Fragment() {
     }
 
 
-    fun onSuccess(user: User) {
-/*        val item = UserItem(user)
 
-        if (!adapterHelper.contains(user)) {
-            adapter.add(item)
-        }*/
+    private fun removeFavoriteHotSpot() {
 
     }
+
 
     override fun onStop() {
         super.onStop()
@@ -137,6 +139,10 @@ class AfterCheckIn : Fragment() {
     }
 
 }
+
+
+
+
 
 
 

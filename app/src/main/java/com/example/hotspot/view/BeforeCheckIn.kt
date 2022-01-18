@@ -22,6 +22,7 @@ import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.Constant.CHECKED_IN
 import com.example.hotspot.view.Constant.RADIUS
 import com.example.hotspot.view.Constant.STREET_WITHOUT_NAME
+import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
@@ -166,13 +167,16 @@ class BeforeCheckIn : Fragment() {
 
     private fun heartButton() {
         binding.beforeCheckInFavoriteBtnWhite.setOnClickListener {
+            addFavoriteHotSpot()
             binding.beforeCheckInFavoriteBtnWhite.visibility = View.GONE
             binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
+            Log.i(TAG, "Added hot 2")
         }
 
         binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
             binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
             binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
+            Log.i(TAG, "Removed hot 3")
 
         }
     }
@@ -255,6 +259,20 @@ class BeforeCheckIn : Fragment() {
         }
     }
 
+
+
+    private fun addFavoriteHotSpot() {
+        args.hotSpot.id?.let { hotSpotId ->
+
+            DataHolder.currentUser?.uid?.let { userId ->
+                BeforeCheckInVM.addHotSpotDB(hotSpotId, userId)
+
+            } ?: run { Log.i(TAG, "User id is null ($this)") }
+
+
+        } ?: run { Log.i(TAG, "HotSpot id is null ($this)") }
+
+    }
 
 }
 

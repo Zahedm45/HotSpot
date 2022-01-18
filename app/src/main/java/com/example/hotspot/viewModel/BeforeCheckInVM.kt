@@ -6,6 +6,7 @@ import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.other.network.TAG
 import com.example.hotspot.repository.Repository
+import com.example.hotspot.repository.SubRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
@@ -79,6 +80,14 @@ class BeforeCheckInVM {
                 }
             }
         }
+
+
+
+
+        fun addHotSpotDB(hotSpotId: String, userId: String) {
+            SubRepository.addHotSpotDB(hotSpotId, userId)
+        }
+
     }
 
 
