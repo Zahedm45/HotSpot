@@ -5,7 +5,10 @@ import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
 import com.google.firebase.firestore.ListenerRegistration
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 
 
 class AfterCheckInVM {
@@ -24,6 +27,30 @@ class AfterCheckInVM {
 
         private fun onSuccessSnapShotIds(newCheckedIn: ArrayList<CheckedInDB>) {
             val oldCheckedIn = UsersAndIds.checkedInMap
+
+            CoroutineScope(Default).launch {
+                val newIdList = ArrayList<String>()
+                newCheckedIn.forEach {
+                    it.id?.let { id -> newIdList.add(id) }
+                }
+
+                val toRemove = ArrayList<String>()
+                for (curr in oldCheckedIn) {
+
+                    if (!newIdList.contains(curr.key)) {
+                        toRemove.add(curr.key)
+                    }
+                }
+
+                CoroutineScope(Main).launch {
+                    if (!toRemove.isNullOrEmpty()){
+                        UsersAndIds.removeUser(toRemove)
+                    }
+                }
+
+            }
+
+
             for (curr in newCheckedIn) {
 
                 curr.id?.let {
@@ -36,24 +63,6 @@ class AfterCheckInVM {
                 }
             }
 
-
-            val newIdList = ArrayList<String>()
-            newCheckedIn.forEach {
-                it.id?.let { id -> newIdList.add(id) }
-            }
-
-
-            val toRemove = ArrayList<String>()
-            for (curr in oldCheckedIn) {
-
-                if (!newIdList.contains(curr.key)) {
-                    toRemove.add(curr.key)
-                }
-            }
-
-            if (!toRemove.isNullOrEmpty()){
-                UsersAndIds.removeUser(toRemove)
-            }
         }
 
 

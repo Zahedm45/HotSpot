@@ -35,9 +35,8 @@ class BeforeCheckInVM {
                 user.uid?.let { userId ->
                     checkedInDB = CheckedInDB(userId, true)
                     this.user = user
-                    Log.i(TAG, "User was $addedCheckedInAndHotspotId")
+                   // Log.i(TAG, "User was $addedCheckedInAndHotspotId")
                     if (addedCheckedInAndHotspotId.containsKey(userId)) {
-
                         Log.i(TAG, "User was previously added to the database (BeforeCheckInVM) 1")
                         return
                     }
