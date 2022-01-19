@@ -1,6 +1,7 @@
 package com.example.hotspot.viewModel
 
 import android.util.Log
+import android.widget.ImageView
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
@@ -26,6 +27,12 @@ class BeforeCheckInVM {
 
         private lateinit var checkedInDB : CheckedInDB
         private lateinit var user: User
+
+        var hotSpotsImg = mutableMapOf<String, String>()
+
+
+
+
 
         fun setCheckedInDB(hotSpot: HotSpot, user: User, onSuccess: (() -> Unit)? ) {
 
