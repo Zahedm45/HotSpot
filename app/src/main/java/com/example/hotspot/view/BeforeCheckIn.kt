@@ -183,7 +183,7 @@ class BeforeCheckIn : Fragment() {
 
         binding.beforeCheckInCheckInBtn.setOnClickListener {
             val isUserPresent = isUserPresent()
-            if (isUserPresent) {
+/*            if (isUserPresent) {
                 DataHolder.currentUser?.let { user ->
                     val checkedInDB = CheckedInDB(id = user.uid)
                     UsersAndIds.addUser(user, checkedInDB)
@@ -191,7 +191,7 @@ class BeforeCheckIn : Fragment() {
                 } ?: run {
                     DataHolder.fetchCurrentUserFromDB()
                 }
-            }
+            }*/
 
             CoroutineScope(IO).launch {
                 val drawable = resources.getDrawable(R.drawable.custom_button_click_effect)

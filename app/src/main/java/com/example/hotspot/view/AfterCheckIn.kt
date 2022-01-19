@@ -20,7 +20,10 @@ import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.hotspot.R
+import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.other.network.TAG
+import com.example.hotspot.viewModel.BeforeCheckInVM
+import com.example.hotspot.viewModel.DataHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -66,7 +69,6 @@ class AfterCheckIn : Fragment() {
 
         CoroutineScope(IO).launch {
             delay(1500)
-
             var time = (AfterCheckInVM.amountOfUsersToFetch * 800).toLong()
             if (time > 2000) {
                 time = 2000
@@ -75,6 +77,7 @@ class AfterCheckIn : Fragment() {
 
             delay(time)
             CoroutineScope(Main).launch {
+                setUserInDb()
                 AfterCheckInVM.amountOfUsersToFetch = 0
                 clearProgress()
             }
@@ -83,6 +86,16 @@ class AfterCheckIn : Fragment() {
     }
 
 
+
+    private fun setUserInDb() {
+        DataHolder.currentUser?.let { user ->
+            val checkedInDB = CheckedInDB(id = user.uid)
+            UsersAndIds.addUser(user, checkedInDB)
+            BeforeCheckInVM.setCheckedInDB(args.hotSpot, user, null)
+        } ?: run {
+            DataHolder.fetchCurrentUserFromDB()
+        }
+    }
 
 
     private fun setProgress() {
