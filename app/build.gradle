@@ -5,13 +5,11 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-    id("androidx.navigation.safeargs.kotlin")
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
 
-}
 
 android {
     compileSdk 30
