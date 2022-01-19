@@ -182,7 +182,8 @@ class BeforeCheckIn : Fragment() {
     private fun checkInBtn(view: View) {
 
         binding.beforeCheckInCheckInBtn.setOnClickListener {
-            val isUserPresent = isUserPresent()
+            //val isUserPresent = isUserPresent()
+            val isUserPresent = true
             if (isUserPresent) {
                 DataHolder.currentUser?.let { user ->
                     val checkedInDB = CheckedInDB(id = user.uid)
