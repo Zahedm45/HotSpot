@@ -62,8 +62,8 @@ class ChatLog : Fragment() {
         val fromid = FirebaseAuth.getInstance().uid
 
         val fragment = User()
-        val user = intent.getParcelableExtra<User>(USER_KEY)
-        val toid = user?.uid
+        val toid = arguments.toString()
+        Log.d("NavigationArgs1",toid)
         val ref = db.collection("messages")
 
             ref.whereIn("toFrom",listOf(fromid+toid,toid+fromid))
@@ -85,8 +85,8 @@ class ChatLog : Fragment() {
 
     private fun newMessageAdded(newDocuments: QuerySnapshot) {
         val fromid = FirebaseAuth.getInstance().uid
-        val user = intent.getParcelableExtra<User>(USER_KEY)
-        val toid = user?.uid
+        val toid = arguments.toString()
+        Log.d("NavigationArgs2",toid)
 
         for (document in newDocuments.documentChanges) {
             when (document.type) {
@@ -120,10 +120,10 @@ class ChatLog : Fragment() {
 
         val db = Firebase.firestore
 
-        val user = intent.getParcelableExtra<User>(USER_KEY)
         val text = editText_chatlog.text.toString()
         val fromid = FirebaseAuth.getInstance().uid
-        val toid = user?.uid
+        val toid = arguments.toString()
+        Log.d("NavigationArgs3",toid)
         val timestamp = System.currentTimeMillis()
 
         val message = ChatMessage(toid+fromid, text, fromid,

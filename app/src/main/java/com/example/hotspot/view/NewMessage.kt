@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityChatLogBinding
 import com.example.hotspot.databinding.ActivityNewMessageBinding
@@ -55,14 +56,14 @@ class NewMessage : Fragment() {
                 users.forEach { user ->
                     if (user.uid != uid) {
                         adapter.add(UserItem(user, user.uid!!))
+                        adapter.setOnItemClickListener { item, view ->
+                            val userItem = item as UserItem
+                            val action = NewMessageDirections.actionNewmessageToChatlog(userItem.user.uid!!)
+                            findNavController().navigate(action)
+                        }
                     }
                 }
-                adapter.setOnItemClickListener { item, view ->
-                    val userItem = item as UserItem
-                    val intent = Intent(view.context, ChatLog::class.java)
-                    intent.putExtra(USER_KEY, userItem.user)
-                    startActivity(intent)
-                }
+
                 binding.recyclerviewNewMessage.adapter = adapter
             }
     }
