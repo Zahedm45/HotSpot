@@ -77,7 +77,7 @@ class AfterCheckIn : Fragment() {
 
             delay(time)
             CoroutineScope(Main).launch {
-                setUserInDb()
+               // setUserInDb()
                 AfterCheckInVM.amountOfUsersToFetch = 0
                 clearProgress()
             }
@@ -87,7 +87,7 @@ class AfterCheckIn : Fragment() {
 
 
 
-    private fun setUserInDb() {
+/*    private fun setUserInDb() {
         DataHolder.currentUser?.let { user ->
             val checkedInDB = CheckedInDB(id = user.uid)
             UsersAndIds.addUser(user, checkedInDB)
@@ -95,7 +95,7 @@ class AfterCheckIn : Fragment() {
         } ?: run {
             DataHolder.fetchCurrentUserFromDB()
         }
-    }
+    }*/
 
 
     private fun setProgress() {
