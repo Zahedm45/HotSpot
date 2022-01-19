@@ -2,13 +2,20 @@ package com.example.hotspot.view
 
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
+import com.example.hotspot.model.User
 import com.example.hotspot.other.UtilView
+import com.example.hotspot.repository.Repository
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import kotlinx.android.synthetic.main.chat_item.view.*
+import kotlinx.android.synthetic.main.fragment_message_overview.*
 
 
 class MessageOverview : Fragment(), View.OnClickListener {
@@ -19,7 +26,6 @@ class MessageOverview : Fragment(), View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view = inflater.inflate(R.layout.fragment_message_overview, container, false)
         (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Messages"
         return view
@@ -28,9 +34,13 @@ class MessageOverview : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-      view.findViewById<CardView>(R.id.chatOnClick).setOnClickListener(this)
+
+        //RVmessage_overview.adapter = GroupAdapter<ViewHolder>()
+        //Repository.fetchMessages()
+        view.findViewById<CardView>(R.id.chatOnClick).setOnClickListener(this)
 
     }
+
 
     override fun onClick(chatsView: View?){
         when(chatsView!!.id){

@@ -15,6 +15,10 @@ import com.example.hotspot.model.User
 import com.example.hotspot.viewModel.PersonalProfileVM
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
@@ -23,6 +27,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 import java.lang.Exception
@@ -234,7 +240,7 @@ class Repository {
             }
 
             val ref = FirebaseStorage.getInstance().getReference("/images/${fbUser.uid}")
-            val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
+            val ONE_MEGABYTE: Long = (1824 * 1824).toLong()
 
             ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                 updateUI(it)
@@ -313,6 +319,21 @@ class Repository {
             }
 
         }
+        /* TODO: Fetches a users messages from the database */
+
+        fun fetchMessages() {
+            val ref = FirebaseDatabase.getInstance().getReference("")
+            ref.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                   TODO(reason = "Not yet implemented")
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }
 
 
 
@@ -334,7 +355,7 @@ class Repository {
             ref.putBytes(data)
                 .addOnSuccessListener {
 
-                    val ONE_MEGABYTE: Long = (1024 * 1024).toLong()
+                    val ONE_MEGABYTE: Long = (1824 * 1824).toLong()
                     ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                         PersonalProfileVM.setUserPicUI(it)
                     }
@@ -414,10 +435,11 @@ class Repository {
                         value.forEach {
 
                             val checkedIn = it.toObject<CheckedInDB>()
-                            if (checkedIn.id == null) {
+                            checkedIn.id = it.id
+
+ /*                           if (checkedIn.id == null) {
                                 checkedIn.id = it.id
-                            }
-                           // Log.d(TAG, "Current $checkedIn")
+                            }*/
 
                             checkedIns.add(checkedIn)
                         }
@@ -432,28 +454,34 @@ class Repository {
         }
 
 
-
-
-        private lateinit var onSuccess: (user: User, checkedIn: CheckedInDB) -> Unit
-        private var user: User? = null
-        private var bitmap: Bitmap? = null
-        private var checkedInDB: CheckedInDB? = null
-
         fun getCheckedInUserFromDB(
             usersId: String,
             checkedInDB: CheckedInDB,
             onSuccess: ((user: User, checkedIn: CheckedInDB) -> Unit)
 
         ) {
-            this.onSuccess = onSuccess
-            this.checkedInDB = checkedInDB
+            var user: User? = null
+           // var bitmap: Bitmap? = null
 
             val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
-            val ONE_MEGABYTE: Long = (624 * 624).toLong()
+            val ONE_MEGABYTE: Long = (1824 * 1824).toLong()
             ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
-                subFunOfGetCheckedInUserFromDB()
+                var bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+
+                CoroutineScope(IO).launch {
+                    while (user == null) {
+                        delay(10)
+                    }
+
+                    CoroutineScope(Main).launch {
+                        user?.let { userTem ->
+                            userTem.bitmapImg = bitmap
+                            onSuccess(userTem, checkedInDB)
+                        }
+                    }
+                }
             }
+
 
             val db = Firebase.firestore
             db.collection("users").document(usersId)
@@ -461,31 +489,12 @@ class Repository {
                 .addOnSuccessListener { doc ->
                     doc.toObject<User>()?.apply {
 
-                        if(this.uid == null) {
-                            this.uid = usersId
-                        }
+                        this.uid = usersId
                         user = this
-                        subFunOfGetCheckedInUserFromDB()
+
                     }
                 }
         }
-
-
-
-        private fun subFunOfGetCheckedInUserFromDB() {
-            user?.let { itUser ->
-                bitmap?.let {
-                    Log.d(TAG, "Success...Repository $user and $it")
-                    itUser.bitmapImg = it
-                    onSuccess(itUser, checkedInDB!!)
-                }
-
-            }
-
-        }
-
-
-
 
 
 
