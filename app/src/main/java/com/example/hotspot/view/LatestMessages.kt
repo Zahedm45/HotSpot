@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 class LatestMessages : Fragment() {
 
-    val adapter = GroupAdapter<GroupieViewHolder>()
+
     private lateinit var binding: FragmentLatestMessagesBinding
 
 
@@ -46,9 +46,14 @@ class LatestMessages : Fragment() {
         Log.d("LatestMessages","onCreate")
 
 
-        fetchUsers()
+
         return view
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fetchUsers()
     }
 
     override fun onAttach(context: Context) {
@@ -57,6 +62,10 @@ class LatestMessages : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 
@@ -68,7 +77,7 @@ class LatestMessages : Fragment() {
 
     @SuppressLint("LogNotTimber")
     public fun fetchUsers(){
-
+        val adapter = GroupAdapter<GroupieViewHolder>()
         val db = Firebase.firestore
         val userRef = db.collection("users")
         val messageRef = db.collection("messages")
