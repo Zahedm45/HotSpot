@@ -1,5 +1,6 @@
 package com.example.hotspot.view
 
+import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -35,7 +36,13 @@ class AfterCheckIn : Fragment() {
     private val adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var groupieUserCheckedIns: ArrayList<UserItemCheckedIn>
     private lateinit var progressBar: ProgressBar
+    var isFragmentJustCreated = false
 
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        isFragmentJustCreated = true
+    }
 
 
 
@@ -52,7 +59,10 @@ class AfterCheckIn : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfterCheckInBinding.bind(view)
-        setProgress()
+
+        if (isFragmentJustCreated) {
+            setProgress()
+        }
 
         setHotSpotInfo()
         heartBtn()
@@ -62,40 +72,30 @@ class AfterCheckIn : Fragment() {
 
 
 
+        if (isFragmentJustCreated) {
+            CoroutineScope(IO).launch {
+                delay(1500)
+                var time = (AfterCheckInVM.amountOfUsersToFetch * 800).toLong()
+                if (time > 2000) {
+                    time = 2000
+                }
+                Log.i(TAG, "delay time is.. $time")
 
-        CoroutineScope(IO).launch {
-            delay(1500)
-            var time = (AfterCheckInVM.amountOfUsersToFetch * 800).toLong()
-            if (time > 2000) {
-                time = 2000
-            }
-            Log.i(TAG, "delay time is.. $time")
-
-            delay(time)
-            CoroutineScope(Main).launch {
-               // setUserInDb()
-                AfterCheckInVM.amountOfUsersToFetch = 0
-                clearProgress()
+                delay(time)
+                CoroutineScope(Main).launch {
+                    AfterCheckInVM.amountOfUsersToFetch = 0
+                    clearProgress()
+                }
             }
         }
-
     }
 
 
 
-/*    private fun setUserInDb() {
-        DataHolder.currentUser?.let { user ->
-            val checkedInDB = CheckedInDB(id = user.uid)
-            UsersAndIds.addUser(user, checkedInDB)
-            BeforeCheckInVM.setCheckedInDB(args.hotSpot, user, null)
-        } ?: run {
-            DataHolder.fetchCurrentUserFromDB()
-        }
-    }*/
-
-
     private fun setProgress() {
+        binding.afterCheckInProgressLayout.visibility = View.VISIBLE
        binding.afterCheckedInRecyclerView.isVisible = false
+        binding.afterCheckInProgress.visibility = View.VISIBLE
         progressBar = binding.afterCheckInProgress
         progressBar.indeterminateDrawable
             .setColorFilter(ContextCompat.getColor(requireContext(), R.color.orange), PorterDuff.Mode.SRC_IN )
@@ -109,6 +109,7 @@ class AfterCheckIn : Fragment() {
         CoroutineScope(IO).launch {
             delay(800)
             CoroutineScope(Main).launch {
+
                 binding.afterCheckInBlank.isVisible = false
                 binding.afterCheckInProgress.visibility = View.GONE
                 binding.afterCheckedInRecyclerView.isVisible = true
@@ -116,7 +117,10 @@ class AfterCheckIn : Fragment() {
 
                 (done.drawable as Animatable).stop()
                 done.visibility = View.GONE
+                binding.afterCheckInProgressLayout.visibility = View.GONE
 
+
+                isFragmentJustCreated = false
             }
         }
 
@@ -162,30 +166,18 @@ class AfterCheckIn : Fragment() {
 
     private fun heartBtn() {
         binding.afterCheckInFavoriteBtnWhite.setOnClickListener {
-            Log.i(TAG, "heart ()")
 
             binding.afterCheckInFavoriteBtnWhite.visibility = View.GONE
             binding.afterCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
-         //   addFavoriteHotSpot()
         }
 
         binding.afterCheckInFavoriteBtnThemeColor.setOnClickListener {
-            Log.i(TAG, "heart2 ()")
 
             binding.afterCheckInFavoriteBtnThemeColor.visibility = View.GONE
             binding.afterCheckInFavoriteBtnWhite.visibility = View.VISIBLE
 
         }
     }
-
-
-
-    override fun onStop() {
-        super.onStop()
-       // AfterCheckInVM.checkedInListenerRig?.remove()
-    }
-
-
 
 
 

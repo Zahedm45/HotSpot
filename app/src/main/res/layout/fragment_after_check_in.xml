@@ -240,12 +240,14 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/after_check_in_progress_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
 
 
             >
@@ -265,6 +267,7 @@
                 style="?android:attr/progressBarStyle"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="@+id/after_check_in_blank"
                 app:layout_constraintBottom_toBottomOf="@+id/after_check_in_blank"
                 app:layout_constraintEnd_toEndOf="@+id/after_check_in_blank"
