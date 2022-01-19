@@ -20,6 +20,7 @@ class SubRepository {
 
            // val db = Firebase.firestore
 
+            Log.i(TAG, "hotSpot id $hotSpotId, and user $userId")
             //val map = mutableMapOf<String, String>()
             map.put("hotspotId", hotSpotId)
 
