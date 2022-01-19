@@ -516,7 +516,7 @@ class Repository {
             val db = Firebase.firestore
             val fbUser = Firebase.auth.currentUser!!
 
-            db.collection("users").document(fbUser.uid).update("userCheckedIn", hotSpotId)
+            db.collection("users").document(fbUser.uid).update("isUserCheckedIn", hotSpotId)
         }
 
     }
