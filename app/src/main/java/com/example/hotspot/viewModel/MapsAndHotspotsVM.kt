@@ -3,6 +3,7 @@ package com.example.hotspot.viewModel
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.repository.Repository
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ListenerRegistration
 
 class MapsAndHotspotsVM {

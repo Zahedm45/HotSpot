@@ -54,6 +54,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var progressBar: ProgressBar
     private var location: LatLng? = null
     private val markers: ArrayList<Marker> = ArrayList()
+    var isSnackBarShowing = false
 
 
 
@@ -74,12 +75,15 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         if (MapsAndHotspotsVM.isAppJustOpened) {
             addProgressBar()
-        }
 
+        } else {
+            logicsForSnackBar()
+            isSnackBarShowing = true
+
+        }
 
         myLocationBtn(view)
 
-        logicsForSnackBar()
 
     }
 
@@ -341,6 +345,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             MapsAndHotspotsVM.isAppJustOpened = false
         }
 
+        if (!isSnackBarShowing) {
+            showSnackBar()
+        }
 
        // requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
