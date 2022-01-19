@@ -79,7 +79,7 @@
     <string name="my_email_address_n_is">My email address \n is</string>
     <string name="email">Email</string>
     <string name="lost_account">We will use your email in case your account is lost.</string>
-
+    <string name="no_favorite_hotspots">You dont have any favorite HotSpots</string>
 
 
 </resources>

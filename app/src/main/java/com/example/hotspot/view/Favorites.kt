@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Divider
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -64,6 +65,16 @@ class Favorites : Fragment() {
     override fun onResume() {
         super.onResume()
         fetchFavoriteHotspots()
+        if(RVfavorites.isEmpty()){
+            RVfavorites.visibility = View.GONE
+            emptyHeartView.visibility = View.VISIBLE
+            emptyListView.visibility = View.VISIBLE
+        }
+        else {
+            RVfavorites.visibility = View.VISIBLE
+            emptyHeartView.visibility = View.GONE
+            emptyListView.visibility = View.GONE
+        }
 
     }
 
