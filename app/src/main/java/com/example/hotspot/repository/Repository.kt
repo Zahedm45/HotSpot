@@ -480,8 +480,8 @@ class Repository {
                     doc.toObject<User>()?.apply {
                         this.uid = usersId
                         user = this
-                       // user!!.uid = usersId
                         bitmap?.let {
+                            user!!.bitmapImg = it
                             onSuccess(user!!, checkedInDB)
                         }
 
