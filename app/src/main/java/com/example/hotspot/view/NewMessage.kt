@@ -2,8 +2,12 @@ package com.example.hotspot.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hotspot.R
+import com.example.hotspot.databinding.ActivityChatLogBinding
 import com.example.hotspot.databinding.ActivityNewMessageBinding
 import com.example.hotspot.model.User
 import com.google.firebase.auth.FirebaseAuth
@@ -23,14 +27,14 @@ class NewMessage : Fragment() {
     //   private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityNewMessageBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityNewMessageBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        supportActionBar?.title = "Select a Person"
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?) : View? {
+        val view = inflater.inflate(R.layout.activity_new_message,container, false)
+        binding = ActivityNewMessageBinding.inflate(inflater, container, false)
 
         fetchUsers()
+
+        return view
     }
 
     companion object {
@@ -58,7 +62,6 @@ class NewMessage : Fragment() {
                     val intent = Intent(view.context, ChatLog::class.java)
                     intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
-                    finish()
                 }
                 binding.recyclerviewNewMessage.adapter = adapter
             }
