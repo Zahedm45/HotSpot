@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentLatestMessagesBinding
+import com.example.hotspot.databinding.LatestMessageRowBinding
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
 import com.example.hotspot.view.ChatLog.Companion.TAG
@@ -31,25 +32,23 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 class LatestMessages : Fragment() {
 
-    private lateinit var binding: FragmentLatestMessagesBinding
     val adapter = GroupAdapter<GroupieViewHolder>()
+    private lateinit var binding: FragmentLatestMessagesBinding
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?) : View? {
 
         val view = inflater.inflate(R.layout.fragment_latest_messages,container, false)
-        binding = FragmentLatestMessagesBinding.inflate(inflater, container, false)
-        return view
-
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        binding = FragmentLatestMessagesBinding.bind(view)
         setHasOptionsMenu(true)
         Log.d("LatestMessages","onCreate")
-        recyclerview_latest_messages.adapter = adapter
+/*
+        binding.recyclerviewLatestMessages.adapter = adapter
+*/
         fetchUsers()
+        return view
+
     }
 
     override fun onAttach(context: Context) {
