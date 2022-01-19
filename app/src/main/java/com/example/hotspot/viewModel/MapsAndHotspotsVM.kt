@@ -11,7 +11,6 @@ class MapsAndHotspotsVM {
 
     companion object {
 
-        var action: NavDirections? = null
         var snackbar: Snackbar? = null
         var showHotSpotReg: ListenerRegistration? = null
 
