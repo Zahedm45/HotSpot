@@ -15,6 +15,7 @@ class DataHolder {
 
         private var currentUser = MutableLiveData<User>()
         private var currentUserHotSpot = MutableLiveData<HotSpot>()
+        var hotSpotId: String? = null
 
 
         fun fetchCurrentUserFromDB() {
@@ -37,9 +38,13 @@ class DataHolder {
         fun getCurrentUser() = currentUser as LiveData<User>
 
 
-        fun addCurrentUserHotspot(hotSpot: HotSpot) {
+        private fun addCurrentUserHotspot(hotSpot: HotSpot) {
+            hotSpotId = hotSpot.id
             currentUserHotSpot.value = hotSpot
         }
+
+
+        fun getCurrentUserHotspot() = currentUserHotSpot as LiveData<HotSpot>
 
     }
 

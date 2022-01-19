@@ -409,8 +409,14 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         val layout = snackbar.view as Snackbar.SnackbarLayout
         layout.setPadding(0, 0, 0, 0)
         customSnackView.setOnClickListener() {
-            //TODO fix navigation when clicking on snackbar.
-            //findNavController().navigate(R.id.action_mapsFragment_to_afterCheckIn)
+
+            Log.i(TAG, "you clicked me...")
+           DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
+                val action = MapsFragmentDirections.actionMapsFragmentToAfterCheckIn(hotSpot)
+                view?.findNavController()?.navigate(action)
+
+            }
+
         }
         val color: Int = resources.getColor(R.color.transparent)
         layout.setBackgroundColor(color)
