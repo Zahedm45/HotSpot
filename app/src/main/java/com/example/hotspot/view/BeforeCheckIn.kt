@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
@@ -62,6 +63,10 @@ class BeforeCheckIn : Fragment() {
         setAllInfo()
         heartButton()
         checkInBtn(view)
+
+        binding.beforeCheckInReviews.setOnClickListener {
+            findNavController().navigate(R.id.Action_beforeCheckin_to_reviews)
+        }
 
     }
 

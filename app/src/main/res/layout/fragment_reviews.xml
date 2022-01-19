@@ -3,7 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="reviews">
+
+    <Button
+        android:id="@+id/Exit_reviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+    </Button>
 
     <TextView
         android:id="@+id/hotspot_name"
@@ -19,6 +34,8 @@
         tools:ignore="MissingConstraints">
 
     </TextView>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_reviews"

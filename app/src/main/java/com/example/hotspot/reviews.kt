@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.databinding.FragmentReviewsBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -35,6 +36,9 @@ class reviews : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentReviewsBinding.inflate(layoutInflater)
 
+        binding.ExitReviews.setOnClickListener {
+            findNavController().navigate(R.id.action_reviews_to_beforeCheckIn)
+        }
     }
 
     override fun onResume() {
@@ -55,7 +59,7 @@ class reviews : Fragment() {
                 val reviews = qr.documents
                 val adapter = GroupAdapter<GroupieViewHolder>()
                 reviews.forEach { review ->
-                    resolveHotspotreview(hotSpot.get("hotspotId") as String, adapter)
+                    //resolveHotspotreview(hotSpot.get("hotspotId") as String, adapter)
                 }
                 binding.recyclerViewReviews.adapter = adapter
             }
@@ -79,6 +83,42 @@ class reviews : Fragment() {
                     }
                 }
             }
+
+         class HotSpotItem(val hotspot: HotSpot): Item() {
+        override fun bind(
+            viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
+            position: Int
+        ) {
+            viewHolder.apply {
+                with(viewHolder.itemView){
+                    hotspot_name.text = hotspot.name
+                    hotspot_rating.text = hotspot.rating.toString()
+                    hotspot_location.text = hotspot.address?.town
+                    val imageRef = Firebase.storage.reference.child("HotSpots/${hotspot.id}.png")
+                    imageRef.downloadUrl.addOnSuccessListener { Uri ->
+                        val imageUrl = Uri.toString()
+                        val imageView = viewHolder.itemView.hotspot_picture
+                        Picasso.get().load(imageUrl).into(imageView)
+
+                }
+
+            }
+
+            viewHolder.itemView.setOnClickListener {
+                val action = FavoritesDirections.actionFavoritesToBeforeCheckIn(hotspot)
+                it.findNavController().navigate(action)
+            }
+
+        }
+
+        }
+
+
+        override fun getLayout(): Int {
+            return R.layout.favorite_item
+        }
+
+
+    }
     */
 
-}
