@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hotspot.R
-import com.example.hotspot.databinding.ActivityChatLogBinding
+import com.example.hotspot.databinding.FragmentChatlogBinding
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
-import com.example.hotspot.view.NewMessage.Companion.USER_KEY
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
@@ -18,11 +17,11 @@ import com.google.firebase.ktx.Firebase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import kotlinx.android.synthetic.main.activity_chat_log.*
 import kotlinx.android.synthetic.main.chat_from_row.view.*
 import kotlinx.android.synthetic.main.chat_to_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_chatlog.*
 
 class ChatLog : Fragment() {
 
@@ -35,12 +34,12 @@ class ChatLog : Fragment() {
     val currentUserId = FirebaseAuth.getInstance().uid
     var latestMessageTimestamp: Long = -1
 
-    private lateinit var binding: ActivityChatLogBinding
+    private lateinit var binding: FragmentChatlogBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?) : View? {
-        val view = inflater.inflate(R.layout.activity_chat_log,container, false)
-        binding = ActivityChatLogBinding.inflate(inflater, container, false)
+        val view = inflater.inflate(R.layout.fragment_chatlog,container, false)
+        binding = FragmentChatlogBinding.inflate(inflater, container, false)
 
         recyclerview_chatlog.adapter = adapter //vid 6 - 22:15
         //Passing an object from one activity to another - in this case we are passing the username

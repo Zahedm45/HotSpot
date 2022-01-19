@@ -8,40 +8,48 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.ActivityLatestMessagesBinding
+import com.example.hotspot.databinding.FragmentLatestMessagesBinding
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
 import com.example.hotspot.view.ChatLog.Companion.TAG
-import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
-import kotlinx.android.synthetic.main.activity_latest_messages.*
 
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.chat_to_row.view.*
+import kotlinx.android.synthetic.main.fragment_latest_messages.*
 import kotlinx.android.synthetic.main.latest_message_row.*
 import kotlinx.android.synthetic.main.latest_message_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
-private lateinit var binding: ActivityLatestMessagesBinding
+
 
 class LatestMessages : Fragment() {
 
+    private lateinit var binding: FragmentLatestMessagesBinding
+    val adapter = GroupAdapter<GroupieViewHolder>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?) : View? {
 
-        val view = inflater.inflate(R.layout.activity_latest_messages,container, false)
-        binding = ActivityLatestMessagesBinding.inflate(inflater, container, false)
-
-        //fetchUsers()
+        val view = inflater.inflate(R.layout.fragment_latest_messages,container, false)
+        binding = FragmentLatestMessagesBinding.inflate(inflater, container, false)
         return view
 
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        Log.d("LatestMessages","onCreate")
+        recyclerview_latest_messages.adapter = adapter
+        fetchUsers()
     }
 
     override fun onAttach(context: Context) {
@@ -71,7 +79,6 @@ class LatestMessages : Fragment() {
         userRef.get()
             .addOnSuccessListener {
                 val users = it.toObjects<User>()
-                val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 var tempLatestMessage = ""
                 users.forEach { user ->
                     messageRef.whereIn("toFrom",listOf(uid+user.uid,user.uid+uid))

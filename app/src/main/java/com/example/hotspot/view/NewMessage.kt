@@ -1,6 +1,5 @@
 package com.example.hotspot.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.ActivityChatLogBinding
-import com.example.hotspot.databinding.ActivityNewMessageBinding
+import com.example.hotspot.databinding.FragmentNewMessageBinding
 import com.example.hotspot.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -26,12 +24,12 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 class NewMessage : Fragment() {
 
     //   private lateinit var recyclerView: RecyclerView
-    private lateinit var binding: ActivityNewMessageBinding
+    private lateinit var binding: FragmentNewMessageBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?) : View? {
-        val view = inflater.inflate(R.layout.activity_new_message,container, false)
-        binding = ActivityNewMessageBinding.inflate(inflater, container, false)
+        val view = inflater.inflate(R.layout.fragment_new_message,container, false)
+        binding = FragmentNewMessageBinding.inflate(inflater, container, false)
 
         fetchUsers()
 
