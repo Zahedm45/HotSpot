@@ -1,5 +1,6 @@
 package com.example.hotspot.viewModel
 
+import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
@@ -11,6 +12,8 @@ class DataHolder {
 
     companion object {
         var currentUser: User? = null
+
+        var currentUser2 = MutableLiveData<User>()
 
 
         fun fetchCurrentUserFromDB() {
@@ -28,6 +31,7 @@ class DataHolder {
         private fun addToCheckedInUsersList(user: User, checkedInDB: CheckedInDB) {
             currentUser = user
         }
+
 
     }
 
