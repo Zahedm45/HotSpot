@@ -18,6 +18,8 @@ class DataHolder {
        // var hotSpotId: String? = null
 
 
+
+
         fun fetchCurrentUserFromDB() {
             val userId = Firebase.auth.uid
             if (userId != null) {
@@ -28,10 +30,8 @@ class DataHolder {
 
 
         private fun addUser(user: User) {
-            if (user.isUserCheckedIn != "null" || user.isUserCheckedIn != null ) {
-                SubRepository.getAndListenCurrentUserHotspot(user.isUserCheckedIn!!) {hotSpot -> addCurrentUserHotspot(hotSpot)}
-            }
             currentUser.value = user
+            getAndListenCurrentUserHotspot()
         }
 
 
@@ -39,13 +39,27 @@ class DataHolder {
 
 
         private fun addCurrentUserHotspot(hotSpot: HotSpot) {
-            //hotSpotId = hotSpot.id
-            currentUserHotSpot.value = hotSpot
+
+            if (!hotSpot.id.isNullOrEmpty() && !hotSpot.name.isNullOrEmpty() ) {
+                currentUserHotSpot.value = hotSpot
+
+            }
         }
 
 
         fun getCurrentUserHotspot() = currentUserHotSpot as LiveData<HotSpot>
 
+
+
+
+        fun getAndListenCurrentUserHotspot() {
+            val user = currentUser.value
+            if (user?.isUserCheckedIn != "null" || user.isUserCheckedIn != null ) {
+                SubRepository.getAndListenCurrentUserHotspotDB(user?.isUserCheckedIn!!) { hotSpot -> addCurrentUserHotspot(hotSpot)}
+            }
+
+
+        }
     }
 
 

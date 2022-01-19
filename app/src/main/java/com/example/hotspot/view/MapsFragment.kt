@@ -84,7 +84,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         myLocationBtn(view)
 
-
     }
 
 

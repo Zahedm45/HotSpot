@@ -106,7 +106,7 @@ class SubRepository {
 
 
 
-        fun getAndListenCurrentUserHotspot(
+        fun getAndListenCurrentUserHotspotDB(
             hotSpotId: String,
             onSuccess: ((hotSpots: HotSpot) -> Unit)
         ) : ListenerRegistration {
