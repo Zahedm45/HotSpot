@@ -7,6 +7,7 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Divider
 import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -45,19 +46,30 @@ class Favorites : Fragment() {
         return view
     }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         fetchFavoriteHotspots()
-        Log.i(TAG, "oncreate")
 
-    }
 
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFavoritesBinding.bind(view)
+        fetchFavoriteHotspots()
+        if (binding.RVfavorites.adapter?.itemCount == null) {
+            binding.RVfavorites.visibility = View.GONE
+            binding.emptyHeartView.visibility = View.VISIBLE
+            binding.emptyListView.visibility = View.VISIBLE
+        } else {
+            binding.RVfavorites.visibility = View.VISIBLE
+            binding.emptyHeartView.visibility = View.GONE
+            binding.emptyListView.visibility = View.GONE
+        }
+
+
+
+        Log.i(TAG, "oncreate")
 
 
     }
@@ -65,22 +77,12 @@ class Favorites : Fragment() {
     override fun onResume() {
         super.onResume()
         fetchFavoriteHotspots()
-        if(RVfavorites.isEmpty()){
-            RVfavorites.visibility = View.GONE
-            emptyHeartView.visibility = View.VISIBLE
-            emptyListView.visibility = View.VISIBLE
-        }
-        else {
-            RVfavorites.visibility = View.VISIBLE
-            emptyHeartView.visibility = View.GONE
-            emptyListView.visibility = View.GONE
-        }
+
 
     }
 
 
-
-    private fun fetchFavoriteHotspots(){
+    private fun fetchFavoriteHotspots() {
         val db = Firebase.firestore
         val fbUser = Firebase.auth.uid.toString()
         val favoriteHotspotsRef = db
@@ -91,18 +93,18 @@ class Favorites : Fragment() {
             .addOnSuccessListener { qr ->
                 val hotspots = qr.documents
                 val adapter = GroupAdapter<GroupieViewHolder>()
-                hotspots.forEach{hotSpot ->
+                hotspots.forEach { hotSpot ->
                     resolveHotspotRef(hotSpot.get("hotspotId") as String, adapter)
                 }
                 binding.RVfavorites.adapter = adapter
 
-
-                }
-
-
             }
-
     }
+}
+
+
+
+
     private fun resolveHotspotRef(ref : String, adapter: GroupAdapter<GroupieViewHolder>){
         val db = Firebase.firestore
         val favoriteHotspotsRef = db
@@ -114,6 +116,7 @@ class Favorites : Fragment() {
                     if (hotspot is HotSpot) {
 
                         adapter.add(HotSpotItem(hotspot))
+
                     }
                 }
             }
@@ -127,7 +130,7 @@ class Favorites : Fragment() {
             position: Int
         ) {
             viewHolder.apply {
-                with(viewHolder.itemView){
+                with(viewHolder.itemView) {
                     hotspot_name.text = hotspot.name
                     hotspot_rating.text = hotspot.rating.toString()
                     hotspot_location.text = hotspot.address?.town
@@ -137,16 +140,16 @@ class Favorites : Fragment() {
                         val imageView = viewHolder.itemView.hotspot_picture
                         Picasso.get().load(imageUrl).into(imageView)
 
+                    }
+
+                }
+
+                viewHolder.itemView.setOnClickListener {
+                    val action = FavoritesDirections.actionFavoritesToBeforeCheckIn(hotspot)
+                    it.findNavController().navigate(action)
                 }
 
             }
-
-            viewHolder.itemView.setOnClickListener {
-                val action = FavoritesDirections.actionFavoritesToBeforeCheckIn(hotspot)
-                it.findNavController().navigate(action)
-            }
-
-        }
 
         }
 
