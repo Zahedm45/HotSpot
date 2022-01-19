@@ -384,8 +384,8 @@ private fun showSnackBarMessage() : Snackbar {
     val snackbar = Snackbar.make((binding.fragmentMapsMyLocationBtn), "" , Snackbar.LENGTH_INDEFINITE)
 
 
-    val customSnackView: View = layoutInflater.inflate(R.layout.snackbar_no_wifi, this.activity?.findViewById<View>(R.id.snackbar_cardView) as? ViewGroup)
-    layoutInflater.inflate(R.layout.snackbar_no_wifi, this.activity?.findViewById<View>(R.id.snackbar_cardView) as? ViewGroup, false)
+    val customSnackView: View = layoutInflater.inflate(R.layout.snackbar_my_hotspot, this.activity?.findViewById<View>(R.id.snackbar_cardView) as? ViewGroup)
+    layoutInflater.inflate(R.layout.snackbar_my_hotspot, this.activity?.findViewById<View>(R.id.snackbar_myhotspot_cardView) as? ViewGroup, false)
     val layout = snackbar.view as Snackbar.SnackbarLayout
     layout.setPadding(0,0,0,0)
     customSnackView.setOnClickListener(){
