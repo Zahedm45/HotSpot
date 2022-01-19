@@ -5,6 +5,7 @@
     android:layout_margin="2dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/review_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -26,6 +27,7 @@
             >
         </TextView>
         <TextView
+            android:id="@+id/reviews_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +39,7 @@
 
         </TextView>
         <TextView
-            android:id="@+id/Review_content"
+            android:id="@+id/review_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="content of review text"

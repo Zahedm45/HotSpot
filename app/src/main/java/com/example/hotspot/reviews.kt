@@ -1,40 +1,54 @@
 package com.example.hotspot
 
+import android.media.MediaDrm
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hotspot.databinding.FragmentReviewsBinding
+import com.example.hotspot.model.reviewItem
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.GroupieViewHolder
+import kotlinx.android.synthetic.main.fragment_reviews.*
+import kotlinx.android.synthetic.main.review_item.view.*
 
 class reviews : Fragment() {
 
     private lateinit var binding: FragmentReviewsBinding
+    var adapter = GroupAdapter<GroupieViewHolder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        //fetchReviews()
-        //Log.i(TAG, "oncreate")
+        //binding = FragmentReviewsBinding.inflate(layoutInflater)
+        recycler_view_reviews.adapter = adapter
+        //setContentView(binding.root)
+
+        fetchReviews()
+        Log.i("debug", "oncreate")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.i("debug", "oncreateview")
         return inflater.inflate(R.layout.fragment_reviews, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentReviewsBinding.inflate(layoutInflater)
+        Log.i("debug", "onviewcreated")
 
         binding.ExitReviews.setOnClickListener {
             findNavController().navigate(R.id.action_reviews_to_beforeCheckIn)
@@ -43,26 +57,56 @@ class reviews : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        //fetchReviews()
+
+        Log.i("debug", "onResume")
     }
 
     private fun fetchReviews(){
         val db = Firebase.firestore
         val fbUser = Firebase.auth.uid.toString()
-        val HotspotReviews = db
+        val Reviews = db
             .collection("users").document(fbUser)
             .collection("Reviews")
 
 
-        HotspotReviews.get()
+        //val adapter = GroupAdapter<GroupieViewHolder>()
+        adapter.add(ReviewItem("ben","Monke","test tekst"))
+        //binding.recyclerViewReviews.adapter = adapter
+
+        /*HotspotReviews.get()
             .addOnSuccessListener { qr ->
                 val reviews = qr.documents
-                val adapter = GroupAdapter<GroupieViewHolder>()
+                val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 reviews.forEach { review ->
                     //resolveHotspotreview(hotSpot.get("hotspotId") as String, adapter)
+                    adapter.add(ReviewItem("ben","Monke","test tekst"))
+                    Log.d("test","test msg")
                 }
                 binding.recyclerViewReviews.adapter = adapter
             }
+*/
+    }
+}
+class ReviewItem(val reviewers_name: String, val reviews_location: String, val review_content: String): com.xwray.groupie.kotlinandroidextensions.Item() {
+    override fun bind(
+        viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
+        position: Int
+    ) {
+        viewHolder.itemView.reviewers_name.text = reviewers_name
+        viewHolder.itemView.reviews_location.text = reviews_location
+        viewHolder.itemView.review_content.text = review_content
+
+        /*val imageId = user.uid
+        val ref = "https://firebasestorage.googleapis.com/v0/b/hotspot-onmyown.appspot.com" +
+                "/o/images%2F" + imageId + "?alt=media&token="
+        val targetImage = viewHolder.itemView.latest_message_pic
+        Picasso.get()
+            .load(ref)
+            .into(targetImage)
+    */}
+
+    override fun getLayout(): Int {
+        return R.layout.review_item
     }
 }
 
