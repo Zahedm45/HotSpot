@@ -2,10 +2,12 @@ package com.example.hotspot.viewModel
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import com.example.hotspot.model.UserProfile
 import com.example.hotspot.other.UtilCalculations
+import com.example.hotspot.other.network.TAG
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
 
@@ -57,8 +59,13 @@ class PersonalProfileVM(
                 monthOfBirth = snapshot.get("month").toString().toInt()
                 yearOfBirth = snapshot.get("year").toString().toInt()
             }
-            val age = UtilCalculations.getAge(yearOfBirth, monthOfBirth, dayOfBirth)
+            var age = UtilCalculations.getAge(yearOfBirth, monthOfBirth, dayOfBirth)
 
+
+            if (age == 0) {
+                age = snapshot.get("age").toString().toInt()
+            }
+             Log.i(TAG, "Age...$age")
 
 
 
