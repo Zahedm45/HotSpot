@@ -13,7 +13,8 @@ data class User(
     var day: Int? = null,
     var month: Int? = null ,
     var year: Int? = null,
-    var favoriteHotspots: MutableCollection<HotSpot>? = null
+    var favoriteHotspots: MutableCollection<HotSpot>? = null,
+    var isUserCheckedIn: Boolean? = false
 
    // var gender: String? = null,
   //  var bitmapImg: Bitmap? = null
