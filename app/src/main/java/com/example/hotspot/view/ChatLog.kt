@@ -60,6 +60,8 @@ class ChatLog : Fragment() {
     private fun listenForMessages() {
 
         val fromid = FirebaseAuth.getInstance().uid
+
+        val fragment = User()
         val user = intent.getParcelableExtra<User>(USER_KEY)
         val toid = user?.uid
         val ref = db.collection("messages")
