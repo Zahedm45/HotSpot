@@ -152,6 +152,27 @@
         android:id="@+id/latestMessagesActivity"
         android:name="com.example.hotspot.view.LatestMessagesActivity"
         android:label="activity_latest_messages"
-        tools:layout="@layout/activity_latest_messages" />
+        tools:layout="@layout/activity_latest_messages" >
+        <action
+            android:id="@+id/action_latest_to_new"
+            app:destination="@id/newMessageActivity" />
+        <action
+            android:id="@+id/action_lastest_to_chatlog"
+            app:destination="@id/chatLogActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatLogActivity"
+        android:name="com.example.hotspot.view.ChatLogActivity"
+        android:label="activity_chat_log"
+        tools:layout="@layout/activity_chat_log" />
+    <fragment
+        android:id="@+id/newMessageActivity"
+        android:name="com.example.hotspot.view.NewMessageActivity"
+        android:label="activity_new_message"
+        tools:layout="@layout/activity_new_message" >
+        <action
+            android:id="@+id/action_newmessage_to_chatlog"
+            app:destination="@id/chatLogActivity" />
+    </fragment>
 
 </navigation>
