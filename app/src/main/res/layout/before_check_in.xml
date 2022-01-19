@@ -16,14 +16,16 @@
         >
 
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/before_check_in_party_img"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_alignParentBottom="true"
             android:src="@drawable/dancing_pic_with_shadow"
-            app:layout_constraintVertical_bias=".0"
 
+            app:shapeAppearance="@style/roundedCorners"
+
+            app:layout_constraintVertical_bias=".0"
             app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_hotspot_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

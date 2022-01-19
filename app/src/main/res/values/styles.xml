@@ -5,4 +5,9 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <style name="roundedCorners" >
+        <item name="cornerSize">10%</item>
+        <item name="background"> @color/orange_hotspot</item>
+    </style>
 </resources>
