@@ -26,21 +26,21 @@
 
 
         <activity
-            android:name=".view.ChatLogActivity"
+            android:name=".view.ChatLog"
             android:exported="false" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.LatestMessagesActivity"/>
+                android:value=".view.LatestMessages"/>
         </activity>
         <activity
-            android:name=".view.NewMessageActivity"
+            android:name=".view.NewMessage"
             android:exported="true" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.LatestMessagesActivity" />
+                android:value=".view.LatestMessages" />
         </activity>
         <activity
-            android:name=".view.LatestMessagesActivity"
+            android:name=".view.LatestMessages"
             android:exported="true" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -5,7 +5,7 @@
     android:id="@+id/LatestMessagesActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LatestMessagesActivity">
+    tools:context=".view.LatestMessages">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_latest_messages"

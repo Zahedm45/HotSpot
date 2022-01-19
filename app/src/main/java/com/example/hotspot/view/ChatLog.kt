@@ -2,18 +2,15 @@ package com.example.hotspot.view
 
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.hotspot.R
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
-import com.example.hotspot.view.NewMessageActivity.Companion.USER_KEY
+import com.example.hotspot.view.NewMessage.Companion.USER_KEY
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -23,7 +20,7 @@ import kotlinx.android.synthetic.main.chat_to_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 import com.squareup.picasso.Picasso
 
-class ChatLogActivity : Fragment() {
+class ChatLog : Fragment() {
 
     companion object {
         val TAG = "chatlog"
@@ -34,7 +31,7 @@ class ChatLogActivity : Fragment() {
     val currentUserId = FirebaseAuth.getInstance().uid
     var latestMessageTimestamp: Long = -1
 
-    private lateinit var binding: ChatLogActivity
+    private lateinit var binding: ChatLog
 
     override fun onCreateView(savedInstanceState: Bundle?) {
         val view = inflater.inflate(R.layout.activity_latest_messages,container, false)

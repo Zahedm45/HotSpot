@@ -2,7 +2,6 @@ package com.example.hotspot.view
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityNewMessageBinding
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 
 
-class NewMessageActivity : Fragment() {
+class NewMessage : Fragment() {
 
     //   private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityNewMessageBinding
@@ -56,7 +55,7 @@ class NewMessageActivity : Fragment() {
                 }
                 adapter.setOnItemClickListener { item, view ->
                     val userItem = item as UserItem
-                    val intent = Intent(view.context, ChatLogActivity::class.java)
+                    val intent = Intent(view.context, ChatLog::class.java)
                     intent.putExtra(USER_KEY, userItem.user)
                     startActivity(intent)
                     finish()
