@@ -180,11 +180,6 @@ class AfterCheckIn : Fragment() {
 
 
 
-    private fun removeFavoriteHotSpot() {
-
-    }
-
-
     override fun onStop() {
         super.onStop()
        // AfterCheckInVM.checkedInListenerRig?.remove()
@@ -205,49 +200,5 @@ class AfterCheckIn : Fragment() {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-/*     fun onSuccess() {
-     AfterCheckInVM.checkedInUsersAndIds.users.observe(viewLifecycleOwner, Observer { it ->
-          // Log.i(TAG, "AFTERCHEC")
-
-           if (it != null) {
-               Log.i(TAG, "AFTERCHEC2 ${it}")
-               val groupieUsers = ArrayList<UserItem>()
-
-
-
-*//*                it.forEach { user ->
-                    Log.i(TAG, "AFTERCHEC3 ")
-                    groupieUsers.add(UserItem(user))
-                }*//*
-
-                for (i in it) {
-                    groupieUsers.add(UserItem(i))
-                    adapter.add(UserItem(i))
-                    adapter.notifyDataSetChanged()
-                }
-
-
-               // adapter.update(groupieUsers)
-            }
-
-
-        })
-
-    }*/
-
-
-
-
 
 
