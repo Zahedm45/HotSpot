@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
@@ -27,6 +28,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.GeoPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -49,6 +51,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var progressBar: ProgressBar
     private var location: LatLng? = null
     private val markers: ArrayList<Marker> = ArrayList()
+    private lateinit var snackbar: Snackbar
 
 
 
@@ -81,6 +84,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     override fun onDestroyView() {
         super.onDestroyView()
         MapsAndHotspotsVM.showHotSpotReg?.remove()
+
     }
 
 
@@ -94,6 +98,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 moveCamara(12f)
             }
             ButtonAnimations.clickImageButton(binding.fragmentMapsMyLocationBtn)
+
         }
     }
 
@@ -122,6 +127,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             clearProgressBar()
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val snackbar = showSnackBarMessage()
+        snackbar.show()
     }
 
 
@@ -365,7 +376,23 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 */
+private fun showSnackBarMessage() : Snackbar {
+    val snackbar = Snackbar.make((binding.fragmentMapsMyLocationBtn), "" , Snackbar.LENGTH_INDEFINITE)
 
+
+    val customSnackView: View = layoutInflater.inflate(R.layout.snackbar_no_wifi, this.activity?.findViewById<View>(R.id.snackbar_cardView) as? ViewGroup)
+    layoutInflater.inflate(R.layout.snackbar_no_wifi, this.activity?.findViewById<View>(R.id.snackbar_cardView) as? ViewGroup, false)
+    val layout = snackbar.view as Snackbar.SnackbarLayout
+    layout.setPadding(0,0,0,0)
+    customSnackView.setOnClickListener(){
+        if(snackbar.isShown) snackbar.dismiss()
+    }
+    val color: Int = resources.getColor(R.color.transparent)
+    layout.setBackgroundColor(color)
+    layout.addView(customSnackView, 0)
+
+    return snackbar
+}
 
 
 
