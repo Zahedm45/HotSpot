@@ -41,13 +41,14 @@
         android:id="@+id/recycler_view_reviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="4dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@+id/hotspot_name"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/review_item"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hotspot_name"
+        tools:listitem="@layout/review_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
