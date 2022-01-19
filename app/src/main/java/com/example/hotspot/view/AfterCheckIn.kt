@@ -10,9 +10,7 @@ import androidx.lifecycle.Observer
 import com.example.hotspot.databinding.FragmentAfterCheckInBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-
 import androidx.navigation.fragment.navArgs
-import com.example.hotspot.model.User
 import com.example.hotspot.other.network.TAG
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.UsersAndIds
@@ -22,10 +20,6 @@ import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.hotspot.R
-import com.example.hotspot.model.CheckedInDB
-import com.example.hotspot.other.network.TAG
-import com.example.hotspot.viewModel.BeforeCheckInVM
-import com.example.hotspot.viewModel.DataHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
