@@ -142,14 +142,11 @@ class LatestMessages : Fragment() {
             R.id.menu_new_message -> {
                 //Navigate to NewMessage
 
-                findNavController().navigate(R.id.)
+                findNavController().navigate(R.id.action_latest_to_new)
             }
             R.id.menu_sign_out -> {
-                FirebaseAuth.getInstance().signOut()
-                //Run registration activity
-                val intent = Intent(this, ActivityCreateProfile::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                //FirebaseAuth.getInstance().signOut()
+                //DELETE THIS BUTTON LATER
             }
         }
 
