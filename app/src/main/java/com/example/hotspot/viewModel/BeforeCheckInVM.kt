@@ -36,10 +36,10 @@ class BeforeCheckInVM {
                     checkedInDB = CheckedInDB(userId, true)
                     this.user = user
                    // Log.i(TAG, "User was $addedCheckedInAndHotspotId")
-                    if (addedCheckedInAndHotspotId.containsKey(userId)) {
+/*                    if (addedCheckedInAndHotspotId.containsKey(userId)) {
                         Log.i(TAG, "User was previously added to the database (BeforeCheckInVM) 1")
                         return
-                    }
+                    }*/
                     //setCheckedInLocal(user, checkedInDB)
                     db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(userId)
                         .set(checkedInDB)
