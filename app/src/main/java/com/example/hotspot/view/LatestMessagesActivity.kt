@@ -32,11 +32,17 @@ class LatestMessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLatestMessagesBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
         fetchUsers()
+        binding.ivChat.setOnClickListener(){
+            val intent = Intent(this, NewMessageActivity::class.java)
+            //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+        supportActionBar?.hide()
 
 //        verifyUserIsLoggedIn()
-
     }
 
 
@@ -131,28 +137,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.nav_top_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item?.itemId) {
-            R.id.menu_new_message -> {
-                val intent = Intent(this, NewMessageActivity::class.java)
-                //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
-            R.id.menu_sign_out -> {
-                FirebaseAuth.getInstance().signOut()
-                //Run registration activity
-                val intent = Intent(this, ActivityCreateProfile::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
-        }
 
-        return super.onOptionsItemSelected(item)
-    }
 }

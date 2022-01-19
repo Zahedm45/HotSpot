@@ -28,7 +28,7 @@ class NewMessageActivity : AppCompatActivity() {
         binding = ActivityNewMessageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = "Select a Person"
+        supportActionBar?.hide()
 
         fetchUsers()
     }

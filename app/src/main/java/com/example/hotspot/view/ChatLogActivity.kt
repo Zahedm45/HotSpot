@@ -21,8 +21,11 @@ import kotlinx.android.synthetic.main.chat_from_row.view.*
 import kotlinx.android.synthetic.main.chat_to_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 import com.squareup.picasso.Picasso
+import com.example.hotspot.databinding.ActivityChatLogBinding
 
 class ChatLogActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityChatLogBinding
 
     companion object {
         val TAG = "chatlog"
@@ -36,15 +39,21 @@ class ChatLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
+        binding = ActivityChatLogBinding.inflate(layoutInflater)
         Log.d(TAG, "Activity is shown on screen")
         recyclerview_chatlog.adapter = adapter //vid 6 - 22:15
+        supportActionBar?.hide()
 
         //Passing an object from one activity to another - in this case we are passing the username
         val user = intent.getParcelableExtra<User>(USER_KEY)
         if (user != null) {
             supportActionBar?.title = user.name
+            tv_user.text = user.name
         }
 
+        binding.btBack.setOnClickListener(){
+            super.onBackPressed()
+        }
 
         listenForMessages()
 

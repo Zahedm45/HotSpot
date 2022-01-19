@@ -41,7 +41,7 @@
         </activity>
         <activity
             android:name=".view.LatestMessagesActivity"
-            android:exported="true" >
+            android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.ActivityLoadingPage" />
