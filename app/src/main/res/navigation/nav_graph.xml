@@ -118,6 +118,9 @@
         <action
             android:id="@+id/action_othersProfile_to_chat"
             app:destination="@id/chat" />
+        <argument
+            android:name="user"
+            app:argType="com.example.hotspot.model.User" />
     </fragment>
 
 

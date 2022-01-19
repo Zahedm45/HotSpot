@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
@@ -83,7 +84,8 @@ class UserItemCheckedIn(val user: User, val hotSpot: HotSpot, private val viewLi
 
 
         viewHolder.itemView.setOnClickListener {
-
+            val action = AfterCheckInDirections.actionAfterCheckInToOthersProfile(user)
+            it.findNavController().navigate(action)
         }
 
 
