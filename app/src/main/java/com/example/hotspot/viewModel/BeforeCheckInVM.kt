@@ -2,6 +2,8 @@ package com.example.hotspot.viewModel
 
 import android.util.Log
 import android.widget.ImageView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
@@ -29,6 +31,8 @@ class BeforeCheckInVM {
         private lateinit var user: User
 
         var hotSpotsImg = mutableMapOf<String, String>()
+        private val repository = Repository
+
 
 
 
@@ -41,7 +45,7 @@ class BeforeCheckInVM {
 
             hotSpot.id?.let { hotSpotId ->
                 user.uid?.let { userId ->
-
+                    updateIsUserCheckIn()
                     val i = addedCheckedInAndHotspotId.get(userId)
 /*                    if (i == false || i == true) {
                         checkedInDB = CheckedInDB(userId, i)
@@ -108,6 +112,13 @@ class BeforeCheckInVM {
         fun deleteHotSpotDB(hotSpotId: String, userId: String){
             SubRepository.deleteHotSpotDB(hotSpotId,userId)
         }
+
+        private fun updateIsUserCheckIn(){
+            User(isUserCheckedIn = true)
+            repository.updateIsUserCheckedIn(true)
+        }
+
+
 
     }
 

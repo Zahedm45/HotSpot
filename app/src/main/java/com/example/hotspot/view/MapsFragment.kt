@@ -43,11 +43,15 @@ import android.view.Gravity
 
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
+import com.example.hotspot.view.createProfilePackage.SharedViewModelCreateProfile
+import com.example.hotspot.viewModel.BeforeCheckInVM
 
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
-
+    private val viewModel = MapsAndHotspotsVM
     private var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
     private var googleMap: GoogleMap? = null
@@ -55,7 +59,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var progressBar: ProgressBar
     private var location: LatLng? = null
     private val markers: ArrayList<Marker> = ArrayList()
-    private lateinit var snackbar: Snackbar
+    private lateinit var snackbar : Snackbar
 
 
 
@@ -81,6 +85,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         requestLocPermissionAndTrackLocation()
         addProgressBar()
         myLocationBtn(view)
+
+
+
+
+        viewModel.updateUserIsCheckedIn()
     }
 
 
@@ -112,6 +121,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
 /*        if (Firebase.auth.uid == null) {
             Log.i(TAG, "not logged in ..")
             val intent = Intent(requireActivity(), LoginActivity::class.java)
@@ -127,16 +137,31 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     override fun onResume() {
         super.onResume()
 
+
+
+        viewModel.updateUserIsCheckedIn()
         googleMap?.let {
             clearProgressBar()
         }
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        snackbar = showSnackBarMessage()
+        viewModel.getIsUserCheckedIn().observe(this.viewLifecycleOwner){
+            if(it){
+                snackbar.show()
+            }
+        }
+        viewModel.updateUserIsCheckedIn()
+    }
     override fun onPause() {
         super.onPause()
-        val snackbar = showSnackBarMessage()
-        snackbar.show()
+        if(snackbar.isShown){
+            snackbar.dismiss()
+        }
+        viewModel.updateUserIsCheckedIn()
     }
 
 
@@ -389,7 +414,6 @@ private fun showSnackBarMessage() : Snackbar {
     val layout = snackbar.view as Snackbar.SnackbarLayout
     layout.setPadding(0,0,0,0)
     customSnackView.setOnClickListener(){
-        if(snackbar.isShown) snackbar.dismiss()
     }
     val color: Int = resources.getColor(R.color.transparent)
     layout.setBackgroundColor(color)
@@ -402,6 +426,8 @@ private fun showSnackBarMessage() : Snackbar {
 
     return snackbar
 }
+
+
 
 
 
