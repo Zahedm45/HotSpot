@@ -15,10 +15,12 @@ import androidx.navigation.fragment.navArgs
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.UsersAndIds
 import android.graphics.drawable.Animatable
+import android.util.Log
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.hotspot.R
+import com.example.hotspot.other.network.TAG
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -33,6 +35,8 @@ class AfterCheckIn : Fragment() {
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var groupieUserCheckedIns: ArrayList<UserItemCheckedIn>
+    private lateinit var progressBar: ProgressBar
+
 
 
 
@@ -61,18 +65,23 @@ class AfterCheckIn : Fragment() {
 
 
         CoroutineScope(IO).launch {
-            delay(4000)
+            delay(1500)
+
+            var time = (AfterCheckInVM.amountOfUsersToFetch * 800).toLong()
+            if (time > 2000) {
+                time = 2000
+            }
+            Log.i(TAG, "delay time is.. $time")
+
+            delay(time)
             CoroutineScope(Main).launch {
+                AfterCheckInVM.amountOfUsersToFetch = 0
                 clearProgress()
             }
         }
 
-
-
-
     }
 
-    private lateinit var progressBar: ProgressBar
 
 
 
@@ -105,6 +114,8 @@ class AfterCheckIn : Fragment() {
     }
 
 
+
+
     private fun setObserverForCheckedInList() {
         val hoSpot = args.hotSpot
         AfterCheckInVM.setListenerToCheckedInListDB(hoSpot)
@@ -122,6 +133,7 @@ class AfterCheckIn : Fragment() {
                 adapter.update(groupieUserCheckedIns)
                 binding.afterCheckedInRecyclerView.adapter = adapter
                 setCheckedInUI(it.size)
+
             }
         })
     }
@@ -155,6 +167,9 @@ class AfterCheckIn : Fragment() {
     }
 
 
+    override fun onStop() {
+        super.onStop()
+    }
 
 
 
