@@ -151,6 +151,7 @@ class AfterCheckIn : Fragment() {
 
 
     private fun setHotSpotInfo() {
+
         binding.afterCheckInHotSpotName.text = args.hotSpot.name
         val imageview = binding.afterCheckInPartyImg
         val img = BeforeCheckInVM.hotSpotsImg.get(args.hotSpot.id)
