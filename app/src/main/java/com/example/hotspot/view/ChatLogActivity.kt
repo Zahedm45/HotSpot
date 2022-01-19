@@ -3,6 +3,7 @@ package com.example.hotspot.view
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.hotspot.R
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.chat_to_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 import com.squareup.picasso.Picasso
 
-class ChatLogActivity : AppCompatActivity() {
+class ChatLogActivity : Fragment() {
 
     companion object {
         val TAG = "chatlog"
@@ -36,6 +37,7 @@ class ChatLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
+
         Log.d(TAG, "Activity is shown on screen")
         recyclerview_chatlog.adapter = adapter //vid 6 - 22:15
 

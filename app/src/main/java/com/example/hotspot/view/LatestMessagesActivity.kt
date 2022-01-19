@@ -42,7 +42,7 @@ class LatestMessagesActivity : Fragment() {
     }
 
 
-/*
+
     companion object {
         val USER_KEY = "USER_KEY"
     }
@@ -143,6 +143,6 @@ class LatestMessagesActivity : Fragment() {
 
         return super.onOptionsItemSelected(item)
     }
-    */
+
 
 }

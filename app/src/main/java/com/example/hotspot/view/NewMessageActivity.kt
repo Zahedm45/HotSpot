@@ -3,6 +3,7 @@ package com.example.hotspot.view
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityNewMessageBinding
 import com.example.hotspot.model.User
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 
 
-class NewMessageActivity : AppCompatActivity() {
+class NewMessageActivity : Fragment() {
 
     //   private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityNewMessageBinding
