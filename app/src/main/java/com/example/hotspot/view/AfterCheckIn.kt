@@ -36,13 +36,15 @@ class AfterCheckIn : Fragment() {
     private val adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var groupieUserCheckedIns: ArrayList<UserItemCheckedIn>
     private lateinit var progressBar: ProgressBar
-    var isFragmentJustCreated = false
+    var isNavigatedFromCheckInBtn = AfterCheckInVM.isNavigatedFromCheckInBtn
 
 
+/*
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        isFragmentJustCreated = true
+        isNavigatedFromCheckInBtn = true
     }
+*/
 
 
 
@@ -60,7 +62,7 @@ class AfterCheckIn : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfterCheckInBinding.bind(view)
 
-        if (isFragmentJustCreated) {
+        if (isNavigatedFromCheckInBtn) {
             setProgress()
         }
 
@@ -72,7 +74,7 @@ class AfterCheckIn : Fragment() {
 
 
 
-        if (isFragmentJustCreated) {
+        if (isNavigatedFromCheckInBtn) {
             CoroutineScope(IO).launch {
                 delay(1500)
                 var time = (AfterCheckInVM.amountOfUsersToFetch * 800).toLong()
@@ -120,7 +122,7 @@ class AfterCheckIn : Fragment() {
                 binding.afterCheckInProgressLayout.visibility = View.GONE
 
 
-                isFragmentJustCreated = false
+                AfterCheckInVM.isNavigatedFromCheckInBtn = false
             }
         }
 

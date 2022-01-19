@@ -232,6 +232,7 @@ class BeforeCheckIn : Fragment() {
                     val drawable2 = resources.getDrawable(R.drawable.custom_button)
                     binding.beforeCheckInCheckInBtn.background = drawable2
                     if (isUserPresent) {
+                        AfterCheckInVM.isNavigatedFromCheckInBtn = true
                         val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
                         view.findNavController().navigate(action)
                     }
