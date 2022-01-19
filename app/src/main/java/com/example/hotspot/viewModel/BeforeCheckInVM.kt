@@ -1,6 +1,7 @@
 package com.example.hotspot.viewModel
 
 import android.util.Log
+import android.widget.ImageView
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
@@ -27,6 +28,12 @@ class BeforeCheckInVM {
         private lateinit var checkedInDB : CheckedInDB
         private lateinit var user: User
 
+        var hotSpotsImg = mutableMapOf<String, String>()
+
+
+
+
+
         fun setCheckedInDB(hotSpot: HotSpot, user: User, onSuccess: (() -> Unit)? ) {
 
 
@@ -34,14 +41,17 @@ class BeforeCheckInVM {
 
             hotSpot.id?.let { hotSpotId ->
                 user.uid?.let { userId ->
+
+                    val i = addedCheckedInAndHotspotId.get(userId)
+/*                    if (i == false || i == true) {
+                        checkedInDB = CheckedInDB(userId, i)
+                    } else {
+                        checkedInDB = CheckedInDB(userId, true)
+                    }*/
+
                     checkedInDB = CheckedInDB(userId, true)
+
                     this.user = user
-                   // Log.i(TAG, "User was $addedCheckedInAndHotspotId")
-                    if (addedCheckedInAndHotspotId.containsKey(userId)) {
-                        Log.i(TAG, "User was previously added to the database (BeforeCheckInVM) 1")
-                        return
-                    }
-                    //setCheckedInLocal(user, checkedInDB)
                     db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(userId)
                         .set(checkedInDB)
                         .addOnSuccessListener {
@@ -76,7 +86,14 @@ class BeforeCheckInVM {
             CoroutineScope(Default).launch {
                 delay(300)
                 CoroutineScope(Main).launch {
-                    UsersAndIds.addUser(user, checkedInDB)
+
+                    if (!addedCheckedInAndHotspotId.containsKey(user.uid)) {
+                        UsersAndIds.addUser(user, checkedInDB)
+
+                    } else {
+                        Log.i(TAG, "User was previously added to the database (BeforeCheckInVM) 1")
+                    }
+
                 }
             }
         }

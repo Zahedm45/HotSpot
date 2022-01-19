@@ -10,76 +10,68 @@
     >
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:elevation="0dp"
+        android:orientation="vertical"
+        android:backgroundTint="#f7f7f7"
         >
 
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fragment_personal_profile_picture"
-            android:layout_width="173dp"
+            android:layout_width="159dp"
             android:layout_height="159dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
             android:src="@drawable/circle_for_profile_picture"
             app:civ_border_color="#40000000"
             app:civ_border_width="1dp"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintVertical_bias=".1"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_personName"
-
-
             />
-
-        <TextView
-            android:id="@+id/fragment_personal_profile_personName"
-            android:layout_width="291dp"
-            android:layout_height="41dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:gravity="center"
-            android:text="@string/personal_name"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginTop="25dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_picture"
-            app:layout_constraintBottom_toTopOf="@id/fragment_personal_profile_age"
-
-
-             />
-
-
-        <TextView
-            android:id="@+id/fragment_personal_profile_age"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_light"
-            android:gravity="center"
-            android:text="@string/personal_age"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                android:id="@+id/fragment_personal_profile_personName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="@string/personal_name"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/black"
+
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
+            <TextView
+                android:id="@+id/fragment_personal_profile_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="center"
+                android:text="@string/personal_age"
+                android:textAlignment="center"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_personName"
-            app:layout_constraintBottom_toTopOf="@id/fragment_personal_profile_bio"
-
-            />
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.07"
+                app:layout_constraintStart_toEndOf="@+id/fragment_personal_profile_personName"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/fragment_personal_profile_bio"
@@ -91,11 +83,8 @@
             android:textAlignment="center"
             android:textColor="#A6000000"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/fragment_personal_profile_email_tv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_personal_profile_age"
-
+            android:layout_gravity="center"
+            android:textStyle="italic"
             />
 
         <TextView
@@ -109,14 +98,26 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_marginTop="16dp"
-            android:drawableStart="@drawable/vector_email"
             android:drawablePadding="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_personal_profile_bio"
-            app:layout_constraintBottom_toTopOf="@id/fragment_personal_profile_editProfile_btn"
+            android:layout_gravity="center"
+            android:width="240dp"
+            app:drawableStartCompat="@drawable/vector_email" />
 
-            />
+        <TextView
+            android:id="@+id/tvPhoneNumbber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="center"
+            android:text="@string/phone_number"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:drawablePadding="16dp"
+            android:layout_gravity="center"
+            android:width="240dp"
+            app:drawableStartCompat="@drawable/vector_android_phone" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_personal_profile_editProfile_btn"
@@ -134,7 +135,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_personal_profile_email_tv" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </ScrollView>

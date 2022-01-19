@@ -61,7 +61,8 @@
             android:id="@+id/action_editProfile_to_personalProfile"
             app:destination="@id/personalProfile"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/mapsFragment" />
     </fragment>
 
 
@@ -102,7 +103,9 @@
             android:id="@+id/action_personalProfile_to_editProfile"
             app:destination="@id/editProfile"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 

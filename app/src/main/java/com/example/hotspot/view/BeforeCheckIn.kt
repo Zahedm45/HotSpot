@@ -86,11 +86,27 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding.beforeCIDescriptionTv.text = args.hotSpot.description
 
-        val imageRef = Firebase.storage.reference.child("HotSpots/${args.hotSpot.id}.png")
-        imageRef.downloadUrl.addOnSuccessListener { Uri ->
-            val imageUrl = Uri.toString()
-            val imageView = binding.beforeCheckInPartyImg
-            Picasso.get().load(imageUrl).into(imageView) }
+
+
+        val imageView = binding.beforeCheckInPartyImg
+
+        val img = BeforeCheckInVM.hotSpotsImg.get(args.hotSpot.id)
+
+        if (img == null) {
+            val imageRef = Firebase.storage.reference.child("HotSpots/${args.hotSpot.id}.png")
+            imageRef.downloadUrl.addOnSuccessListener { Uri ->
+                val imageUrl = Uri.toString()
+                Picasso.get().load(imageUrl).into(imageView)
+                BeforeCheckInVM.hotSpotsImg.put(args.hotSpot.id!!, imageUrl)
+            }
+
+        } else {
+            Picasso.get().load(img).into(imageView)
+        }
+
+
+
+
 
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         // binding.beforeCheckInReviews.paintFlags =  Paint.UNDERLINE_TEXT_FLAG or binding.beforeCheckInReviews.paintFlags
@@ -196,7 +212,8 @@ class BeforeCheckIn : Fragment() {
     private fun checkInBtn(view: View) {
 
         binding.beforeCheckInCheckInBtn.setOnClickListener {
-            val isUserPresent = isUserPresent()
+            //val isUserPresent = isUserPresent()
+            val isUserPresent = true
             if (isUserPresent) {
                 DataHolder.currentUser?.let { user ->
                     val checkedInDB = CheckedInDB(id = user.uid)

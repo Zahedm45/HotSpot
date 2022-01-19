@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.hotspot.R
 
 import com.example.hotspot.databinding.FragmentChatBinding
+import kotlinx.android.synthetic.main.activity_after_login.*
 
 class Chat : Fragment() {
 
@@ -19,6 +20,7 @@ class Chat : Fragment() {
     ): View? {
         _binding = FragmentChatBinding.inflate(inflater, container, false)
 
+        this.requireActivity().bottomNavigationView.visibility = View.GONE
         // Inflate the layout for this fragment
         return binding.root
     }

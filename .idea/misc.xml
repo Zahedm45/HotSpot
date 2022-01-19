@@ -126,14 +126,10 @@
         <entry key="app/src/main/res/drawable-v24/ic_baseline_remove_red_eye_24.xml" value="0.40208333333333335" />
         <entry key="app/src/main/res/drawable/background_hotspot.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/border_for_info_window.xml" value="0.23796296296296296" />
-        <entry key="app/src/main/res/drawable/button_empty.xml" value="0.1734375" />
-        <entry key="app/src/main/res/drawable/heart_outline.xml" value="0.165" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/humberger_menu_bar_background.xml" value="0.13333333333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.335" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.15052083333333333" />
-        <entry key="app/src/main/res/drawable/large_icon_favorite.xml" value="0.1734375" />
-        <entry key="app/src/main/res/drawable/large_icon_favorite_white.xml" value="0.1734375" />
         <entry key="app/src/main/res/drawable/person.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/vector_add_photo.xml" value="0.2171875" />
         <entry key="app/src/main/res/drawable/vector_add_photo_alternate.xml" value="0.2171875" />
@@ -162,7 +158,7 @@
         <entry key="app/src/main/res/layout/fragment_create_profile_upload_image.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_edit_profile2.xml" value="0.37604166666666666" />
-        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.55" />
         <entry key="app/src/main/res/layout/fragment_home_map.xml" value="0.22760416666666666" />
         <entry key="app/src/main/res/layout/fragment_liste_view.xml" value="0.14114583333333333" />
         <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.37604166666666666" />
