@@ -4,12 +4,8 @@ package com.example.hotspot.view
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Divider
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
+import androidx.compose.ui.node.getOrAddAdapter
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
@@ -43,32 +39,16 @@ class Favorites : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
+        binding = FragmentFavoritesBinding.bind(view)
         return view
+
+
     }
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fetchFavoriteHotspots()
-
-
-    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentFavoritesBinding.bind(view)
         fetchFavoriteHotspots()
-        if (binding.RVfavorites.adapter?.itemCount == null) {
-            binding.RVfavorites.visibility = View.GONE
-            binding.emptyHeartView.visibility = View.VISIBLE
-            binding.emptyListView.visibility = View.VISIBLE
-        } else {
-            binding.RVfavorites.visibility = View.VISIBLE
-            binding.emptyHeartView.visibility = View.GONE
-            binding.emptyListView.visibility = View.GONE
-        }
-
-
-
         Log.i(TAG, "oncreate")
 
 
@@ -93,11 +73,20 @@ class Favorites : Fragment() {
             .addOnSuccessListener { qr ->
                 val hotspots = qr.documents
                 val adapter = GroupAdapter<GroupieViewHolder>()
-                hotspots.forEach { hotSpot ->
-                    resolveHotspotRef(hotSpot.get("hotspotId") as String, adapter)
-                }
-                binding.RVfavorites.adapter = adapter
 
+                binding.RVfavorites.adapter = adapter
+                hotspots.forEach { hotSpot ->
+                    resolveHotspotRef(hotSpot.get("hotspotId") as String, adapter )
+                }
+                if (hotspots.isEmpty()){
+                      binding.RVfavorites.visibility = View.GONE
+                      binding.emptyHeartView.visibility = View.VISIBLE
+                      binding.emptyListView.visibility = View.VISIBLE
+                 } else {
+                     binding.RVfavorites.visibility = View.VISIBLE
+                    binding.emptyHeartView.visibility = View.GONE
+                    binding.emptyListView.visibility = View.GONE
+                 }
             }
     }
 }
