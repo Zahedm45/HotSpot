@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.*
+import androidx.fragment.app.Fragment
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLatestMessagesBinding
 import com.example.hotspot.model.ChatMessage
@@ -28,27 +28,21 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 private lateinit var binding: ActivityLatestMessagesBinding
 
-class LatestMessagesActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLatestMessagesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        fetchUsers()
+class LatestMessagesActivity : Fragment() {
 
-//        verifyUserIsLoggedIn()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?) : View? {
 
-    }
+        val view = inflater.inflate(R.layout.activity_latest_messages,container, false)
+        binding = ActivityLatestMessagesBinding.inflate(inflater, container, false)
 
-    override fun onBackPressed() {
-        //Navigate back to the map i guess..
+        //fetchUsers()
+        return view
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
 
-        return false
-    }
-
+/*
     companion object {
         val USER_KEY = "USER_KEY"
     }
@@ -128,10 +122,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.nav_top_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -152,4 +143,6 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+    */
+
 }

@@ -6,7 +6,7 @@
         android:title="@string/map"
         android:icon="@drawable/bottom_nav_home_selector" />
     <item
-        android:id="@+id/messageOverview"
+        android:id="@+id/latestMessagesActivity"
         android:title="@string/messages"
         android:icon="@drawable/bottom_nav_message_selector" />
     <item
