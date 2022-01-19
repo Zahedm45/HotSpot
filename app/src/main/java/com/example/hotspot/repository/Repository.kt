@@ -27,6 +27,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 import java.lang.Exception
@@ -459,16 +461,24 @@ class Repository {
 
         ) {
             var user: User? = null
-            var bitmap: Bitmap? = null
+           // var bitmap: Bitmap? = null
 
             val ref = FirebaseStorage.getInstance().getReference("/images/${usersId}")
             val ONE_MEGABYTE: Long = (1824 * 1824).toLong()
             ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+                var bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
 
-                user?.let { userTem ->
-                    userTem.bitmapImg = bitmap
-                    onSuccess(userTem, checkedInDB)
+                CoroutineScope(IO).launch {
+                    while (user == null) {
+                        delay(10)
+                    }
+
+                    CoroutineScope(Main).launch {
+                        user?.let { userTem ->
+                            userTem.bitmapImg = bitmap
+                            onSuccess(userTem, checkedInDB)
+                        }
+                    }
                 }
             }
 
@@ -478,26 +488,13 @@ class Repository {
                 .get()
                 .addOnSuccessListener { doc ->
                     doc.toObject<User>()?.apply {
+
                         this.uid = usersId
                         user = this
-                        bitmap?.let {
-                            user!!.bitmapImg = it
-                            onSuccess(user!!, checkedInDB)
-                        }
-
 
                     }
                 }
-
-
-
-
         }
-
-
-
-
-
 
 
 
