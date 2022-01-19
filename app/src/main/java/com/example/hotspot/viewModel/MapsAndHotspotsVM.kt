@@ -16,17 +16,9 @@ class MapsAndHotspotsVM : ViewModel(){
 
     companion object {
 
-       // private val _isUserCheckIn = MutableLiveData<Boolean>()
         var snackbar: Snackbar? = null
-
-
-        private val repository = Repository
-
         var showHotSpotReg: ListenerRegistration? = null
-
-         var hotSpots: ArrayList<HotSpot>? = null
-        private var googleMap: GoogleMap? = null
-
+        var hotSpots: ArrayList<HotSpot>? = null
 
         fun showHotSpots(onSuccess: (hotSpots: ArrayList<HotSpot>) -> Unit) {
 
@@ -34,27 +26,10 @@ class MapsAndHotspotsVM : ViewModel(){
                 onSuccess(hotSpots!!)
             }
 
-           showHotSpotReg = Repository.getAndListenHotSpotsDB({ hotSpots -> onSuccess(hotSpots)}, null)
+            showHotSpotReg =
+                Repository.getAndListenHotSpotsDB({ hotSpots -> onSuccess(hotSpots) }, null)
 
         }
-
-/*        fun getIsUserCheckedIn() : LiveData<Boolean> {
-            return _isUserCheckIn
-        }
-
-        private fun setIsUserCheckedIn(snapshot: DocumentSnapshot) {
-            _isUserCheckIn.value = snapshot.get("userCheckedIn").toString().toBoolean()
-        }
-
-        fun updateUserIsCheckedIn(){
-            PersonalProfileVM.getUserProfileReg = repository.getUserProfile { snapshot ->
-                setIsUserCheckedIn(
-                    snapshot
-                )
-            }
-        }*/
-
-
 
     }
 

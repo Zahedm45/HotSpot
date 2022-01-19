@@ -13,7 +13,6 @@ import com.google.firebase.ktx.Firebase
 class DataHolder {
 
     companion object {
-       // var currentUser: User? = null
 
         private var currentUser = MutableLiveData<User>()
 
@@ -22,32 +21,13 @@ class DataHolder {
             val userId = Firebase.auth.uid
             if (userId != null) {
 
-
                 SubRepository.getAndListenCurrentUserDB(userId) { user -> onSuccessUserListener(user) }
-
-
-/*
-                val checkedInDB = CheckedInDB(id = userId)
-
-                Repository.getCheckedInUserFromDB(userId, checkedInDB) {
-                        user, checkedIn -> addToCheckedInUsersList(user, checkedIn) }*/
             }
         }
 
 
-        private fun addToCheckedInUsersList(user: User, checkedInDB: CheckedInDB) {
-           // currentUser = user
-        }
-
-
         private fun onSuccessUserListener(user: User) {
-
             currentUser.value = user
-
-/*            if (currentUser.value != user) {
-                currentUser.value = user
-            }*/
-
         }
 
 
