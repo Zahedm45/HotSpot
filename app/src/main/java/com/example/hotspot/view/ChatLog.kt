@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.chat_to_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_chatlog.*
+import kotlinx.android.synthetic.main.fragment_chatlog.view.*
 
 class ChatLog : Fragment() {
 
@@ -29,7 +30,7 @@ class ChatLog : Fragment() {
         val TAG = "chatlog"
     }
 
-    val adapter = GroupAdapter<GroupieViewHolder>() //vid 6 - 22:15
+    val adapter2 = GroupAdapter<GroupieViewHolder>() //vid 6 - 22:15
     val db = Firebase.firestore
     val currentUserId = FirebaseAuth.getInstance().uid
     var latestMessageTimestamp: Long = -1
@@ -41,7 +42,7 @@ class ChatLog : Fragment() {
         val view = inflater.inflate(R.layout.fragment_chatlog,container, false)
         binding = FragmentChatlogBinding.bind(view)
 
-        //recyclerview_chatlog.adapter = adapter //vid 6 - 22:15
+        recyclerview_chatlog.adapter = adapter2 //vid 6 - 22:15
         //Passing an object from one activity to another - in this case we are passing the username
 
         listenForMessages()
@@ -78,7 +79,7 @@ class ChatLog : Fragment() {
                         newMessageAdded(newDocuments)
                     }
         }
-        recyclerview_chatlog.scrollToPosition(adapter.itemCount -1)
+        recyclerview_chatlog.scrollToPosition(adapter2.itemCount -1)
 
     }
 
@@ -91,12 +92,12 @@ class ChatLog : Fragment() {
             when (document.type) {
                 DocumentChange.Type.ADDED -> {
                     if (document.document.data["fromId"] == fromid) {
-                        adapter.add(ChatToItem(
+                        adapter2.add(ChatToItem(
                             document.document.data["text"].toString(),
                             fromid!!
                         ))
 
-                    } else { adapter.add(ChatFromItem(
+                    } else { adapter2.add(ChatFromItem(
                         document.document.data["text"].toString(),toid!!
 
                     )) }
@@ -104,6 +105,7 @@ class ChatLog : Fragment() {
                     if (document == newDocuments.elementAt(newDocuments.size() -1)) {
                         latestMessageTimestamp = document.document.data["timestamp"].toString().toLong()
                     }
+
                 }
 
                 DocumentChange.Type.MODIFIED -> Log.d(TAG,"Document modified. Possible error!")
@@ -111,7 +113,7 @@ class ChatLog : Fragment() {
             }
 
         }
-        recyclerview_chatlog.scrollToPosition(adapter.itemCount -1)
+        recyclerview_chatlog.scrollToPosition(adapter2.itemCount -1)
     }
 
     // this is how we actually send a message to firebase

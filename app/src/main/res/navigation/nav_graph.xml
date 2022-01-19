@@ -156,7 +156,7 @@
             android:id="@+id/action_latest_to_new"
             app:destination="@id/NewMessage" />
         <action
-            android:id="@+id/action_lastest_to_chatlog"
+            android:id="@+id/action_latest_to_chatlog"
             app:destination="@id/Chatlog" />
     </fragment>
     <fragment

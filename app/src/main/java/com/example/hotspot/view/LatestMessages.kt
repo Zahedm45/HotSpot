@@ -43,9 +43,8 @@ class LatestMessages : Fragment() {
         binding = FragmentLatestMessagesBinding.bind(view)
         setHasOptionsMenu(true)
         Log.d("LatestMessages","onCreate")
-/*
-        binding.recyclerviewLatestMessages.adapter = adapter
-*/
+
+
         fetchUsers()
         return view
 
@@ -109,8 +108,9 @@ class LatestMessages : Fragment() {
                         }
                 }
                 adapter.setOnItemClickListener { item, view ->
-                    val userItem = users as UserItem
-                    val action = NewMessageDirections.actionNewmessageToChatlog(userItem.user.uid!!)
+                    Log.d(TAG,item.toString())
+                    Log.d(TAG,view.toString())
+                    val action = LatestMessagesDirections.actionLatestToChatlog("potato")
                     findNavController().navigate(action)
                 }
                 binding.recyclerviewLatestMessages.adapter = adapter
@@ -118,10 +118,12 @@ class LatestMessages : Fragment() {
     }
 
     class LatestMessageRow(val user: User, val latestMessage: String): com.xwray.groupie.kotlinandroidextensions.Item() {
+        val username = user.name
         override fun bind(
             viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
             position: Int
         ) {
+
             viewHolder.itemView.latest_message_name.text = user.name
             viewHolder.itemView.latest_message_received.text = latestMessage
 
@@ -136,6 +138,9 @@ class LatestMessages : Fragment() {
 
         override fun getLayout(): Int {
             return R.layout.latest_message_row
+        }
+        fun getName(): String {
+            return username!!
         }
     }
 

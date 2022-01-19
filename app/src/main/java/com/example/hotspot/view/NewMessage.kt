@@ -62,7 +62,7 @@ class NewMessage : Fragment() {
                     }
                 }
 
-                //binding.recyclerviewNewMessage.adapter = adapter
+                binding.recyclerviewNewMessage.adapter = adapter
             }
     }
 }
