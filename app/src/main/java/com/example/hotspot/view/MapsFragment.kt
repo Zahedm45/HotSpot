@@ -79,29 +79,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
-    private fun logicsForSnackBar() {
-        DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
-            it.isUserCheckedIn?.let {
-                if (it != "null") {
-                    if (MapsAndHotspotsVM.snackbar == null) {
-                        MapsAndHotspotsVM.snackbar = showSnackBarMessage()
-                        MapsAndHotspotsVM.snackbar?.show()
-
-                    } else { MapsAndHotspotsVM.snackbar?.show() }
-
-                } else {
-
-                    if (MapsAndHotspotsVM.snackbar != null) {
-
-                        if (MapsAndHotspotsVM.snackbar!!.isShown) {
-                            MapsAndHotspotsVM.snackbar?.dismiss()
-                        }
-                    }
-                }
-            }
-        })
-
-    }
 
 
     override fun onDestroyView() {
@@ -141,40 +118,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         setHasOptionsMenu(true)
 
-
-
     }
 
 
     override fun onResume() {
         super.onResume()
-
-      //  viewModel.updateUserIsCheckedIn()
         googleMap?.let {
             clearProgressBar()
         }
 
     }
-
-    override fun onStart() {
-        super.onStart()
-/*        snackbar = showSnackBarMessage()
-        viewModel.getIsUserCheckedIn().observe(this.viewLifecycleOwner){
-            if(it){
-                snackbar.show()
-            }
-        }
-        viewModel.updateUserIsCheckedIn()*/
-    }
-
-    override fun onPause() {
-        super.onPause()
-/*        if(snackbar.isShown){
-            snackbar.dismiss()
-        }
-        viewModel.updateUserIsCheckedIn()*/
-    }
-
 
 
 
@@ -188,7 +141,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             MapUtility.requestPermission(this)
         }
     }
-
 
 
 
@@ -398,6 +350,74 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+    private fun logicsForSnackBar() {
+        DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
+            it.isUserCheckedIn?.let {
+                if (it != "null") {
+                    if (MapsAndHotspotsVM.snackbar == null) {
+                        MapsAndHotspotsVM.snackbar = showSnackBarMessage()
+                        MapsAndHotspotsVM.snackbar?.show()
+
+                    } else {
+                        MapsAndHotspotsVM.snackbar?.show()
+                    }
+
+                } else {
+
+                    if (MapsAndHotspotsVM.snackbar != null) {
+
+                        if (MapsAndHotspotsVM.snackbar!!.isShown) {
+                            MapsAndHotspotsVM.snackbar?.dismiss()
+                        }
+                    }
+                }
+            }
+        })
+
+    }
+
+
+    private fun showSnackBarMessage(): Snackbar {
+        val snackbar =
+            Snackbar.make((binding.fragmentMapsMyLocationBtn), "", Snackbar.LENGTH_INDEFINITE)
+
+
+        val customSnackView: View = layoutInflater.inflate(
+            R.layout.snackbar_my_hotspot,
+            this.activity?.findViewById<View>(R.id.snackbar_cardView) as? ViewGroup
+        )
+        layoutInflater.inflate(
+            R.layout.snackbar_my_hotspot,
+            this.activity?.findViewById<View>(R.id.snackbar_myhotspot_cardView) as? ViewGroup,
+            false
+        )
+        val layout = snackbar.view as Snackbar.SnackbarLayout
+        layout.setPadding(0, 0, 0, 0)
+        customSnackView.setOnClickListener() {
+            //TODO fix navigation when clicking on snackbar.
+            //findNavController().navigate(R.id.action_mapsFragment_to_afterCheckIn)
+        }
+        val color: Int = resources.getColor(R.color.transparent)
+        layout.setBackgroundColor(color)
+        layout.addView(customSnackView, 0)
+
+        val view = snackbar.view
+        val params = view.layoutParams as CoordinatorLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        view.layoutParams = params
+
+        return snackbar
+    }
+
+
+}
+
+
+
+
+
+
+
 
 
 
@@ -416,35 +436,4 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 */
-private fun showSnackBarMessage() : Snackbar {
-    val snackbar = Snackbar.make((binding.fragmentMapsMyLocationBtn), "" , Snackbar.LENGTH_INDEFINITE)
 
-
-    val customSnackView: View = layoutInflater.inflate(R.layout.snackbar_my_hotspot, this.activity?.findViewById<View>(R.id.snackbar_cardView) as? ViewGroup)
-    layoutInflater.inflate(R.layout.snackbar_my_hotspot, this.activity?.findViewById<View>(R.id.snackbar_myhotspot_cardView) as? ViewGroup, false)
-    val layout = snackbar.view as Snackbar.SnackbarLayout
-    layout.setPadding(0,0,0,0)
-    customSnackView.setOnClickListener(){
-        //TODO fix navigation when clicking on snackbar.
-        //findNavController().navigate(R.id.action_mapsFragment_to_afterCheckIn)
-    }
-    val color: Int = resources.getColor(R.color.transparent)
-    layout.setBackgroundColor(color)
-    layout.addView(customSnackView, 0)
-
-    val view = snackbar.view
-    val params = view.layoutParams as CoordinatorLayout.LayoutParams
-    params.gravity = Gravity.TOP
-    view.layoutParams = params
-
-    return snackbar
-}
-
-
-
-
-
-
-
-
-}
