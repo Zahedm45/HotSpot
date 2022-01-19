@@ -1,15 +1,12 @@
 package com.example.hotspot.view.createProfilePackage
 
 import android.graphics.Bitmap
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.hotspot.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class SharedViewModelCreateProfile : ViewModel() {
@@ -150,6 +147,7 @@ class SharedViewModelCreateProfile : ViewModel() {
 
     private fun verifyInput( onFailure: (message: String) -> Unit): com.example.hotspot.model.User? {
 
+
         val name = this._firstName.value.toString()
         val email = this._email.value.toString()
         val age = this._dayOfBirth.value
@@ -193,6 +191,7 @@ class SharedViewModelCreateProfile : ViewModel() {
         }
 
         return com.example.hotspot.model.User(
+            uid = FirebaseAuth.getInstance().uid,
             name = name,
             age = age,
             emailAddress = email,

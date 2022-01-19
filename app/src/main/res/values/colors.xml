@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white_80tinted">#CDFFFFFF</color>
     <color name="orange">#FFB255</color>
+    <color name="tinted_orange">#85FFB255</color>
     <color name="gold">#C6FFA200</color>
     <color name="light_gold">#EAC690</color>
     <color name="blue">#EB11E6D2</color>
@@ -19,6 +20,12 @@
     <color name="dark_gray">#A9A9A9</color>
     <color name="light_gray">#F9F7F6</color>
     <color name="transparent">#00FFFFFF</color>
+
+
+    <color name="dart_gold">#E16716</color>
+
+
+
 
 
 
