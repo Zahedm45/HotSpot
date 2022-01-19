@@ -1,11 +1,13 @@
 package com.example.hotspot.view
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLatestMessagesBinding
 import com.example.hotspot.model.ChatMessage
@@ -30,6 +32,8 @@ private lateinit var binding: ActivityLatestMessagesBinding
 
 class LatestMessagesActivity : Fragment() {
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?) : View? {
 
@@ -40,6 +44,15 @@ class LatestMessagesActivity : Fragment() {
         return view
 
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+    }
+
 
 
 
@@ -131,6 +144,8 @@ class LatestMessagesActivity : Fragment() {
                 val intent = Intent(this, NewMessageActivity::class.java)
                 //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+
+                findNavController().navigate(R.id.)
             }
             R.id.menu_sign_out -> {
                 FirebaseAuth.getInstance().signOut()
