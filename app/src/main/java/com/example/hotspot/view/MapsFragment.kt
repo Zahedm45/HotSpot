@@ -121,12 +121,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+    override fun onPause() {
+        super.onPause()
+        clearSnackBar()
+    }
+
     override fun onResume() {
         super.onResume()
         googleMap?.let {
             clearProgressBar()
         }
-
     }
 
 
@@ -354,26 +358,37 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
             it.isUserCheckedIn?.let {
                 if (it != "null") {
-                    if (MapsAndHotspotsVM.snackbar == null) {
-                        MapsAndHotspotsVM.snackbar = showSnackBarMessage()
-                        MapsAndHotspotsVM.snackbar?.show()
-
-                    } else {
-                        MapsAndHotspotsVM.snackbar?.show()
-                    }
+                    showSnackBar()
 
                 } else {
-
-                    if (MapsAndHotspotsVM.snackbar != null) {
-
-                        if (MapsAndHotspotsVM.snackbar!!.isShown) {
-                            MapsAndHotspotsVM.snackbar?.dismiss()
-                        }
-                    }
+                    clearSnackBar()
                 }
             }
         })
 
+    }
+
+
+    private fun showSnackBar() {
+        if (MapsAndHotspotsVM.snackbar == null) {
+            MapsAndHotspotsVM.snackbar = showSnackBarMessage()
+            MapsAndHotspotsVM.snackbar?.show()
+
+        } else {
+            MapsAndHotspotsVM.snackbar?.show()
+        }
+    }
+
+
+
+    private fun clearSnackBar() {
+
+        if (MapsAndHotspotsVM.snackbar != null) {
+
+            if (MapsAndHotspotsVM.snackbar!!.isShown) {
+                MapsAndHotspotsVM.snackbar?.dismiss()
+            }
+        }
     }
 
 
