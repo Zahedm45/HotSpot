@@ -30,7 +30,7 @@ class reviews : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         //binding = FragmentReviewsBinding.inflate(layoutInflater)
-        recycler_view_reviews.adapter = adapter
+        //recycler_view_reviews.adapter = adapter
         //setContentView(binding.root)
 
         fetchReviews()
@@ -42,7 +42,10 @@ class reviews : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Log.i("debug", "oncreateview")
-        return inflater.inflate(R.layout.fragment_reviews, container, false)
+        val view = inflater.inflate(R.layout.fragment_reviews,container,false)
+        binding = FragmentReviewsBinding.bind(view)
+        binding.recyclerViewReviews.adapter = adapter
+        return view
 
     }
 
