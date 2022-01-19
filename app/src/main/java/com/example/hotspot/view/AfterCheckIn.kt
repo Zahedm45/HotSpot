@@ -12,6 +12,8 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
 import androidx.navigation.fragment.navArgs
+import com.example.hotspot.model.User
+import com.example.hotspot.other.network.TAG
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.UsersAndIds
 import android.graphics.drawable.Animatable
@@ -146,7 +148,6 @@ class AfterCheckIn : Fragment() {
                 adapter.update(groupieUserCheckedIns)
                 binding.afterCheckedInRecyclerView.adapter = adapter
                 setCheckedInUI(it.size)
-
             }
         })
     }
@@ -167,12 +168,16 @@ class AfterCheckIn : Fragment() {
 
     private fun heartBtn() {
         binding.afterCheckInFavoriteBtnWhite.setOnClickListener {
+            Log.i(TAG, "heart ()")
+
             binding.afterCheckInFavoriteBtnWhite.visibility = View.GONE
             binding.afterCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
-
+         //   addFavoriteHotSpot()
         }
 
         binding.afterCheckInFavoriteBtnThemeColor.setOnClickListener {
+            Log.i(TAG, "heart2 ()")
+
             binding.afterCheckInFavoriteBtnThemeColor.visibility = View.GONE
             binding.afterCheckInFavoriteBtnWhite.visibility = View.VISIBLE
 
@@ -180,17 +185,16 @@ class AfterCheckIn : Fragment() {
     }
 
 
-    override fun onStop() {
-        super.onStop()
+
+    private fun removeFavoriteHotSpot() {
+
     }
 
 
-
-/*    override fun onDestroyView() {
-        super.onDestroyView()
-        AfterCheckInVM.checkedInListenerRig?.remove()
-        Log.i(TAG, "On destroy view")
-    }*/
+    override fun onStop() {
+        super.onStop()
+       // AfterCheckInVM.checkedInListenerRig?.remove()
+    }
 
 
 
@@ -207,6 +211,10 @@ class AfterCheckIn : Fragment() {
     }
 
 }
+
+
+
+
 
 
 

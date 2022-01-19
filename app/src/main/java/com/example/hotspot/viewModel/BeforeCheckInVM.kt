@@ -1,11 +1,13 @@
 package com.example.hotspot.viewModel
 
 import android.util.Log
+import android.widget.ImageView
 import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.other.network.TAG
 import com.example.hotspot.repository.Repository
+import com.example.hotspot.repository.SubRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
@@ -25,6 +27,12 @@ class BeforeCheckInVM {
 
         private lateinit var checkedInDB : CheckedInDB
         private lateinit var user: User
+
+        var hotSpotsImg = mutableMapOf<String, String>()
+
+
+
+
 
         fun setCheckedInDB(hotSpot: HotSpot, user: User, onSuccess: (() -> Unit)? ) {
 
@@ -86,6 +94,18 @@ class BeforeCheckInVM {
                 }
             }
         }
+
+
+
+
+        fun addHotSpotDB(hotSpotId: String, userId: String) {
+            SubRepository.addHotSpotDB(hotSpotId, userId)
+        }
+
+        fun deleteHotSpotDB(hotSpotId: String, userId: String){
+            SubRepository.deleteHotSpotDB(hotSpotId,userId)
+        }
+
     }
 
 

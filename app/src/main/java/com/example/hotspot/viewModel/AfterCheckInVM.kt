@@ -85,6 +85,12 @@ class AfterCheckInVM {
             }
         }
 
+
+
+
+
+
+
     }
 
 
