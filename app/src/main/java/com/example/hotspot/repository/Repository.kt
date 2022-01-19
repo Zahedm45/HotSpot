@@ -512,12 +512,13 @@ class Repository {
             return phoneNumber
         }
 
-        private fun updateIsUserCheckedIn(){
+        fun updateIsUserCheckedIn(boolean: Boolean){
             val db = Firebase.firestore
             val fbUser = Firebase.auth.currentUser!!
 
-            db.collection("users").document(fbUser.uid).update("isUserCheckedIn", true)
+            db.collection("users").document(fbUser.uid).update("userCheckedIn", boolean)
         }
+
     }
 
 

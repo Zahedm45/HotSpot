@@ -414,6 +414,8 @@ private fun showSnackBarMessage() : Snackbar {
     val layout = snackbar.view as Snackbar.SnackbarLayout
     layout.setPadding(0,0,0,0)
     customSnackView.setOnClickListener(){
+        //TODO fix navigation when clicking on snackbar.
+        //findNavController().navigate(R.id.action_mapsFragment_to_afterCheckIn)
     }
     val color: Int = resources.getColor(R.color.transparent)
     layout.setBackgroundColor(color)
