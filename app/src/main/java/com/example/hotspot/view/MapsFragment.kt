@@ -135,29 +135,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private fun showCheckedIn() {
-        binding.mapsFragmentMyHotspotBtnLayout.visibility = View.VISIBLE
-        binding.fragmentMapsMyLocationBtn.setOnClickListener {
-            navigateToAfterCheckIn(it)
-        }
-
-    }
-
-    private fun clearCheckedIn() {
-        binding.mapsFragmentMyHotspotBtnLayout.visibility = View.GONE
-    }
-
-
-
-    private fun navigateToAfterCheckIn(view: View) {
-
-        DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
-            val action = MapsFragmentDirections.actionMapsFragmentToAfterCheckIn(hotSpot)
-            Log.i(TAG, "you clicked me..inside ${action}")
-            view.findNavController().navigate(action)
-        }
-
-    }
 
 
 
@@ -404,6 +381,30 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
+
+    private fun showCheckedIn() {
+        binding.mapsFragmentMyHotspotBtnLayout.visibility = View.VISIBLE
+        binding.mapsGoToMyHotspotBtn.setOnClickListener {
+            navigateToAfterCheckIn(it)
+        }
+
+    }
+
+    private fun clearCheckedIn() {
+        binding.mapsFragmentMyHotspotBtnLayout.visibility = View.GONE
+    }
+
+
+
+    private fun navigateToAfterCheckIn(view: View) {
+
+        DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
+            val action = MapsFragmentDirections.actionMapsFragmentToAfterCheckIn(hotSpot)
+            Log.i(TAG, "you clicked me..inside ${action}")
+            view.findNavController().navigate(action)
+        }
+
+    }
 
 
 
