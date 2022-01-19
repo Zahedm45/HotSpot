@@ -42,7 +42,11 @@ import pub.devrel.easypermissions.EasyPermissions
 import android.view.Gravity
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import com.example.hotspot.other.network.TAG
+import com.example.hotspot.viewModel.MapsAndHotspotsVM.Companion.action
 
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
@@ -55,6 +59,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var location: LatLng? = null
     private val markers: ArrayList<Marker> = ArrayList()
     var isSnackBarShowing = false
+    lateinit var view2: View
+
 
 
 
@@ -69,7 +75,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view2 = view
         binding = FragmentMaps4Binding.bind(view)
+
 
         requestLocPermissionAndTrackLocation()
 
@@ -83,6 +91,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
         myLocationBtn(view)
+
+        DataHolder.fetchCurrentUserFromDB()
 
     }
 
@@ -101,10 +111,26 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun myLocationBtn(view: View) {
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
+
+            DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
+
+
+                val action = MapsFragmentDirections.actionMapsFragmentToAfterCheckIn(hotSpot)
+                Log.i(TAG, "you clicked me..inside ${action}")
+
+                view.findNavController().navigate(action)
+
+            }
+
+
+
+
+/*
             if (location != null && googleMap != null) {
                 moveCamara(12f)
             }
             ButtonAnimations.clickImageButton(binding.fragmentMapsMyLocationBtn)
+*/
 
         }
     }
@@ -139,6 +165,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         googleMap?.let {
             clearProgressBar()
         }
+        DataHolder.fetchCurrentUserFromDB()
     }
 
 
@@ -345,7 +372,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
 
         if (!isSnackBarShowing) {
-            showSnackBar()
+            logicsForSnackBar()
         }
 
        // requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
@@ -413,6 +440,11 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     }
 
 
+
+    fun navigateToAfterCheckIn() {
+
+    }
+
     private fun showSnackBarMessage(): Snackbar {
         val snackbar =
             Snackbar.make((binding.fragmentMapsMyLocationBtn), "", Snackbar.LENGTH_INDEFINITE)
@@ -429,11 +461,17 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         )
         val layout = snackbar.view as Snackbar.SnackbarLayout
         layout.setPadding(0, 0, 0, 0)
+
         customSnackView.setOnClickListener() {
 
-            Log.i(TAG, "you clicked me...")
-           DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
+
+            Log.i(TAG, "you clicked me...${ DataHolder.getCurrentUserHotspot().value}")
+            DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
+
+
                 val action = MapsFragmentDirections.actionMapsFragmentToAfterCheckIn(hotSpot)
+                Log.i(TAG, "you clicked me..inside ${action}")
+
                 view?.findNavController()?.navigate(action)
 
             }
@@ -447,6 +485,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         val params = view.layoutParams as CoordinatorLayout.LayoutParams
         params.gravity = Gravity.TOP
         view.layoutParams = params
+
 
         return snackbar
     }

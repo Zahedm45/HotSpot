@@ -147,7 +147,8 @@
             app:exitAnim="@anim/slide_fade"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/slide_out_down"
-            app:popUpTo="@id/mapsFragment" />
+            app:popUpTo="@id/mapsFragment"
+            />
 
     </fragment>
 

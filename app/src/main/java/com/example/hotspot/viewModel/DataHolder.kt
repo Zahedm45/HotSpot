@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.SubRepository
+import com.example.hotspot.view.MapsFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -56,6 +57,7 @@ class DataHolder {
             val user = currentUser.value
             if (user?.isUserCheckedIn != "null" || user.isUserCheckedIn != null ) {
                 SubRepository.getAndListenCurrentUserHotspotDB(user?.isUserCheckedIn!!) { hotSpot -> addCurrentUserHotspot(hotSpot)}
+
             }
 
 

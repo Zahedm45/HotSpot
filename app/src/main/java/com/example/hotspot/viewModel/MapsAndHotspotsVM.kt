@@ -1,5 +1,6 @@
 package com.example.hotspot.viewModel
 
+import androidx.navigation.NavDirections
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.repository.Repository
 import com.google.android.gms.maps.GoogleMap
@@ -10,6 +11,7 @@ class MapsAndHotspotsVM {
 
     companion object {
 
+        var action: NavDirections? = null
         var snackbar: Snackbar? = null
         var showHotSpotReg: ListenerRegistration? = null
 
