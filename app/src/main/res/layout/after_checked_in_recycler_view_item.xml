@@ -31,7 +31,7 @@
             android:id="@+id/after_checked_in_person_item_user_pic"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="1.8dp"
             android:layout_gravity="center"
             android:elevation="20dp"
@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="15dp"
             android:orientation="vertical"
-            android:layout_weight="8"
+            android:layout_weight="8.5"
 
             >
 

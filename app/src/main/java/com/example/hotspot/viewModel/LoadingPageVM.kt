@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class LoadingPageVM : ViewModel() {
 
@@ -29,17 +30,23 @@ class LoadingPageVM : ViewModel() {
 
     fun checkForCurrentuser(onSuccess: (() -> Unit),
                             onFailure: (() -> Unit)){
+
         _user.value = repository.getFirebaseUser()
 
         if (_user.value != null) {
             CoroutineScope(Dispatchers.IO).launch {
-                val isCreated = repository.isUserProfileCreated()
-                if(isCreated) {
-                    onSuccess() // If profile has been created, we go to our Maps landing page.
+                try {
+                    val isCreated = repository.isUserProfileCreated()
+                    if(isCreated) {
+                        onSuccess() // If profile has been created, we go to our Maps landing page.
+                    }
+                    else{
+                        onFailure() //If no profile has been created, but user has been authed.
+                    }
+                }catch (e: Exception){
+                    onFailure
                 }
-                else{
-                    onFailure() //If no profile has been created, but user has been authed.
-                }
+
             }.isCompleted
         }
         else{

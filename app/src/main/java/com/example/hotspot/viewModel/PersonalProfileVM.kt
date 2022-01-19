@@ -2,10 +2,12 @@ package com.example.hotspot.viewModel
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import com.example.hotspot.model.UserProfile
 import com.example.hotspot.other.UtilCalculations
+import com.example.hotspot.other.network.TAG
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
 
@@ -57,38 +59,33 @@ class PersonalProfileVM(
                 monthOfBirth = snapshot.get("month").toString().toInt()
                 yearOfBirth = snapshot.get("year").toString().toInt()
             }
-            val age = UtilCalculations.getAge(yearOfBirth, monthOfBirth, dayOfBirth)
+            var age = UtilCalculations.getAge(yearOfBirth, monthOfBirth, dayOfBirth)
 
+
+            if (age == 0) {
+                age = snapshot.get("age").toString().toInt()
+            }
+             Log.i(TAG, "Age...$age")
 
 
 
             userProfile = UserProfile(name = name, age = age, password = password,
                 emailAddress = email, gender = gender, userName = userName, bio = bio, day = dayOfBirth, month = monthOfBirth, year = yearOfBirth)
+             var showName = StringBuilder()
+             showName.append(userProfile.name)
+             showName.append(",")
 
-            binding.fragmentPersonalProfilePersonName.text = userProfile.name
+            binding.fragmentPersonalProfilePersonName.text = showName
             binding.fragmentPersonalProfileAge.text = "${userProfile.age}"
             binding.fragmentPersonalProfileBio.text = userProfile.bio
             binding.fragmentPersonalProfileEmailTv.text = "${userProfile.emailAddress}"
+
+             binding.tvPhoneNumbber.text = repository.getPhoneNumber()
 
 
             if (userProfile.bitmapImg != null) {
                 binding.fragmentPersonalProfilePicture.setImageBitmap(userProfile.bitmapImg)
             }
-
-
-
-            //     binding.fragmentPersonalProfilePicture.setImageURI(null)
-
-//            val storageRef = FirebaseStorage.getInstance().reference.child("images/${DataHolder.fbUser!!.uid}")
-//            val localFile = File.createTempFile("temImage", "jpeg")
-//
-//            storageRef.getFile(localFile).addOnSuccessListener {
-//
-//                val bit = BitmapFactory.decodeFile(localFile.absolutePath)
-//
-//                binding.fragmentPersonalProfilePicture.setImageBitmap(bit)
-//
-//            }
 
         }
 

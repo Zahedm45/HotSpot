@@ -12,7 +12,7 @@ class MapsAndHotspotsVM {
         var showHotSpotReg: ListenerRegistration? = null
 
          var hotSpots: ArrayList<HotSpot>? = null
-        private var googleMap: GoogleMap? = null
+         var isAppJustOpened = true
 
 
         fun showHotSpots(onSuccess: (hotSpots: ArrayList<HotSpot>) -> Unit) {

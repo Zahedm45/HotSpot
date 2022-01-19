@@ -80,6 +80,8 @@
     <string name="my_email_address_n_is">My email address \n is</string>
     <string name="email">Email</string>
     <string name="lost_account">We will use your email in case your account is lost.</string>
+    <string name="phone_number">Phone number</string>
+
 
 
 </resources>
