@@ -47,7 +47,6 @@ import com.example.hotspot.other.network.TAG
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
-    private val viewModel = MapsAndHotspotsVM
     private var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
     private var googleMap: GoogleMap? = null
@@ -55,16 +54,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var progressBar: ProgressBar
     private var location: LatLng? = null
     private val markers: ArrayList<Marker> = ArrayList()
-    private lateinit var snackbar : Snackbar
 
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-
-      //  DataHolder.fetchCurrentUserFromDB()
-    }
 
 
     override fun onCreateView(
@@ -84,26 +74,34 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         addProgressBar()
         myLocationBtn(view)
 
+        logicsForSnackBar()
 
-
-
-     //   viewModel.updateUserIsCheckedIn()
-
-
-
-        DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
-            if(it.isUserCheckedIn != null) {
-
-                Log.i(TAG, "snack bar in observer")
-
-          //      snackbar.show()
-
-            }
-
-
-        })
     }
 
+
+    private fun logicsForSnackBar() {
+        DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
+            it.isUserCheckedIn?.let {
+                if (it != "null") {
+                    if (MapsAndHotspotsVM.snackbar == null) {
+                        MapsAndHotspotsVM.snackbar = showSnackBarMessage()
+                        MapsAndHotspotsVM.snackbar?.show()
+
+                    } else { MapsAndHotspotsVM.snackbar?.show() }
+
+                } else {
+
+                    if (MapsAndHotspotsVM.snackbar != null) {
+
+                        if (MapsAndHotspotsVM.snackbar!!.isShown) {
+                            MapsAndHotspotsVM.snackbar?.dismiss()
+                        }
+                    }
+                }
+            }
+        })
+
+    }
 
 
     override fun onDestroyView() {
@@ -118,7 +116,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun myLocationBtn(view: View) {
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
-          //  addHotSpotsInDB()
             if (location != null && googleMap != null) {
                 moveCamara(12f)
             }

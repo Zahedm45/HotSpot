@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.repository.Repository
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
 
@@ -16,6 +17,8 @@ class MapsAndHotspotsVM : ViewModel(){
     companion object {
 
        // private val _isUserCheckIn = MutableLiveData<Boolean>()
+        var snackbar: Snackbar? = null
+
 
         private val repository = Repository
 

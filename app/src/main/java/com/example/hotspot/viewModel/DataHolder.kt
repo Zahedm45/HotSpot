@@ -42,9 +42,11 @@ class DataHolder {
 
         private fun onSuccessUserListener(user: User) {
 
-            if (currentUser.value != user) {
+            currentUser.value = user
+
+/*            if (currentUser.value != user) {
                 currentUser.value = user
-            }
+            }*/
 
         }
 
