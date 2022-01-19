@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
@@ -12,7 +13,7 @@ import com.example.hotspot.viewModel.UsersAndIds
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 
-class UserItemCheckedIn(val user: User, val hotSpot: HotSpot, val viewLifecycleOwner: LifecycleOwner): Item() {
+class UserItemCheckedIn(val user: User, val hotSpot: HotSpot, private val viewLifecycleOwner: LifecycleOwner): Item() {
 
     override fun bind(
         viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
@@ -81,6 +82,11 @@ class UserItemCheckedIn(val user: User, val hotSpot: HotSpot, val viewLifecycleO
         }
 
 
+
+        viewHolder.itemView.setOnClickListener {
+            val action = AfterCheckInDirections.actionAfterCheckInToOthersProfile(user)
+            it.findNavController().navigate(action)
+        }
 
 
     }

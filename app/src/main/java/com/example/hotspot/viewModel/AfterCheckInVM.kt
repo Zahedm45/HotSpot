@@ -17,6 +17,8 @@ class AfterCheckInVM {
     companion object {
         var checkedInListenerRig: ListenerRegistration? = null
         var amountOfUsersToFetch = 0
+        var isNavigatedFromCheckInBtn = false
+
 
 
 
