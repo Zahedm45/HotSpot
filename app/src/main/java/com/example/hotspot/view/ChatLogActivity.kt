@@ -34,7 +34,15 @@ class ChatLogActivity : Fragment() {
     val currentUserId = FirebaseAuth.getInstance().uid
     var latestMessageTimestamp: Long = -1
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private lateinit var binding: ChatLogActivity
+
+    override fun onCreateView(savedInstanceState: Bundle?) {
+        val view = inflater.inflate(R.layout.activity_latest_messages,container, false)
+        binding = ActivityLatestMessagesBinding.inflate(inflater, container, false)
+
+        return view
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_log)
 

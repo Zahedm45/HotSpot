@@ -47,7 +47,7 @@ class LatestMessagesActivity : Fragment() {
         val USER_KEY = "USER_KEY"
     }
 
-    private fun fetchUsers(){
+    public fun fetchUsers(){
 
         val db = Firebase.firestore
         val userRef = db.collection("users")
