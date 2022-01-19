@@ -65,7 +65,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        DataHolder.fetchCurrentUserFromDB()
+
+
+      //  DataHolder.fetchCurrentUserFromDB()
     }
 
 
