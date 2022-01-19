@@ -45,7 +45,7 @@ class BeforeCheckInVM {
 
             hotSpot.id?.let { hotSpotId ->
                 user.uid?.let { userId ->
-                    updateIsUserCheckIn()
+                    updateIsUserCheckIn(hotSpotId)
                     val i = addedCheckedInAndHotspotId.get(userId)
 /*                    if (i == false || i == true) {
                         checkedInDB = CheckedInDB(userId, i)
@@ -113,9 +113,10 @@ class BeforeCheckInVM {
             SubRepository.deleteHotSpotDB(hotSpotId,userId)
         }
 
-        private fun updateIsUserCheckIn(){
-            User(isUserCheckedIn = true)
-            repository.updateIsUserCheckedIn(true)
+        private fun updateIsUserCheckIn(hotSpotId: String){
+
+            //User(isUserCheckedIn = true)
+            repository.updateIsUserCheckedIn(hotSpotId)
         }
 
 

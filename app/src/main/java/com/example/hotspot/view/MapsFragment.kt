@@ -156,6 +156,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }
         viewModel.updateUserIsCheckedIn()
     }
+
     override fun onPause() {
         super.onPause()
         if(snackbar.isShown){
