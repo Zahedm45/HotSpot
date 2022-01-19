@@ -27,8 +27,9 @@ class DataHolder {
 
 
         private fun addUser(user: User) {
-
-
+            if (user.isUserCheckedIn != "null" || user.isUserCheckedIn != null ) {
+                SubRepository.getAndListenCurrentUserHotspot(user.isUserCheckedIn!!) {hotSpot -> addCurrentUserHotspot(hotSpot)}
+            }
             currentUser.value = user
         }
 
@@ -36,7 +37,9 @@ class DataHolder {
         fun getCurrentUser() = currentUser as LiveData<User>
 
 
-
+        fun addCurrentUserHotspot(hotSpot: HotSpot) {
+            currentUserHotSpot.value = hotSpot
+        }
 
     }
 
