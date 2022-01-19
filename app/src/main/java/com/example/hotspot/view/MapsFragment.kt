@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
@@ -42,13 +41,8 @@ import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import android.view.Gravity
 
-import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
 import com.example.hotspot.other.network.TAG
-import com.example.hotspot.view.createProfilePackage.SharedViewModelCreateProfile
-import com.example.hotspot.viewModel.BeforeCheckInVM
 
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
@@ -102,7 +96,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
                 Log.i(TAG, "snack bar in observer")
 
-                snackbar.show()
+          //      snackbar.show()
 
             }
 

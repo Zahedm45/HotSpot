@@ -67,8 +67,12 @@ class SubRepository {
 
                     if (value != null && value.exists()) {
 
+                       // Log.i(TAG, "player .. ${value.get("isUserCheckedIn")}")
                         value.toObject<User>()?.apply {
                             this.uid = usersId
+                            if (this.isUserCheckedIn == null) {
+                               this.isUserCheckedIn = value.get("isUserCheckedIn").toString()
+                            }
 
                             val ref =
                                 FirebaseStorage.getInstance().getReference("/images/${usersId}")
@@ -76,7 +80,7 @@ class SubRepository {
                             ref.getBytes(ONE_MEGABYTE).addOnSuccessListener {
                                 if (it != null) {
                                     this.bitmapImg = BitmapFactory.decodeByteArray(it, 0, it.size)
-
+                                    Log.i(TAG, "Player found $this")
                                     onSuccess(this)
 
                                 } else Log.i(TAG, "User's image can not be fetched ($this)")

@@ -11,10 +11,10 @@ data class User(
     val gender: String? = null,
     var bitmapImg: Bitmap? = null,
     var day: Int? = null,
-    var month: Int? = null ,
+    var month: Int? = null,
     var year: Int? = null,
+    var isUserCheckedIn: String? = null,
     var favoriteHotspots: MutableCollection<HotSpot>? = null,
-    var isUserCheckedIn: String? = null
 
    // var gender: String? = null,
   //  var bitmapImg: Bitmap? = null
