@@ -5,35 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MessageOverview"
-    android:id="@+id/fragment_message">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RVmessage_overview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:clipToPadding="false"
-        android:padding="4dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/chat_item" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="15dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="@string/messages"
-        android:textSize="28sp" />
-
-    <ImageView
-        android:id="@+id/personal_profile_pic"
-        android:layout_width="84dp"
-        android:layout_height="76dp"
-        android:layout_margin ="15dp"
-        tools:src="@mipmap/ic_profile" />
-
-
-</FrameLayout>
+    android:id="@+id/fragment_message" />

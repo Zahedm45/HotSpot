@@ -7,11 +7,10 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id("androidx.navigation.safeargs.kotlin")
     id 'kotlin-android-extensions'
-
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
-androidExtensions {
-    experimental = true
+
 }
 
 android {
@@ -19,7 +18,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.hotspot"
-        minSdk 24
+        minSdk 26
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -63,8 +62,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.android.gms:play-services-location:17.1.0'
-
-
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     implementation 'pub.devrel:easypermissions:2.0.1'
 
@@ -95,6 +93,22 @@ dependencies {
 
 
 
+    //Groupie
+    implementation 'com.xwray:groupie:2.9.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.9.0'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+//    implementation "com.github.lisawray.groupie:groupie:2.10.0"
+//    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.10.0"//   implementation 'com.xwray:groupie-databinding:2.1.0'
+    //implementation "com.github.lisawray.groupie:groupie-viewbinding:2.10.0"
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
 // pls do not update this dependency, bugs could occur...
     implementation 'com.google.android.gms:play-services-location:17.1.0'
