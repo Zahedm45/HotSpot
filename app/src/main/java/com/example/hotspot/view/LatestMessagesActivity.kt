@@ -39,6 +39,15 @@ class LatestMessagesActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        //Navigate back to the map i guess..
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+
+        return false
+    }
 
     companion object {
         val USER_KEY = "USER_KEY"
@@ -116,18 +125,6 @@ class LatestMessagesActivity : AppCompatActivity() {
 
         override fun getLayout(): Int {
             return R.layout.latest_message_row
-        }
-    }
-
-
-
-    private fun verifyUserIsLoggedIn() {
-        //Perform check to see if user is logged in (if necessary)
-        val uid = FirebaseAuth.getInstance().uid
-        if (uid == null) {
-            val intent = Intent(this, ActivityCreateProfile::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
         }
     }
 
