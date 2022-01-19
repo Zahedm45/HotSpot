@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.chat_to_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 import com.squareup.picasso.Picasso
 import com.example.hotspot.databinding.ActivityChatLogBinding
+import com.example.hotspot.other.ButtonAnimations
 
 class ChatLogActivity : AppCompatActivity() {
 
@@ -59,6 +60,7 @@ class ChatLogActivity : AppCompatActivity() {
 
         send_button_chatlog.setOnClickListener {
             Log.d(TAG, "Attempt to send message")
+            ButtonAnimations.clickButton(send_button_chatlog)
             performSendMessage()
         }
     }

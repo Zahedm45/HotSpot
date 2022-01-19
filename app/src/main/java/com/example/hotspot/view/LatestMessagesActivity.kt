@@ -10,6 +10,7 @@ import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLatestMessagesBinding
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.view.ChatLogActivity.Companion.TAG
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.auth.FirebaseAuth
@@ -36,6 +37,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         setContentView(binding.root)
         fetchUsers()
         binding.ivChat.setOnClickListener(){
+            ButtonAnimations.clickButton(binding.ivChat)
             val intent = Intent(this, NewMessageActivity::class.java)
             //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)

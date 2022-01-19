@@ -29,13 +29,13 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ivChat"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:background="@drawable/vector_message_gradient"
             android:src="@drawable/vector_message_gradient"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.94"
             app:layout_constraintStart_toEndOf="@+id/tv_chats"
             app:layout_constraintTop_toTopOf="parent" />
 

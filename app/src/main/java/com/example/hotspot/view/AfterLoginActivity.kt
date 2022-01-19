@@ -80,6 +80,18 @@ class AfterLoginActivity: AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val snackbar = showSnackBarMessage()
+        connectionLiveData = ConnectionLiveData(this)
+        connectionLiveData.observe(this, { isConnected ->
+            when(isConnected){
+                true -> if(snackbar.isShown) snackbar.dismiss()
+                false -> snackbar.show()
+            }
+        })
+    }
+
 
 
     private fun showSnackBarMessage() : Snackbar  {

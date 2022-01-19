@@ -49,10 +49,11 @@ class NewMessageActivity : AppCompatActivity() {
                 val users = it.toObjects<User>()
                 val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 users.forEach { user ->
+                    if(user.uid != null){
                     if (user.uid != uid) {
                         adapter.add(UserItem(user, user.uid!!))
                     }
-                }
+                }}
                 adapter.setOnItemClickListener { item, view ->
                     val userItem = item as UserItem
                     val intent = Intent(view.context, ChatLogActivity::class.java)
