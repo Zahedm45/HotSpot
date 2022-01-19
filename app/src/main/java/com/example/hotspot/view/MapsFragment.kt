@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.PorterDuff
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
@@ -45,6 +46,7 @@ import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
+import com.example.hotspot.other.network.TAG
 import com.example.hotspot.view.createProfilePackage.SharedViewModelCreateProfile
 import com.example.hotspot.viewModel.BeforeCheckInVM
 
@@ -91,7 +93,21 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-        viewModel.updateUserIsCheckedIn()
+     //   viewModel.updateUserIsCheckedIn()
+
+
+
+        DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
+            if(it.isUserCheckedIn != null) {
+
+                Log.i(TAG, "snack bar in observer")
+
+                snackbar.show()
+
+            }
+
+
+        })
     }
 
 
@@ -133,15 +149,16 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         }*/
 
         setHasOptionsMenu(true)
+
+
+
     }
 
 
     override fun onResume() {
         super.onResume()
 
-
-
-        viewModel.updateUserIsCheckedIn()
+      //  viewModel.updateUserIsCheckedIn()
         googleMap?.let {
             clearProgressBar()
         }
@@ -150,21 +167,21 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onStart() {
         super.onStart()
-        snackbar = showSnackBarMessage()
+/*        snackbar = showSnackBarMessage()
         viewModel.getIsUserCheckedIn().observe(this.viewLifecycleOwner){
             if(it){
                 snackbar.show()
             }
         }
-        viewModel.updateUserIsCheckedIn()
+        viewModel.updateUserIsCheckedIn()*/
     }
 
     override fun onPause() {
         super.onPause()
-        if(snackbar.isShown){
+/*        if(snackbar.isShown){
             snackbar.dismiss()
         }
-        viewModel.updateUserIsCheckedIn()
+        viewModel.updateUserIsCheckedIn()*/
     }
 
 

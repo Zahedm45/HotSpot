@@ -215,7 +215,7 @@ class BeforeCheckIn : Fragment() {
             //val isUserPresent = isUserPresent()
             val isUserPresent = true
             if (isUserPresent) {
-                DataHolder.currentUser?.let { user ->
+                DataHolder.getCurrentUser().value?.let { user ->
                     val checkedInDB = CheckedInDB(id = user.uid)
                     UsersAndIds.addUser(user, checkedInDB)
                     BeforeCheckInVM.setCheckedInDB(args.hotSpot, user, null)
@@ -291,7 +291,7 @@ class BeforeCheckIn : Fragment() {
     private fun addFavoriteHotSpot() {
         args.hotSpot.id?.let { hotSpotId ->
 
-            DataHolder.currentUser?.uid?.let { userId ->
+            DataHolder.getCurrentUser().value?.uid?.let { userId ->
                 BeforeCheckInVM.addHotSpotDB(hotSpotId, userId)
 
             } ?: run { Log.i(TAG, "User id is null ($this)") }
@@ -304,7 +304,7 @@ class BeforeCheckIn : Fragment() {
     private fun deleteFavoriteHotspot(){
         args.hotSpot.id?.let{ hotSpotId ->
 
-            DataHolder.currentUser?.uid?.let { userId ->
+            DataHolder.getCurrentUser().value?.uid?.let { userId ->
                 BeforeCheckInVM.deleteHotSpotDB(hotSpotId,userId)
             } ?: run { Log.i(TAG, "User id is null ($this)") }
 

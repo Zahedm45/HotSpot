@@ -79,7 +79,7 @@ class AfterCheckInVM {
 
 
         fun setIsInterested(isInterested: Boolean, hotSpotId: String) {
-            val userId = DataHolder.currentUser?.uid
+            val userId = DataHolder.getCurrentUser().value?.uid
             if (userId != null) {
                 Repository.updateIsInterestedDB(hotSpotId, userId, isInterested)
             }

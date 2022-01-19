@@ -15,7 +15,7 @@ class MapsAndHotspotsVM : ViewModel(){
 
     companion object {
 
-        private val _isUserCheckIn = MutableLiveData<Boolean>()
+       // private val _isUserCheckIn = MutableLiveData<Boolean>()
 
         private val repository = Repository
 
@@ -35,7 +35,7 @@ class MapsAndHotspotsVM : ViewModel(){
 
         }
 
-        fun getIsUserCheckedIn() : LiveData<Boolean> {
+/*        fun getIsUserCheckedIn() : LiveData<Boolean> {
             return _isUserCheckIn
         }
 
@@ -49,7 +49,7 @@ class MapsAndHotspotsVM : ViewModel(){
                     snapshot
                 )
             }
-        }
+        }*/
 
 
 
