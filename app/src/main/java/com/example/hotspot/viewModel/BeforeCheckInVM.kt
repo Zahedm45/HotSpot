@@ -40,7 +40,7 @@ class BeforeCheckInVM {
                         Log.i(TAG, "User was previously added to the database (BeforeCheckInVM) 1")
                         return
                     }*/
-                    //setCheckedInLocal(user, checkedInDB)
+                    ///setCheckedInLocal(user, checkedInDB)
                     db.collection("hotSpots3").document(hotSpotId).collection("checkedIn").document(userId)
                         .set(checkedInDB)
                         .addOnSuccessListener {
@@ -75,7 +75,14 @@ class BeforeCheckInVM {
             CoroutineScope(Default).launch {
                 delay(300)
                 CoroutineScope(Main).launch {
-                    UsersAndIds.addUser(user, checkedInDB)
+
+                    if (!addedCheckedInAndHotspotId.containsKey(user.uid)) {
+                        UsersAndIds.addUser(user, checkedInDB)
+
+                    } else {
+                        Log.i(TAG, "User was previously added to the database (BeforeCheckInVM) 1")
+                    }
+
                 }
             }
         }
