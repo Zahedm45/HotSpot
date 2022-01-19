@@ -2,8 +2,12 @@ package com.example.hotspot.view
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hotspot.R
+import com.example.hotspot.databinding.ActivityChatLogBinding
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
 import com.example.hotspot.view.NewMessage.Companion.USER_KEY
@@ -31,27 +35,15 @@ class ChatLog : Fragment() {
     val currentUserId = FirebaseAuth.getInstance().uid
     var latestMessageTimestamp: Long = -1
 
-    private lateinit var binding: ChatLog
+    private lateinit var binding: ActivityChatLogBinding
 
-    override fun onCreateView(savedInstanceState: Bundle?) {
-        val view = inflater.inflate(R.layout.activity_latest_messages,container, false)
-        binding = ActivityLatestMessagesBinding.inflate(inflater, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?) : View? {
+        val view = inflater.inflate(R.layout.activity_chat_log,container, false)
+        binding = ActivityChatLogBinding.inflate(inflater, container, false)
 
-        return view
-
-
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chat_log)
-
-        Log.d(TAG, "Activity is shown on screen")
         recyclerview_chatlog.adapter = adapter //vid 6 - 22:15
-
         //Passing an object from one activity to another - in this case we are passing the username
-        val user = intent.getParcelableExtra<User>(USER_KEY)
-        if (user != null) {
-            supportActionBar?.title = user.name
-        }
-
 
         listenForMessages()
 
@@ -59,6 +51,9 @@ class ChatLog : Fragment() {
             Log.d(TAG, "Attempt to send message")
             performSendMessage()
         }
+
+        return view
+
     }
 
 
