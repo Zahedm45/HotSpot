@@ -39,6 +39,10 @@ import kotlinx.coroutines.launch
 
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import android.view.Gravity
+
+import android.widget.FrameLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
@@ -390,6 +394,11 @@ private fun showSnackBarMessage() : Snackbar {
     val color: Int = resources.getColor(R.color.transparent)
     layout.setBackgroundColor(color)
     layout.addView(customSnackView, 0)
+
+    val view = snackbar.view
+    val params = view.layoutParams as CoordinatorLayout.LayoutParams
+    params.gravity = Gravity.TOP
+    view.layoutParams = params
 
     return snackbar
 }
