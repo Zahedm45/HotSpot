@@ -18,8 +18,4 @@ data class User(
    // var gender: String? = null,
   //  var bitmapImg: Bitmap? = null
 ) {
-
-
-
-
 }

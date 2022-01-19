@@ -114,7 +114,7 @@
         android:id="@+id/othersProfile"
         android:name="com.example.hotspot.view.OthersProfile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile_from_check_in" >
         <action
             android:id="@+id/action_othersProfile_to_chat"
             app:destination="@id/chat" />
