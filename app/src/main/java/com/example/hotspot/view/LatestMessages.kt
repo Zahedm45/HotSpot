@@ -109,10 +109,9 @@ class LatestMessages : Fragment() {
                         }
                 }
                 adapter.setOnItemClickListener { item, view ->
-                    val latestMessageRow = item as LatestMessageRow
-                    val intent = Intent(view.context, ChatLog::class.java)
-                    intent.putExtra(NewMessage.USER_KEY, latestMessageRow.user)
-                    startActivity(intent)
+                    val userItem = users as UserItem
+                    val action = NewMessageDirections.actionNewmessageToChatlog(userItem.user.uid!!)
+                    findNavController().navigate(action)
                 }
                 binding.recyclerviewLatestMessages.adapter = adapter
             }
