@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.PersonalProfile"
+    tools:context=".view.OthersProfile"
     android:fillViewport="true"
     >
 
@@ -19,59 +19,85 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@id/profile_from_check_in_bio"
+            android:id="@+id/profile_from_check_in_pic"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_marginTop="104dp"
             android:src="@drawable/circle_for_profile_picture"
             app:civ_border_color="#40000000"
             app:civ_border_width="1dp"
-            app:layout_constraintBottom_toTopOf="profile_from_check_in_name"
             app:layout_constraintEnd_toEndOf="parent"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
+            app:layout_constraintVertical_chainStyle="packed"
 
-            app:layout_constraintVertical_bias=".1"
-            app:layout_constraintVertical_chainStyle="packed" />
+            />
 
         <TextView
             android:id="@id/profile_from_check_in_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
             android:gravity="center"
             android:text="@string/personal_name"
             android:textAlignment="center"
             android:textAllCaps="false"
+            android:layout_marginTop="24dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/black"
             android:textSize="32sp"
-            app:layout_constraintTop_toBottomOf="@+id/profile_from_check_in_bio"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_from_check_in_pic"
             app:layout_constraintBottom_toTopOf="@id/profile_from_check_in_age"
             tools:layout_editor_absoluteX="159dp" />
 
         <TextView
             android:id="@id/profile_from_check_in_age"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="420dp"
             android:fontFamily="@font/poppins_light"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@string/personal_age"
             android:textAlignment="center"
             android:textColor="@color/black"
-
-
             android:textSize="16sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_from_check_in_name"
+
+            />
+
+
+
+
+        <TextView
+            android:id="@+id/profile_from_check_in_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/personal_description"
+            android:textAlignment="center"
+            android:textColor="#A6000000"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:textStyle="italic"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_from_check_in_age"
             app:layout_constraintBottom_toTopOf="@+id/profile_from_check_in_button"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.142" />
+            />
+
+
+
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@id/profile_from_check_in_button"
@@ -89,7 +115,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="profile_from_check_in_mail" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_from_check_in_bio"
+
+
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
