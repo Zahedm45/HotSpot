@@ -41,7 +41,14 @@ class BeforeCheckInVM {
 
             hotSpot.id?.let { hotSpotId ->
                 user.uid?.let { userId ->
-                    checkedInDB = CheckedInDB(userId, true)
+
+                    val i = addedCheckedInAndHotspotId.get(userId)
+                    if (i == false || i == true) {
+                        checkedInDB = CheckedInDB(userId, i)
+                    } else {
+                        checkedInDB = CheckedInDB(userId, true)
+                    }
+
                     this.user = user
                    // Log.i(TAG, "User was $addedCheckedInAndHotspotId")
 /*                    if (addedCheckedInAndHotspotId.containsKey(userId)) {
