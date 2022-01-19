@@ -48,6 +48,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var mapFragment: SupportMapFragment? = null
     private lateinit var progressBar: ProgressBar
     private var location: LatLng? = null
+    private val markers: ArrayList<Marker> = ArrayList()
+
 
 
     override fun onAttach(context: Context) {
@@ -220,7 +222,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private val markers: ArrayList<Marker> = ArrayList()
 
     private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
         MapsAndHotspotsVM.hotSpots = hotSpots

@@ -4,6 +4,7 @@ import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
+import com.example.hotspot.view.AfterCheckIn
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Default
@@ -15,6 +16,10 @@ class AfterCheckInVM {
 
     companion object {
         var checkedInListenerRig: ListenerRegistration? = null
+        var amountOfUsersToFetch = 0
+
+
+
         fun setListenerToCheckedInListDB(hotSpot: HotSpot) {
             if (hotSpot.id != null) {
 
@@ -33,10 +38,10 @@ class AfterCheckInVM {
                 newCheckedIn.forEach {
                     it.id?.let { id -> newIdList.add(id) }
                 }
-
+                val tempOldC = oldCheckedIn
                 val toRemove = ArrayList<String>()
-                for (curr in oldCheckedIn) {
 
+                for (curr in tempOldC) {
                     if (!newIdList.contains(curr.key)) {
                         toRemove.add(curr.key)
                     }
@@ -51,10 +56,12 @@ class AfterCheckInVM {
             }
 
 
+
             for (curr in newCheckedIn) {
 
                 curr.id?.let {
                     if (!oldCheckedIn.containsKey(it)) {
+                        amountOfUsersToFetch++
                         Repository.getCheckedInUserFromDB(it, curr) { user, crr -> onnSuccessGetUser(user, crr) }
 
                     } else {
@@ -77,6 +84,12 @@ class AfterCheckInVM {
                 Repository.updateIsInterestedDB(hotSpotId, userId, isInterested)
             }
         }
+
+
+
+
+
+
 
     }
 
