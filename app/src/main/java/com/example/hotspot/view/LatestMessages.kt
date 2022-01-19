@@ -1,5 +1,6 @@
 package com.example.hotspot.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -65,6 +66,7 @@ class LatestMessages : Fragment() {
         val USER_KEY = "USER_KEY"
     }
 
+    @SuppressLint("LogNotTimber")
     public fun fetchUsers(){
 
         val db = Firebase.firestore

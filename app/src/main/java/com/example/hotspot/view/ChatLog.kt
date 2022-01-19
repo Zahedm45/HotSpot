@@ -40,20 +40,22 @@ class ChatLog : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?) : View? {
         val view = inflater.inflate(R.layout.fragment_chatlog,container, false)
-        binding = FragmentChatlogBinding.bind(view)
-
-        recyclerview_chatlog.adapter = adapter2 //vid 6 - 22:15
+        //recyclerview_chatlog.adapter = adapter2 //vid 6 - 22:15
         //Passing an object from one activity to another - in this case we are passing the username
 
         listenForMessages()
 
+        return view
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentChatlogBinding.bind(view)
         send_button_chatlog.setOnClickListener {
             Log.d(TAG, "Attempt to send message")
             performSendMessage()
         }
-
-        return view
-
     }
 
 
@@ -79,7 +81,7 @@ class ChatLog : Fragment() {
                         newMessageAdded(newDocuments)
                     }
         }
-        recyclerview_chatlog.scrollToPosition(adapter2.itemCount -1)
+        //recyclerview_chatlog.scrollToPosition(adapter2.itemCount -1)
 
     }
 
