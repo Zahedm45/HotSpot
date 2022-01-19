@@ -66,6 +66,7 @@ class AfterCheckIn : Fragment() {
             setProgress()
         }
 
+
         setHotSpotInfo()
         heartBtn()
         setObserverForCheckedInList()
