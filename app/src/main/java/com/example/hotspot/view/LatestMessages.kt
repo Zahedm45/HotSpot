@@ -110,9 +110,12 @@ class LatestMessages : Fragment() {
                         }
                 }
                 adapter.setOnItemClickListener { item, view ->
-                    Log.d(TAG,item.toString())
-                    Log.d(TAG,view.toString())
-                    val action = LatestMessagesDirections.actionLatestToChatlog("potato")
+                    val thing = item as LatestMessageRow
+                    val toid = thing.user.uid
+                    Log.d("ClickPerson",toid!!)
+                    Log.d("ClickPerson",view.toString())
+
+                    val action = LatestMessagesDirections.actionLatestToChatlog(toid)
                     findNavController().navigate(action)
                 }
                 binding.recyclerviewLatestMessages.adapter = adapter

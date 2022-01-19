@@ -29,8 +29,9 @@ class ChatLog : Fragment() {
     companion object {
         val TAG = "chatlog"
     }
+    //val toid: String = requireArguments()["user_id"].toString()
 
-    val adapter2 = GroupAdapter<GroupieViewHolder>() //vid 6 - 22:15
+    val adapter = GroupAdapter<GroupieViewHolder>() //vid 6 - 22:15
     val db = Firebase.firestore
     val currentUserId = FirebaseAuth.getInstance().uid
     var latestMessageTimestamp: Long = -1
@@ -40,11 +41,6 @@ class ChatLog : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?) : View? {
         val view = inflater.inflate(R.layout.fragment_chatlog,container, false)
-        //recyclerview_chatlog.adapter = adapter2 //vid 6 - 22:15
-        //Passing an object from one activity to another - in this case we are passing the username
-
-        listenForMessages()
-
         return view
 
     }
@@ -52,20 +48,20 @@ class ChatLog : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChatlogBinding.bind(view)
+        binding.recyclerviewChatlog.adapter = adapter
         send_button_chatlog.setOnClickListener {
             Log.d(TAG, "Attempt to send message")
             performSendMessage()
         }
+        listenForMessages()
     }
-
 
     private fun listenForMessages() {
 
-        val fromid = FirebaseAuth.getInstance().uid
 
-        val fragment = User()
-        val toid = arguments.toString()
-        Log.d("NavigationArgs1",toid)
+        val fromid = FirebaseAuth.getInstance().uid
+        val toid = requireArguments()["user_id"].toString()
+        Log.d("NavigationArgs1", toid)
         val ref = db.collection("messages")
 
             ref.whereIn("toFrom",listOf(fromid+toid,toid+fromid))
@@ -81,41 +77,48 @@ class ChatLog : Fragment() {
                         newMessageAdded(newDocuments)
                     }
         }
-        //recyclerview_chatlog.scrollToPosition(adapter2.itemCount -1)
+        recyclerview_chatlog.scrollToPosition(adapter.itemCount -1)
 
     }
 
     private fun newMessageAdded(newDocuments: QuerySnapshot) {
         val fromid = FirebaseAuth.getInstance().uid
-        val toid = arguments.toString()
-        Log.d("NavigationArgs2",toid)
+        val toid = requireArguments()["user_id"].toString()
+        Log.d("NavigationArgs2", toid)
 
         for (document in newDocuments.documentChanges) {
             when (document.type) {
                 DocumentChange.Type.ADDED -> {
                     if (document.document.data["fromId"] == fromid) {
-                        adapter2.add(ChatToItem(
-                            document.document.data["text"].toString(),
-                            fromid!!
-                        ))
+                        adapter.add(
+                            ChatToItem(
+                                document.document.data["text"].toString(),
+                                fromid!!
+                            )
+                        )
 
-                    } else { adapter2.add(ChatFromItem(
-                        document.document.data["text"].toString(),toid!!
+                    } else {
+                        adapter.add(
+                            ChatFromItem(
+                                document.document.data["text"].toString(), toid!!
 
-                    )) }
+                            )
+                        )
+                    }
 
-                    if (document == newDocuments.elementAt(newDocuments.size() -1)) {
-                        latestMessageTimestamp = document.document.data["timestamp"].toString().toLong()
+                    if (document == newDocuments.elementAt(newDocuments.size() - 1)) {
+                        latestMessageTimestamp =
+                            document.document.data["timestamp"].toString().toLong()
                     }
 
                 }
 
-                DocumentChange.Type.MODIFIED -> Log.d(TAG,"Document modified. Possible error!")
-                DocumentChange.Type.REMOVED -> Log.d(TAG,"Document removed. Possible error!")
+                DocumentChange.Type.MODIFIED -> Log.d(TAG, "Document modified. Possible error!")
+                DocumentChange.Type.REMOVED -> Log.d(TAG, "Document removed. Possible error!")
             }
 
         }
-        recyclerview_chatlog.scrollToPosition(adapter2.itemCount -1)
+        recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
     }
 
     // this is how we actually send a message to firebase
@@ -125,8 +128,8 @@ class ChatLog : Fragment() {
 
         val text = editText_chatlog.text.toString()
         val fromid = FirebaseAuth.getInstance().uid
-        val toid = arguments.toString()
-        Log.d("NavigationArgs3",toid)
+        val toid = requireArguments()["user_id"].toString()
+        Log.d("NavigationArgs3", toid)
         val timestamp = System.currentTimeMillis()
 
         val message = ChatMessage(toid+fromid, text, fromid,
@@ -138,7 +141,7 @@ class ChatLog : Fragment() {
                 Log.d(TAG, "Message sent")
             }
             .addOnFailureListener {
-            Log.w(TAG, "Error sending message")
+                Log.w(TAG, "Error sending message")
             }
 
         editText_chatlog.text.clear()
