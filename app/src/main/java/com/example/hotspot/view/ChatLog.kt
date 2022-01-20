@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentChatlogBinding
 import com.example.hotspot.model.ChatMessage
@@ -54,6 +55,10 @@ class ChatLog : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChatlogBinding.bind(view)
         binding.recyclerviewChatlog.adapter = adapter
+        val llm = LinearLayoutManager(this.requireContext())
+        llm.stackFromEnd = true
+        llm.reverseLayout = false
+        binding.recyclerviewChatlog.layoutManager = llm
         setHasOptionsMenu(true)
         tv_chat.text = requireArguments()["user_name"].toString()
         send_button_chatlog.setOnClickListener {
