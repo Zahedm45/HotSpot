@@ -264,15 +264,16 @@ class AfterCheckIn : Fragment() {
 
 
 
-        UsersAndIds.getIsInterestedTrueList().observe(viewLifecycleOwner, Observer{ interestedList ->
+/*        UsersAndIds.getIsInterestedTrueList().observe(viewLifecycleOwner, Observer{ interestedList ->
             var userID = DataHolder.getCurrentUser().value?.uid
 
             if (userID == null) {
                 userID = Firebase.auth.uid
             }
 
+            if()
             binding.afterCheckInterestedBtn.isChecked = interestedList.contains(userID)
-        })
+        })*/
 
     }
 
