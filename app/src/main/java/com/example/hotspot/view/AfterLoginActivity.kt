@@ -71,23 +71,7 @@ class AfterLoginActivity: AppCompatActivity() {
 
 
 
-        navCont.addOnDestinationChangedListener{_, destination, _ ->
-            when(destination.id){
-                R.id.chat -> {
-                btn.animate().apply {
-                    duration = 150
-                    this.alpha(0f)
-                }.withEndAction { btn.visibility = View.GONE }.start()
-                }
-                else -> {
-                    btn.visibility = View.VISIBLE
-                    btn.animate().apply {
-                        duration = 150
-                        this.alpha(1f)
-                    }.start()
-                }
-            }
-        }
+
     }
 
     override fun onResume() {

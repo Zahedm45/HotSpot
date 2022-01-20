@@ -42,16 +42,6 @@
     </fragment>
 
 
-
-    <fragment
-        android:id="@+id/chat"
-        android:name="com.example.hotspot.view.Chat"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
-
-
-
-
     <fragment
         android:id="@+id/editProfile"
         android:name="com.example.hotspot.view.EditProfile"
@@ -83,18 +73,6 @@
 
 
     <fragment
-        android:id="@+id/messageOverview"
-        android:name="com.example.hotspot.view.MessageOverview"
-        android:label="fragment_message_overview"
-        tools:layout="@layout/fragment_message_overview" >
-        <action
-            android:id="@+id/action_messageOverview_to_chat"
-            app:destination="@id/chat" />
-    </fragment>
-
-
-
-    <fragment
         android:id="@+id/personalProfile"
         android:name="com.example.hotspot.view.PersonalProfile"
         android:label="fragment_personal_profile"
@@ -115,12 +93,12 @@
         android:name="com.example.hotspot.view.OthersProfile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile_from_check_in" >
-        <action
-            android:id="@+id/action_othersProfile_to_chat"
-            app:destination="@id/chat" />
         <argument
             android:name="user"
             app:argType="com.example.hotspot.model.User" />
+        <action
+            android:id="@+id/action_othersProfile_to_Chatlog"
+            app:destination="@id/Chatlog" />
     </fragment>
 
 
@@ -167,7 +145,11 @@
             app:destination="@id/NewMessage" />
         <action
             android:id="@+id/action_latest_to_chatlog"
-            app:destination="@id/Chatlog" />
+            app:destination="@id/Chatlog"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/Chatlog"

@@ -22,7 +22,7 @@
             android:textColor="@color/black"
             android:fontFamily="@font/poppins_semibold"
             android:layout_gravity="center"
-            android:textSize="18sp"/>
+            android:textSize="24sp"/>
     </LinearLayout>
 
 <androidx.constraintlayout.widget.ConstraintLayout

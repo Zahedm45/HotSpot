@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentProfileFromCheckInBinding
@@ -32,6 +33,8 @@ class OthersProfile : Fragment() {
         binding = FragmentProfileFromCheckInBinding.bind(view)
 
         setAllAttributes()
+
+
 
 
     }

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentNewMessageBinding
 import com.example.hotspot.model.User
+import com.example.hotspot.repository.Repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
@@ -46,13 +47,15 @@ class NewMessage : Fragment() {
         val db = Firebase.firestore
         val userRef = db.collection("users")
         val uid = FirebaseAuth.getInstance().uid
+        val hotspotId = Repository.getUserProfile {  }
 
         userRef.get()
             .addOnSuccessListener {
                 val users = it.toObjects<User>()
                 val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 users.forEach { user ->
-                    if (user.uid != uid && user.uid != null) {
+                    if (user.uid != uid && user.uid != null  ) {
+
                         adapter.add(UserItem(user, user.uid!!))
                         adapter.setOnItemClickListener { item, view ->
                             val userItem = item as UserItem
@@ -74,6 +77,11 @@ class UserItem(val user: User, val uid: String): Item() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
 
         viewHolder.itemView.row_message_name.text = user.name
+        viewHolder.itemView.tv_age.text = user.age.toString()
+        viewHolder.itemView.tv_gender.text = user.gender.toString()
+
+
+
 
         //TO-DO: create code for fetching user profile picture
         //val user = intent.getParcelableExtra<User>(USER_KEY)

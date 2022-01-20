@@ -27,6 +27,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_chatlog.*
 import kotlinx.android.synthetic.main.fragment_chatlog.view.*
 import kotlinx.android.synthetic.main.fragment_latest_messages.*
+import java.lang.Exception
 
 class ChatLog : Fragment() {
 
@@ -125,7 +126,11 @@ class ChatLog : Fragment() {
             }
 
         }
-        recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
+        try {
+            recyclerview_chatlog.scrollToPosition(adapter.itemCount - 1)
+        }catch (e: Exception){
+            print(e.stackTrace)
+        }
     }
 
     // this is how we actually send a message to firebase
