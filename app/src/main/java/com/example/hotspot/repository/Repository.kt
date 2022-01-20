@@ -78,7 +78,7 @@ class Repository {
                 return
             }
 
-
+            user.uid = getFirebaseUser()?.uid
             val bitmap = user.bitmapImg
             user.bitmapImg = null
 
