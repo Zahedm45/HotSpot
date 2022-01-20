@@ -85,7 +85,6 @@ class Favorites : Fragment() {
                 }
                 binding.RVfavorites.adapter = adapter
 
-
                 }
 
 

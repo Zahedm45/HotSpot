@@ -1,8 +1,11 @@
 package com.example.hotspot.viewModel
 
-import com.example.hotspot.model.CheckedInDB
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
-import com.example.hotspot.repository.Repository
+import com.example.hotspot.repository.SubRepository
+import com.example.hotspot.view.MapsFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -10,25 +13,55 @@ import com.google.firebase.ktx.Firebase
 class DataHolder {
 
     companion object {
-        var currentUser: User? = null
+
+        private var currentUser = MutableLiveData<User>()
+        private var currentUserHotSpot = MutableLiveData<HotSpot>()
+       // var hotSpotId: String? = null
+
+
 
 
         fun fetchCurrentUserFromDB() {
             val userId = Firebase.auth.uid
             if (userId != null) {
 
-                val checkedInDB = CheckedInDB(id = userId)
-
-                Repository.getCheckedInUserFromDB(userId, checkedInDB) {
-                        user, checkedIn -> addToCheckedInUsersList(user, checkedIn) }
+                SubRepository.getAndListenCurrentUserDB(userId) { user -> addUser(user) }
             }
         }
 
 
-        private fun addToCheckedInUsersList(user: User, checkedInDB: CheckedInDB) {
-            currentUser = user
+        private fun addUser(user: User) {
+            currentUser.value = user
+            getAndListenCurrentUserHotspot()
         }
 
+
+        fun getCurrentUser() = currentUser as LiveData<User>
+
+
+        private fun addCurrentUserHotspot(hotSpot: HotSpot) {
+
+            if (!hotSpot.id.isNullOrEmpty() && !hotSpot.name.isNullOrEmpty() ) {
+                currentUserHotSpot.value = hotSpot
+
+            }
+        }
+
+
+        fun getCurrentUserHotspot() = currentUserHotSpot as LiveData<HotSpot>
+
+
+
+
+        fun getAndListenCurrentUserHotspot() {
+            val user = currentUser.value
+            if (user?.isUserCheckedIn != "null" || user.isUserCheckedIn != null ) {
+                SubRepository.getAndListenCurrentUserHotspotDB(user?.isUserCheckedIn!!) { hotSpot -> addCurrentUserHotspot(hotSpot)}
+
+            }
+
+
+        }
     }
 
 

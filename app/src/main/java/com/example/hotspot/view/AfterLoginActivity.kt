@@ -18,6 +18,7 @@ import com.example.hotspot.databinding.ActivityAfterLoginBinding
 import com.example.hotspot.databinding.FragmentCreateProfileAgeBinding
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.other.network.ConnectivityManager
+import com.example.hotspot.viewModel.DataHolder
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -32,8 +33,17 @@ class AfterLoginActivity: AppCompatActivity() {
 
     private lateinit var snackbar : Snackbar
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        DataHolder.fetchCurrentUserFromDB()
+
+
+
+
         setContentView(R.layout.activity_after_login)
         val snackbar = showSnackBarMessage()
 

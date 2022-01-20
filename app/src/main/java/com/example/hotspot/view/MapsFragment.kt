@@ -1,15 +1,14 @@
 package com.example.hotspot.view
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.hotspot.R
@@ -38,9 +37,10 @@ import kotlinx.coroutines.launch
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 
+import com.example.hotspot.other.network.TAG
+
 
 class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
-
 
     private var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
@@ -49,13 +49,10 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var progressBar: ProgressBar
     private var location: LatLng? = null
     private val markers: ArrayList<Marker> = ArrayList()
+    var isSnackBarShowing = false
+    lateinit var view2: View
 
 
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        DataHolder.fetchCurrentUserFromDB()
-    }
 
 
     override fun onCreateView(
@@ -69,24 +66,74 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view2 = view
         binding = FragmentMaps4Binding.bind(view)
+
 
         requestLocPermissionAndTrackLocation()
 
         if (MapsAndHotspotsVM.isAppJustOpened) {
             addProgressBar()
+
+        } else {
+            logicsForCheckedInlayout()
+            isSnackBarShowing = true
+
         }
 
-
         myLocationBtn(view)
+
+        DataHolder.fetchCurrentUserFromDB()
+
     }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        clearCheckedIn()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        googleMap?.let {
+            clearProgressBar()
+        }
+        DataHolder.fetchCurrentUserFromDB()
+    }
+
 
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         MapsAndHotspotsVM.showHotSpotReg?.remove()
+
     }
+
+
+
+
+    private fun logicsForCheckedInlayout() {
+        DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
+            it.isUserCheckedIn?.let {
+                if (it != "null") {
+                    showCheckedIn()
+
+                } else {
+                    clearCheckedIn()
+                }
+            }
+        })
+
+    }
+
+
 
 
 
@@ -94,39 +141,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun myLocationBtn(view: View) {
         binding.fragmentMapsMyLocationBtn.setOnClickListener {
-          //  addHotSpotsInDB()
+
             if (location != null && googleMap != null) {
                 moveCamara(12f)
             }
             ButtonAnimations.clickImageButton(binding.fragmentMapsMyLocationBtn)
+
         }
-    }
-
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-/*        if (Firebase.auth.uid == null) {
-            Log.i(TAG, "not logged in ..")
-            val intent = Intent(requireActivity(), LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            requireActivity().finish()
-        }*/
-
-        setHasOptionsMenu(true)
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-
-        googleMap?.let {
-            clearProgressBar()
-        }
-
     }
 
 
@@ -142,7 +163,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             MapUtility.requestPermission(this)
         }
     }
-
 
 
 
@@ -312,10 +332,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
     private fun addProgressBar() {
-
         binding.fragmentMapsLoadingImg.visibility = View.VISIBLE
-
-
         progressBar = binding.fragmentMapsProgressBar
         progressBar.visibility = View.VISIBLE
         progressBar.indeterminateDrawable
@@ -334,6 +351,9 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             MapsAndHotspotsVM.isAppJustOpened = false
         }
 
+        if (!isSnackBarShowing) {
+            logicsForCheckedInlayout()
+        }
 
        // requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 
@@ -344,8 +364,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun moveCamara(zoom: Float) {
         googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(location!!, zoom))
     }
-
-
 
 
 
@@ -360,6 +378,150 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         menuOptionClick(item, requireActivity())
         return super.onOptionsItemSelected(item)
     }
+
+
+
+
+    private fun showCheckedIn() {
+        binding.mapsFragmentMyHotspotBtnLayout.visibility = View.VISIBLE
+        binding.mapsGoToMyHotspotBtn.setOnClickListener {
+            navigateToAfterCheckIn(it)
+        }
+
+    }
+
+    private fun clearCheckedIn() {
+        binding.mapsFragmentMyHotspotBtnLayout.visibility = View.GONE
+    }
+
+
+
+    private fun navigateToAfterCheckIn(view: View) {
+
+        DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
+            val action = MapsFragmentDirections.actionMapsFragmentToAfterCheckIn(hotSpot)
+            Log.i(TAG, "you clicked me..inside ${action}")
+            view.findNavController().navigate(action)
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*    private fun logicsForSnackBar() {
+        DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
+            it.isUserCheckedIn?.let {
+                if (it != "null") {
+                    showSnackBar()
+
+                } else {
+                    clearSnackBar()
+                }
+            }
+        })
+
+    }*/
+
+/*
+
+    private fun showSnackBar() {
+        if (MapsAndHotspotsVM.snackbar == null) {
+            MapsAndHotspotsVM.snackbar = showSnackBarMessage()
+            MapsAndHotspotsVM.snackbar?.show()
+
+        } else {
+            MapsAndHotspotsVM.snackbar?.show()
+        }
+    }
+
+
+
+    private fun clearSnackBar() {
+
+        if (MapsAndHotspotsVM.snackbar != null) {
+
+            if (MapsAndHotspotsVM.snackbar!!.isShown) {
+                MapsAndHotspotsVM.snackbar?.dismiss()
+            }
+        }
+    }
+*/
+
+
+
+
+
+   /*
+
+    private fun showSnackBarMessage(): Snackbar {
+        val snackbar =
+            Snackbar.make((binding.fragmentMapsMyLocationBtn), "", Snackbar.LENGTH_INDEFINITE)
+
+
+        val customSnackView: View = layoutInflater.inflate(
+            R.layout.snackbar_my_hotspot,
+            this.activity?.findViewById<View>(R.id.snackbar_cardView) as? ViewGroup
+        )
+        layoutInflater.inflate(
+            R.layout.snackbar_my_hotspot,
+            this.activity?.findViewById<View>(R.id.snackbar_myhotspot_cardView) as? ViewGroup,
+            false
+        )
+        val layout = snackbar.view as Snackbar.SnackbarLayout
+        layout.setPadding(0, 0, 0, 0)
+
+        customSnackView.setOnClickListener() {
+
+
+            Log.i(TAG, "you clicked me...${ DataHolder.getCurrentUserHotspot().value}")
+            DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
+
+
+                val action = MapsFragmentDirections.actionMapsFragmentToAfterCheckIn(hotSpot)
+                Log.i(TAG, "you clicked me..inside ${action}")
+
+                view?.findNavController()?.navigate(action)
+
+            }
+
+        }
+        val color: Int = resources.getColor(R.color.transparent)
+        layout.setBackgroundColor(color)
+        layout.addView(customSnackView, 0)
+
+        val view = snackbar.view
+        val params = view.layoutParams as CoordinatorLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        view.layoutParams = params
+
+
+        return snackbar
+    }
+*/
+
+}
+
+
+
+
+
 
 
 
@@ -381,10 +543,3 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 */
 
-
-
-
-
-
-
-}

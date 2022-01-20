@@ -101,8 +101,6 @@ class EditProfileVM {
             if (counter1 == counter2) {
                 Log.i(TAG, "navigate is called..")
 
-
-                navigateToPersonalProfile()
             }
         }
 
