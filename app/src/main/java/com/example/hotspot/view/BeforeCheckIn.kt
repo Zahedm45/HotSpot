@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
@@ -71,6 +72,10 @@ class BeforeCheckIn : Fragment() {
         heartButton()
         checkInBtn(view)
         logicsForCheckedInlayout()
+
+        binding.beforeCheckInReviews.setOnClickListener {
+            findNavController().navigate(R.id.Action_beforeCheckin_to_reviews)
+        }
 
     }
 

@@ -39,6 +39,9 @@
             android:name="hotSpot"
             app:argType="com.example.hotspot.model.HotSpot"
             />
+        <action
+            android:id="@+id/Action_beforeCheckin_to_reviews"
+            app:destination="@id/reviews" />
     </fragment>
 
 
@@ -135,6 +138,15 @@
     <action android:id="@+id/trackingFragment"
         app:destination="@+id/mapsFragment"
         app:launchSingleTop="true" />
+    <fragment
+        android:id="@+id/reviews"
+        android:name="com.example.hotspot.reviews"
+        android:label="fragment_reviews"
+        tools:layout="@layout/fragment_reviews" >
+        <action
+            android:id="@+id/action_reviews_to_beforeCheckIn"
+            app:destination="@id/beforeCheckIn" />
+    </fragment>
     <fragment
         android:id="@+id/LatestMessages"
         android:name="com.example.hotspot.view.LatestMessages"

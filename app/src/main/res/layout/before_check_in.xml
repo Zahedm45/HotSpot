@@ -226,15 +226,16 @@
 
 
 
-        <TextView
+        <Button
             android:id="@+id/before_check_in_reviews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reviews"
             android:stateListAnimator="@null"
             android:paddingBottom="5dp"
-            android:textSize="15sp"
+            android:textSize="12dp"
             android:textColor="@color/black"
+            android:backgroundTint="@color/white"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
