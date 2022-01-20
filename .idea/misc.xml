@@ -67,12 +67,21 @@
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/layout/user_row_new_message.xml" value="0.1" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navi.xml" value="0.21979166666666666" />
         <entry key="..\:/Users/freja/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navigation.xml" value="0.21979166666666666" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/animated_check.xml" value="0.2324074074074074" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/ic_baseline_remove_red_eye_24.xml" value="0.21875" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-v24/orange_button.xml" value="0.1515625" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable-xxxhdpi/ic_directions_run_black_24dp.xml" value="0.21875" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/button_empty.xml" value="0.1515625" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/button_filled.xml" value="0.1953125" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/button_layered.xml" value="0.1515625" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/custom_button.xml" value="0.1515625" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/emoticon.xml" value="0.2324074074074074" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/heart_outline.xml" value="0.21875" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/home.xml" value="0.29333333333333333" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/humberger_menu_bar_background.xml" value="0.21875" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_baseline_crop_portrait_24.xml" value="0.21875" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.21875" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21875" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/drawable/map_nav_bottom.xml" value="0.29333333333333333" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_after_login.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/activity_create_profile.xml" value="0.22604166666666667" />
@@ -97,6 +106,7 @@
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_personal_profile.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_profile.xml" value="0.13541666666666666" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/fragment_profile_text.xml" value="0.13541666666666666" />
+        <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/layout/latest_message_row.xml" value="0.25" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/menu/bottom_navigation.xml" value="0.28177083333333336" />
         <entry key="..\:/Users/skals/AndroidStudioProjects/HotSpot/app/src/main/res/menu/nav_top_menu.xml" value="0.22604166666666667" />
         <entry key="app/src/main/res/drawable-v24/edittext_background1.xml" value="0.3921875" />

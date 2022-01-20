@@ -177,10 +177,7 @@ class ChatFromItem(val text: String, val toId: String): Item() {
             .load(ref)
             .into(targetImage)
 
-        /*val targetImage = viewHolder.itemView.image_from_row
-        Picasso.get()
-            .load("file:src/main/res/drawable-mdpi/bitmap.bmp")
-            .into(targetImage)*/
+
 
     }
 
