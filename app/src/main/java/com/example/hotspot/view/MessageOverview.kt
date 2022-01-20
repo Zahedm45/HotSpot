@@ -1,5 +1,6 @@
 package com.example.hotspot.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -9,20 +10,23 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.other.UtilView
+import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 
 
 class MessageOverview : Fragment(), View.OnClickListener {
 
     lateinit var navController : NavController
 
+/*
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_message_overview, container, false)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Messages"
-        return view
+        return inflater.inflate(R.layout.fragment_message_overview, container, false)
+        //(activity as AppCompatActivity?)!!.supportActionBar!!.title = "Messages"
+        //return view
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,21 +35,26 @@ class MessageOverview : Fragment(), View.OnClickListener {
       view.findViewById<CardView>(R.id.chatOnClick).setOnClickListener(this)
 
     }
-
+*/
     override fun onClick(chatsView: View?){
-        when(chatsView!!.id){
+        /*when(chatsView!!.id){
             R.id.chatOnClick -> navController.navigate(R.id.action_messageOverview_to_chat)
-        }
+        }*/
     }
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val intent = Intent(this.context, LatestMessagesActivity::class.java)
+        //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+
+
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
     }
-
-
+/*
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -56,5 +65,5 @@ class MessageOverview : Fragment(), View.OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         UtilView.menuOptionClick(item, requireActivity())
         return super.onOptionsItemSelected(item)
-    }
+    }*/
 }

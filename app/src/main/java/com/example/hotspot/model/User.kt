@@ -1,7 +1,10 @@
 package com.example.hotspot.model
 
 import android.graphics.Bitmap
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
     var uid: String? = null,
     var name: String? = null,
@@ -13,10 +16,4 @@ data class User(
     var day: Int? = null,
     var month: Int? = null ,
     var year: Int? = null,
-   // var gender: String? = null,
-  //  var bitmapImg: Bitmap? = null
-) {
-
-
-
-}
+) : Parcelable
