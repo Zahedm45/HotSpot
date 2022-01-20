@@ -315,6 +315,34 @@ class BeforeCheckIn : Fragment() {
 
 
 
+
+
+    private fun showCheckedIn() {
+        binding.beforeCheckeInMyHotspotBtnLayout.visibility = View.VISIBLE
+        binding.beforeCheckInGoToMyHotspotBtn.setOnClickListener {
+            navigateToAfterCheckIn(it)
+        }
+
+    }
+
+    private fun clearCheckedIn() {
+        binding.beforeCheckeInMyHotspotBtnLayout.visibility = View.GONE
+    }
+
+
+
+    private fun navigateToAfterCheckIn(view: View) {
+
+        DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
+            val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(hotSpot)
+            Log.i(TAG, "you clicked me..inside ${action}")
+            view.findNavController().navigate(action)
+        }
+
+    }
+
+
+
 }
 
 
