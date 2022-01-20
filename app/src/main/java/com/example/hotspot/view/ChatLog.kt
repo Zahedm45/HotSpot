@@ -10,10 +10,13 @@ import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentChatlogBinding
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
+import com.example.hotspot.other.ButtonAnimations
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -23,6 +26,7 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_chatlog.*
 import kotlinx.android.synthetic.main.fragment_chatlog.view.*
+import kotlinx.android.synthetic.main.fragment_latest_messages.*
 
 class ChatLog : Fragment() {
 
@@ -42,15 +46,18 @@ class ChatLog : Fragment() {
                               savedInstanceState: Bundle?) : View? {
         val view = inflater.inflate(R.layout.fragment_chatlog,container, false)
         return view
-
+        //supportActionBar?.hide()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChatlogBinding.bind(view)
         binding.recyclerviewChatlog.adapter = adapter
+        setHasOptionsMenu(true)
+        tv_chat.text = requireArguments()["user_name"].toString()
         send_button_chatlog.setOnClickListener {
             Log.d(TAG, "Attempt to send message")
+            ButtonAnimations.clickButton(send_button_chatlog)
             performSendMessage()
         }
         listenForMessages()

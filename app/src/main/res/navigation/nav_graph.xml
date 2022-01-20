@@ -168,6 +168,9 @@
         <argument
             android:name="user_id"
             app:argType="string" />
+        <argument
+            android:name="user_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/NewMessage"
