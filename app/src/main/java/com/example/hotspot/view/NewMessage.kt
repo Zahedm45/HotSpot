@@ -18,19 +18,19 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 
 
-class NewMessageActivity : AppCompatActivity() {
+class NewMessage : Fragment() {
 
     //   private lateinit var recyclerView: RecyclerView
-    private lateinit var binding: ActivityNewMessageBinding
+    private lateinit var binding: FragmentNewMessageBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityNewMessageBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        supportActionBar?.hide()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?) : View? {
+        val view = inflater.inflate(R.layout.fragment_new_message,container, false)
+        binding = FragmentNewMessageBinding.bind(view)
 
         fetchUsers()
+
+        return view
     }
 
     companion object {
@@ -49,18 +49,16 @@ class NewMessageActivity : AppCompatActivity() {
                 val users = it.toObjects<User>()
                 val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 users.forEach { user ->
-                    if(user.uid != null){
                     if (user.uid != uid) {
                         adapter.add(UserItem(user, user.uid!!))
+                        adapter.setOnItemClickListener { item, view ->
+                            val userItem = item as UserItem
+                            val action = NewMessageDirections.actionNewmessageToChatlog(userItem.user.uid!!)
+                            findNavController().navigate(action)
+                        }
                     }
-                }}
-                adapter.setOnItemClickListener { item, view ->
-                    val userItem = item as UserItem
-                    val intent = Intent(view.context, ChatLogActivity::class.java)
-                    intent.putExtra(USER_KEY, userItem.user)
-                    startActivity(intent)
-                    finish()
                 }
+
                 binding.recyclerviewNewMessage.adapter = adapter
             }
     }

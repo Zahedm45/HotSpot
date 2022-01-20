@@ -24,28 +24,6 @@
         android:theme="@style/Theme.HotSpot">
 
 
-
-        <activity
-            android:name=".view.ChatLogActivity"
-            android:exported="false" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.LatestMessagesActivity"/>
-        </activity>
-        <activity
-            android:name=".view.NewMessageActivity"
-            android:exported="true" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.LatestMessagesActivity" />
-        </activity>
-        <activity
-            android:name=".view.LatestMessagesActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.ActivityLoadingPage" />
-        </activity>
         <activity
             android:name=".view.ActivityLoadingPage"
             android:exported="true"
@@ -88,8 +66,7 @@
         <activity
             android:name=".view.AfterLoginActivity"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing"
-            >
+            android:windowSoftInputMode="adjustResize">
         </activity>
 
 
