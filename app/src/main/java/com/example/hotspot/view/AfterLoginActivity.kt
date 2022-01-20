@@ -17,6 +17,7 @@ import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityAfterLoginBinding
 import com.example.hotspot.databinding.FragmentCreateProfileAgeBinding
 import com.example.hotspot.other.network.ConnectionLiveData
+import com.example.hotspot.other.network.ConnectivityManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -51,6 +52,8 @@ class AfterLoginActivity: AppCompatActivity() {
         btn.setupWithNavController(navCont)
         btn.itemIconTintList = null
 
+        val connectivityManager = ConnectivityManager(this.application)
+        connectivityManager.registerConnectionObserver(this)
 
 
 
@@ -75,6 +78,18 @@ class AfterLoginActivity: AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val snackbar = showSnackBarMessage()
+        connectionLiveData = ConnectionLiveData(this)
+        connectionLiveData.observe(this, { isConnected ->
+            when(isConnected){
+                true -> if(snackbar.isShown) snackbar.dismiss()
+                false -> snackbar.show()
+            }
+        })
     }
 
 
