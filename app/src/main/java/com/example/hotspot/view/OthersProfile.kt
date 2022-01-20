@@ -8,29 +8,45 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
+import com.example.hotspot.databinding.FragmentProfileFromCheckInBinding
 
 
-class OthersProfile : Fragment(), View.OnClickListener {
+class OthersProfile : Fragment() {
 
-    lateinit var navController: NavController
+   // lateinit var navController: NavController
+    private val args: OthersProfileArgs by navArgs()
+    lateinit var binding: FragmentProfileFromCheckInBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_profile_from_check_in, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.send_message).setOnClickListener(this)
+       // navController = Navigation.findNavController(view)
+        binding = FragmentProfileFromCheckInBinding.bind(view)
+
+        setAllAttributes()
+
 
     }
-    override fun onClick(p0: View?) {
-        when (p0!!.id) {
-            R.id.send_message -> navController.navigate(R.id.action_othersProfile_to_chat)
-        }
+
+
+
+
+
+    private fun setAllAttributes() {
+        var user = args.user
+        binding.profileFromCheckInPic.setImageBitmap(user.bitmapImg)
+        binding.profileFromCheckInName.text = user.name
+        binding.profileFromCheckInAge.text = user.age.toString()
+        binding.profileFromCheckInBio.text = user.bio
+
     }
+
 }

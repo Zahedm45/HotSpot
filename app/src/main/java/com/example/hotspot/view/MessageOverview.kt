@@ -4,13 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import com.example.hotspot.R
-import com.example.hotspot.other.UtilView
-import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 
 
 class MessageOverview : Fragment(), View.OnClickListener {
@@ -45,7 +39,7 @@ class MessageOverview : Fragment(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val intent = Intent(this.context, LatestMessagesActivity::class.java)
+        val intent = Intent(this.context, LatestMessages::class.java)
         //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
 

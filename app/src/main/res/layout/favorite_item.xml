@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView_favorites"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginTop="15dp"
+    app:cardCornerRadius="5dp"
+    android:clickable="true"
+    android:focusable="true">
+
+
+
+    <ImageView
+        android:id="@+id/hotspot_picture"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        tools:src="@mipmap/ic_profile" />
+
+    <TextView
+        android:id="@+id/hotspot_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="50dp"
+        tools:text="Rating" />
+
+    <TextView
+        android:id="@+id/hotspot_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        tools:text="Hotspot name" />
+
+    <TextView
+        android:id="@+id/hotspot_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="50dp"
+        tools:text="Location" />
+
+    <ImageView
+        android:id="@+id/ratingStar"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+
+</androidx.cardview.widget.CardView>

@@ -48,6 +48,8 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private var mapFragment: SupportMapFragment? = null
     private lateinit var progressBar: ProgressBar
     private var location: LatLng? = null
+    private val markers: ArrayList<Marker> = ArrayList()
+
 
 
     override fun onAttach(context: Context) {
@@ -70,7 +72,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding = FragmentMaps4Binding.bind(view)
 
         requestLocPermissionAndTrackLocation()
-        addProgressBar()
+
+        if (MapsAndHotspotsVM.isAppJustOpened) {
+            addProgressBar()
+        }
+
+
         myLocationBtn(view)
     }
 
@@ -220,7 +227,6 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
 
-    private val markers: ArrayList<Marker> = ArrayList()
 
     private fun onSuccess(hotSpots: ArrayList<HotSpot>) {
         MapsAndHotspotsVM.hotSpots = hotSpots
@@ -306,7 +312,12 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
     private fun addProgressBar() {
+
+        binding.fragmentMapsLoadingImg.visibility = View.VISIBLE
+
+
         progressBar = binding.fragmentMapsProgressBar
+        progressBar.visibility = View.VISIBLE
         progressBar.indeterminateDrawable
             .setColorFilter(ContextCompat.getColor(requireContext(), R.color.orange), PorterDuff.Mode.SRC_IN )
 //        requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -316,8 +327,13 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
     private fun clearProgressBar() {
-        progressBar.visibility = View.GONE
-        binding.fragmentMapsLoadingImg.isVisible = false
+
+        if (MapsAndHotspotsVM.isAppJustOpened) {
+            progressBar.visibility = View.GONE
+            binding.fragmentMapsLoadingImg.visibility = View.GONE
+            MapsAndHotspotsVM.isAppJustOpened = false
+        }
+
 
        // requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
 

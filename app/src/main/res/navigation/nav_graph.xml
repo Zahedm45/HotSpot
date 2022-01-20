@@ -79,6 +79,9 @@
         <action
             android:id="@+id/action_favorites_to_beforeCheckIn"
             app:destination="@id/beforeCheckIn" />
+<!--        <action
+            android:id="@+id/action_favorites_to_personalProfile"
+            app:destination="@id/personalProfile" />-->
     </fragment>
 
 
@@ -118,6 +121,9 @@
         <action
             android:id="@+id/action_othersProfile_to_chat"
             app:destination="@id/chat" />
+        <argument
+            android:name="user"
+            app:argType="com.example.hotspot.model.User" />
     </fragment>
 
 
@@ -141,7 +147,6 @@
     </fragment>
 
 
-// global action
     <action android:id="@+id/trackingFragment"
         app:destination="@+id/mapsFragment"
         app:launchSingleTop="true" />
@@ -153,6 +158,39 @@
         <action
             android:id="@+id/action_reviews_to_beforeCheckIn"
             app:destination="@id/beforeCheckIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/LatestMessages"
+        android:name="com.example.hotspot.view.LatestMessages"
+        android:label="fragment_latest_messages"
+        tools:layout="@layout/fragment_latest_messages">
+        <action
+            android:id="@+id/action_latest_to_new"
+            app:destination="@id/NewMessage" />
+        <action
+            android:id="@+id/action_latest_to_chatlog"
+            app:destination="@id/Chatlog" />
+    </fragment>
+    <fragment
+        android:id="@+id/Chatlog"
+        android:name="com.example.hotspot.view.ChatLog"
+        android:label="fragment_chatlog"
+        tools:layout="@layout/fragment_chatlog">
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+        <argument
+            android:name="user_name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/NewMessage"
+        android:name="com.example.hotspot.view.NewMessage"
+        android:label="fragment_new_message"
+        tools:layout="@layout/fragment_new_message">
+        <action
+            android:id="@+id/action_newmessage_to_chatlog"
+            app:destination="@id/Chatlog" />
     </fragment>
 
 </navigation>

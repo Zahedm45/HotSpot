@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.location.Location
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -23,10 +24,15 @@ import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.Constant.CHECKED_IN
 import com.example.hotspot.view.Constant.RADIUS
 import com.example.hotspot.view.Constant.STREET_WITHOUT_NAME
+import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder
 import com.example.hotspot.viewModel.UsersAndIds
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.custom_toast_layout.*
+import kotlinx.android.synthetic.main.favorite_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -78,14 +84,34 @@ class BeforeCheckIn : Fragment() {
 
 
 
-
-
     private fun setAllInfo() {
         binding.beforeCheckInEventLocationName.text = args.hotSpot.name
         binding.beforeCIAddressTv.text = getAddress()
         binding.beforeCheckInRatingBar.rating = args.hotSpot.rating!!.toFloat()
         binding.beforeCheckInReviews.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         binding.beforeCIDescriptionTv.text = args.hotSpot.description
+
+
+
+        val imageView = binding.beforeCheckInPartyImg
+
+        val img = BeforeCheckInVM.hotSpotsImg.get(args.hotSpot.id)
+
+        if (img == null) {
+            val imageRef = Firebase.storage.reference.child("HotSpots/${args.hotSpot.id}.png")
+            imageRef.downloadUrl.addOnSuccessListener { Uri ->
+                val imageUrl = Uri.toString()
+                Picasso.get().load(imageUrl).into(imageView)
+                BeforeCheckInVM.hotSpotsImg.put(args.hotSpot.id!!, imageUrl)
+            }
+
+        } else {
+            Picasso.get().load(img).into(imageView)
+        }
+
+
+
+
 
       //  binding.beforeCheckInReviews.setPaintFlags(binding.beforeCheckInReviews.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         // binding.beforeCheckInReviews.paintFlags =  Paint.UNDERLINE_TEXT_FLAG or binding.beforeCheckInReviews.paintFlags
@@ -171,13 +197,17 @@ class BeforeCheckIn : Fragment() {
 
     private fun heartButton() {
         binding.beforeCheckInFavoriteBtnWhite.setOnClickListener {
+            addFavoriteHotSpot()
             binding.beforeCheckInFavoriteBtnWhite.visibility = View.GONE
             binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.VISIBLE
+            Log.i(TAG, "Added hot 2")
         }
 
         binding.beforeCheckInFavoriteBtnThemeColor.setOnClickListener {
+            deleteFavoriteHotspot()
             binding.beforeCheckInFavoriteBtnThemeColor.visibility = View.GONE
             binding.beforeCheckInFavoriteBtnWhite.visibility = View.VISIBLE
+            Log.i(TAG, "Removed hot 3")
 
         }
     }
@@ -187,7 +217,8 @@ class BeforeCheckIn : Fragment() {
     private fun checkInBtn(view: View) {
 
         binding.beforeCheckInCheckInBtn.setOnClickListener {
-            val isUserPresent = isUserPresent()
+            //val isUserPresent = isUserPresent()
+            val isUserPresent = true
             if (isUserPresent) {
                 DataHolder.currentUser?.let { user ->
                     val checkedInDB = CheckedInDB(id = user.uid)
@@ -206,6 +237,7 @@ class BeforeCheckIn : Fragment() {
                     val drawable2 = resources.getDrawable(R.drawable.custom_button)
                     binding.beforeCheckInCheckInBtn.background = drawable2
                     if (isUserPresent) {
+                        AfterCheckInVM.isNavigatedFromCheckInBtn = true
                         val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(args.hotSpot)
                         view.findNavController().navigate(action)
                     }
@@ -259,6 +291,33 @@ class BeforeCheckIn : Fragment() {
             }
         }
     }
+
+
+
+    private fun addFavoriteHotSpot() {
+        args.hotSpot.id?.let { hotSpotId ->
+
+            DataHolder.currentUser?.uid?.let { userId ->
+                BeforeCheckInVM.addHotSpotDB(hotSpotId, userId)
+
+            } ?: run { Log.i(TAG, "User id is null ($this)") }
+
+
+        } ?: run { Log.i(TAG, "HotSpot id is null ($this)") }
+
+    }
+
+    private fun deleteFavoriteHotspot(){
+        args.hotSpot.id?.let{ hotSpotId ->
+
+            DataHolder.currentUser?.uid?.let { userId ->
+                BeforeCheckInVM.deleteHotSpotDB(hotSpotId,userId)
+            } ?: run { Log.i(TAG, "User id is null ($this)") }
+
+        } ?: run { Log.i(TAG, "HotSpot id is null ($this)") }
+
+    }
+
 
 
 }

@@ -33,6 +33,7 @@ class FragmentAge : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentCreateProfileAgeBinding.inflate(inflater, container, false)
 
 
