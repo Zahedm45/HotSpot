@@ -22,7 +22,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.hotspot.R
 import com.example.hotspot.viewModel.BeforeCheckInVM
+import com.example.hotspot.viewModel.DataHolder
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -197,6 +201,18 @@ class AfterCheckIn : Fragment() {
             }
 
         }
+
+
+
+        UsersAndIds.getIsInterestedTrueList().observe(viewLifecycleOwner, Observer{ interestedList ->
+            var userID = DataHolder.getCurrentUser().value?.uid
+
+            if (userID == null) {
+                userID = Firebase.auth.uid
+            }
+
+            binding.afterCheckInterestedBtn.isChecked = interestedList.contains(userID)
+        })
 
     }
 
