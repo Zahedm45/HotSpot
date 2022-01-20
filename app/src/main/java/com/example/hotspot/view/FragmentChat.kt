@@ -10,7 +10,7 @@ import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentChatBinding
 import kotlinx.android.synthetic.main.activity_after_login.*
 
-class Chat : Fragment() {
+class FragmentChat : Fragment() {
 
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!

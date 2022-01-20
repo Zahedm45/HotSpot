@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 
 
-class LatestMessages : Fragment() {
+class FragmentLatestMessages : Fragment() {
 
 
     private lateinit var binding: FragmentLatestMessagesBinding
@@ -116,7 +116,7 @@ class LatestMessages : Fragment() {
                     Log.d("ClickPerson",toid!!)
                     Log.d("ClickPerson",view.toString())
 
-                    val action = LatestMessagesDirections.actionLatestToChatlog(toid,thing.user.name!!)
+                    val action = FragmentLatestMessagesDirections.actionLatestToChatlog(toid,thing.user.name!!)
                     findNavController().navigate(action)
                 }
                 binding.recyclerviewLatestMessages.adapter = adapter

@@ -64,7 +64,7 @@
 
 
         <activity
-            android:name=".view.AfterLoginActivity"
+            android:name=".view.ActivityAfterLogin"
             android:exported="false"
 
             android:windowSoftInputMode="adjustPan">
@@ -72,7 +72,7 @@
 
 
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".view.ActivityLogin"
             android:exported="false">
 
         </activity>

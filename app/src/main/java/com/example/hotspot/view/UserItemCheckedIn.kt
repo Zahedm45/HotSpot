@@ -53,7 +53,7 @@ class UserItemCheckedIn(val user: User, val hotSpot: HotSpot, private val viewLi
 
 
         viewHolder.itemView.setOnClickListener {
-            val action = AfterCheckInDirections.actionAfterCheckInToOthersProfile(user)
+            val action = FragmentAfterCheckInDirections.actionAfterCheckInToOthersProfile(user)
             it.findNavController().navigate(action)
         }
 

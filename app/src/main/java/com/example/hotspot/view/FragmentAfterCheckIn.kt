@@ -34,10 +34,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class AfterCheckIn : Fragment() {
+class FragmentAfterCheckIn : Fragment() {
 
     private lateinit var binding: FragmentAfterCheckInBinding
-    private val args: AfterCheckInArgs by navArgs()
+    private val args: FragmentAfterCheckInArgs by navArgs()
 
     private val adapter = GroupAdapter<GroupieViewHolder>()
     lateinit var groupieUserCheckedIns: ArrayList<UserItemCheckedIn>

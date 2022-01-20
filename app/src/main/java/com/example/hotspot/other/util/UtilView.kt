@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.view.MenuItem
 import com.example.hotspot.R
-import com.example.hotspot.view.LoginActivity
+import com.example.hotspot.view.ActivityLogin
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -13,7 +13,7 @@ object UtilView {
 
 
      fun navigateToLoginPage(activity: Activity) {
-        val intent = Intent(activity, LoginActivity::class.java)
+        val intent = Intent(activity, ActivityLogin::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
     }

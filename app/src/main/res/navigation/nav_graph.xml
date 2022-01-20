@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/afterCheckIn"
-        android:name="com.example.hotspot.view.AfterCheckIn"
+        android:name="com.example.hotspot.view.FragmentAfterCheckIn"
         android:label="fragment_after_check_in"
         tools:layout="@layout/fragment_after_check_in" >
         <action
@@ -50,7 +50,7 @@
 
     <fragment
         android:id="@+id/editProfile"
-        android:name="com.example.hotspot.view.EditProfile"
+        android:name="com.example.hotspot.view.FragmentEditProfile"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" >
         <action
@@ -80,7 +80,7 @@
 
     <fragment
         android:id="@+id/personalProfile"
-        android:name="com.example.hotspot.view.PersonalProfile"
+        android:name="com.example.hotspot.view.FragmentPersonalProfile"
         android:label="fragment_personal_profile"
         tools:layout="@layout/fragment_personal_profile" >
         <action
@@ -96,7 +96,7 @@
 
     <fragment
         android:id="@+id/othersProfile"
-        android:name="com.example.hotspot.view.OthersProfile"
+        android:name="com.example.hotspot.view.FragmentOthersProfile"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile_from_check_in" >
         <argument
@@ -114,7 +114,7 @@
 
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.hotspot.view.MapsFragment"
+        android:name="com.example.hotspot.view.FragmentMaps"
         android:label="fragment_maps4"
         tools:layout="@layout/fragment_maps4" >
         <action
@@ -152,7 +152,7 @@
     </fragment>
     <fragment
         android:id="@+id/LatestMessages"
-        android:name="com.example.hotspot.view.LatestMessages"
+        android:name="com.example.hotspot.view.FragmentLatestMessages"
         android:label="fragment_latest_messages"
         tools:layout="@layout/fragment_latest_messages">
         <action

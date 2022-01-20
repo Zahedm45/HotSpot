@@ -25,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.SnackbarLayout
 
 
-class AfterLoginActivity: AppCompatActivity() {
+class ActivityAfterLogin: AppCompatActivity() {
     private lateinit var connectionLiveData: ConnectionLiveData
 
     private var _binding: ActivityAfterLoginBinding? = null

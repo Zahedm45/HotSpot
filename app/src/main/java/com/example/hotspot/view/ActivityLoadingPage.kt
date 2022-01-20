@@ -28,7 +28,7 @@ class ActivityLoadingPage : AppCompatActivity() {
     }
 
     private fun navigateToLogin(){
-        val intent = Intent(this@ActivityLoadingPage, LoginActivity::class.java)
+        val intent = Intent(this@ActivityLoadingPage, ActivityLogin::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()
@@ -36,7 +36,7 @@ class ActivityLoadingPage : AppCompatActivity() {
 
     private fun toMapsActivity(){
 
-        val intent = Intent(this@ActivityLoadingPage, AfterLoginActivity::class.java)
+        val intent = Intent(this@ActivityLoadingPage, ActivityAfterLogin::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         finish()

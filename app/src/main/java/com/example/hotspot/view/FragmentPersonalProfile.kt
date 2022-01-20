@@ -14,7 +14,7 @@ import com.example.hotspot.viewModel.PersonalProfileVM
 import kotlinx.android.synthetic.main.fragment_personal_profile.*
 
 
-class PersonalProfile : Fragment(),View.OnClickListener {
+class FragmentPersonalProfile : Fragment(),View.OnClickListener {
 
     lateinit var navController: NavController
 //    private val userModel : PersonalProfileVM by viewModels()

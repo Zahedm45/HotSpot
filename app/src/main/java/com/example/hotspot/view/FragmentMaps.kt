@@ -40,7 +40,7 @@ import pub.devrel.easypermissions.EasyPermissions
 import com.example.hotspot.other.network.TAG
 
 
-class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
+class FragmentMaps : Fragment(), EasyPermissions.PermissionCallbacks {
 
     private var isMakerShowing = false
     private lateinit var binding: FragmentMaps4Binding
@@ -318,7 +318,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
 
             hotSpot?.let {
-                val action = MapsFragmentDirections.actionMapsFragmentToBeforeCheckIn(it)
+                val action = FragmentMapsDirections.actionMapsFragmentToBeforeCheckIn(it)
                 view?.findNavController()?.navigate(action)
             }
 
@@ -400,7 +400,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun navigateToAfterCheckIn(view: View) {
 
         DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
-            val action = MapsFragmentDirections.actionMapsFragmentToAfterCheckIn(hotSpot)
+            val action = FragmentMapsDirections.actionMapsFragmentToAfterCheckIn(hotSpot)
             Log.i(TAG, "you clicked me..inside ${action}")
             view.findNavController().navigate(action)
         }

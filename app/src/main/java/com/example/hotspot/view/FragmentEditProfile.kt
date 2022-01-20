@@ -23,7 +23,7 @@ import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.viewModel.EditProfileVM
 import java.util.*
 
-class EditProfile : Fragment(R.layout.fragment_edit_profile) {
+class FragmentEditProfile : Fragment(R.layout.fragment_edit_profile) {
 
     private lateinit var binding: FragmentEditProfileBinding
     private lateinit var connectionLiveData: ConnectionLiveData
@@ -123,7 +123,7 @@ class EditProfile : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun navigateToLogin(){
-        val intent = Intent(this.context, LoginActivity::class.java)
+        val intent = Intent(this.context, ActivityLogin::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)

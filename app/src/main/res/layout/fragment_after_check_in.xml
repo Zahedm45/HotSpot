@@ -14,7 +14,7 @@
         android:id="@+id/after_check_in_constrain_lao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".view.AfterCheckIn">
+        tools:context=".view.FragmentAfterCheckIn">
 
 
         <ImageView

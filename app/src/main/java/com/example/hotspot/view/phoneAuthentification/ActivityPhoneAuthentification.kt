@@ -15,7 +15,7 @@ import com.example.hotspot.other.util.ButtonAnimations
 import com.example.hotspot.other.util.DialogWifi
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.repository.Repository
-import com.example.hotspot.view.AfterLoginActivity
+import com.example.hotspot.view.ActivityAfterLogin
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -286,7 +286,7 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
     }
 
     private fun startLoggedInActivity(){
-        val intent = Intent(this@ActivityPhoneAuthentification, AfterLoginActivity::class.java)
+        val intent = Intent(this@ActivityPhoneAuthentification, ActivityAfterLogin::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)

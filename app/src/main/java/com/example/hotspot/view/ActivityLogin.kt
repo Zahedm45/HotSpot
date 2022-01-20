@@ -13,7 +13,7 @@ import com.example.hotspot.other.network.TAG
 import com.example.hotspot.view.phoneAuthentification.ActivityPhoneAuthentification
 
 
-class LoginActivity : AppCompatActivity() {
+class ActivityLogin : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginSuggestionBinding
     private lateinit var connectionLiveData: ConnectionLiveData

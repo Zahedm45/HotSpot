@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 
 
-class MessageOverview : Fragment(), View.OnClickListener {
+class FragmentMessageOverview : Fragment(), View.OnClickListener {
 
     lateinit var navController : NavController
 
@@ -39,7 +39,7 @@ class MessageOverview : Fragment(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val intent = Intent(this.context, LatestMessages::class.java)
+        val intent = Intent(this.context, FragmentLatestMessages::class.java)
         //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
 

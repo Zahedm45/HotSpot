@@ -18,7 +18,7 @@ import android.util.Log
 import com.example.hotspot.other.util.ButtonAnimations
 import com.example.hotspot.other.util.DialogWifi
 import com.example.hotspot.other.network.ConnectionLiveData
-import com.example.hotspot.view.AfterLoginActivity
+import com.example.hotspot.view.ActivityAfterLogin
 
 
 class FragmentUploadImage : Fragment() {
@@ -123,7 +123,7 @@ class FragmentUploadImage : Fragment() {
     private fun updateUIOnSuccess(){
         // signal to user that there was error
         Toast.makeText(this.requireContext(), "Success", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this.context, AfterLoginActivity::class.java)
+        val intent = Intent(this.context, ActivityAfterLogin::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)

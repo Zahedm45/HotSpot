@@ -14,10 +14,10 @@ import com.example.hotspot.other.util.ButtonAnimations
 import kotlinx.android.synthetic.main.fragment_profile_from_check_in.*
 
 
-class OthersProfile : Fragment() {
+class FragmentOthersProfile : Fragment() {
 
    // lateinit var navController: NavController
-    private val args: OthersProfileArgs by navArgs()
+    private val args: FragmentOthersProfileArgs by navArgs()
     lateinit var binding: FragmentProfileFromCheckInBinding
 
 
@@ -39,7 +39,7 @@ class OthersProfile : Fragment() {
             ButtonAnimations.clickButton(profile_from_check_in_button)
             val username = args.user.name!!
             val userid = args.user.uid!!
-            val action = OthersProfileDirections.actionOthersProfileToChatlog(userid,username)
+            val action = FragmentOthersProfileDirections.actionOthersProfileToChatlog(userid,username)
             findNavController().navigate(action)
         }
 
