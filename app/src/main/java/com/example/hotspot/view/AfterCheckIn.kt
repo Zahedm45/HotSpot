@@ -166,8 +166,27 @@ class AfterCheckIn : Fragment() {
         binding.afterCheckInHotSpotName.text = args.hotSpot.name
         val imageview = binding.afterCheckInPartyImg
         val img = BeforeCheckInVM.hotSpotsImg.get(args.hotSpot.id)
-        Picasso.get().load(img).into(imageview)
+
+        if (img != null) {
+            Picasso.get().load(img).into(imageview)
+        } else {
+            args.hotSpot.id?.let { AfterCheckInVM.getHotSpotImgFromDB(it) {img -> onSuccessImgFetch(img)} }
+        }
     }
+
+
+
+    fun onSuccessImgFetch(img: String) {
+
+        val imageview = binding.afterCheckInPartyImg
+        Picasso.get().load(img).into(imageview)
+
+        val userId = DataHolder.getCurrentUser().value?.uid
+        if (userId != null) {
+            BeforeCheckInVM.hotSpotsImg.put(userId,img)
+        }
+    }
+
 
 
     private fun setCheckedInUI(checkedInSize: Int) {
