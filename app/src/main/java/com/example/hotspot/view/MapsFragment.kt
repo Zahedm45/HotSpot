@@ -14,10 +14,10 @@ import androidx.navigation.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentMaps4Binding
 import com.example.hotspot.model.HotSpot
-import com.example.hotspot.other.ButtonAnimations
-import com.example.hotspot.other.Constants.ACTION_START_OR_RESUME_SERVICE
-import com.example.hotspot.other.MapUtility
-import com.example.hotspot.other.UtilView.menuOptionClick
+import com.example.hotspot.other.util.ButtonAnimations
+import com.example.hotspot.other.util.Constants.ACTION_START_OR_RESUME_SERVICE
+import com.example.hotspot.other.util.MapUtility
+import com.example.hotspot.other.util.UtilView.menuOptionClick
 import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.infoWindow.InfoWindow
 import com.example.hotspot.viewModel.DataHolder

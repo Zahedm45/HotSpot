@@ -13,12 +13,10 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.hotspot.databinding.FragmentCreateProfileUploadImageBinding
-import android.content.ContentResolver
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.util.Log
-import com.example.hotspot.other.ButtonAnimations
-import com.example.hotspot.other.DialogWifi
+import com.example.hotspot.other.util.ButtonAnimations
+import com.example.hotspot.other.util.DialogWifi
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.view.AfterLoginActivity
 

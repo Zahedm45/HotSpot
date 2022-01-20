@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentCreateProfileGenderBinding
-import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.other.util.ButtonAnimations
 
 class FragmentGender : Fragment() {
 

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.location.Location
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -21,7 +20,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
 import com.example.hotspot.model.CheckedInDB
-import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.other.util.ButtonAnimations
 import com.example.hotspot.other.network.TAG
 import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.Constant.CHECKED_IN
@@ -35,7 +34,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.custom_toast_layout.*
-import kotlinx.android.synthetic.main.favorite_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

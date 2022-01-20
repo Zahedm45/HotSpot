@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentCreateProfileProfileTextBinding
-import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.other.util.ButtonAnimations
 
 
 class FragmentProfileText : Fragment() {
@@ -34,17 +34,20 @@ class FragmentProfileText : Fragment() {
 
         binding.continueButton.setOnClickListener {
             if(!isContinueClickable) return@setOnClickListener
-            viewModel.setProfileText(binding.firstNameText.text.toString())
+            viewModel.setProfileText(binding.tvFirstNameText.text.toString())
             ButtonAnimations.clickButton(binding.continueButton)
             findNavController().navigate(R.id.action_fragmentProfileText_to_createProfileUploadImageFragment)
         }
 
+
         viewModel.getProfileText().observe(viewLifecycleOwner,
             Observer {
-                binding.firstNameText.setText(it.toString())
+                binding.tvFirstNameText.setText(it.toString())
             })
 
-        binding.firstNameText.addTextChangedListener {
+
+
+        binding.tvFirstNameText.addTextChangedListener {
             if(it.toString().isNotEmpty()){
                 ButtonAnimations.fadeIn(binding.continueButton)
                 isContinueClickable = true

@@ -9,24 +9,17 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.animation.Animation
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import com.example.hotspot.databinding.ActivityPhoneAuthBinding
-import com.example.hotspot.other.ButtonAnimations
-import com.example.hotspot.other.DialogWifi
+import com.example.hotspot.other.util.ButtonAnimations
+import com.example.hotspot.other.util.DialogWifi
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.AfterLoginActivity
-import com.example.hotspot.view.LoginActivity
 import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import com.google.firebase.firestore.DocumentSnapshot
-import com.hbb20.CountryCodePicker
-import com.hbb20.CountryCodePicker.PhoneNumberValidityChangeListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -125,9 +118,13 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
             }
 
             binding.submitButton.setOnClickListener{
+                //TODO removed for demo purposes
+                /*
                 if(!isSubmitClickable){
                     return@setOnClickListener
                 }
+                */
+
                 if(!isConnected) {
                     DialogWifi().show(supportFragmentManager, com.example.hotspot.other.network.TAG)
                     return@setOnClickListener
@@ -267,7 +264,8 @@ class ActivityPhoneAuthentification : AppCompatActivity() {
                 }
                 else {
                     binding.verifyCodeTextEdit.setTextColor(RED)
-                    ButtonAnimations.fadeOut(binding.submitButton)
+                    //TODO Removed for demo purposes
+                    //ButtonAnimations.fadeOut(binding.submitButton)
                     isSubmitClickable = false
                 }
             }

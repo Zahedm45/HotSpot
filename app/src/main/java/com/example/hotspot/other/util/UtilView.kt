@@ -1,10 +1,8 @@
-package com.example.hotspot.other
+package com.example.hotspot.other.util
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
-import androidx.core.content.ContextCompat.startActivity
 import com.example.hotspot.R
 import com.example.hotspot.view.LoginActivity
 import com.google.firebase.auth.ktx.auth

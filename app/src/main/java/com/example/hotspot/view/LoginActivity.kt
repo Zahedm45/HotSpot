@@ -3,14 +3,11 @@ package com.example.hotspot.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AlertDialog
-import androidx.compose.ui.res.stringResource
-import androidx.fragment.app.FragmentManager
 import com.example.hotspot.R
 import com.example.hotspot.databinding.ActivityLoginSuggestionBinding
-import com.example.hotspot.other.ButtonAnimations
-import com.example.hotspot.other.DialogWifi
+import com.example.hotspot.other.util.ButtonAnimations
+import com.example.hotspot.other.util.DialogWifi
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.other.network.TAG
 import com.example.hotspot.view.phoneAuthentification.ActivityPhoneAuthentification

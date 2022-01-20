@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentCreateProfileEmailBinding
-import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.other.util.ButtonAnimations
 
 class FragmentEmail : Fragment() {
 

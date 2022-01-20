@@ -10,14 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentChatlogBinding
 import com.example.hotspot.model.ChatMessage
-import com.example.hotspot.model.User
-import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.other.util.ButtonAnimations
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item

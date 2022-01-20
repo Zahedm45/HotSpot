@@ -13,7 +13,10 @@
         tools:layout="@layout/fragment_after_check_in" >
         <action
             android:id="@+id/action_afterCheckIn_to_othersProfile"
-            app:destination="@id/othersProfile" />
+            app:destination="@id/othersProfile"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_fade"
+            app:popEnterAnim="@android:anim/fade_in" />
         <argument
             android:name="hotSpot"
             app:argType="com.example.hotspot.model.HotSpot" />
@@ -154,7 +157,11 @@
         tools:layout="@layout/fragment_latest_messages">
         <action
             android:id="@+id/action_latest_to_new"
-            app:destination="@id/NewMessage" />
+            app:destination="@id/NewMessage"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_latest_to_chatlog"
             app:destination="@id/Chatlog"

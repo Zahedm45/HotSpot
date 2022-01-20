@@ -8,10 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
-import com.example.hotspot.other.ButtonAnimations
-import com.example.hotspot.other.UtilView
+import com.example.hotspot.other.util.ButtonAnimations
+import com.example.hotspot.other.util.UtilView
 import com.example.hotspot.viewModel.PersonalProfileVM
 import kotlinx.android.synthetic.main.fragment_personal_profile.*
 

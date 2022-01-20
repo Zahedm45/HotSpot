@@ -11,6 +11,15 @@ import com.google.firebase.storage.StorageReference
 
 class SharedViewModelCreateProfile : ViewModel() {
     private val _firstName = MutableLiveData<String>()
+
+    fun getFirstName() : LiveData<String> {
+        return _firstName
+    }
+
+    fun setName(name : String){
+        _firstName.value = name
+    }
+
     private val _profileText = MutableLiveData<String>()
     private val _dateString = MutableLiveData<String>()
     private val _dayOfBirth = MutableLiveData<Int>()
@@ -21,9 +30,7 @@ class SharedViewModelCreateProfile : ViewModel() {
     private val _email = MutableLiveData<String>()
 
     //Getters BEGIN
-    fun getFirstName() : LiveData<String> {
-        return _firstName
-    }
+
 
     fun getProfileText() : LiveData<String>{
         return _profileText
@@ -59,9 +66,7 @@ class SharedViewModelCreateProfile : ViewModel() {
 
     // Setters BEGIN
 
-    fun setName(name : String){
-        _firstName.value = name
-    }
+
 
     fun setProfileText(profileText : String){
         _profileText.value = profileText

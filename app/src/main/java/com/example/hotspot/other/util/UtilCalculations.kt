@@ -1,4 +1,4 @@
-package com.example.hotspot.other
+package com.example.hotspot.other.util
 
 import java.time.LocalDate
 import java.time.Period

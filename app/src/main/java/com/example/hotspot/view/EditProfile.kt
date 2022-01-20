@@ -7,27 +7,21 @@ import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
-import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentEditProfileBinding
-import com.example.hotspot.other.ButtonAnimations
-import com.example.hotspot.other.DialogWifi
-import com.example.hotspot.other.UtilView
+import com.example.hotspot.other.util.ButtonAnimations
+import com.example.hotspot.other.util.DialogWifi
+import com.example.hotspot.other.util.UtilView
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.viewModel.EditProfileVM
-import com.google.android.material.snackbar.Snackbar
 import java.util.*
-import kotlin.concurrent.timerTask
 
 class EditProfile : Fragment(R.layout.fragment_edit_profile) {
 

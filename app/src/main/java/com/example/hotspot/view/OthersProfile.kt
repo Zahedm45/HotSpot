@@ -6,16 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.FragmentProfileFromCheckInBinding
-import com.example.hotspot.model.User
-import com.example.hotspot.other.ButtonAnimations
-import kotlinx.android.synthetic.main.fragment_chatlog.*
+import com.example.hotspot.other.util.ButtonAnimations
 import kotlinx.android.synthetic.main.fragment_profile_from_check_in.*
 
 
@@ -39,7 +34,7 @@ class OthersProfile : Fragment() {
 
         setAllAttributes()
 
-        profile_from_check_in_button.setOnClickListener {
+        binding.profileFromCheckInButton.setOnClickListener {
             Log.d("OthersProfile","Clicked on Chat Button")
             ButtonAnimations.clickButton(profile_from_check_in_button)
             val username = args.user.name!!
