@@ -24,7 +24,5 @@ object MapUtility {
             Manifest.permission.ACCESS_FINE_LOCATION
         )
     }
-
-
-
 }
+
