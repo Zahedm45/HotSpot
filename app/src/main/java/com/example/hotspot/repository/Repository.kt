@@ -48,14 +48,11 @@ class Repository {
                             user.delete()
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
-                                        Log.d(TAG, "User account deleted.")
                                     }
                                 }
                         }
                     }
             } catch (e : Exception){
-                Log.d(TAG,e.toString())
-                Log.d("Lucas Lucas Lucas Lucas Lucas Lucas", e.stackTraceToString())
                 e.printStackTrace()
             }
         }
