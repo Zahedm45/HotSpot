@@ -385,6 +385,7 @@ class MapsFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private fun showCheckedIn() {
         binding.mapsFragmentMyHotspotBtnLayout.visibility = View.VISIBLE
         binding.mapsGoToMyHotspotBtn.setOnClickListener {
+            ButtonAnimations.clickButton(binding.mapsGoToMyHotspotBtn)
             navigateToAfterCheckIn(it)
         }
 

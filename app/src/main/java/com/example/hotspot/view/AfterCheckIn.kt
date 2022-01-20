@@ -22,7 +22,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.hotspot.R
 import com.example.hotspot.viewModel.BeforeCheckInVM
+import com.example.hotspot.viewModel.DataHolder
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.after_checked_in_recycler_view_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -93,6 +97,28 @@ class AfterCheckIn : Fragment() {
                 }
             }
         }
+
+
+
+    }
+
+
+    private fun setProgressWithoutDoneIcon() {
+
+        binding.afterCheckInProgressLayout.visibility = View.VISIBLE
+        binding.afterCheckedInRecyclerView.isVisible = false
+        binding.afterCheckInProgress.visibility = View.VISIBLE
+        progressBar = binding.afterCheckInProgress
+
+    }
+
+
+    private fun clearProgressWithoutDoneIcon() {
+        binding.afterCheckInBlank.isVisible = false
+        binding.afterCheckInProgress.visibility = View.GONE
+        binding.afterCheckedInRecyclerView.isVisible = true
+        binding.afterCheckInProgressLayout.visibility = View.GONE
+
     }
 
 
@@ -159,11 +185,49 @@ class AfterCheckIn : Fragment() {
 
     private fun setHotSpotInfo() {
 
-        binding.afterCheckInHotSpotName.text = args.hotSpot.name
         val imageview = binding.afterCheckInPartyImg
-        val img = BeforeCheckInVM.hotSpotsImg.get(args.hotSpot.id)
-        Picasso.get().load(img).into(imageview)
+        val img = BeforeCheckInVM.hotSpotsImg[args.hotSpot.id]
+        if (img != null) {
+            Picasso.get().load(img).into(imageview)
+        } else {
+
+            args.hotSpot.id?.let {
+                AfterCheckInVM.getHotSpotImgFromDB(it) {img -> onSuccessImgFetch(img)}
+                setProgressWithoutDoneIcon()
+                Log.i(TAG, "hotspots info $img")
+            }
+
+        }
+
+        binding.afterCheckInHotSpotName.text = args.hotSpot.name
+
     }
+
+
+
+    private fun onSuccessImgFetch(img: String) {
+
+        val imageview = binding.afterCheckInPartyImg
+        Picasso.get().load(img).into(imageview)
+
+        val hotSpotId = args.hotSpot.id
+        if (hotSpotId != null) {
+            BeforeCheckInVM.hotSpotsImg[hotSpotId] = img
+
+        }
+
+
+        CoroutineScope(IO).launch {
+            delay(1200)
+            CoroutineScope(Main).launch {
+                clearProgressWithoutDoneIcon()
+            }
+        }
+
+
+
+    }
+
 
 
     private fun setCheckedInUI(checkedInSize: Int) {
@@ -197,6 +261,19 @@ class AfterCheckIn : Fragment() {
             }
 
         }
+
+
+
+/*        UsersAndIds.getIsInterestedTrueList().observe(viewLifecycleOwner, Observer{ interestedList ->
+            var userID = DataHolder.getCurrentUser().value?.uid
+
+            if (userID == null) {
+                userID = Firebase.auth.uid
+            }
+
+            if()
+            binding.afterCheckInterestedBtn.isChecked = interestedList.contains(userID)
+        })*/
 
     }
 

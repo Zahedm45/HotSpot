@@ -21,6 +21,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
 import com.example.hotspot.databinding.BeforeCheckInBinding
 import com.example.hotspot.model.CheckedInDB
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.other.network.TAG
 import com.example.hotspot.other.service.MapService
 import com.example.hotspot.view.Constant.CHECKED_IN
@@ -226,8 +227,8 @@ class BeforeCheckIn : Fragment() {
     private fun checkInBtn(view: View) {
 
         binding.beforeCheckInCheckInBtn.setOnClickListener {
-            //val isUserPresent = isUserPresent()
-            val isUserPresent = true
+            val isUserPresent = isUserPresent()
+           // val isUserPresent = true
             if (isUserPresent) {
                 DataHolder.getCurrentUser().value?.let { user ->
                     val checkedInDB = CheckedInDB(id = user.uid)
@@ -352,6 +353,8 @@ class BeforeCheckIn : Fragment() {
         binding.beforeCheckInCheckInBtn.isVisible = false
         binding.beforeCheckeInMyHotspotBtnLayout.visibility = View.VISIBLE
         binding.beforeCheckInGoToMyHotspotBtn.setOnClickListener {
+            ButtonAnimations.clickButton( binding.beforeCheckInGoToMyHotspotBtn)
+
             navigateToAfterCheckIn(it)
         }
 

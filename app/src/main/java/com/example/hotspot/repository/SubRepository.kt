@@ -8,12 +8,15 @@ import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.other.network.TAG
+import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -134,6 +137,14 @@ class SubRepository {
         }
 
 
+
+        fun getHotSpotImgFromDB(hotSpotId: String, onSuccess: (img: String) -> Unit) {
+
+            val imageRef = Firebase.storage.reference.child("HotSpots/${hotSpotId}.png")
+            imageRef.downloadUrl.addOnSuccessListener { Uri ->
+                onSuccess(Uri.toString())
+            }
+        }
 
 
 
