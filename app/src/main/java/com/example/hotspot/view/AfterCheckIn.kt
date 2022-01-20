@@ -97,6 +97,28 @@ class AfterCheckIn : Fragment() {
                 }
             }
         }
+
+
+
+    }
+
+
+    private fun setProgressWithoutDoneIcon() {
+
+        binding.afterCheckInProgressLayout.visibility = View.VISIBLE
+        binding.afterCheckedInRecyclerView.isVisible = false
+        binding.afterCheckInProgress.visibility = View.VISIBLE
+        progressBar = binding.afterCheckInProgress
+
+    }
+
+
+    private fun clearProgressWithoutDoneIcon() {
+        binding.afterCheckInBlank.isVisible = false
+        binding.afterCheckInProgress.visibility = View.GONE
+        binding.afterCheckedInRecyclerView.isVisible = true
+        binding.afterCheckInProgressLayout.visibility = View.GONE
+
     }
 
 
@@ -163,28 +185,47 @@ class AfterCheckIn : Fragment() {
 
     private fun setHotSpotInfo() {
 
-        binding.afterCheckInHotSpotName.text = args.hotSpot.name
         val imageview = binding.afterCheckInPartyImg
-        val img = BeforeCheckInVM.hotSpotsImg.get(args.hotSpot.id)
-
+        val img = BeforeCheckInVM.hotSpotsImg[args.hotSpot.id]
         if (img != null) {
             Picasso.get().load(img).into(imageview)
         } else {
-            args.hotSpot.id?.let { AfterCheckInVM.getHotSpotImgFromDB(it) {img -> onSuccessImgFetch(img)} }
+
+            args.hotSpot.id?.let {
+                AfterCheckInVM.getHotSpotImgFromDB(it) {img -> onSuccessImgFetch(img)}
+                setProgressWithoutDoneIcon()
+                Log.i(TAG, "hotspots info $img")
+            }
+
         }
+
+        binding.afterCheckInHotSpotName.text = args.hotSpot.name
+
     }
 
 
 
-    fun onSuccessImgFetch(img: String) {
+    private fun onSuccessImgFetch(img: String) {
 
         val imageview = binding.afterCheckInPartyImg
         Picasso.get().load(img).into(imageview)
 
-        val userId = DataHolder.getCurrentUser().value?.uid
-        if (userId != null) {
-            BeforeCheckInVM.hotSpotsImg.put(userId,img)
+        val hotSpotId = args.hotSpot.id
+        if (hotSpotId != null) {
+            BeforeCheckInVM.hotSpotsImg[hotSpotId] = img
+
         }
+
+
+        CoroutineScope(IO).launch {
+            delay(1200)
+            CoroutineScope(Main).launch {
+                clearProgressWithoutDoneIcon()
+            }
+        }
+
+
+
     }
 
 
