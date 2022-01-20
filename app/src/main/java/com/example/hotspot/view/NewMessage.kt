@@ -1,10 +1,13 @@
 package com.example.hotspot.view
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.ActivityNewMessageBinding
+import com.example.hotspot.databinding.FragmentNewMessageBinding
 import com.example.hotspot.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -18,19 +21,19 @@ import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
 
 
-class NewMessageActivity : AppCompatActivity() {
+class NewMessage : Fragment() {
 
     //   private lateinit var recyclerView: RecyclerView
-    private lateinit var binding: ActivityNewMessageBinding
+    private lateinit var binding: FragmentNewMessageBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityNewMessageBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        supportActionBar?.hide()
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?) : View? {
+        val view = inflater.inflate(R.layout.fragment_new_message,container, false)
+        binding = FragmentNewMessageBinding.bind(view)
+        //supportActionBar?.hide()
         fetchUsers()
+
+        return view
     }
 
     companion object {
@@ -49,18 +52,16 @@ class NewMessageActivity : AppCompatActivity() {
                 val users = it.toObjects<User>()
                 val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 users.forEach { user ->
-                    if(user.uid != null){
-                    if (user.uid != uid) {
+                    if (user.uid != uid && user.uid != null) {
                         adapter.add(UserItem(user, user.uid!!))
+                        adapter.setOnItemClickListener { item, view ->
+                            val userItem = item as UserItem
+                            val action = NewMessageDirections.actionNewmessageToChatlog(userItem.user.uid!!,userItem.user.name!!)
+                            findNavController().navigate(action)
+                        }
                     }
-                }}
-                adapter.setOnItemClickListener { item, view ->
-                    val userItem = item as UserItem
-                    val intent = Intent(view.context, ChatLogActivity::class.java)
-                    intent.putExtra(USER_KEY, userItem.user)
-                    startActivity(intent)
-                    finish()
                 }
+
                 binding.recyclerviewNewMessage.adapter = adapter
             }
     }

@@ -153,14 +153,41 @@
     </fragment>
 
 
-// global action
     <action android:id="@+id/trackingFragment"
         app:destination="@+id/mapsFragment"
         app:launchSingleTop="true" />
-    <activity
-        android:id="@+id/latestMessagesActivity"
-        android:name="com.example.hotspot.view.LatestMessagesActivity"
-        android:label="activity_latest_messages"
-        tools:layout="@layout/activity_latest_messages" />
+    <fragment
+        android:id="@+id/LatestMessages"
+        android:name="com.example.hotspot.view.LatestMessages"
+        android:label="fragment_latest_messages"
+        tools:layout="@layout/fragment_latest_messages">
+        <action
+            android:id="@+id/action_latest_to_new"
+            app:destination="@id/NewMessage" />
+        <action
+            android:id="@+id/action_latest_to_chatlog"
+            app:destination="@id/Chatlog" />
+    </fragment>
+    <fragment
+        android:id="@+id/Chatlog"
+        android:name="com.example.hotspot.view.ChatLog"
+        android:label="fragment_chatlog"
+        tools:layout="@layout/fragment_chatlog">
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+        <argument
+            android:name="user_name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/NewMessage"
+        android:name="com.example.hotspot.view.NewMessage"
+        android:label="fragment_new_message"
+        tools:layout="@layout/fragment_new_message">
+        <action
+            android:id="@+id/action_newmessage_to_chatlog"
+            app:destination="@id/Chatlog" />
+    </fragment>
 
 </navigation>

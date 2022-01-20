@@ -1,59 +1,78 @@
 package com.example.hotspot.view
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.*
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.ActivityLatestMessagesBinding
+import com.example.hotspot.databinding.FragmentLatestMessagesBinding
+import com.example.hotspot.databinding.LatestMessageRowBinding
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
 import com.example.hotspot.other.ButtonAnimations
-import com.example.hotspot.view.ChatLogActivity.Companion.TAG
-import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
+import com.example.hotspot.view.ChatLog.Companion.TAG
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
-import kotlinx.android.synthetic.main.activity_latest_messages.*
 
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import com.xwray.groupie.GroupieViewHolder
 import kotlinx.android.synthetic.main.chat_to_row.view.*
+import kotlinx.android.synthetic.main.fragment_latest_messages.*
 import kotlinx.android.synthetic.main.latest_message_row.*
 import kotlinx.android.synthetic.main.latest_message_row.view.*
 import kotlinx.android.synthetic.main.user_row_new_message.view.*
 
-private lateinit var binding: ActivityLatestMessagesBinding
 
-class LatestMessagesActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityLatestMessagesBinding.inflate(layoutInflater)
 
-        setContentView(binding.root)
+class LatestMessages : Fragment() {
+
+
+    private lateinit var binding: FragmentLatestMessagesBinding
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?) : View? {
+
+        val view = inflater.inflate(R.layout.fragment_latest_messages,container, false)
+        binding = FragmentLatestMessagesBinding.bind(view)
+        setHasOptionsMenu(true)
+        Log.d("LatestMessages","onCreate")
+
+
+
+        return view
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         fetchUsers()
         binding.ivChat.setOnClickListener(){
             ButtonAnimations.clickButton(binding.ivChat)
-            val intent = Intent(this, NewMessageActivity::class.java)
-            //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            findNavController().navigate(R.id.action_latest_to_new)
         }
-        supportActionBar?.hide()
-
-//        verifyUserIsLoggedIn()
+        //supportActionBar?.hide()
     }
+
+
+
 
 
     companion object {
         val USER_KEY = "USER_KEY"
     }
 
-    private fun fetchUsers(){
-
+    @SuppressLint("LogNotTimber")
+    public fun fetchUsers(){
+        val adapter = GroupAdapter<GroupieViewHolder>()
         val db = Firebase.firestore
         val userRef = db.collection("users")
         val messageRef = db.collection("messages")
@@ -64,7 +83,6 @@ class LatestMessagesActivity : AppCompatActivity() {
         userRef.get()
             .addOnSuccessListener {
                 val users = it.toObjects<User>()
-                val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 var tempLatestMessage = ""
                 users.forEach { user ->
                     messageRef.whereIn("toFrom",listOf(uid+user.uid,user.uid+uid))
@@ -96,20 +114,25 @@ class LatestMessagesActivity : AppCompatActivity() {
                         }
                 }
                 adapter.setOnItemClickListener { item, view ->
-                    val latestMessageRow = item as LatestMessageRow
-                    val intent = Intent(view.context, ChatLogActivity::class.java)
-                    intent.putExtra(NewMessageActivity.USER_KEY, latestMessageRow.user)
-                    startActivity(intent)
+                    val thing = item as LatestMessageRow
+                    val toid = thing.user.uid
+                    Log.d("ClickPerson",toid!!)
+                    Log.d("ClickPerson",view.toString())
+
+                    val action = LatestMessagesDirections.actionLatestToChatlog(toid,thing.user.name!!)
+                    findNavController().navigate(action)
                 }
                 binding.recyclerviewLatestMessages.adapter = adapter
             }
     }
 
     class LatestMessageRow(val user: User, val latestMessage: String): com.xwray.groupie.kotlinandroidextensions.Item() {
+        val username = user.name
         override fun bind(
             viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
             position: Int
         ) {
+
             viewHolder.itemView.latest_message_name.text = user.name
             viewHolder.itemView.latest_message_received.text = latestMessage
 
@@ -125,21 +148,8 @@ class LatestMessagesActivity : AppCompatActivity() {
         override fun getLayout(): Int {
             return R.layout.latest_message_row
         }
-    }
-
-
-
-    private fun verifyUserIsLoggedIn() {
-        //Perform check to see if user is logged in (if necessary)
-        val uid = FirebaseAuth.getInstance().uid
-        if (uid == null) {
-            val intent = Intent(this, ActivityCreateProfile::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+        fun getName(): String {
+            return username!!
         }
     }
-
-
-
-
 }
