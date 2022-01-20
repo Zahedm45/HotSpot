@@ -1,10 +1,13 @@
 package com.example.hotspot.view
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.hotspot.R
-import com.example.hotspot.databinding.ActivityNewMessageBinding
+import com.example.hotspot.databinding.FragmentNewMessageBinding
 import com.example.hotspot.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
