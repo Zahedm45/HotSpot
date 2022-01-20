@@ -147,6 +147,7 @@
     </fragment>
 
 
+// global action
     <action android:id="@+id/trackingFragment"
         app:destination="@+id/mapsFragment"
         app:launchSingleTop="true" />
