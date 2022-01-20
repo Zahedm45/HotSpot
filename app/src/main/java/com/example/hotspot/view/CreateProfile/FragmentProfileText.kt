@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -46,7 +47,7 @@ class FragmentProfileText : Fragment() {
 
 
 
-        binding.tvFirstNameText.addTextChangedListener {
+        binding.tvFirstNameText.addTextChangedListener() {
             if(it.toString().isNotEmpty()){
                 ButtonAnimations.fadeIn(binding.continueButton)
                 isContinueClickable = true

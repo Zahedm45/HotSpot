@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -48,7 +49,7 @@ class FragmentEmail : Fragment() {
                 binding.tvEmail.setText(it.toString())
             })
 
-        binding.tvEmail.addTextChangedListener {
+        binding.tvEmail.addTextChangedListener() {
             if(it.toString().isNotEmpty()){
                 ButtonAnimations.fadeIn(binding.continueButton)
                 isContinueClickable = true
