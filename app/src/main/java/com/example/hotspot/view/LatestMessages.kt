@@ -13,7 +13,11 @@ import com.example.hotspot.databinding.FragmentLatestMessagesBinding
 import com.example.hotspot.databinding.LatestMessageRowBinding
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
+import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.view.ChatLog.Companion.TAG
+import com.example.hotspot.other.ButtonAnimations
+import com.example.hotspot.view.ChatLogActivity.Companion.TAG
+import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
 
@@ -54,19 +58,13 @@ class LatestMessages : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchUsers()
+        binding.ivChat.setOnClickListener(){
+            ButtonAnimations.clickButton(binding.ivChat)
+            findNavController().navigate(R.id.action_latest_to_new)
+        }
+        //supportActionBar?.hide()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
 
 
 
@@ -157,25 +155,4 @@ class LatestMessages : Fragment() {
             return username!!
         }
     }
-
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item?.itemId) {
-            R.id.menu_new_message -> {
-                //Navigate to NewMessage
-
-                findNavController().navigate(R.id.action_latest_to_new)
-            }
-            R.id.menu_sign_out -> {
-                //FirebaseAuth.getInstance().signOut()
-                //DELETE THIS BUTTON LATER
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-
 }

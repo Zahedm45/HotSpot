@@ -30,7 +30,7 @@ class NewMessage : Fragment() {
                               savedInstanceState: Bundle?) : View? {
         val view = inflater.inflate(R.layout.fragment_new_message,container, false)
         binding = FragmentNewMessageBinding.bind(view)
-
+        //supportActionBar?.hide()
         fetchUsers()
 
         return view
@@ -52,7 +52,7 @@ class NewMessage : Fragment() {
                 val users = it.toObjects<User>()
                 val adapter = GroupAdapter<com.xwray.groupie.GroupieViewHolder>()
                 users.forEach { user ->
-                    if (user.uid != uid) {
+                    if (user.uid != uid && user.uid != null) {
                         adapter.add(UserItem(user, user.uid!!))
                         adapter.setOnItemClickListener { item, view ->
                             val userItem = item as UserItem
