@@ -15,9 +15,6 @@ import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
 import com.example.hotspot.other.ButtonAnimations
 import com.example.hotspot.view.ChatLog.Companion.TAG
-import com.example.hotspot.other.ButtonAnimations
-import com.example.hotspot.view.ChatLogActivity.Companion.TAG
-import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
 
@@ -122,7 +119,7 @@ class LatestMessages : Fragment() {
                     Log.d("ClickPerson",toid!!)
                     Log.d("ClickPerson",view.toString())
 
-                    val action = LatestMessagesDirections.actionLatestToChatlog(toid)
+                    val action = LatestMessagesDirections.actionLatestToChatlog(toid,thing.user.name!!)
                     findNavController().navigate(action)
                 }
                 binding.recyclerviewLatestMessages.adapter = adapter

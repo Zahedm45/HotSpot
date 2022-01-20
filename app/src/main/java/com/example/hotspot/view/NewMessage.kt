@@ -56,7 +56,7 @@ class NewMessage : Fragment() {
                         adapter.add(UserItem(user, user.uid!!))
                         adapter.setOnItemClickListener { item, view ->
                             val userItem = item as UserItem
-                            val action = NewMessageDirections.actionNewmessageToChatlog(userItem.user.uid!!)
+                            val action = NewMessageDirections.actionNewmessageToChatlog(userItem.user.uid!!,userItem.user.name!!)
                             findNavController().navigate(action)
                         }
                     }
