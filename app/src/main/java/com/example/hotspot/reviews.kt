@@ -53,9 +53,6 @@ class reviews : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.i("debug", "onviewcreated")
 
-        binding.ExitReviews.setOnClickListener {
-            findNavController().navigate(R.id.action_reviews_to_beforeCheckIn)
-        }
     }
 
     override fun onResume() {
@@ -74,6 +71,17 @@ class reviews : Fragment() {
 
         //val adapter = GroupAdapter<GroupieViewHolder>()
         adapter.add(ReviewItem("ben","Monke","test tekst"))
+        adapter.add(ReviewItem("Jeniffer","Monke","test tekst"))
+        adapter.add(ReviewItem("Iben","Monke","test tekst"))
+        adapter.add(ReviewItem("karen","Monke","test tekst"))
+        adapter.add(ReviewItem("ben","Monke","test tekst"))
+        adapter.add(ReviewItem("thomas","Monke","test tekst"))
+        adapter.add(ReviewItem("Jonas","Monke","test tekst"))
+        adapter.add(ReviewItem("ben","Monke","test tekst"))
+        adapter.add(ReviewItem("ben","Monke","test tekst"))
+        adapter.add(ReviewItem("ben","Monke","test tekst"))
+        adapter.add(ReviewItem("ben","Monke","test tekst"))
+
         //binding.recyclerViewReviews.adapter = adapter
 
         /*HotspotReviews.get()
@@ -131,7 +139,7 @@ class ReviewItem(val reviewers_name: String, val reviews_location: String, val r
                 }
             }
 
-         class HotSpotItem(val hotspot: HotSpot): Item() {
+         class ReviewItem(val hotspot: HotSpot): Item() {
         override fun bind(
             viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
             position: Int

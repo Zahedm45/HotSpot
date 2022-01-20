@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="reviews">
-
-    <Button
-        android:id="@+id/Exit_reviews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="X"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-
-    </Button>
-
-    <TextView
-        android:id="@+id/hotspot_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:padding="10dp"
-        android:text="Hotspot Name"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        tools:ignore="MissingConstraints">
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/hotspot_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:padding="10dp"
+            android:text="Hotspot Name"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints"
+            android:layout_gravity="center"
+            >
+        </TextView>
 
-    </TextView>
+    </LinearLayout>
 
-
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_reviews"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toStartOf="@+id/hotspot_name"
         android:clipToPadding="false"
         android:padding="4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -51,4 +48,5 @@
         tools:listitem="@layout/review_item">
 
     </androidx.recyclerview.widget.RecyclerView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</LinearLayout>
