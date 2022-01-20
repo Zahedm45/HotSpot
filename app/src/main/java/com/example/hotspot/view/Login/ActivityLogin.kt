@@ -1,4 +1,4 @@
-package com.example.hotspot.view
+package com.example.hotspot.view.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +10,7 @@ import com.example.hotspot.other.util.ButtonAnimations
 import com.example.hotspot.other.util.DialogWifi
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.other.network.TAG
-import com.example.hotspot.view.phoneAuthentification.ActivityPhoneAuthentification
+import com.example.hotspot.view.PhoneAuth.ActivityPhoneAuthentification
 
 
 class ActivityLogin : AppCompatActivity() {

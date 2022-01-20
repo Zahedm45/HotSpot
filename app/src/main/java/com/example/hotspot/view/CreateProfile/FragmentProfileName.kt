@@ -1,4 +1,4 @@
-package com.example.hotspot.view.createProfilePackage
+package com.example.hotspot.view.CreateProfile
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController

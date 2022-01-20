@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#f7f7f7"
-    tools:context=".view.FragmentLatestMessages">
+    tools:context=".view.Chat.FragmentLatestMessages">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ChatLog"
+    tools:context=".view.Chat.ChatLog"
     android:background="@color/white">
 
     <EditText

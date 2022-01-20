@@ -1,4 +1,4 @@
-package com.example.hotspot.view
+package com.example.hotspot.view.Profile
 
 import android.app.Activity
 import android.content.Intent
@@ -20,6 +20,7 @@ import com.example.hotspot.other.util.ButtonAnimations
 import com.example.hotspot.other.util.DialogWifi
 import com.example.hotspot.other.util.UtilView
 import com.example.hotspot.other.network.ConnectionLiveData
+import com.example.hotspot.view.Login.ActivityLogin
 import com.example.hotspot.viewModel.EditProfileVM
 import java.util.*
 

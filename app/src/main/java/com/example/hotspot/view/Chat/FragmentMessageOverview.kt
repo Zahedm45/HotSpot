@@ -1,4 +1,4 @@
-package com.example.hotspot.view
+package com.example.hotspot.view.Chat
 
 import android.content.Intent
 import android.os.Bundle

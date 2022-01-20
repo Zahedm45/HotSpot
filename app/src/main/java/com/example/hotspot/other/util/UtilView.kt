@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.view.MenuItem
 import com.example.hotspot.R
-import com.example.hotspot.view.ActivityLogin
+import com.example.hotspot.view.Login.ActivityLogin
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

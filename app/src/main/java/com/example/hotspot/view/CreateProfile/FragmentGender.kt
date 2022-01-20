@@ -1,4 +1,4 @@
-package com.example.hotspot.view.createProfilePackage
+package com.example.hotspot.view.CreateProfile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,4 +1,4 @@
-package com.example.hotspot.view.createProfilePackage
+package com.example.hotspot.view.CreateProfile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

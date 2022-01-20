@@ -1,4 +1,4 @@
-package com.example.hotspot.view
+package com.example.hotspot.view.CheckIn
 
 import android.annotation.SuppressLint
 import android.graphics.Paint
@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -23,9 +22,9 @@ import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.other.util.ButtonAnimations
 import com.example.hotspot.other.network.TAG
 import com.example.hotspot.other.service.MapService
-import com.example.hotspot.view.Constant.CHECKED_IN
-import com.example.hotspot.view.Constant.RADIUS
-import com.example.hotspot.view.Constant.STREET_WITHOUT_NAME
+import com.example.hotspot.view.CheckIn.Constant.CHECKED_IN
+import com.example.hotspot.view.CheckIn.Constant.RADIUS
+import com.example.hotspot.view.CheckIn.Constant.STREET_WITHOUT_NAME
 import com.example.hotspot.viewModel.AfterCheckInVM
 import com.example.hotspot.viewModel.BeforeCheckInVM
 import com.example.hotspot.viewModel.DataHolder

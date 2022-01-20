@@ -1,10 +1,11 @@
-package com.example.hotspot.view
+package com.example.hotspot.view.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.hotspot.databinding.ActivityLoadingPageBinding
+import com.example.hotspot.view.ActivityAfterLogin
 import com.example.hotspot.viewModel.LoadingPageVM
 
 class ActivityLoadingPage : AppCompatActivity() {

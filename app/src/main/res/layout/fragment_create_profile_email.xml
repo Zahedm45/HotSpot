@@ -7,7 +7,7 @@
     android:background="#f7f7f7"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".view.createProfilePackage.FragmentEmail">
+    tools:context=".view.CreateProfile.FragmentEmail">
 
     <ProgressBar
         android:layout_width="match_parent"

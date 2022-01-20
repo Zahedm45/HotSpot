@@ -1,4 +1,4 @@
-package com.example.hotspot.view.phoneAuthentification
+package com.example.hotspot.view.PhoneAuth
 
 import android.content.Intent
 import android.graphics.Color.BLACK
@@ -16,7 +16,7 @@ import com.example.hotspot.other.util.DialogWifi
 import com.example.hotspot.other.network.ConnectionLiveData
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.view.ActivityAfterLogin
-import com.example.hotspot.view.createProfilePackage.ActivityCreateProfile
+import com.example.hotspot.view.CreateProfile.ActivityCreateProfile
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*

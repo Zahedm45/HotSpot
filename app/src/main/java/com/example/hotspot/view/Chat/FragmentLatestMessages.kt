@@ -1,4 +1,4 @@
-package com.example.hotspot.view
+package com.example.hotspot.view.Chat
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.example.hotspot.databinding.FragmentLatestMessagesBinding
 import com.example.hotspot.model.ChatMessage
 import com.example.hotspot.model.User
 import com.example.hotspot.other.util.ButtonAnimations
-import com.example.hotspot.view.ChatLog.Companion.TAG
+import com.example.hotspot.view.Chat.ChatLog.Companion.TAG
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
 

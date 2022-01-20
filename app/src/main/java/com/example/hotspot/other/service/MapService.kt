@@ -29,7 +29,7 @@ import com.example.hotspot.other.util.Constants.NOTIFICATION_CHANNEL_ID
 import com.example.hotspot.other.util.Constants.NOTIFICATION_CHANNEL_NAME
 import com.example.hotspot.other.util.Constants.NOTIFICATION_ID
 import com.example.hotspot.other.util.MapUtility
-import com.example.hotspot.view.ActivityLoadingPage
+import com.example.hotspot.view.Login.ActivityLoadingPage
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY

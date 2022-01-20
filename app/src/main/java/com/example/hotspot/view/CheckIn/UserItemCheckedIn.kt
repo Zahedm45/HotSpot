@@ -1,8 +1,6 @@
-package com.example.hotspot.view
+package com.example.hotspot.view.CheckIn
 
-import android.content.ContentValues
 import android.graphics.Color
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
