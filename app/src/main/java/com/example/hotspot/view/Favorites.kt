@@ -4,10 +4,8 @@ package com.example.hotspot.view
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Divider
+import androidx.compose.ui.node.getOrAddAdapter
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
@@ -41,22 +39,17 @@ class Favorites : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_favorites, container, false)
+        binding = FragmentFavoritesBinding.bind(view)
         return view
-    }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-        fetchFavoriteHotspots()
-        Log.i(TAG, "oncreate")
 
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentFavoritesBinding.bind(view)
+        fetchFavoriteHotspots()
+        Log.i(TAG, "oncreate")
 
 
     }
@@ -65,11 +58,11 @@ class Favorites : Fragment() {
         super.onResume()
         fetchFavoriteHotspots()
 
+
     }
 
 
-
-    private fun fetchFavoriteHotspots(){
+    private fun fetchFavoriteHotspots() {
         val db = Firebase.firestore
         val fbUser = Firebase.auth.uid.toString()
         val favoriteHotspotsRef = db
@@ -80,17 +73,27 @@ class Favorites : Fragment() {
             .addOnSuccessListener { qr ->
                 val hotspots = qr.documents
                 val adapter = GroupAdapter<GroupieViewHolder>()
-                hotspots.forEach{hotSpot ->
-                    resolveHotspotRef(hotSpot.get("hotspotId") as String, adapter)
-                }
+
                 binding.RVfavorites.adapter = adapter
-
+                hotspots.forEach { hotSpot ->
+                    resolveHotspotRef(hotSpot.get("hotspotId") as String, adapter )
                 }
-
-
+                if (hotspots.isEmpty()){
+                      binding.RVfavorites.visibility = View.GONE
+                      binding.emptyHeartView.visibility = View.VISIBLE
+                      binding.emptyListView.visibility = View.VISIBLE
+                 } else {
+                     binding.RVfavorites.visibility = View.VISIBLE
+                    binding.emptyHeartView.visibility = View.GONE
+                    binding.emptyListView.visibility = View.GONE
+                 }
             }
-
     }
+}
+
+
+
+
     private fun resolveHotspotRef(ref : String, adapter: GroupAdapter<GroupieViewHolder>){
         val db = Firebase.firestore
         val favoriteHotspotsRef = db
@@ -102,6 +105,7 @@ class Favorites : Fragment() {
                     if (hotspot is HotSpot) {
 
                         adapter.add(HotSpotItem(hotspot))
+
                     }
                 }
             }
@@ -115,7 +119,7 @@ class Favorites : Fragment() {
             position: Int
         ) {
             viewHolder.apply {
-                with(viewHolder.itemView){
+                with(viewHolder.itemView) {
                     hotspot_name.text = hotspot.name
                     hotspot_rating.text = hotspot.rating.toString()
                     hotspot_location.text = hotspot.address?.town
@@ -125,16 +129,16 @@ class Favorites : Fragment() {
                         val imageView = viewHolder.itemView.hotspot_picture
                         Picasso.get().load(imageUrl).into(imageView)
 
+                    }
+
+                }
+
+                viewHolder.itemView.setOnClickListener {
+                    val action = FavoritesDirections.actionFavoritesToBeforeCheckIn(hotspot)
+                    it.findNavController().navigate(action)
                 }
 
             }
-
-            viewHolder.itemView.setOnClickListener {
-                val action = FavoritesDirections.actionFavoritesToBeforeCheckIn(hotspot)
-                it.findNavController().navigate(action)
-            }
-
-        }
 
         }
 

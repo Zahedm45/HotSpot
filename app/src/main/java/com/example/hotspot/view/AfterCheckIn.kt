@@ -21,6 +21,8 @@ import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.hotspot.R
+import com.example.hotspot.viewModel.BeforeCheckInVM
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -156,7 +158,11 @@ class AfterCheckIn : Fragment() {
 
 
     private fun setHotSpotInfo() {
+
         binding.afterCheckInHotSpotName.text = args.hotSpot.name
+        val imageview = binding.afterCheckInPartyImg
+        val img = BeforeCheckInVM.hotSpotsImg.get(args.hotSpot.id)
+        Picasso.get().load(img).into(imageview)
     }
 
 
