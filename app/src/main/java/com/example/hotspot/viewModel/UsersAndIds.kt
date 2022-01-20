@@ -15,7 +15,6 @@ class UsersAndIds() {
 
         private val userList = mutableListOf<User>()
         private var users  = MutableLiveData<List<User>>()
-      //  private var checked = ArrayList<CheckedInDB>()
 
 
         private var isInterestedTrueList = MutableLiveData<List<String>>()
@@ -23,13 +22,11 @@ class UsersAndIds() {
 
 
         var checkedInMap = mutableMapOf<String, Boolean>()
-       // private var isInterestedChanged = MutableLiveData<Boolean>()
 
 
 
         init {
             users.value = userList
-         //   isInterestedChanged.value = false
             isInterestedTrueList.value = isInterestedTrueListHelper
         }
 
@@ -118,22 +115,4 @@ class UsersAndIds() {
 
 
 }
-
-
-
-
-
-
-
-/*        private fun setIsInterestedChanged() {
-            if (isInterestedChanged.value == true) {
-                isInterestedChanged.value = false
-
-            } else {
-                val i = true
-                isInterestedChanged.value = i
-            }
-        }*/
-
-
 

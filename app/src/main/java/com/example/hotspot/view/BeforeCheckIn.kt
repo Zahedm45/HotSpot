@@ -13,6 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
@@ -68,6 +70,7 @@ class BeforeCheckIn : Fragment() {
         setAllInfo()
         heartButton()
         checkInBtn(view)
+        logicsForCheckedInlayout()
 
     }
 
@@ -75,6 +78,12 @@ class BeforeCheckIn : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         BeforeCheckInVM.getAndListenCheckedInIdsRegis?.remove()
+        clearCheckedIn()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        logicsForCheckedInlayout()
     }
 
 
@@ -215,7 +224,7 @@ class BeforeCheckIn : Fragment() {
             //val isUserPresent = isUserPresent()
             val isUserPresent = true
             if (isUserPresent) {
-                DataHolder.currentUser?.let { user ->
+                DataHolder.getCurrentUser().value?.let { user ->
                     val checkedInDB = CheckedInDB(id = user.uid)
                     UsersAndIds.addUser(user, checkedInDB)
                     BeforeCheckInVM.setCheckedInDB(args.hotSpot, user, null)
@@ -292,7 +301,7 @@ class BeforeCheckIn : Fragment() {
     private fun addFavoriteHotSpot() {
         args.hotSpot.id?.let { hotSpotId ->
 
-            DataHolder.currentUser?.uid?.let { userId ->
+            DataHolder.getCurrentUser().value?.uid?.let { userId ->
                 BeforeCheckInVM.addHotSpotDB(hotSpotId, userId)
 
             } ?: run { Log.i(TAG, "User id is null ($this)") }
@@ -305,11 +314,59 @@ class BeforeCheckIn : Fragment() {
     private fun deleteFavoriteHotspot(){
         args.hotSpot.id?.let{ hotSpotId ->
 
-            DataHolder.currentUser?.uid?.let { userId ->
+            DataHolder.getCurrentUser().value?.uid?.let { userId ->
                 BeforeCheckInVM.deleteHotSpotDB(hotSpotId,userId)
             } ?: run { Log.i(TAG, "User id is null ($this)") }
 
         } ?: run { Log.i(TAG, "HotSpot id is null ($this)") }
+
+    }
+
+
+
+
+
+    private fun logicsForCheckedInlayout() {
+        DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
+            it.isUserCheckedIn?.let {
+                if (it != "null") {
+                    showCheckedIn()
+
+                } else {
+                    clearCheckedIn()
+                }
+            }
+        })
+
+    }
+
+
+
+
+    private fun showCheckedIn() {
+        binding.beforeCheckInCheckInBtn.isVisible = false
+        binding.beforeCheckeInMyHotspotBtnLayout.visibility = View.VISIBLE
+        binding.beforeCheckInGoToMyHotspotBtn.setOnClickListener {
+            navigateToAfterCheckIn(it)
+        }
+
+    }
+
+    private fun clearCheckedIn() {
+        binding.beforeCheckeInMyHotspotBtnLayout.visibility = View.GONE
+        binding.beforeCheckInCheckInBtn.isVisible = true
+
+    }
+
+
+
+    private fun navigateToAfterCheckIn(view: View) {
+
+        DataHolder.getCurrentUserHotspot().value?.let { hotSpot ->
+            val action = BeforeCheckInDirections.actionBeforeCheckInToAfterCheckIn(hotSpot)
+            Log.i(TAG, "you clicked me..inside ${action}")
+            view.findNavController().navigate(action)
+        }
 
     }
 
