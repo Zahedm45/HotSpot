@@ -13,6 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.hotspot.R
@@ -68,6 +70,7 @@ class BeforeCheckIn : Fragment() {
         setAllInfo()
         heartButton()
         checkInBtn(view)
+        logicsForCheckedInlayout()
 
     }
 
@@ -75,6 +78,12 @@ class BeforeCheckIn : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         BeforeCheckInVM.getAndListenCheckedInIdsRegis?.remove()
+        clearCheckedIn()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        logicsForCheckedInlayout()
     }
 
 
@@ -317,7 +326,25 @@ class BeforeCheckIn : Fragment() {
 
 
 
+    private fun logicsForCheckedInlayout() {
+        DataHolder.getCurrentUser().observe(viewLifecycleOwner, Observer {
+            it.isUserCheckedIn?.let {
+                if (it != "null") {
+                    showCheckedIn()
+
+                } else {
+                    clearCheckedIn()
+                }
+            }
+        })
+
+    }
+
+
+
+
     private fun showCheckedIn() {
+        binding.beforeCheckInCheckInBtn.isVisible = false
         binding.beforeCheckeInMyHotspotBtnLayout.visibility = View.VISIBLE
         binding.beforeCheckInGoToMyHotspotBtn.setOnClickListener {
             navigateToAfterCheckIn(it)
@@ -327,6 +354,8 @@ class BeforeCheckIn : Fragment() {
 
     private fun clearCheckedIn() {
         binding.beforeCheckeInMyHotspotBtnLayout.visibility = View.GONE
+        binding.beforeCheckInCheckInBtn.isVisible = true
+
     }
 
 
