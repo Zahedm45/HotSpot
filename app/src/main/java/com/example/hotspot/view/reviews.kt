@@ -70,17 +70,19 @@ class reviews : Fragment() {
 
 
         //val adapter = GroupAdapter<GroupieViewHolder>()
-        adapter.add(ReviewItem("ben","Monke","test tekst"))
-        adapter.add(ReviewItem("Jeniffer","Monke","test tekst"))
-        adapter.add(ReviewItem("Iben","Monke","test tekst"))
-        adapter.add(ReviewItem("karen","Monke","test tekst"))
-        adapter.add(ReviewItem("ben","Monke","test tekst"))
-        adapter.add(ReviewItem("thomas","Monke","test tekst"))
-        adapter.add(ReviewItem("Jonas","Monke","test tekst"))
-        adapter.add(ReviewItem("ben","Monke","test tekst"))
-        adapter.add(ReviewItem("ben","Monke","test tekst"))
-        adapter.add(ReviewItem("ben","Monke","test tekst"))
-        adapter.add(ReviewItem("ben","Monke","test tekst"))
+
+        //dummies made manuelly with adapter
+        adapter.add(ReviewItem("ben","Best place ever, totally coming back again"))
+        adapter.add(ReviewItem("Jeniffer","I had a great night here, got to meet a lot of new people at this place"))
+        adapter.add(ReviewItem("Iben","without doubt I will come by here again"))
+        adapter.add(ReviewItem("karen","Totally cool place, the people here are nice and the staff are also helpful for sure"))
+        adapter.add(ReviewItem("ben","I normally didnt go out that much, but this place have become my new home where I hang out with my friends and meet a lot of new people"))
+        adapter.add(ReviewItem("thomas","Super nice staff here and the people I got to meet here have become my good friends now"))
+        adapter.add(ReviewItem("Jonas","Lovely place, the design of the interior is so well done"))
+        adapter.add(ReviewItem("ben","I would come here again for sure"))
+        adapter.add(ReviewItem("ben","Im rating this 5/5 cause I like the place and the vibe in it is great, im coming again here for sure"))
+        adapter.add(ReviewItem("ben","Best bar ever, I just got to know this place from the app and im loving it. I got to know a lot of new people that lived so close to me"))
+        adapter.add(ReviewItem("ben","Would recommend this place to everyone who wants to get out in the middle of the day without having to worry of drinking, they got cocktails with and without alcohol in them."))
 
         //binding.recyclerViewReviews.adapter = adapter
 
@@ -98,13 +100,12 @@ class reviews : Fragment() {
 */
     }
 }
-class ReviewItem(val reviewers_name: String, val reviews_location: String, val review_content: String): com.xwray.groupie.kotlinandroidextensions.Item() {
+class ReviewItem(val reviewers_name: String, val review_content: String): com.xwray.groupie.kotlinandroidextensions.Item() {
     override fun bind(
         viewHolder: com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder,
         position: Int
     ) {
         viewHolder.itemView.reviewers_name.text = reviewers_name
-        viewHolder.itemView.reviews_location.text = reviews_location
         viewHolder.itemView.review_content.text = review_content
 
         /*val imageId = user.uid
