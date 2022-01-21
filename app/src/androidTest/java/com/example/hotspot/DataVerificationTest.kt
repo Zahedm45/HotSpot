@@ -4,7 +4,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.hotspot.model.User
-import com.example.hotspot.view.AfterLoginActivity
+import com.example.hotspot.view.ActivityAfterLogin
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -24,8 +24,8 @@ import org.junit.Rule
 class DataVerificationTest {
 
     @get :Rule
-    var activityRule: ActivityScenarioRule<AfterLoginActivity>
-            = ActivityScenarioRule(AfterLoginActivity::class.java)
+    var activityRule: ActivityScenarioRule<ActivityAfterLogin>
+            = ActivityScenarioRule(ActivityAfterLogin::class.java)
 
     lateinit var db: FirebaseFirestore
     lateinit var userRef: CollectionReference
