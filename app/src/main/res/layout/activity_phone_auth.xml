@@ -7,7 +7,7 @@
     android:background="#f7f7f7"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".view.phoneAuthentification.ActivityPhoneAuthentification">
+    tools:context=".view.PhoneAuth.ActivityPhoneAuthentification">
 
 
     <ImageView
@@ -69,6 +69,7 @@
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:textColorHint="#c5c5c5"
+                android:text="22481046"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ccp"
@@ -149,6 +150,7 @@
             android:layout_marginTop="10dp"
             android:background="#fff"
             android:hint="123 456"
+            android:text="112233"
             android:inputType="phone"
             android:padding="10dp"
             android:textAlignment="center"
@@ -165,7 +167,7 @@
             android:background="@drawable/custom_button"
             android:textColor="#f7f7f7"
             android:text="Submit code"
-            android:alpha="0.1"
+            android:alpha="1"
             android:textAllCaps="false"
             />
         <TextView

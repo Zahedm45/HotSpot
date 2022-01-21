@@ -8,7 +8,7 @@
     android:background="#f7f7f7"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".view.createProfilePackage.FragmentAge">
+    tools:context=".view.CreateProfile.FragmentAge">
 
     <ProgressBar
         android:layout_width="match_parent"

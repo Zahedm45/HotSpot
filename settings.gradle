@@ -6,5 +6,5 @@ dependencyResolutionManagement {
         jcenter()
     }
 }
-rootProject.name = "HotSpot"
+rootProject.name = "F4 Hotspot"
 include ':app'

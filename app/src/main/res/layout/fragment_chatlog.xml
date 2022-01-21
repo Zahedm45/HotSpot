@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#f7f7f7"
-    tools:context=".view.LatestMessages">
+    tools:context=".view.Chat.FragmentLatestMessages">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,27 +27,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/ivChat"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:background="@drawable/vector_message_gradient"
-            android:src="@drawable/vector_message_gradient"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.94"
-            app:layout_constraintStart_toEndOf="@+id/tv_chats"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ChatLog"
+    tools:context=".view.Chat.ChatLog"
     android:background="@color/white">
 
     <EditText
@@ -70,29 +56,25 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/send_button_chatlog"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Send"
-        android:background="@drawable/custom_button"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/vector_send_message"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/recyclerview_chatlog" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_chatlog"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
         android:layout_marginBottom="8dp"
         android:background="#3EFFFFFF"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/editText_chatlog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

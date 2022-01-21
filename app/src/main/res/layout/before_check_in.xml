@@ -12,18 +12,20 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".view.BeforeCheckIn"
+        tools:context=".view.CheckIn.BeforeCheckIn"
         >
 
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/before_check_in_party_img"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_alignParentBottom="true"
             android:src="@drawable/dancing_pic_with_shadow"
-            app:layout_constraintVertical_bias=".0"
 
+            app:shapeAppearance="@style/roundedCorners"
+
+            app:layout_constraintVertical_bias=".0"
             app:layout_constraintBottom_toTopOf="@+id/linear_layout_for_hotspot_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -263,6 +265,67 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/before_check_in_reviews"
             />
+
+
+
+
+
+
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/before_checke_in_my_hotspot_btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@color/white"
+            android:visibility="gone"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+
+            <TextView
+                android:id="@+id/before_check_in_you_are_checked_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You are checked in"
+                android:textSize="20dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/before_checke_in_my_hotspot_btn_layout"
+                app:layout_constraintBottom_toTopOf="@+id/before_check_in_go_to_my_hotspot_btn"
+
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/before_check_in_go_to_my_hotspot_btn"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:alpha="1"
+                android:background="@drawable/custom_button"
+                android:elevation="75dp"
+                android:text="MY HOTSPOT"
+                android:textAllCaps="false"
+                android:textColor="#f7f7f7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/before_check_in_you_are_checked_in"
+
+
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 
 

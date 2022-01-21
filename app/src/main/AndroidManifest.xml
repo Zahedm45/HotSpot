@@ -19,13 +19,13 @@
         android:allowBackup="true"
         android:icon="@drawable/dancing_pic"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_hotspot_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HotSpot">
 
 
         <activity
-            android:name=".view.ActivityLoadingPage"
+            android:name=".view.Login.ActivityLoadingPage"
             android:exported="true"
             tools:ignore="ExtraText">
             <intent-filter>
@@ -44,7 +44,7 @@
 
 
         <activity
-            android:name=".view.createProfilePackage.ActivityCreateProfile"
+            android:name=".view.CreateProfile.ActivityCreateProfile"
             android:exported="false"
             android:launchMode="singleTop"
             />
@@ -57,21 +57,22 @@
             />
 
         <activity
-            android:name=".view.phoneAuthentification.ActivityPhoneAuthentification"
+            android:name=".view.PhoneAuth.ActivityPhoneAuthentification"
             android:exported="false" />
 
 
 
 
         <activity
-            android:name=".view.AfterLoginActivity"
+            android:name=".view.ActivityAfterLogin"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize">
+
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
 
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".view.Login.ActivityLogin"
             android:exported="false">
 
         </activity>

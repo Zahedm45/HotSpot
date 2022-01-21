@@ -4,7 +4,7 @@ import com.example.hotspot.model.CheckedInDB
 import com.example.hotspot.model.HotSpot
 import com.example.hotspot.model.User
 import com.example.hotspot.repository.Repository
-import com.example.hotspot.view.AfterCheckIn
+import com.example.hotspot.repository.SubRepository
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Default
@@ -81,11 +81,27 @@ class AfterCheckInVM {
 
 
         fun setIsInterested(isInterested: Boolean, hotSpotId: String) {
-            val userId = DataHolder.currentUser?.uid
+            val userId = DataHolder.getCurrentUser().value?.uid
             if (userId != null) {
                 Repository.updateIsInterestedDB(hotSpotId, userId, isInterested)
             }
         }
+
+
+        fun getHotSpotImgFromDB(
+            hotSpotId: String,
+            onSuccess: (img: String) -> Unit){
+
+
+            SubRepository.getHotSpotImgFromDB(hotSpotId) { img -> onSuccess(img) }
+
+        }
+
+
+
+
+
+
 
 
 

@@ -8,12 +8,15 @@
 
     <fragment
         android:id="@+id/afterCheckIn"
-        android:name="com.example.hotspot.view.AfterCheckIn"
+        android:name="com.example.hotspot.view.CheckIn.FragmentAfterCheckIn"
         android:label="fragment_after_check_in"
         tools:layout="@layout/fragment_after_check_in" >
         <action
             android:id="@+id/action_afterCheckIn_to_othersProfile"
-            app:destination="@id/othersProfile" />
+            app:destination="@id/othersProfile"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_fade"
+            app:popEnterAnim="@android:anim/fade_in" />
         <argument
             android:name="hotSpot"
             app:argType="com.example.hotspot.model.HotSpot" />
@@ -23,7 +26,7 @@
 
     <fragment
         android:id="@+id/beforeCheckIn"
-        android:name="com.example.hotspot.view.BeforeCheckIn"
+        android:name="com.example.hotspot.view.CheckIn.BeforeCheckIn"
         android:label="fragment_before_check_in"
         tools:layout="@layout/before_check_in" >
 
@@ -45,19 +48,9 @@
     </fragment>
 
 
-
-    <fragment
-        android:id="@+id/chat"
-        android:name="com.example.hotspot.view.Chat"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
-
-
-
-
     <fragment
         android:id="@+id/editProfile"
-        android:name="com.example.hotspot.view.EditProfile"
+        android:name="com.example.hotspot.view.Profile.FragmentEditProfile"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" >
         <action
@@ -86,20 +79,8 @@
 
 
     <fragment
-        android:id="@+id/messageOverview"
-        android:name="com.example.hotspot.view.MessageOverview"
-        android:label="fragment_message_overview"
-        tools:layout="@layout/fragment_message_overview" >
-        <action
-            android:id="@+id/action_messageOverview_to_chat"
-            app:destination="@id/chat" />
-    </fragment>
-
-
-
-    <fragment
         android:id="@+id/personalProfile"
-        android:name="com.example.hotspot.view.PersonalProfile"
+        android:name="com.example.hotspot.view.Profile.FragmentPersonalProfile"
         android:label="fragment_personal_profile"
         tools:layout="@layout/fragment_personal_profile" >
         <action
@@ -115,15 +96,15 @@
 
     <fragment
         android:id="@+id/othersProfile"
-        android:name="com.example.hotspot.view.OthersProfile"
+        android:name="com.example.hotspot.view.Profile.FragmentOthersProfile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_othersProfile_to_chat"
-            app:destination="@id/chat" />
+        tools:layout="@layout/fragment_profile_from_check_in" >
         <argument
             android:name="user"
             app:argType="com.example.hotspot.model.User" />
+        <action
+            android:id="@+id/action_othersProfile_to_Chatlog"
+            app:destination="@id/Chatlog" />
     </fragment>
 
 
@@ -133,7 +114,7 @@
 
     <fragment
         android:id="@+id/mapsFragment"
-        android:name="com.example.hotspot.view.MapsFragment"
+        android:name="com.example.hotspot.view.FragmentMaps"
         android:label="fragment_maps4"
         tools:layout="@layout/fragment_maps4" >
         <action
@@ -143,6 +124,15 @@
             app:exitAnim="@anim/slide_fade"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@anim/slide_out_down" />
+        <action
+            android:id="@+id/action_mapsFragment_to_afterCheckIn"
+            app:destination="@id/afterCheckIn"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_fade"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/slide_out_down"
+            app:popUpTo="@id/mapsFragment"
+            />
 
     </fragment>
 
@@ -162,19 +152,27 @@
     </fragment>
     <fragment
         android:id="@+id/LatestMessages"
-        android:name="com.example.hotspot.view.LatestMessages"
+        android:name="com.example.hotspot.view.Chat.FragmentLatestMessages"
         android:label="fragment_latest_messages"
         tools:layout="@layout/fragment_latest_messages">
         <action
             android:id="@+id/action_latest_to_new"
-            app:destination="@id/NewMessage" />
+            app:destination="@id/NewMessage"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_latest_to_chatlog"
-            app:destination="@id/Chatlog" />
+            app:destination="@id/Chatlog"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/Chatlog"
-        android:name="com.example.hotspot.view.ChatLog"
+        android:name="com.example.hotspot.view.Chat.ChatLog"
         android:label="fragment_chatlog"
         tools:layout="@layout/fragment_chatlog">
         <argument
@@ -186,7 +184,7 @@
     </fragment>
     <fragment
         android:id="@+id/NewMessage"
-        android:name="com.example.hotspot.view.NewMessage"
+        android:name="com.example.hotspot.view.Chat.NewMessage"
         android:label="fragment_new_message"
         tools:layout="@layout/fragment_new_message">
         <action

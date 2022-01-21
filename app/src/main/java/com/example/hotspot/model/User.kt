@@ -15,11 +15,12 @@ data class User(
     var day: Int? = null,
     var month: Int? = null,
     var year: Int? = null,
-    var favoriteHotspots: MutableCollection<HotSpot>? = null
-
-
-
+    var isUserCheckedIn: String? = null,
+    var favoriteHotspots: MutableCollection<HotSpot>? = null,
 ) : Parcelable {
+
+
+
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -31,10 +32,9 @@ data class User(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
         parcel.readValue(HotSpot::class.java.classLoader) as? MutableCollection<HotSpot>
-
-
-        ) {
+    ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -48,6 +48,7 @@ data class User(
         parcel.writeValue(day)
         parcel.writeValue(month)
         parcel.writeValue(year)
+        parcel.writeString(isUserCheckedIn)
     }
 
     override fun describeContents(): Int {
@@ -63,5 +64,6 @@ data class User(
             return arrayOfNulls(size)
         }
     }
+
 
 }

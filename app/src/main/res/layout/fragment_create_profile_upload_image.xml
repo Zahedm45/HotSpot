@@ -7,7 +7,7 @@
         android:background="#f7f7f7"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".view.createProfilePackage.FragmentUploadImage">
+        tools:context=".view.CreateProfile.FragmentUploadImage">
 
         <ProgressBar
             android:id="@+id/progressBar"

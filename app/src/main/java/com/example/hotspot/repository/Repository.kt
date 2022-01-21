@@ -48,14 +48,11 @@ class Repository {
                             user.delete()
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
-                                        Log.d(TAG, "User account deleted.")
                                     }
                                 }
                         }
                     }
             } catch (e : Exception){
-                Log.d(TAG,e.toString())
-                Log.d("Lucas Lucas Lucas Lucas Lucas Lucas", e.stackTraceToString())
                 e.printStackTrace()
             }
         }
@@ -78,7 +75,7 @@ class Repository {
                 return
             }
 
-
+            user.uid = getFirebaseUser()?.uid
             val bitmap = user.bitmapImg
             user.bitmapImg = null
 
@@ -511,7 +508,22 @@ class Repository {
             val phoneNumber = Firebase.auth.currentUser?.phoneNumber
             return phoneNumber
         }
+
+        fun updateIsUserCheckedIn(hotSpotId: String){
+            val db = Firebase.firestore
+            val fbUser = Firebase.auth.currentUser!!
+
+            db.collection("users").document(fbUser.uid).update("isUserCheckedIn", hotSpotId)
+        }
+
     }
+
+
+
+
+
+
+
 }
 
 
