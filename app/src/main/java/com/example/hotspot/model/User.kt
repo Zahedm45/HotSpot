@@ -17,9 +17,6 @@ data class User(
     var year: Int? = null,
     var isUserCheckedIn: String? = null,
     var favoriteHotspots: MutableCollection<HotSpot>? = null,
-
-
-
 ) : Parcelable {
 
 

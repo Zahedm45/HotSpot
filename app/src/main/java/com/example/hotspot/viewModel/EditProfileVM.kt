@@ -10,6 +10,10 @@ import com.example.hotspot.R
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.databinding.FragmentEditProfileBinding
 import com.example.hotspot.model.UserProfile
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class EditProfileVM {
 
@@ -105,7 +109,9 @@ class EditProfileVM {
         }
 
         fun deleteUser(){
-            repository.deleteUser()
+            CoroutineScope(IO).launch {
+                repository.deleteUser()
+            }
         }
     }
 

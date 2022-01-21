@@ -6,7 +6,7 @@ import android.util.Log
 import com.example.hotspot.repository.Repository
 import com.example.hotspot.databinding.FragmentPersonalProfileBinding
 import com.example.hotspot.model.UserProfile
-import com.example.hotspot.other.UtilCalculations
+import com.example.hotspot.other.util.UtilCalculations
 import com.example.hotspot.other.network.TAG
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration

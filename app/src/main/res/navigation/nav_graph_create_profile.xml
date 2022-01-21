@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/createProfileName"
-        android:name="com.example.hotspot.view.createProfilePackage.FragmentProfileName"
+        android:name="com.example.hotspot.view.CreateProfile.FragmentProfileName"
         android:label="create_profile_name_fragment"
         tools:layout="@layout/fragment_create_profile_name" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/createProfileAgeFragment"
-        android:name="com.example.hotspot.view.createProfilePackage.FragmentAge"
+        android:name="com.example.hotspot.view.CreateProfile.FragmentAge"
         android:label="create_profile_age_fragment"
         tools:layout="@layout/fragment_create_profile_age" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/createProfileGenderFragment"
-        android:name="com.example.hotspot.view.createProfilePackage.FragmentGender"
+        android:name="com.example.hotspot.view.CreateProfile.FragmentGender"
         android:label="create_profile_gender_fragment"
         tools:layout="@layout/fragment_create_profile_gender" >
         <action
@@ -46,12 +46,12 @@
     </fragment>
     <fragment
         android:id="@+id/createProfileUploadImageFragment"
-        android:name="com.example.hotspot.view.createProfilePackage.FragmentUploadImage"
+        android:name="com.example.hotspot.view.CreateProfile.FragmentUploadImage"
         android:label="fragment_create_profile_upload_image"
         tools:layout="@layout/fragment_create_profile_upload_image" />
     <fragment
         android:id="@+id/fragmentProfileText"
-        android:name="com.example.hotspot.view.createProfilePackage.FragmentProfileText"
+        android:name="com.example.hotspot.view.CreateProfile.FragmentProfileText"
         android:label="fragment_profile_text"
         tools:layout="@layout/fragment_create_profile_profile_text" >
         <action
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentEmail"
-        android:name="com.example.hotspot.view.createProfilePackage.FragmentEmail"
+        android:name="com.example.hotspot.view.CreateProfile.FragmentEmail"
         android:label="fragment_create_profile_email"
         tools:layout="@layout/fragment_create_profile_email" >
         <action

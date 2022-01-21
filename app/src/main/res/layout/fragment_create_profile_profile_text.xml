@@ -8,7 +8,7 @@
         android:background="#f7f7f7"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".view.createProfilePackage.FragmentProfileText">
+        tools:context=".view.CreateProfile.FragmentProfileText">
 
         <ProgressBar
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:textColor="@color/black"
             android:textSize="24sp" />
         <EditText
-            android:id="@+id/firstNameText"
+            android:id="@+id/tv_first_name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
