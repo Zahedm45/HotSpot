@@ -59,7 +59,6 @@ class LatestMessages : Fragment() {
             ButtonAnimations.clickButton(binding.ivChat)
             findNavController().navigate(R.id.action_latest_to_new)
         }
-        //supportActionBar?.hide()
     }
 
 
@@ -70,19 +69,18 @@ class LatestMessages : Fragment() {
         val USER_KEY = "USER_KEY"
     }
 
-    @SuppressLint("LogNotTimber")
-    public fun fetchUsers(){
+    fun fetchUsers(){
         val adapter = GroupAdapter<GroupieViewHolder>()
         val db = Firebase.firestore
         val userRef = db.collection("users")
         val messageRef = db.collection("messages")
 
-        //val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val uid = FirebaseAuth.getInstance().uid
 
         userRef.get()
             .addOnSuccessListener {
                 val users = it.toObjects<User>()
+                Log.d(TAG,"users.size = ${users.size}")
                 var tempLatestMessage = ""
                 users.forEach { user ->
                     messageRef.whereIn("toFrom",listOf(uid+user.uid,user.uid+uid))
