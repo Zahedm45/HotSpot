@@ -72,17 +72,17 @@ class reviews : Fragment() {
         //val adapter = GroupAdapter<GroupieViewHolder>()
 
         //dummies made manuelly with adapter
-        adapter.add(ReviewItem("ben","Best place ever, totally coming back again"))
+        adapter.add(ReviewItem("Ben","Best place ever, totally coming back again"))
         adapter.add(ReviewItem("Jeniffer","I had a great night here, got to meet a lot of new people at this place"))
         adapter.add(ReviewItem("Iben","without doubt I will come by here again"))
-        adapter.add(ReviewItem("karen","Totally cool place, the people here are nice and the staff are also helpful for sure"))
-        adapter.add(ReviewItem("ben","I normally didnt go out that much, but this place have become my new home where I hang out with my friends and meet a lot of new people"))
-        adapter.add(ReviewItem("thomas","Super nice staff here and the people I got to meet here have become my good friends now"))
+        adapter.add(ReviewItem("Karen","Totally cool place, the people here are nice and the staff are also helpful for sure"))
+        adapter.add(ReviewItem("Benny","I normally didnt go out that much, but this place have become my new home where I hang out with my friends and meet a lot of new people"))
+        adapter.add(ReviewItem("Thomas","Super nice staff here and the people I got to meet here have become my good friends now"))
         adapter.add(ReviewItem("Jonas","Lovely place, the design of the interior is so well done"))
-        adapter.add(ReviewItem("ben","I would come here again for sure"))
-        adapter.add(ReviewItem("ben","Im rating this 5/5 cause I like the place and the vibe in it is great, im coming again here for sure"))
-        adapter.add(ReviewItem("ben","Best bar ever, I just got to know this place from the app and im loving it. I got to know a lot of new people that lived so close to me"))
-        adapter.add(ReviewItem("ben","Would recommend this place to everyone who wants to get out in the middle of the day without having to worry of drinking, they got cocktails with and without alcohol in them."))
+        adapter.add(ReviewItem("Micheal","I would come here again for sure"))
+        adapter.add(ReviewItem("Albert","Im rating this 5/5 cause I like the place and the vibe in it is great, im coming again here for sure"))
+        adapter.add(ReviewItem("Chris","Best bar ever, I just got to know this place from the app and im loving it. I got to know a lot of new people that lived so close to me"))
+        adapter.add(ReviewItem("Sofie","Would recommend this place to everyone who wants to get out in the middle of the day without having to worry of drinking, they got cocktails with and without alcohol in them."))
 
         //binding.recyclerViewReviews.adapter = adapter
 
